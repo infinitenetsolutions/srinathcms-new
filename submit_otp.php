@@ -14,9 +14,8 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 
     if ($_SESSION['otp'] == $otp) {
         send_data_in_database($connection);
-    }
-    else{
-        $smg="Wrong OTP";
+    } else {
+        $smg = "Wrong OTP";
     }
 }
 function send_data_in_database($connection)
@@ -27,7 +26,7 @@ function send_data_in_database($connection)
     $otp_quer1 = "INSERT INTO `snu_login` (`id`, `name`, `phone`, `email`, `Date`, `status`) VALUES (NULL, '$name', '$phone', '$email', current_timestamp(), '0');";
     $result = mysqli_query($connection, $otp_quer1);
     if ($result > 0) {
-       header('location: registration.php');
+        header('location: registration.php');
     }
 }
 
@@ -58,12 +57,14 @@ function send_data_in_database($connection)
     <link rel="stylesheet" href="./asset/css/login.css">
     <!-- Roboto Font -->
 
+    <?php include './srinath.inc/head.php'; ?>
     <!-- Your custom styles (optional) -->
 
 </head>
 
 <body>
-
+    <?php include './srinath.inc/header.php'; ?>
+    <div class=".img-responsive "><img src="./asset/img/logo.png" alt=""></div>
     <div class="row">
         <div class="col-md-6 mx-auto p-0 ">
             <div class="card">
@@ -100,7 +101,9 @@ function send_data_in_database($connection)
         </div>
     </div>
     <!--Main layout-->
-
+    <!--Main layout-->
+    <?php include './srinath.inc/footer.php';  ?>
+    <?php include './srinath.inc/foot.php'; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

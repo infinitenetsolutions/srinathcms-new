@@ -13,10 +13,9 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
     echo "<br>";
 
     if ($_SESSION['otp'] == $otp) {
-header("location:registration.php");
-    }
-    else{
-        $smg="Wrong OTP";
+        header("location:registration.php");
+    } else {
+        $smg = "Wrong OTP";
     }
 }
 
@@ -48,12 +47,15 @@ header("location:registration.php");
     <link rel="stylesheet" href="./asset/css/login.css">
     <!-- Roboto Font -->
 
+
+    <?php include './srinath.inc/head.php'; ?>
     <!-- Your custom styles (optional) -->
 
 </head>
 
 <body>
-
+    <?php include './srinath.inc/header.php'; ?>
+    <div class=".img-responsive "><img src="./asset/img/logo.png" alt=""></div>
     <div class="row">
         <div class="col-md-6 mx-auto p-0 ">
             <div class="card">
@@ -90,7 +92,8 @@ header("location:registration.php");
         </div>
     </div>
     <!--Main layout-->
-
+    <?php include './srinath.inc/footer.php';  ?>
+    <?php include './srinath.inc/foot.php'; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

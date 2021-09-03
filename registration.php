@@ -1,4 +1,29 @@
-<html class="loading" lang="en" data-textdirection="ltr">
+<script>
+    function change_course(course_type) {
+        console.log(course_type);
+
+
+        document.getElementById("course_name").disable = false;
+
+    }
+</script>
+
+<!-- here to start getting the data from the database  -->
+<?php
+include './Backend/connection.inc.php';
+include './Backend/function.inc.php';
+// data retring from tbl_course_type table
+$course_type = "SELECT  *  FROM `tbl_course_type` WHERE 1";
+$coursr_result = mysqli_query($connection, $course_type);
+//data retring from course_name table
+$course_name = "SELECT * FROM `tbl_course` WHERE 1";
+$course_name_result = mysqli_query($connection, $course_name);
+
+
+?>
+
+
+<html lang="en" data-textdirection="ltr">
 
 <head>
 
@@ -36,9 +61,9 @@
             <div class="nav-wrapper">
                 <img class="ajulogo" src="./asset/img/logo.png" alt="AJU Logo">
                 <ul class="right">
-                    <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1">dkljfdjhg<i class="material-icons right">arrow_drop_down</i></a>
+                    <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1"><?php echo $_SESSION['name']; ?><i class="material-icons right">arrow_drop_down</i></a>
                         <div id="dropdown1" class="dropdown-content" tabindex="0">
-                            <a href="logout" class="whitenav" tabindex="0">Log Out</a>
+                            <a href="./Backend/logout.php" class="whitenav" tabindex="0">Log Out</a>
                         </div>
                     </li>
                 </ul>
@@ -54,13 +79,13 @@
     <!-- START MAIN -->
     <div>
         <!-- START WRAPPER -->
-        <div class="row">
+        <div class="row container">
             <section class="content-wrapper-before">
                 <!--start container-->
                 <div class="col s12">
                     <div class="row">
                         <div class="col s12">
-                            <form id="registration_submit" action="conformation.php" method="POST" enctype="multipart/form-data">
+                            <form id="registration_submit" action="" method="POST" enctype="multipart/form-data">
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-header">
@@ -68,165 +93,60 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col l4 m4 s12">
-                                                <p>Academic *</p>
+                                                <p>Academic <span class="color-red"> * </span></p>
                                                 <div class="select-wrapper">
-                                                    <select name="academic" id="academic" tabindex="-1">
+                                                    <select name="academic" onchange="change_course(this.value)" id="academic" tabindex="-1">
+
                                                         <option value="" disabled="" selected="">Choose your option</option>
-                                                        <option id="apply_for" value="UG Courses">UG Courses</option>
-                                                        <option id="apply_for" value="PG Courses">PG Courses</option>
-                                                        <option id="apply_for" value="Diploma Courses">Diploma Courses</option>
-                                                        <option id="apply_for" value="Doctorate Courses">Doctorate Courses</option>
-                                                        <option id="apply_for" value="Lateral Entry Courses">Lateral Entry Courses</option>
+                                                        <?php
+                                                        // here i have to fetch the data fo course and showing the data
+                                                        while ($rwo = mysqli_fetch_array($coursr_result)) { ?>
+
+                                                            <option id="apply_for" value="<?php echo $rwo['name']; ?>"><?php echo $rwo['name']; ?></option>
+
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
 
                                                 <div class="error" id="academic1_err"></div>
                                             </div>
-                                            <div class="input-field col l4 m4 s12 hide" id="course_box">
-                                                <p>Course *</p>
-                                                <div class="ug_class hide">
+                                            <div class="input-field col l4 m4 s12" id="course_box">
+                                                <p>Course <span class="color-red"> * </span></p>
+                                                <div class="ug_class ">
                                                     <div class="select-wrapper">
-                                                        <ul id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d0087" class="dropdown-content select-dropdown" tabindex="0">
-                                                            <li class="disabled selected" id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00870" tabindex="0"><span>Choose your option</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00871" tabindex="0"><span>BBA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00872" tabindex="0"><span>BBA with CIMA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00873" tabindex="0"><span>BBA with Wiley</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00874" tabindex="0"><span>BBA with ACCA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00875" tabindex="0"><span>B.COM(H)</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00876" tabindex="0"><span>B. Com (H) with CIMA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00877" tabindex="0"><span>B.Com with ACCA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00878" tabindex="0"><span>BCA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d00879" tabindex="0"><span>BCA with IoA.</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008710" tabindex="0"><span>B.PHARMA</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008711" tabindex="0"><span>B.TECH ( MECHANICAL )</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008712" tabindex="0"><span>B.TECH ( COMPUTER SCIENCE )</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008713" tabindex="0"><span>B.TECH ( ELECTRICAL &amp; ELECTRONICS )</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008714" tabindex="0"><span>B.TECH ( CIVIL )</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008715" tabindex="0"><span>B.OPTOMETRY</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008716" tabindex="0"><span>B.A ENGLISH ( HONS.)</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008717" tabindex="0"><span>B.A FASHION DESIGN ( HONS.)</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008718" tabindex="0"><span>B.A JOURNALISM &amp; MASS COMMUNICATION ( HONS.)</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008719" tabindex="0"><span>B.SC - BIOTECHNOLOGY</span></li>
-                                                            <li id="select-options-32b1ec12-590a-bac5-20fc-4fd3463d008720" tabindex="0"><span>BBA (LLB) HONS.</span></li>
-                                                        </ul><svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 10l5 5 5-5z"></path>
-                                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select name="course" id="course" onchange="change_course(this.value)" tabindex="-1">
+                                                        <select name="course" id="course_name">
                                                             <option value="" disabled="" selected="">Choose your option</option>
-                                                            <option value="BBA">BBA</option>
-                                                            <option value="BBA with CIMA">BBA with CIMA</option>
-                                                            <option value="BBA with Wiley">BBA with Wiley</option>
-                                                            <option value="BBA with ACCA">BBA with ACCA</option>
-                                                            <option value="B.COM(H)">B.COM(H)</option>
-                                                            <option value="B. Com (H) with CIMA">B. Com (H) with CIMA</option>
-                                                            <option value=" B.Com with ACCA">B.Com with ACCA</option>
-                                                            <option value="BCA">BCA</option>
-                                                            <option value=" BCA with IoA.">BCA with IoA.</option>
-                                                            <option value="B.PHARMA">B.PHARMA</option>
-                                                            <option value="B.TECH ( MECHANICAL )">B.TECH ( MECHANICAL )</option>
-                                                            <option value="B.TECH ( COMPUTER SCIENCE )">B.TECH ( COMPUTER SCIENCE )</option>
-                                                            <option value="B.TECH ( ELECTRICAL &amp; ELECTRONICS  )">B.TECH ( ELECTRICAL &amp; ELECTRONICS )</option>
-                                                            <option value="B.TECH ( CIVIL )">B.TECH ( CIVIL )</option>
-                                                            <option value="B.OPTOMETRY">B.OPTOMETRY</option>
-                                                            <option value="B.A ENGLISH ( HONS.)">B.A ENGLISH ( HONS.)</option>
-                                                            <option value="B.A FASHION DESIGN ( HONS.)">B.A FASHION DESIGN ( HONS.)</option>
-                                                            <option value="B.A JOURNALISM &amp; MASS COMMUNICATION ( HONS.)">B.A JOURNALISM &amp; MASS COMMUNICATION ( HONS.)</option>
-                                                            <option value="B.SC - BIOTECHNOLOGY">B.SC - BIOTECHNOLOGY</option>
-                                                            <option value="BBA (LLB) HONS.">BBA (LLB) HONS.</option>
+                                                            <?php while ($row = mysqli_fetch_array($course_name_result)) {
+                                                            ?>
+                                                                <option value="<?php echo $row['course_name']; ?>"><?php echo $row['course_name']; ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="pg_class hide">
-                                                    <div class="select-wrapper">
-                                                        <ul id="select-options-a63a5eb0-c120-8944-5003-a1f73fdd85d6" class="dropdown-content select-dropdown" tabindex="0">
-                                                            <li class="disabled selected" id="select-options-a63a5eb0-c120-8944-5003-a1f73fdd85d60" tabindex="0"><span>Choose your option</span></li>
-                                                            <li id="select-options-a63a5eb0-c120-8944-5003-a1f73fdd85d61" tabindex="0"><span>MBA</span></li>
-                                                            <li id="select-options-a63a5eb0-c120-8944-5003-a1f73fdd85d62" tabindex="0"><span>MCA</span></li>
-                                                        </ul><svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 10l5 5 5-5z"></path>
-                                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select name="course" id="course" onchange="change_course(this.value)" tabindex="-1">
-                                                            <option value="" disabled="" selected="">Choose your option</option>
-                                                            <option value="MBA">MBA</option>
-                                                            <option value="MCA">MCA</option>
-                                                        </select>
-                                                    </div>
+
+                                            </div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <p for="transportation_opted">Session<span class="color-red"> * </span></p>
+                                                <div class="select-wrapper">
+                                                    <?php
+                                                    //    gettiting the starting date for input the session in 
+                                                    $startdate = date("Y");
+                                                    ?>
+                                                    </svg><select id="transportation" name="session" tabindex="-1">
+                                                        <option value=" " disabled="" selected="">-Select-</option>
+                                                        <option value="<?php echo date('Y');
+                                                                        echo " - ";
+                                                                        echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
+                                                                                                                    echo " - ";
+                                                                                                                    echo date('Y', strtotime('+3 year')); ?></option>
+                                                        <option value="<?php echo date('Y');
+                                                                        echo " - ";
+                                                                        echo date('Y', strtotime('+4 year')); ?>"><?php echo date('Y');
+                                                                                                                    echo " - ";
+                                                                                                                    echo date('Y', strtotime('+4 year')); ?></option>
+                                                    </select>
                                                 </div>
-                                                <div class="diploma_class  hide">
-                                                    <div class="select-wrapper">
-                                                        <ul id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a68" class="dropdown-content select-dropdown" tabindex="0">
-                                                            <li class="disabled selected" id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a680" tabindex="0"><span>Choose your option</span></li>
-                                                            <li id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a681" tabindex="0"><span>DIPLOMA ( MECHANICAL )</span></li>
-                                                            <li id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a682" tabindex="0"><span>DIPLOMA ( COMPUTER SCIENCE )</span></li>
-                                                            <li id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a683" tabindex="0"><span>DIPLOMA ( ELECTRICAL &amp; ELECTRONICS )</span></li>
-                                                            <li id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a684" tabindex="0"><span>DIPLOMA ( CIVIL )</span></li>
-                                                            <li id="select-options-f30c6b03-7960-8b6a-2e56-daa892069a685" tabindex="0"><span>D.PHARMA</span></li>
-                                                        </ul><svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 10l5 5 5-5z"></path>
-                                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select name="course" id="course" onchange="change_course(this.value)" tabindex="-1">
-                                                            <option value="" disabled="" selected="">Choose your option</option>
-                                                            <option value="DIPLOMA ( MECHANICAL )">DIPLOMA ( MECHANICAL )</option>
-                                                            <option value="DIPLOMA ( COMPUTER SCIENCE )">DIPLOMA ( COMPUTER SCIENCE )</option>
-                                                            <option value="DIPLOMA ( ELECTRICAL &amp; ELECTRONICS )">DIPLOMA ( ELECTRICAL &amp; ELECTRONICS )</option>
-                                                            <option value="DIPLOMA ( CIVIL )">DIPLOMA ( CIVIL )</option>
-                                                            <option value="D.PHARMA">D.PHARMA</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="doctorate_class  hide">
-                                                    <div class="select-wrapper">
-                                                        <ul id="select-options-203ad44f-4bf0-c751-9071-4ce60dc97cd3" class="dropdown-content select-dropdown" tabindex="0">
-                                                            <li class="disabled selected" id="select-options-203ad44f-4bf0-c751-9071-4ce60dc97cd30" tabindex="0"><span>Choose your option</span></li>
-                                                            <li id="select-options-203ad44f-4bf0-c751-9071-4ce60dc97cd31" tabindex="0"><span>Ph.D ( Commerce &amp; Management)</span></li>
-                                                            <li id="select-options-203ad44f-4bf0-c751-9071-4ce60dc97cd32" tabindex="0"><span>Ph.D (English)</span></li>
-                                                            <li id="select-options-203ad44f-4bf0-c751-9071-4ce60dc97cd33" tabindex="0"><span>Ph.D (Mass Communication)</span></li>
-                                                        </ul><svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 10l5 5 5-5z"></path>
-                                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select name="course" id="course" onchange="change_course(this.value)" tabindex="-1">
-                                                            <option value="" disabled="" selected="">Choose your option</option>
-                                                            <option value="Ph.D ( Commerce &amp; Management)">Ph.D ( Commerce &amp; Management)</option>
-                                                            <option value="Ph.D (English)">Ph.D (English)</option>
-                                                            <option value="Ph.D (Mass Communication)">Ph.D (Mass Communication)</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="lateral_class  hide">
-                                                    <div class="select-wrapper">
-                                                        <ul id="select-options-56d518a1-1170-3dcd-2790-3232b936925e" class="dropdown-content select-dropdown" tabindex="0">
-                                                            <li class="disabled selected" id="select-options-56d518a1-1170-3dcd-2790-3232b936925e0" tabindex="0"><span>Choose your option</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e1" tabindex="0"><span>DIPLOMA (MECHANICAL)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e2" tabindex="0"><span>DIPLOMA (COMPUTER SCIENCE)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e3" tabindex="0"><span>DIPLOMA (ELECTRICAL &amp; ELECTRONICS)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e4" tabindex="0"><span>DIPLOMA (CIVIL)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e5" tabindex="0"><span>BCA</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e6" tabindex="0"><span>B.TECH (MECHANICAL)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e7" tabindex="0"><span>B.TECH (ELECTRICAL &amp; ELECTRONICS)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e8" tabindex="0"><span>B.TECH (COMPUTER SCIENCE)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e9" tabindex="0"><span>B.TECH (CIVIL)</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e10" tabindex="0"><span>B.OPTOMETRY</span></li>
-                                                            <li id="select-options-56d518a1-1170-3dcd-2790-3232b936925e11" tabindex="0"><span>B.PHARMA</span></li>
-                                                        </ul><svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 10l5 5 5-5z"></path>
-                                                            <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select name="course" id="course" onchange="change_course(this.value)" tabindex="-1">
-                                                            <option value="" disabled="" selected="">Choose your option</option>
-                                                            <option value="DIPLOMA (MECHANICAL)">DIPLOMA (MECHANICAL)</option>
-                                                            <option value="DIPLOMA (COMPUTER SCIENCE)">DIPLOMA (COMPUTER SCIENCE)</option>
-                                                            <option value="DIPLOMA (ELECTRICAL &amp; ELECTRONICS)">DIPLOMA (ELECTRICAL &amp; ELECTRONICS)</option>
-                                                            <option value="DIPLOMA (CIVIL)">DIPLOMA (CIVIL)</option>
-                                                            <option value="BCA">BCA</option>
-                                                            <option value="B.TECH (MECHANICAL)">B.TECH (MECHANICAL)</option>
-                                                            <option value="B.TECH (ELECTRICAL &amp; ELECTRONICS)">B.TECH (ELECTRICAL &amp; ELECTRONICS)</option>
-                                                            <option value="B.TECH (COMPUTER SCIENCE)">B.TECH (COMPUTER SCIENCE)</option>
-                                                            <option value="B.TECH (CIVIL)">B.TECH (CIVIL)</option>
-                                                            <option value="B.OPTOMETRY">B.OPTOMETRY</option>
-                                                            <option value="B.PHARMA">B.PHARMA</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="error" id="course_err"></div>
+                                                <div class="error" id="transportation_err"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -238,34 +158,47 @@
                                             <h3 class="card-title">Personal Details</h3>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6>Your Name *</h6>
-                                                <input type="text" placeholder="Your Name" name="username" id="username" class="" value="dkljfdjhg">
-                                                <div class="error" id="username_err"></div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6>Your Name <span class="color-red"> * </span></h6>
+                                                <input required type="text" placeholder="Your Name" name="name" id="username" class="" value="">
+
                                             </div>
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="mobile_no">Mobile Number *</h6>
-                                                <input placeholder="Mobile Number" id="mobile" name="mobile" type="tel" class="validate" value="9304612012" disabled="">
-                                                <div class="error" id="mobile_err"></div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="mobile_no">Mobile Number <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Mobile Number" id="mobile" name="mobile" type="tel" class="validate">
+
                                             </div>
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="email">Email *</h6>
-                                                <input placeholder="Email" name="email" id="email" type="email" class="validate" value="hdksjfhdskjhf@jdkfhdkj.kjghkf" disabled="">
-                                                <div class="error" id="email_err"></div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="email">Email <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Email" name="email" id="email" type="email" class="validate" value="">
+
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="alternate_mobileid">Alternate Mobile No.</h6>
-                                                <input placeholder="Alternate Mobile No." id="alt_mobile" name="alt_mobile" type="tel" class="validate" value="">
-                                                <div class="error" id="alt_mobile_err"></div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="father_nameid">Father's Name <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Father's Name" id="father_name" name="father_name" type="text" class="validate" value="">
+
                                             </div>
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="first_name">Gender *</h6>
+
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="transportation_opted">Mother's Name <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Mothers's Name" id="mother_name" name="mother_name" type="text" class="validate" value="">
+
+                                            </div>
+
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="transportation_opted">Refered BY (Optional)</h6>
+                                                <input placeholder="Enter name of Refered BY" id="mother_name" name="referby" type="text" class="validate" value="">
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12 m6 l4">
+                                                <h6 for="first_name">Gender <span class="color-red"> * </span></h6>
                                                 <div class="select-wrapper">
                                                     <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M7 10l5 5 5-5z"></path>
@@ -280,55 +213,15 @@
                                                 <div class="error" id="gender_err"></div>
                                             </div>
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="dob">Date Of Birth *</h6>
-                                                <input placeholder="Placeholder" id="dob" name="dob" type="text" class="datepicker" value="">
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="dob">Date Of Birth <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Date Of Birth" id="dob" name="dob" type="text" class="datepicker" value="">
                                                 <div class="error" id="dob_err"></div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="father_nameid">Father's Name *</h6>
-                                                <input placeholder="Father's Name" id="father_name" name="father_name" type="text" class="validate" value="">
-                                                <div class="error" id="father_name_err"></div>
-                                            </div>
 
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="transportation_opted">Transportation opted *</h6>
-                                                <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="transportation" name="transportation" tabindex="-1">
-                                                        <option value=" " disabled="" selected="">-Select-</option>
-                                                        <option id="transportation_opted" value="Yes">Yes</option>
-                                                        <option id="transportation_opted" value="No">No</option>
-                                                    </select>
-                                                </div>
-                                                <div class="error" id="transportation_err"></div>
-                                            </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="hostel_opted">Hostel opted *</h6>
-                                                <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="hostel" name="hostel" tabindex="-1">
-                                                        <option value="" disabled="" selected="">-Select-</option>
-                                                        <option id="hostel_opted" value="Yes">Yes</option>
-                                                        <option id="hostel_opted" value="No">No</option>
-                                                    </select>
-                                                </div>
-                                                <div class="error" id="hostel_err"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -337,49 +230,30 @@
                                             <h3 class="card-title">Address Details</h3>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="address1">Address 1 *</h6>
-                                                <input placeholder="Address 1" id="address_1" name="address_1" type="text" class="validate" value="">
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="address1">Parmanent Address <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Address 1" id="address_1" name="address1" type="text" class="validate" value="">
                                                 <div class="error" id="address_1_err"></div>
                                             </div>
 
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="address2">Address 2</h6>
-                                                <input placeholder="Address 2" id="address_2" name="address_2" type="text" class="validate" value="">
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="address2">Crossponeds Address </h6>
+                                                <input required placeholder="Address 2" id="address_2" name="address2" type="text" class="validate" value="">
                                             </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="address3">Address 3</h6>
-                                                <input placeholder="Address 3" id="address_3" name="address_3" type="text" class="validate" value="">
-                                            </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="district">District *</h6>
-                                                <input placeholder="District" id="district" name="district" type="text" class="validate" value="">
-                                                <div class="error" id="district_err"></div>
-                                            </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="country">Country *</h6>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="country">Country <span class="color-red"> * </span></h6>
                                                 <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="country" name="country" tabindex="-1">
+
+                                                    <select id="country" name="country" tabindex="-1">
                                                         <option value="" disabled="" selected="">-Select-</option>
                                                         <option id="country" value="India">India</option>
                                                     </select>
                                                 </div>
-                                                <div class="error" id="country_err"></div>
                                             </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="state1">State/Province *</h6>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="state1">State/Province <span class="color-red"> * </span></h6>
                                                 <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="state" name="state" tabindex="-1">
+                                                    <select id="state" name="state" tabindex="-1">
                                                         <option id="state1" value="" disabled="" selected="">-Select-</option>
                                                         <option id="state1" value="Andhra Pradesh">Andhra Pradesh</option>
                                                         <option id="state1" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -419,167 +293,22 @@
                                                         <option id="state1" value="West Bengal">West Bengal</option>
                                                     </select>
                                                 </div>
-                                                <div class="error" id="state_err"></div>
                                             </div>
-
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="postal">Postal code *</h6>
-                                                <input placeholder="Postal Code" type="text" id="postal_code" name="postal_code" class="validate" value="">
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="district">District <span class="color-red"> * </span></h6>
+                                                <input required placeholder="District" id="district" name="district" type="text" class="validate" value="">
+                                                <div class="error" id="district_err"></div>
+                                            </div>
+                                            <div class="input-field col s6 m6 l4">
+                                                <h6 for="postal">Postal code <span class="color-red"> * </span></h6>
+                                                <input required placeholder="Postal Code" type="text" id="postal_code" name="postal_code" class="validate" value="">
                                                 <div class="error" id="postal_code_err"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-content">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Education Details</h3>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="input-field col s12 m3 l3">
-                                                <h6 for="class">Last Class Attended *</h6>
-                                                <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="last_class" name="last_class" tabindex="-1">
-                                                        <option id="class" value="" disabled="" selected="">-Select-</option>
-                                                        <option id="class" value="10th">10th</option>
-                                                        <option id="class" value="12th">12th</option>
-                                                        <option id="class" value="Graduation">Graduation</option>
-                                                        <option id="class" value="Post Graduation">Post Graduation</option>
-                                                        <option id="class" value="Diploma">Diploma</option>
-                                                        <option id="class" value="ITI">ITI</option>
-                                                    </select>
-                                                </div>
-                                                <div class="error" id="last_class_err"></div>
-                                            </div>
-
-                                            <div class="input-field col s12 m3 l3">
-                                                <h6 for="school_name">School Name *</h6>
-                                                <input placeholder="" id="school_name" name="school_name" type="text" value="">
-                                                <div class="error" id="school_name_err"></div>
-                                            </div>
-
-                                            <div class="input-field col s12 m3 l3">
-                                                <h6 for="result">Result Declared *</h6>
-                                                <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="result_declared" name="result_declared" tabindex="-1">
-                                                        <option value="">-Select-</option>
-                                                        <option id="result" value="Yes">Yes</option>
-                                                        <option id="result" value="No">No</option>
-                                                    </select>
-                                                </div>
-                                                <div class="error" id="result_declared_err"></div>
-                                            </div>
-
-                                            <div id="percentage" class="input-field col s12 m3 l3" style="display: none;">
-                                                <h6 for="percentage">Percentage of Marks *</h6>
-                                                <input placeholder="" type="number" maxlength="5" min="1" max="100" id="result_percentage" name="result_percentage" value="">
-                                                <div class="error" id="result_percentage_err"></div>
-                                            </div>
-
-                                            <div id="admitcard" class="input-field col s12 m3 l3">
-                                                <h6 for="admit_card_no">Admit Card No. *</h6>
-                                                <input placeholder="" id="admit_card_no" name="admit_card_no" type="text" value="">
-                                                <div class="error" id="admit_card_no_err"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div id="admitcard_upload" class="input-field col s12 m6 l6">
-                                                <h6>Admit Card *</h6>
-                                                <div class="dropify-wrapper">
-                                                    <div class="dropify-message"><span class="file-icon"></span>
-
-                                                    </div>
-                                                    <div class="dropify-loader"></div>
-                                                    <div class="dropify-errors-container">
-                                                        <ul></ul>
-                                                    </div><input type="file" id="admit_card" name="admit_card" class="dropify" data-max-file-size="2M"><button type="button" class="dropify-clear">Remove</button>
-                                                    <div class="dropify-preview"><span class="dropify-render"></span>
-                                                        <div class="dropify-infos">
-                                                            <div class="dropify-infos-inner">
-                                                                <p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p>
-                                                                <p class="dropify-infos-message">Drag and drop or click to replace</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span></span>
-                                                <div class="error" id="admit_card_err"></div>
-                                                <input type="hidden" name="admit_card_hidden" id="admit_card_hidden" value="">
-                                            </div>
-
-                                            <div id="marksheet_upload" class="input-field col s12 m6 l6" style="display: none;">
-                                                <h6>Marksheet *</h6>
-                                                <div class="dropify-wrapper">
-                                                    <div class="dropify-message"><span class="file-icon"></span>
-                                                        <p>Drag and drop a file here or click</p>
-                                                        <p class="dropify-error">Ooops, something wrong appended.</p>
-                                                    </div>
-                                                    <div class="dropify-loader"></div>
-                                                    <div class="dropify-errors-container">
-                                                        <ul></ul>
-                                                    </div><input type="file" id="result_marksheet" name="result_marksheet" class="dropify" data-max-file-size="2M"><button type="button" class="dropify-clear">Remove</button>
-                                                    <div class="dropify-preview"><span class="dropify-render"></span>
-                                                        <div class="dropify-infos">
-                                                            <div class="dropify-infos-inner">
-                                                                <p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p>
-                                                                <p class="dropify-infos-message">Drag and drop or click to replace</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span></span>
-                                                <div class="error" id="result_marksheet_err"></div>
-                                                <input type="hidden" name="result_marksheet_hidden" id="result_marksheet_hidden" value="">
-                                            </div>
-                                        </div>
 
 
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-content">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Entrance Exam Details</h3>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12 m12 l4">
-                                                <h6 for="name_entrance">Appeared For any Entrance Exam *</h6>
-                                                <div class="select-wrapper">
-                                                    <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M7 10l5 5 5-5z"></path>
-                                                        <path d="M0 0h24v24H0z" fill="none"></path>
-                                                    </svg><select id="entrance_exam_status" name="entrance_exam_status" tabindex="-1">
-                                                        <option value="" disabled="" selected="">-Select-</option>
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No">No</option>
-                                                    </select>
-                                                </div>
-                                                <div class="error" id="entrance_exam_status_err"></div>
-                                            </div>
-
-                                            <div id="exam_nametext" class="input-field col s12 m12 l4" style="display: none;">
-                                                <h6 for="exam_nametext">Name of the exam *</h6>
-                                                <input placeholder="" id="entrance_exam_name" name="entrance_exam_name" type="text" value="">
-                                                <div class="error" id="entrance_exam_name_err"></div>
-                                            </div>
-
-                                            <div id="scoretext" class="input-field col s12 m12 l4" style="display: none;">
-                                                <h6 for="scoretext">Score</h6>
-                                                <input placeholder="" id="entrance_exam_score" name="entrance_exam_score" type="text" value="">
-                                                <div class="error" id="entrance_exam_score_err"></div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-header">
@@ -587,10 +316,10 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="input-field col s12 m12 l12">
+                                            <div class="input-field col s6 m6 l12">
                                                 <p>
                                                     <label>
-                                                        <input type="checkbox" id="declare_1" name="declare_1" value="1">
+                                                        <input required type="checkbox" id="declare_1" name="declare_1" value="1">
                                                         <span>I declare that I meet all the eligibility criteria of admission as per the university guideline. In case of failure to do so or , in case of non-submission of required document by scheduled date given by university , my admission shall stand cancelled &amp; fees paid will be forfeited</span>
                                                     </label>
                                                 </p>
@@ -599,10 +328,10 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col s12 m12 l12">
+                                            <div class="input-field col s6 m6 l12">
                                                 <p>
                                                     <label>
-                                                        <input type="checkbox" id="declare_2" name="declare_2" value="1">
+                                                        <input required type="checkbox" id="declare_2" name="declare_2" value="1">
                                                         <span>I declare that the information given above is true and to the best of my knowledge and belief ; and if any of its found to be incorrect at any time during the program , my admission shall stand cancelled and I shall be liable to such disciplinary action as may be decided by the university</span>
                                                     </label>
                                                 </p>
@@ -612,10 +341,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="course_hide" id="course_hide" value="">
+                                <input required type="hidden" name="course_hide" id="course_hide" value="">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                                        <button class="btn waves-effect waves-light" type="submit" name="submit">
                                             Save &amp; Next
                                             <i class="material-icons right">send</i>
                                         </button>
@@ -675,3 +404,64 @@
 </body>
 
 </html>
+
+<?php
+// here to inserting the data into the database
+if (isset($_POST['submit'])) {
+
+    //     // course Details
+    $prospectus_session = $_POST['session'];
+    $prospectus_course_name = $_POST['course'];
+
+    //     // persnal details
+
+    $prospectus_applicant_name = $_POST['name'];
+    $mobile = $_POST['mobile'];
+    $prospectus_emailid = $_POST['email'];
+    $prospectus_gender = $_POST['gender'];
+    $prospectus_dob = $_POST['dob'];
+    $prospectus_father_name = $_POST['father_name'];
+    $prospectus_mother_name = $_POST['mather_name'];
+    $revert_by = $_POST['referby'];
+
+    // address details
+    $address1 = $_POST['address1'];
+    $address1 = $_POST['address2'];
+    // address1 and address2 has converting into the json form and send to the database
+    $address = array("permanet" => $address1, "crosspodens" => $address2);
+
+    $prospectus_address = json_encode($address);
+    $prospectus_country = $_POST['country'];
+    $prospectus_state = $_POST['state'];
+    $prospectus_city = $_POST['city'];
+    $prospectus_postal_code = $_POST['postal_code'];
+
+    // //for updating in final page
+    //     $payment_status=
+    //     $prospectus_rate=
+    //     $prospectus_payment_mode=
+    //     $prospectus_deposit_to=
+    //     $bank_name=
+    //     $transaction_no=
+    //     $transaction_date=
+    //     $post_at=
+    //     $type=
+    //     $easebuzz_id=
+    //     $transaction_id=
+    //     $status=
+
+
+
+    $tbl_prospectus_query = "INSERT INTO `tbl_prospectus`(`prospectus_no`, `prospectus_applicant_name`, `prospectus_gender`, `prospectus_father_name`, `prospectus_mother_name`, `prospectus_address`, `prospectus_country`, `prospectus_state`, `prospectus_city`, `prospectus_postal_code`, `prospectus_dob`, `prospectus_emailid`, `mobile`, `revert_by`, `prospectus_course_name`, `prospectus_session`, `payment_status`, `prospectus_rate`, `prospectus_payment_mode`, `prospectus_deposit_to`, `bank_name`, `transaction_no`, `transaction_date`, `post_at`, `type`, `easebuzz_id`, `transaction_id`, `status`) VALUES ('NULL','$prospectus_applicant_name','$prospectus_gender','$prospectus_father_name','$prospectus_mother_name','$prospectus_address','$prospectus_country','$prospectus_state','$prospectus_city','$prospectus_postal_code','$prospectus_dob','$prospectus_emailid','$mobile','$revert_by','$prospectus_course_name','$prospectus_session','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL')";
+    $tbl_prospectus_insert = mysqli_query($connection, $tbl_prospectus_query);
+    if ($tbl_prospectus_insert) {
+        echo "<script>
+       window.location.replace('conformation.php');
+       </script>";
+    }
+
+       else{
+        echo "<script> alert('Data already Exits');</script>";
+    }
+}
+?>

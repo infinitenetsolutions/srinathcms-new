@@ -1,5 +1,4 @@
 body {
-
     margin-top: 10px;
     /* background-image: url("/asset/img/background.jpg"); */
     /* background-image: url(https://www.wallpapertip.com/wmimgs/49-493241_background-image-for-student-portal.jpg); */
@@ -10,21 +9,20 @@ body {
 }
 
 .login-box {
-  
-    width: 100%;
+    width: 800px;
     margin: auto;
     min-height: 510px;
     position: relative;
-    background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
-    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
+    /* background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center; */
+    /* box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19) */
 }
 
 .login-snip {
     width: 100%;
     height: 100%;
     position: absolute;
-    padding: 90px 70px 50px 70px;
-    background: linear-gradient(to right top, #ff3c00be, #ff3c0083, #6d6d6d69, #ff3c00be, #ff3e03e1);
+    padding: 30px 70px 50px 70px;
+    background: #ff3c00;
     ;
 }
 
@@ -80,7 +78,7 @@ body {
 
 .login-space .group .input, .login-space .group .button {
     border: none;
-    padding: 6px 20px;
+    padding: 6px 10px;
     border-radius: 25px;
     background: rgba(255, 255, 255, .1)
 }
@@ -191,7 +189,7 @@ a {
 }
 
 .errormsg {
-    color: red;
+    color: whitesmoke;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -202,7 +200,7 @@ main {
 
 .form-check-label {
     margin-bottom: 0;
-    margin-left: 18px;
+    margin-left: 0px;
 }
 
 .form-check-input {
@@ -210,6 +208,7 @@ main {
     margin-top: 3px;
     margin-left: 0px;
 }
+
 /* 
 header {
     border: solid black 1px;
@@ -241,7 +240,7 @@ element.style {}
 
 @media screen and (min-width: 320px) and (max-width:680px) {
     .row1 {
-        margin-top: 5%;
+        margin-top: 1%;
         display: -ms-flexbox;
         display: flex;
         -ms-flex-wrap: wrap;
@@ -253,6 +252,20 @@ element.style {}
         margin-left: -5px;
         margin-right: -5px;
     }
+    .login-box {
+        width: 100%;
+        margin: auto;
+        min-height: 510px;
+        position: relative;
+        background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
+        /* box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19) */
+    }
+    .tab {
+        font-size: 12px !important;
+    }
+    .nav-btn {
+        display: none;
+    }
 }
 
 label {
@@ -261,8 +274,21 @@ label {
 }
 
 .btn-primary {
-    background-color: #ff3c00 !important;
+    background-color: #252628 !important;
 }
-.text-color{
+
+.text-color {
     color: seagreen;
+}
+
+.nav-wrapper img {
+    margin-left: 1rem;
+}
+
+.text-muted {
+    margin-left: 2rem;
+}
+
+.col-md-8 {
+    margin-left: 1rem;
 }

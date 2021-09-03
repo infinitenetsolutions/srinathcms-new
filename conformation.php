@@ -1,4 +1,8 @@
-<html class="loading" lang="en" data-textdirection="ltr">
+<?php 
+include './Backend/connection.inc.php';
+include './Backend/function.inc.php';
+?>
+<html >
 
 <head>
   
@@ -41,9 +45,9 @@
             <div class="nav-wrapper">
                 <img  src="./asset/img/logo.png" alt="Srinath logo">
                 <ul class="right">
-                    <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1">Rohit kumar<i class="material-icons right">arrow_drop_down</i></a>
+                    <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1"><?php echo $_SESSION['name']; ?><i class="material-icons right">arrow_drop_down</i></a>
                         <div id="dropdown1" class="dropdown-content" tabindex="0">
-                            <a href="logout" class="whitenav" tabindex="0">Log Out</a>
+                            <a href="./Backend/logout.php" class="whitenav" tabindex="0">Log Out</a>
                         </div>
                     </li>
                 </ul>
@@ -76,15 +80,15 @@
                                         </tr>
                                         <tr>
                                             <td>Name</td>
-                                            <td>Rohit kumar</td>
+                                            <td><?php echo $_SESSION['name'] ?></td>
                                         </tr>
                                         <tr>
                                             <td>Email</td>
-                                            <td>hdksjfhdskjhf@jdkfhdkj.kjghkf</td>
+                                            <td><?php echo $_SESSION['email']; ?></td>
                                         </tr>
                                         <tr>
                                             <td>Mobile</td>
-                                            <td>9304612012</td>
+                                            <td><?php echo $_SESSION['phone']; ?></td>
                                         </tr>
                                         <tr>
                                             <td></td>

@@ -15,7 +15,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
     if ($_SESSION['otp'] == $otp) {
         send_data_in_database($connection);
     } else {
-        $smg = "Wrong OTP";
+        $smg = "You Enter Wrong OTP ";
     }
 }
 function send_data_in_database($connection)
@@ -26,6 +26,7 @@ function send_data_in_database($connection)
     $otp_quer1 = "INSERT INTO `snu_login` (`id`, `name`, `phone`, `email`, `Date`, `status`) VALUES (NULL, '$name', '$phone', '$email', current_timestamp(), '0');";
     $result = mysqli_query($connection, $otp_quer1);
     if ($result > 0) {
+        unset($_SESSION['otp']);
         header('location: registration.php');
     }
 }
@@ -41,18 +42,27 @@ function send_data_in_database($connection)
     <!-- Bootstrap CSS -->
 
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Timmana&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png"> 
 
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="footer.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN VENDOR CSS -->
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/dropify/css/dropify.min.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN THEME  CSS-->
+    <!-- END THEME  CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/materialize.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/style.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom/custom.css"> 
+    <!-- END Custom CSS-->
 
-    <link rel="stylesheet" href="productcart.css">
-
-    <link rel="stylesheet" href="contact.css">
-    <link rel="stylesheet" href="search.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./asset/css/login.css">
     <!-- Roboto Font -->
@@ -64,7 +74,18 @@ function send_data_in_database($connection)
 
 <body>
     <?php include './srinath.inc/header.php'; ?>
-    <div class=".img-responsive "><img src="./asset/img/logo.png" alt=""></div>
+    <nav class="whitenav">
+        <div class="nav-wrapper">
+        <a href="index.php">
+            <img src="./asset/img/logo.png" alt="Srinath logo">
+            </a>
+            <ul class="right">
+            <div class="nav-btn d-sm-none d-md-none d-lg-inline-block">
+                    <a href="http://srinathuniversity.in/apply-2021" target="blank">Admission 2021</a>
+                </div>
+            </ul>
+        </div>
+    </nav>
     <div class="row">
         <div class="col-md-6 mx-auto p-0 ">
             <div class="card">
@@ -81,10 +102,11 @@ function send_data_in_database($connection)
                                 <form action="" method="POST">
                                     <div class="group col-sm-6"> <label for="user" class="label">Otp</label> <input required id="user" type="text" class="input" placeholder="Enter 6 Digit otp" name="otp">
                                     </div>
+                                    <p class="errormsg"><?php echo $smg; ?></p>
                                     <br>
                                     <div class="group col-sm-6"> <input required type="submit" class="button btn-primary" value="Submit Otp" name="submit">
                                     </div>
-                                    <p class="errormsg"><?php echo $smg; ?></p>
+
                                     <div class="hr"></div>
 
 

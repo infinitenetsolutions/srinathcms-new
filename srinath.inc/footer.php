@@ -1,10 +1,9 @@
-
 <div class="footer-copyright-section">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="footer-copyright-text">
-                    <p class="text-muted">design & develop by <a class="text-color" href="http://infinitenetsolutions.com/" target="blank">Infinite Net Solutions</a></p>
+                    <p class="text-muted">Design & Develop By <a class="text-color" href="http://infinitenetsolutions.com/" target="blank">Infinite Net Solutions</a></p>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">

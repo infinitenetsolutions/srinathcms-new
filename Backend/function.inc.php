@@ -41,7 +41,7 @@ function send_otp()
     $mail->isHTML(true);                                  // Set email format to HTML
 
     $mail->Subject = 'Otp Varification code';
-    $mail->Body    = ' <h4>This is your one time password  <b>' . $otp . '</b> </h4>';
+    $mail->Body    = ' <h4> Your One Time Varification Code is  <b>' . $otp . '</b> </h4>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     if (!$mail->send()) {

@@ -7,7 +7,8 @@ $email = '';
 $phone = '';
 
 require('./Backend/connection.inc.php');
-echo $_SESSION['otp'];
+include './Backend/function.inc.php';
+
 if (isset($_POST['submit']) && isset($_POST['otp'])) {
     $otp = $_POST['otp'];
     echo "<br>";

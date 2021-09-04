@@ -140,7 +140,7 @@ if (isset($_POST['done'])) {
                                    
                                     <p class="errormsg col-sm-6"><?php echo $smg; ?></p></div>
                                     <?php echo $otp; ?>
-                                    <br>
+                          
                                     <div class=" ad group col-sm-6"> <input required type="submit" class=" button btn-primary" name="submit" value="Get Otp"> </div>
                                   
                                     <div class="hr"></div>

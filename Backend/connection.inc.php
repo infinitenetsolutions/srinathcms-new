@@ -1,5 +1,13 @@
 <?php
+
 session_start();
-$connection=mysqli_connect("localhost","root","","srinathuniversity");
+if($_SERVER['HTTP_HOST']=="localhost"){
+    $connection=mysqli_connect("localhost","root","","srinathuniversity");
+
+}
+else{
+    $connection=mysqli_connect("localhost","phpmyadmin","raja@#","srinathuniversity");
+
+}
 
 ?>

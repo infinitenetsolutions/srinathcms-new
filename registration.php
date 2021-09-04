@@ -232,13 +232,13 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s6 m6 l4">
-                                                    <h6 for="address1">Parmanent Address <span class="color-red"> * </span></h6>
+                                                    <h6 for="address1">Permanent Address <span class="color-red"> * </span></h6>
                                                     <input required placeholder="Address 1" id="address_1" name="address1" type="text" class="validate" value="">
                                                     <div class="error" id="address_1_err"></div>
                                                 </div>
 
                                                 <div class="input-field col s6 m6 l4">
-                                                    <h6 for="address2">Crossponeds Address </h6>
+                                                    <h6 for="address2">Correspondence Address </h6>
                                                     <input required placeholder="Address 2" id="address_2" name="address2" type="text" class="validate" value="">
                                                 </div>
                                                 <div class="input-field col s6 m6 l4">

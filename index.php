@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['phone'] = $_POST['phone'];  //the data type of phone number is string
         $_SESSION['email'] = $_POST['email'];   //the data type of name is string
         $_SESSION['otp'] = generate_otp($email);
-    
+        $_SESSION['msg'] = send_otp();
         // redirect to the page
         header("location:./submit_otp.php");
     }
@@ -37,12 +37,15 @@ if (isset($_POST['done'])) {
     $otp_query = "SELECT * FROM `snu_login` WHERE `email`='$email'";
     $result = mysqli_query($connection, $otp_query);
     $data = mysqli_fetch_array($result);
-    $name=$data['name'];
+    $name = $data['name'];
     $dphone = $data['phone'];
     $demail = $data['email'];
+   
 
     if ($demail == $email) {
+     
         $_SESSION['otp'] = generate_otp($email);
+        $_SESSION['msg'] = send_otp();
         $_SESSION['name'] = $name;   //the data type of name is string
         $_SESSION['phone'] = $dphone;  //the data type of phone number is string
         $_SESSION['email'] = $demail;   //the data type of name is string
@@ -99,9 +102,9 @@ if (isset($_POST['done'])) {
     <nav class="whitenav">
         <div class="nav-wrapper">
             <a href="index.php">
-            <img src="./asset/img/logo.png" alt="Srinath logo">
+                <img src="./asset/img/logo.png" alt="Srinath logo">
             </a>
-       
+
             <ul class="right">
                 <div class="nav-btn d-sm-none d-md-none d-lg-inline-block">
                     <a href="http://srinathuniversity.in/apply-2021" target="blank">Admission 2021</a>
@@ -139,7 +142,7 @@ if (isset($_POST['done'])) {
                                     <div class=" ad group col-sm-6"> <input required type="submit" class=" button btn-primary" name="submit" value="Get Otp"> </div>
                                     <p class="errormsg"><?php echo $smg; ?></p>
                                     <div class="hr"></div>
-                                  
+
 
                                 </form>
                             </div>

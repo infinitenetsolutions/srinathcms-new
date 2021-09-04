@@ -4,7 +4,7 @@
 function generate_otp($email)
 {
     $_SESSION['otp'] = rand(100000, 999999);
-    send_otp();
+   return send_otp();
 }
 function send_otp()
 {
@@ -32,7 +32,7 @@ function send_otp()
     $mail->setFrom($sender_email_id, 'Srinath University');
     $mail->addAddress($reciever_email, $reciever_name);     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
-    $mail->addReplyTo($reciever_email, 'Information');
+    // $mail->addReplyTo($reciever_email, 'Information');  // if You want to giving the reply then you can enable 
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
@@ -48,6 +48,6 @@ function send_otp()
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
-        return 'OTP has been sent on you Email id';
+        return 'OTP Sent '.$reciever_email;
     }
 }

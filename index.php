@@ -37,11 +37,16 @@ if (isset($_POST['done'])) {
     $otp_query = "SELECT * FROM `snu_login` WHERE `email`='$email'";
     $result = mysqli_query($connection, $otp_query);
     $data = mysqli_fetch_array($result);
+    $name=$data['name'];
     $dphone = $data['phone'];
     $demail = $data['email'];
 
     if ($demail == $email) {
         $_SESSION['otp'] = generate_otp($email);
+        $_SESSION['name'] = $name;   //the data type of name is string
+        $_SESSION['phone'] = $dphone;  //the data type of phone number is string
+        $_SESSION['email'] = $demail;   //the data type of name is string
+
         // redirect to the page
         header("location:./alreadyuser.php");
     } else {

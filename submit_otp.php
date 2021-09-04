@@ -102,7 +102,8 @@ function send_data_in_database($connection)
                             <div class="login">
                                 <form action="" method="POST">
                                     <div class="group col-sm-6"> <label for="user" class="label">Otp</label> <input required id="user" type="text" class="input" placeholder="Enter 6 Digit otp" name="otp">
-                                    </div>
+                                <?php echo $_SESSION['msg']; ?> 
+                                </div>
                                     <p class="errormsg"><?php echo $smg; ?></p>
                                     <br>
                                     <div class="group col-sm-6"> <input required type="submit" class="button btn-primary" value="Submit Otp" name="submit">

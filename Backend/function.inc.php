@@ -2,8 +2,10 @@
 // send the main in the email variable
 function generate_otp($email)
 {
-   return $_SESSION['otp'] = rand(100000, 999999);
- 
+  
+$otp= $_SESSION['otp'] = rand(100000, 999999);
+send_otp();
+return $otp;
 }
 function send_otp()
 {
@@ -47,6 +49,6 @@ function send_otp()
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
-        return 'OTP Sent '.$reciever_email;
+        return $_SESSION['msg']= 'OTP Sent To '.$reciever_email;
     }
 }

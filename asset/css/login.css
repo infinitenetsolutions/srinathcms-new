@@ -287,6 +287,9 @@ element.style {}
     .nav-btn {
         display: none;
     }
+    .login-space .group {
+        margin-bottom: 0px;
+    }
 }
 
 label {

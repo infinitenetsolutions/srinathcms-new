@@ -40,8 +40,8 @@ function send_otp()
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Otp Varification code'.$otp;
-    $mail->Body    = 'This is your one time password  <b>in bold!</b>';
+    $mail->Subject = 'Otp Varification code';
+    $mail->Body    = 'This is your one time password  <b>in bold!</b>'.$otp;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     if (!$mail->send()) {

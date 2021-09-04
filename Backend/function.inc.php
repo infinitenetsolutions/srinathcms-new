@@ -12,10 +12,10 @@ function send_otp()
     $reciever_email = $_SESSION['email'];
     $reciever_name = $_SESSION['name'];
     $otp=$_SESSION['otp'];
-    $smtp_host="smtp.gmail.com";
-    $port=465;
-    $sender_email_id = "testingfor83013@gmail.com";  //here put the sender email id he show in the clint email
-    $sender_password = "Rafiganj"; //here put the password of email id to send the email otp
+    $smtp_host="mail.srinathuniversity.com";
+    $port=587;
+    $sender_email_id = "admissions@srinathuniversity.com";  //here put the sender email id he show in the clint email
+    $sender_password = "Rohit83013@#"; //here put the password of email id to send the email otp
 
     // here is the actual logic to send the otp on the email id show keep changes quirefully
     include 'phpmailer/PHPMailerAutoload.php';
@@ -43,7 +43,7 @@ function send_otp()
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Otp Verification code';
+    $mail->Subject = 'Otp Varification code';
     $mail->Body    = '<p> Thank you for showing interest in Srinath University <br><br> </p> <big>  Your One Time Varification Code is  <b>' . $otp . '</b> </big>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

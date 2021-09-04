@@ -90,7 +90,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
     </nav>
     <div class="row">
         <div class="col-md-6 mx-auto p-0 ">
-            <div class="card">
+           
                 <div class="login-box">
 
                     <div class="login-snip">
@@ -122,7 +122,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
 
                         </div>
                     </div>
-                </div>
+        
             </div>
         </div>
     </div>

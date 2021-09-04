@@ -1,10 +1,10 @@
 <script>
-    function change_course(course_type) {
-        console.log(course_type);
+    function change_course(acadmic) {
+        console.log(acadmic);
 
-
-        document.getElementById("course_name").disable = false;
-
+        if (acadmic != null) {
+            document.getElementById("course_name").disabled = true;
+        }
     }
 </script>
 
@@ -20,7 +20,35 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     $course_name = "SELECT * FROM `tbl_course` WHERE 1";
     $course_name_result = mysqli_query($connection, $course_name);
 
+    // showing the data if avaible in the database
 
+    $phone = $_SESSION['phone'];
+    $email = $_SESSION['email'];
+    $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE 1";
+    $propactus_details = mysqli_query($connection, $user_data_query);
+    $row = mysqli_fetch_array($propactus_details);
+    // course details
+    $prospectus_no = $row['prospectus_no'];
+    $prospectus_course_name = $row['prospectus_course_name'];
+    $prospectus_session = $row['prospectus_session'];
+    // personal details
+    $prospectus_applicant_name = $row['prospectus_applicant_name'];
+    $prospectus_gender = $row['prospectus_gender'];
+    $prospectus_father_name = $row['prospectus_father_name'];
+    $prospectus_mother_name = $row['prospectus_mother_name'];
+    $prospectus_dob = $row['prospectus_dob'];
+    $prospectus_emailid = $row['prospectus_emailid'];
+    $mobile = $row['mobile'];
+    $revert_by    = $row['revert_by'];
+    // address details
+    // here i have to getting the data from the json
+    $prospectus_address = $row['prospectus_address'];
+    $address = json_decode($prospectus_address);
+
+    $prospectus_country = $row['prospectus_country'];
+    $prospectus_state = $row['prospectus_state'];
+    $prospectus_city = $row['prospectus_city'];
+    $prospectus_postal_code = $row['prospectus_postal_code'];
 ?>
 
 
@@ -116,7 +144,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     <div class="ug_class ">
                                                         <div class="select-wrapper">
                                                             <select required name="course" id="course_name">
-                                                                <option value="" disabled="" selected="">Choose your option</option>
+                                                            <?php if($prospectus_course_name!=''){ ?>
+                                                                <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
+                                                                <?php } ?>
+                                                                <option  disabled="">Choose your option</option>
                                                                 <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                 ?>
                                                                     <option value="<?php echo $row['course_name']; ?>"><?php echo $row['course_name']; ?></option>
@@ -134,7 +165,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         $startdate = date("Y");
                                                         ?>
                                                         </svg><select required id="transportation" name="session" tabindex="-1">
-                                                            <option value=" " disabled="" selected="">-Select-</option>
+                                                            <?php if ($prospectus_session != '') { ?>
+                                                                <option value=" <?php echo $prospectus_session ?>" selected><?php echo $prospectus_session; ?></option>
+                                                            <?php } ?>
+                                                            <option value=" " disabled="">-Select-</option>
                                                             <option value="<?php echo date('Y');
                                                                             echo " - ";
                                                                             echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');

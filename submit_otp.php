@@ -89,7 +89,7 @@ function send_data_in_database($connection)
     </nav>
     <div class="row">
         <div class="col-md-6 mx-auto p-0 ">
-            <div class="card">
+     
                 <div class="login-box">
 
                     <div class="login-snip">
@@ -102,9 +102,11 @@ function send_data_in_database($connection)
                             <div class="login">
                                 <form action="" method="POST">
                                     <div class="group col-sm-6"> <label for="user" class="label">Otp</label> <input required id="user" type="text" class="input" placeholder="Enter 6 Digit otp" name="otp">
-                                <?php echo $_SESSION['msg']; ?> 
-                                </div>
+                              
+                                    <?php echo $_SESSION['msg']; ?> 
                                     <p class="errormsg"><?php echo $smg; ?></p>
+                                </div>
+                                  
                                     <br>
                                     <div class="group col-sm-6"> <input required type="submit" class="button btn-primary" value="Submit Otp" name="submit">
                                     </div>
@@ -119,7 +121,7 @@ function send_data_in_database($connection)
 
 
                         </div>
-                    </div>
+             
                 </div>
             </div>
         </div>

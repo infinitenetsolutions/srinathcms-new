@@ -13,7 +13,7 @@ include('./Backend/function.inc.php');
 if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $otp_query = "SELECT * FROM `snu_login` WHERE `email`='$email' && `phone`='$phone'";
+    $otp_query = "SELECT * FROM `snu_login` WHERE `email`='$email'";
     $result = mysqli_query($connection, $otp_query);
     $data = mysqli_fetch_array($result);
     $dphone = $data['phone'];
@@ -116,7 +116,7 @@ if (isset($_POST['done'])) {
     <div class="row">
 
         <div class="col-md-6 mx-auto p-0  ">
-            <div class="card">
+
                 <div class="login-box">
 
                     <div class="login-snip">
@@ -135,12 +135,14 @@ if (isset($_POST['done'])) {
 
                                         <div class="group col-sm-6 "> <label for="user" class="label">Phone</label> <input value="<?php echo $phone; ?>" required id="user" type="text" class="input" placeholder="Enter Phone Number" name="phone" required maxlength="12" pattern="[6789][0-9]{9}"> </div>
 
-                                    </div>
-                                    <div class="group"> <label for="user" class="label">Email</label> <input value="<?php echo $email; ?>" required id="user" type="email" class="input" placeholder="Enter Email id" name="email" required pattern="[^ @]*@[^ @]*"> </div>
+                                  
+                                    <div class="group col-sm-6"> <label for="user" class="label">Email</label> <input value="<?php echo $email; ?>" required id="user" type="email" class="input" placeholder="Enter Email id" name="email" required pattern="[^ @]*@[^ @]*"> </div>
+                                   
+                                    <p class="errormsg col-sm-6"><?php echo $smg; ?></p></div>
                                     <?php echo $otp; ?>
                                     <br>
                                     <div class=" ad group col-sm-6"> <input required type="submit" class=" button btn-primary" name="submit" value="Get Otp"> </div>
-                                    <p class="errormsg"><?php echo $smg; ?></p>
+                                  
                                     <div class="hr"></div>
 
 
@@ -167,7 +169,7 @@ if (isset($_POST['done'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+   
         </div>
     </div>
     <!--Main layout-->

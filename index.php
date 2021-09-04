@@ -40,10 +40,10 @@ if (isset($_POST['done'])) {
     $name = $data['name'];
     $dphone = $data['phone'];
     $demail = $data['email'];
-   
+
 
     if ($demail == $email) {
-     
+
         $_SESSION['otp'] = generate_otp($email);
         $_SESSION['msg'] = send_otp();
         $_SESSION['name'] = $name;   //the data type of name is string

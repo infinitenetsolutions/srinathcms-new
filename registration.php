@@ -96,7 +96,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                 <div class="input-field col l4 m4 s12">
                                                     <p>Academic <span class="color-red"> * </span></p>
                                                     <div class="select-wrapper">
-                                                        <select name="academic" onchange="change_course(this.value)" id="academic" tabindex="-1">
+                                                        <select required name="academic" onchange="change_course(this.value)" id="academic" tabindex="-1">
 
                                                             <option value="" disabled="" selected="">Choose your option</option>
                                                             <?php
@@ -115,7 +115,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     <p>Course <span class="color-red"> * </span></p>
                                                     <div class="ug_class ">
                                                         <div class="select-wrapper">
-                                                            <select name="course" id="course_name">
+                                                            <select required name="course" id="course_name">
                                                                 <option value="" disabled="" selected="">Choose your option</option>
                                                                 <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                 ?>
@@ -133,7 +133,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         //    gettiting the starting date for input the session in 
                                                         $startdate = date("Y");
                                                         ?>
-                                                        </svg><select id="transportation" name="session" tabindex="-1">
+                                                        </svg><select required id="transportation" name="session" tabindex="-1">
                                                             <option value=" " disabled="" selected="">-Select-</option>
                                                             <option value="<?php echo date('Y');
                                                                             echo " - ";
@@ -204,7 +204,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <svg class="caret" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M7 10l5 5 5-5z"></path>
                                                             <path d="M0 0h24v24H0z" fill="none"></path>
-                                                        </svg><select id="gender" name="gender" tabindex="-1">
+                                                        </svg><select required id="gender" name="gender" tabindex="-1">
                                                             <option value="" disabled="" selected="">-Select-</option>
                                                             <option id="gender" value="Male">Male</option>
                                                             <option id="gender" value="Female">Female</option>
@@ -245,7 +245,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     <h6 for="country">Country <span class="color-red"> * </span></h6>
                                                     <div class="select-wrapper">
 
-                                                        <select id="country" name="country" tabindex="-1">
+                                                        <select required id="country" name="country" tabindex="-1">
                                                             <option value="" disabled="" selected="">-Select-</option>
                                                             <option id="country" value="India">India</option>
                                                         </select>
@@ -254,7 +254,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                 <div class="input-field col s6 m6 l4">
                                                     <h6 for="state1">State/Province <span class="color-red"> * </span></h6>
                                                     <div class="select-wrapper">
-                                                        <select id="state" name="state" tabindex="-1">
+                                                        <select required id="state" name="state" tabindex="-1">
                                                             <option id="state1" value="" disabled="" selected="">-Select-</option>
                                                             <option id="state1" value="Andhra Pradesh">Andhra Pradesh</option>
                                                             <option id="state1" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>

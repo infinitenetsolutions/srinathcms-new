@@ -144,10 +144,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     <div class="ug_class ">
                                                         <div class="select-wrapper">
                                                             <select required name="course" id="course_name">
-                                                            <?php if($prospectus_course_name!=''){ ?>
-                                                                <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
+                                                                <?php if ($prospectus_course_name != '') { ?>
+                                                                    <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
                                                                 <?php } ?>
-                                                                <option  disabled="">Choose your option</option>
+                                                                <option disabled="">Choose your option</option>
                                                                 <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                 ?>
                                                                     <option value="<?php echo $row['course_name']; ?>"><?php echo $row['course_name']; ?></option>

@@ -1,0 +1,10 @@
+.login-card-body, .register-card-body {
+    background: #ff3c00;
+    border-top: 0;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+}
+.fa, .fas {
+    font-weight: 900;
+    color: rgb(255, 255, 255) ;
+}

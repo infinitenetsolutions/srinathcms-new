@@ -984,6 +984,7 @@ if (isset($_GET["action"])) {
                 <tr>
                     <th>S.No</th>
                     <th>Course</th>
+                    <th>Prospectus fee</th>
                     <th class="project-actions text-center">Action </th>
                 </tr>
             </thead>
@@ -1000,6 +1001,7 @@ if (isset($_GET["action"])) {
                         <tr>
                             <td><?php echo $s_no; ?></td>
                             <td><?php echo $row["course_name"] ?></td>
+                            <td><?php echo $row["prospectus_rate"] ?></td>
                             <td class="project-actions text-center">
                                 <button class="btn btn-info btn-sm" onclick="document.getElementById('edit_courses<?php echo $row["course_id"]; ?>').style.display='block'">
                                     <i class="fas fa-pencil-alt">

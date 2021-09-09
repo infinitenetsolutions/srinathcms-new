@@ -75,13 +75,13 @@ $path = 'images/';
                             <div class="row">
                                 <div class="col-3">
                                     <h4 class="text-center">
-                                        <img src="images/logo.png" width="100%" alt="Image" border="0" title="Images" style="-webkit-filter: drop-shadow(5px 5px 5px #222 ); filter: drop-shadow(5px 5px 5px #222);">
+                                        <img src="images/logo1.png" width="100%" alt="Image" border="0" title="Images" style="-webkit-filter: drop-shadow(5px 5px 5px #222 ); filter: drop-shadow(5px 5px 5px #222);">
                                     </h4>
                                 </div>
                                 <div class="col-7">
                                     <div class="text-center mt-5" style="font-family: Times New Roman;">
                                         <h1 class="text-bold">SRINATH UNIVERSITY</h1>
-                                        <p>POKHARI, P.O : BHILAI PAHARI, P.S : M.G.M Dist : EAST SINGHBHUM,<br /> JAMSHEDPUR - 831012 Jharkhand. Contact - (+91) 9835203429 <br />Visit : https://nsuniv.ac.in/</p>
+                                        <p> Dindli P.O : Adityapur  EAST SINGHBHUM,<br /> JAMSHEDPUR - 831013 Jharkhand. Contact - 0657 238 3113 <br />Visit : srinathuniversity@gmail.com/</p>
                                     </div>
                                 </div>
                                 <div class="col-2 pt-1">

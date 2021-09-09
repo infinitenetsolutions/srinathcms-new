@@ -45,7 +45,7 @@ function send_data_in_database($connection)
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
     <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png"> 
+    <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- BEGIN VENDOR CSS -->
@@ -60,7 +60,7 @@ function send_data_in_database($connection)
     <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/style.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="app-assets/css/custom/custom.css"> 
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom/custom.css">
     <!-- END Custom CSS-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -77,19 +77,20 @@ function send_data_in_database($connection)
     <?php include './srinath.inc/header.php'; ?>
     <nav class="whitenav">
         <div class="nav-wrapper">
-        <a href="index.php">
-            <img src="./asset/img/logo.png" alt="Srinath logo">
+            <a href="index.php">
+                <img src="./asset/img/logo.png" alt="Srinath logo">
             </a>
             <ul class="right">
-            <div class="nav-btn d-sm-none d-md-none d-lg-inline-block">
+                <div class="nav-btn d-sm-none d-md-none d-lg-inline-block">
                     <a href="http://srinathuniversity.in/apply-2021" target="blank">Admission 2021</a>
                 </div>
             </ul>
         </div>
     </nav>
-    <div class="row">
-        <div class="col-md-6 mx-auto p-0 ">
-     
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8  p-0 ">
+
                 <div class="login-box">
 
                     <div class="login-snip">
@@ -102,11 +103,11 @@ function send_data_in_database($connection)
                             <div class="login">
                                 <form action="" method="POST">
                                     <div class="group col-sm-6"> <label for="user" class="label">Otp</label> <input required id="user" type="text" class="input" placeholder="Enter 6 Digit otp" name="otp">
-                              
-                                    <?php echo $_SESSION['msg']; ?> 
-                                    <p class="errormsg"><?php echo $smg; ?></p>
-                                </div>
-                                  
+
+                                        <?php echo $_SESSION['msg']; ?>
+                                        <p class="errormsg"><?php echo $smg; ?></p>
+                                    </div>
+
                                     <br>
                                     <div class="group col-sm-6"> <input required type="submit" class="button btn-primary" value="Submit Otp" name="submit">
                                     </div>
@@ -121,8 +122,12 @@ function send_data_in_database($connection)
 
 
                         </div>
-             
+
+                    </div>
                 </div>
+            </div>
+            <div class="col-sm">
+                <img class="es-margin" src="./asset/img/index_banner.jpeg" alt="">
             </div>
         </div>
     </div>

@@ -98,7 +98,9 @@ if (isset($_POST['done'])) {
 </head>
 
 <body>
-    <?php include './srinath.inc/header.php'; ?>
+    <?php
+    include './srinath.inc/header.php';
+    ?>
     <nav class="whitenav">
         <div class="nav-wrapper">
             <a href="index.php">
@@ -112,11 +114,10 @@ if (isset($_POST['done'])) {
             </ul>
         </div>
     </nav>
-
-    <div class="row">
-
-        <div class="col-md-6 mx-auto p-0  ">
-
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8  p-0 ">
                 <div class="login-box">
 
                     <div class="login-snip">
@@ -135,14 +136,15 @@ if (isset($_POST['done'])) {
 
                                         <div class="group col-sm-6 "> <label for="user" class="label">Phone</label> <input value="<?php echo $phone; ?>" required id="user" type="text" class="input" placeholder="Enter Phone Number" name="phone" required maxlength="12" pattern="[6789][0-9]{9}"> </div>
 
-                                  
-                                    <div class="group col-sm-6"> <label for="user" class="label">Email</label> <input value="<?php echo $email; ?>" required id="user" type="email" class="input" placeholder="Enter Email id" name="email" required pattern="[^ @]*@[^ @]*"> </div>
-                                   
-                                    <p class="errormsg col-sm-6"><?php echo $smg; ?></p></div>
+
+                                        <div class="group col-sm-6"> <label for="user" class="label">Email</label> <input value="<?php echo $email; ?>" required id="user" type="email" class="input" placeholder="Enter Email id" name="email" required pattern="[^ @]*@[^ @]*"> </div>
+
+                                        <p class="errormsg col-sm-6"><?php echo $smg; ?></p>
+                                    </div>
                                     <?php echo $otp; ?>
-<!--                           here i have removed br tag -->
+                                    <!--                           here i have removed br tag -->
                                     <div class=" ad group col-sm-6"> <input required type="submit" class=" button btn-primary" name="submit" value="Get Otp"> </div>
-                                  
+
                                     <div class="hr"></div>
 
 
@@ -169,10 +171,18 @@ if (isset($_POST['done'])) {
                         </div>
                     </div>
                 </div>
-   
+
+            </div>
+            <div class="col-sm">
+                <img class="es-margin" src="./asset/img/index_banner.jpeg" alt="">
+            </div>
+
         </div>
     </div>
+
+
     <!--Main layout-->
+
     <?php include './srinath.inc/footer.php';  ?>
     <?php include './srinath.inc/foot.php'; ?>
 

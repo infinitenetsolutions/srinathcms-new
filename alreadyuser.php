@@ -88,8 +88,10 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
             </ul>
         </div>
     </nav>
-    <div class="row">
-        <div class="col-md-6 mx-auto p-0 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8  p-0 ">
+
            
                 <div class="login-box">
 
@@ -123,6 +125,10 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
                         </div>
                     </div>
         
+            </div>
+            </div>
+            <div class="col-sm">
+                <img class="es-margin" src="./asset/img/index_banner.jpeg" alt="">
             </div>
         </div>
     </div>

@@ -1890,7 +1890,7 @@ if (isset($_GET["action"])) {
             <tbody>
                 <?php
                 $sql = "SELECT * FROM `tbl_prospectus`
-                                WHERE `status` = '$trash'
+                                WHERE 
                                 ORDER BY `id` DESC
                                 ";
                 $result = $con->query($sql);
@@ -5178,7 +5178,7 @@ if (isset($_GET["action"])) {
             <tbody>
                 <?php
                 $sql = "SELECT * FROM `tbl_prospectus`
-                                WHERE `status` = '$visible'
+                                WHERE 
                                 ORDER BY `id` DESC
                                 ";
                 $result = $con->query($sql);
@@ -5577,7 +5577,7 @@ if (isset($_GET["action"])) {
         $form_no = $_POST["add_admission_form_no"];
         if (!empty($form_no)) {
             $sql = "SELECT * FROM `tbl_prospectus`
-                        WHERE `status` = '$visible' && `prospectus_no` = '$form_no'
+                        WHERE `prospectus_no` = '$form_no'
                         ";
             $result = $con->query($sql);
             if ($result->num_rows > 0) {
@@ -7825,9 +7825,9 @@ if (isset($_GET["action"])) {
                     $s_no = ++$start;
                 }
                 $result = $objectSecond->get();
-                if ($result->num_rows > 0) {
+                if ($result) {
                     while ($row = $objectSecond->get_row()) {
-                ?>
+                      ?>
                         <tr>
                             <td><?php echo $s_no; ?></td>
                             <td style="color:#8a0410;"><b><?php if ($row["prospectus_no"] != "") echo $row["prospectus_no"];
@@ -7855,7 +7855,7 @@ if (isset($_GET["action"])) {
                             <div id="view_university_prospectus_enquiry<?php echo $row["id"]; ?>" class="w3-modal" style="z-index:2020;">
                                 <div class="w3-modal-content w3-animate-top w3-card-4" style="width:40%; margin-bottom:50px;">
                                     <header class="w3-container" style="background:#343a40; color:white;">
-                                        <span onclick="document.getElementById('view_university_prospectus_enquiry<?php echo $row["id"]; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <span onclick="document.getElementById('view_university_prospectus_enquiry<?php echo $row['id']; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <h2 align="center">View Details</h2>
                                     </header>
                                     <form role="form" method="POST">

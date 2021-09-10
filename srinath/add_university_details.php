@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NETAJI SUBHAS UNIVERSITY | University Details </title>
+    <title>Srinath UNIVERSITY | University Details </title>
     <link rel="icon" href="images/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -49,7 +49,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Netaji Subhas University Details</h1>
+                            <h1>Srinath University Details</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -67,7 +67,7 @@
                     <!-- SELECT2 EXAMPLE -->
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Netaji Subhas University</h3>
+                            <h3 class="card-title">Srinath University</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>

@@ -83,7 +83,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
             </a>
             <ul class="right">
                 <div class="nav-btn d-sm d-md d-lg-inline-block">
-                    <a href="http://srinathuniversity.in/apply-2021" target="blank">Admission 2021</a>
+                    <a href="http://srinathuniversity.in/" target="blank">Back to Home</a>
                 </div>
             </ul>
         </div>

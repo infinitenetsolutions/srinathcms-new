@@ -5,7 +5,7 @@ include './Backend/function.inc.php';
 if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 
     $phone = $_SESSION['phone'];
-  echo  $email = $_SESSION['email'];
+   $email = $_SESSION['email'];
   $email =trim($email);
     $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_emailid`='$email'";
     $propactus_details = mysqli_query($connection, $user_data_query);

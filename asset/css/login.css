@@ -327,3 +327,6 @@ label {
 .container{
 border: 1px orange solid;
 }
+.header-top-left-icon span{
+color: white !important ;
+}

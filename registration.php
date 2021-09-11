@@ -205,19 +205,19 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                 <div class="row">
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6>Your Name <span class="color-red"> * </span></h6>
-                                                        <input required type="text" placeholder="Your Name" name="name" id="username" class="" value="<?php echo $_SESSION['name']; ?>">
+                                                        <input readonly required type="text" placeholder="Your Name" name="name" id="username" class="" value="<?php echo $_SESSION['name']; ?>">
 
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="mobile_no">Mobile Number <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Mobile Number" id="mobile" name="mobile" type="tel" class="validate" value="<?php echo  $_SESSION['phone']; ?>">
+                                                        <input readonly required placeholder="Mobile Number" id="mobile" name="mobile" type="tel" class="validate" value="<?php echo  $_SESSION['phone']; ?>">
 
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="email">Email/Id <span class="color-red"> *  </span></h6>
-                                                        <input required placeholder="Email" name="email" id="email" type="email" class="validate" value="<?php echo $_SESSION['email']; ?> ">
+                                                        <input readonly required placeholder="Email" name="email" id="email" type="email" class="validate" value="<?php echo $_SESSION['email']; ?> ">
 
                                                     </div>
                                                 </div>

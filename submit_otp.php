@@ -82,7 +82,7 @@ function send_data_in_database($connection)
             </a>
             <ul class="right">
                 <div class="nav-btn d-sm-none d-md-none d-lg-inline-block">
-                    <a href="http://srinathuniversity.in/apply-2021" target="blank">Admission 2021</a>
+                    <a href="http://srinathuniversity.in/" target="blank">Back To Home</a>
                 </div>
             </ul>
         </div>

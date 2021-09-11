@@ -13,7 +13,7 @@
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
 if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
-    $email=trim($_SESSION['email']);
+    $email = trim($_SESSION['email']);
     // data retring from tbl_course_type table
     $course_type = "SELECT  *  FROM `tbl_course_type` WHERE `prospectus_emailid`='$email'";
     $coursr_result = mysqli_query($connection, $course_type);
@@ -57,7 +57,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
     <head>
 
-    <?php include './srinath.inc/head.php'; ?>
+        <?php include './srinath.inc/head.php'; ?>
         <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
         <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
         <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png">
@@ -79,7 +79,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         <!-- END Custom CSS-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
+
         <!-- Your custom styles (optional) -->
 
     </head>
@@ -136,14 +136,18 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <option value="" disabled="" selected="">Choose your option</option>
                                                                 <?php
                                                                 // here i have to fetch the data fo course and showing the data
-                                                                // while ($rwo = mysqli_fetch_array($coursr_result)) { ?>
+                                                                // while ($rwo = mysqli_fetch_array($coursr_result)) { 
+                                                                ?>
 
-                                                                    <option id="apply_for" value="<?php 
-                                                                    // echo $rwo['name']; ?>"><?php 
-                                                                    // echo $rwo['name']; ?></option>
+                                                                    <option id="apply_for" value="<?php
+                                                                                                    // echo $rwo['name']; 
+                                                                                                    ?>"><?php
+                                                                                                        // echo $rwo['name']; 
+                                                                                                        ?></option>
 
-                                                                <?php 
-                                                            // } ?>
+                                                                <?php
+                                                                // } 
+                                                                ?>
                                                             </select>
                                                         </div>
 
@@ -182,13 +186,13 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <option value="<?php echo date('Y');
                                                                                 echo " - ";
                                                                                 echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
-                                                                                                                        echo " - ";
-                                                                                                                        echo date('Y', strtotime('+3 year')); ?></option>
+                                                                                                                            echo " - ";
+                                                                                                                            echo date('Y', strtotime('+3 year')); ?></option>
                                                                 <option value="<?php echo date('Y');
                                                                                 echo " - ";
                                                                                 echo date('Y', strtotime('+4 year')); ?>"><?php echo date('Y');
-                                                                                                                        echo " - ";
-                                                                                                                        echo date('Y', strtotime('+4 year')); ?></option>
+                                                                                                                            echo " - ";
+                                                                                                                            echo date('Y', strtotime('+4 year')); ?></option>
                                                             </select>
                                                         </div>
                                                         <div class="error" id="transportation_err"></div>
@@ -216,7 +220,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
-                                                        <h6 for="email">Email/Id <span class="color-red"> *  </span></h6>
+                                                        <h6 for="email">Email/Id <span class="color-red"> * </span></h6>
                                                         <input readonly required placeholder="Email" name="email" id="email" type="email" class="validate" value="<?php echo $_SESSION['email']; ?> ">
 
                                                     </div>
@@ -296,7 +300,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         </div>
                                                     </div>
                                                     <div class="input-field col s6 m6 l4">
-                                                        <h6 for="state1">State  <span class="color-red"> * &nbsp; </span></h6>
+                                                        <h6 for="state1">State <span class="color-red"> * &nbsp; </span></h6>
                                                         <div class="select-wrapper">
                                                             <select required id="state" name="state" tabindex="-1">
                                                                 <option id="state1" value="" disabled="" selected="">-Select-</option>
@@ -400,7 +404,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                             </div>
                         </div>
                     </section>
-             
+
                     <br>
                     <!-- END CONTENT -->
                     <!--
@@ -412,7 +416,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
             <!--
       //////////////////////////////////////////////////////////////////////////// -->
             <!-- START FOOTER -->
-          <?php include './srinath.inc/footer.php'; ?>
+            <?php include './srinath.inc/footer.php'; ?>
             <!-- END FOOTER -->
             <!-- ================================================
       Scripts
@@ -500,16 +504,31 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         $tbl_prospectus_query = "INSERT INTO `tbl_prospectus`(`prospectus_no`, `prospectus_applicant_name`, `prospectus_gender`, `prospectus_father_name`, `prospectus_mother_name`, `prospectus_address`, `prospectus_country`, `prospectus_state`, `prospectus_city`, `prospectus_postal_code`, `prospectus_dob`, `prospectus_emailid`, `mobile`, `revert_by`, `prospectus_course_name`, `prospectus_session`, `payment_status`, `prospectus_rate`, `prospectus_payment_mode`, `prospectus_deposit_to`, `bank_name`, `transaction_no`, `transaction_date`, `post_at`, `type`, `easebuzz_id`, `transaction_id`, `status`) VALUES ('NULL','$prospectus_applicant_name','$prospectus_gender','$prospectus_father_name','$prospectus_mother_name','$prospectus_address','$prospectus_country','$prospectus_state','$prospectus_city','$prospectus_postal_code','$prospectus_dob','$prospectus_emailid','$mobile','$revert_by','$prospectus_course_name','$prospectus_session','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL')";
         $tbl_prospectus_insert = mysqli_query($connection, $tbl_prospectus_query);
         if ($tbl_prospectus_insert) {
-            // update the user login table
+            $_SESSION['course_name'] = $prospectus_course_name;
+            $_SESSION['course_session'] = $prospectus_session;
+            $_SESSION['name']=$prospectus_applicant_name;
+            $_SESSION['email']=$prospectus_emailid;
+            $_SESSION['phone']=$mobile;
+            $url_data='';
+            if($_SERVER['HTTP_HOST']=='localhost'){
+                $url_data="/srinathcms";
+            }
+            else{
+                $url_data='';
+            }
+     
+            $_SESSION['surl']='http://'.$_SERVER['HTTP_HOST'].$url_data.'/library/response.php';       
+            $_SESSION['furl']='http://'.$_SERVER['HTTP_HOST'].$url_data.'/library/response.php';      
+                 // update the user login table
             $update_login = "UPDATE `snu_login` SET `name`='$prospectus_applicant_name',`phone`='$mobile',`email`='$prospectus_emailid' WHERE `email`='$prospectus_emailid'";
             $update_login_result = mysqli_query($connection, $update_login);
             if ($update_login_result) {
                 echo "<script>
        window.location.replace('conformation.php');
        </script>";
+            } else {
+                echo "<script> alert('Data already Exits');</script>";
             }
-        } else {
-            echo "<script> alert('Data already Exits');</script>";
         }
     }
 } else {

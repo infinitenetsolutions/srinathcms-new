@@ -2,6 +2,13 @@
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
 if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
+    $course_name1 = trim($_SESSION['course_name']);
+    $course_name_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name1'";
+    $course_name_result = mysqli_query($connection, $course_name_query);
+    $course_name_data = mysqli_fetch_array($course_name_result);
+    $ammout = $course_name_data['prospectus_rate'];
+
+
 ?>
     <html>
 
@@ -71,14 +78,25 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                         <h4>Please pay for registration</h4>
                         <div class="row">
                             <div class="col s12">
-                                <form action="print.php" id="payment_form" method="POST">
-
+                                <form action="./library/easebuzz.php?api_name=initiate_payment" id="payment_form" method="POST">
+                                  <!-- here i hava to set the ammount for paying fee in sesssion  -->
+                                <?php $_SESSION['ammount'] = $ammout; ?>
                                     <table border="1">
                                         <tbody>
                                             <tr>
-                                                <td>Payment</td>
-                                                <td>600</td>
+                                                <td>Course Name</td>
+                                                <td><?php echo $_SESSION['course_name']; ?></td>
                                             </tr>
+
+                                            <tr>
+                                                <td>Payment</td>
+                                                <td><?php echo $ammout; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Academic Session</td>
+                                                <td><?php echo $_SESSION['course_session']; ?></td>
+                                            </tr>
+
                                             <tr>
                                                 <td>Name</td>
                                                 <td><?php echo $_SESSION['name'] ?></td>
@@ -147,4 +165,9 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     window.location.replace('./index.php');
 </script>";
 }
+?>
+<!-- here i hava to getting the data and seding the data in payment getway library page -->
+
+<?php
+
 ?>

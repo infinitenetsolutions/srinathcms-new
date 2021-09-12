@@ -503,7 +503,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         $_SESSION['course_name'] = $prospectus_course_name;
         $_SESSION['course_session'] = $prospectus_session;
         $_SESSION['name'] = $prospectus_applicant_name;
-        // $_SESSION['email'] = $prospectus_emailid;
+        $_SESSION['email'] = $prospectus_emailid;
         $_SESSION['phone'] = $mobile;
         $url_data = '';
         // here i have to check host name concatnate the directory

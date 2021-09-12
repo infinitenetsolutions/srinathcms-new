@@ -1,7 +1,7 @@
 <?php
 // include file
 include_once('easebuzz-lib/easebuzz_payment_gateway.php');
-include '../Backend/connection.inc.php';
+
 // salt for testing env
 $SALT = "92HHB0OBFH";
 
@@ -37,7 +37,7 @@ $result = json_decode($result, true);
 // echo "<br>";
 $payment_status=$result['data']['status'];
 if($payment_status=='success'){
-
+    include '../Backend/connection.inc.php';
 $prospectus_rate=$result['data']['net_amount_debit'];
 $prospectus_payment_mode=$result['data']['mode'];
 $prospectus_deposit_to=$result['data']['bank_ref_num'];
@@ -49,7 +49,7 @@ $type=$result['data']['PG_TYPE'];
 $easebuzz_id=$result['data']['easepayid'];
 $transaction_id=$result['data']['txnid'];
 $status=md5('visible');
-$email=$_SESSION['email'];
+$email=$result['data']['email'];
 $update_payment="UPDATE `tbl_prospectus` SET `payment_status`='$payment_status',`prospectus_rate`='$prospectus_rate',`prospectus_payment_mode`='$prospectus_payment_mode',`prospectus_deposit_to`='$prospectus_deposit_to',`bank_name`='$bank_name',`transaction_no`='$transaction_no',`transaction_date`='$transaction_date',`post_at`='NULL',`type`='$type',`easebuzz_id`='$easebuzz_id',`transaction_id`='$transaction_id',`status`='$status' WHERE `prospectus_emailid`='$email' ";
 $update_payment_result($connection,$update_payment);
 if($update_payment_result){

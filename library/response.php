@@ -1,7 +1,7 @@
 <?php
 // include file
 include_once('easebuzz-lib/easebuzz_payment_gateway.php');
-
+include '../Backend/connection.inc.php';
 // salt for testing env
 $SALT = "92HHB0OBFH";
 
@@ -37,7 +37,7 @@ $result = json_decode($result, true);
 // echo "<br>";
 $payment_status=$result['data']['status'];
 if($payment_status=='success'){
-    include '../Backend/connection.inc.php';
+    
 $prospectus_rate=$result['data']['net_amount_debit'];
 $prospectus_payment_mode=$result['data']['mode'];
 $prospectus_deposit_to=$result['data']['bank_ref_num'];

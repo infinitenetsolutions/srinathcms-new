@@ -54,7 +54,7 @@ $email=$result['data']['email'];
 $_SESSION['email']=$email;
 $prospectus_number=rand(1000000,999999);
 // $prospectus_number= $_SESSION['course_name'].'/'. $_SESSION['course_session'].'/'.$prospectus_number;
-echo $update_payment="UPDATE `tbl_prospectus` SET `prospectus_no`='$prospectus_number', `payment_status`='$payment_status',`prospectus_rate`='$prospectus_rate',`prospectus_payment_mode`='$prospectus_payment_mode',`prospectus_deposit_to`='$prospectus_deposit_to',`bank_name`='$bank_name',`transaction_no`='$transaction_no',`transaction_date`='$transaction_date',`post_at`='NULL',`type`='$type',`easebuzz_id`='$easebuzz_id',`transaction_id`='$transaction_id',`status`='$status' WHERE `prospectus_emailid`='$email' ";
+echo $update_payment="UPDATE `tbl_prospectus` SET `payment_status`='$payment_status',`prospectus_rate`='$prospectus_rate',`prospectus_payment_mode`='$prospectus_payment_mode',`prospectus_deposit_to`='$prospectus_deposit_to',`bank_name`='$bank_name',`transaction_no`='$transaction_no',`transaction_date`='$transaction_date',`post_at`='NULL',`type`='$type',`easebuzz_id`='$easebuzz_id',`transaction_id`='$transaction_id',`status`='$status' WHERE `prospectus_emailid`='$email' ";
 $update_payment_result=mysqli_query($connection,$update_payment);
 if($update_payment_result){
 echo '<script> window.location.replace("../print.php") </script>';

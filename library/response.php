@@ -1,7 +1,7 @@
 <?php
 // include file
 include_once('easebuzz-lib/easebuzz_payment_gateway.php');
-include './Backend/connection.inc.php';
+include '../Backend/connection.inc.php';
 // salt for testing env
 $SALT = "92HHB0OBFH";
 

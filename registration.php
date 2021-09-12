@@ -500,27 +500,27 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         //     $transaction_id=
         //     $status=
 
+        $_SESSION['course_name'] = $prospectus_course_name;
+        $_SESSION['course_session'] = $prospectus_session;
+        $_SESSION['name'] = $prospectus_applicant_name;
+        $_SESSION['email'] = $prospectus_emailid;
+        $_SESSION['phone'] = $mobile;
+        $url_data = '';
+        // here i have to check host name concatnate the directory
+        // in to surl and furl
+        if ($_SERVER['HTTP_HOST'] == 'localhost') {
+            $url_data = "/srinathcms";
+        } else {
+            $url_data = '';
+        }
 
+        $_SESSION['surl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
+        $_SESSION['furl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
 
         $tbl_prospectus_query = "INSERT INTO `tbl_prospectus`(`prospectus_no`, `prospectus_applicant_name`, `prospectus_gender`, `prospectus_father_name`, `prospectus_mother_name`, `prospectus_address`, `prospectus_country`, `prospectus_state`, `prospectus_city`, `prospectus_postal_code`, `prospectus_dob`, `prospectus_emailid`, `mobile`, `revert_by`, `prospectus_course_name`, `prospectus_session`, `payment_status`, `prospectus_rate`, `prospectus_payment_mode`, `prospectus_deposit_to`, `bank_name`, `transaction_no`, `transaction_date`, `post_at`, `type`, `easebuzz_id`, `transaction_id`, `status`) VALUES ('NULL','$prospectus_applicant_name','$prospectus_gender','$prospectus_father_name','$prospectus_mother_name','$prospectus_address','$prospectus_country','$prospectus_state','$prospectus_city','$prospectus_postal_code','$prospectus_dob','$prospectus_emailid','$mobile','$revert_by','$prospectus_course_name','$prospectus_session','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL')";
         $tbl_prospectus_insert = mysqli_query($connection, $tbl_prospectus_query);
         if ($tbl_prospectus_insert) {
-            $_SESSION['course_name'] = $prospectus_course_name;
-            $_SESSION['course_session'] = $prospectus_session;
-            $_SESSION['name'] = $prospectus_applicant_name;
-            $_SESSION['email'] = $prospectus_emailid;
-            $_SESSION['phone'] = $mobile;
-            $url_data = '';
-            // here i have to check host name concatnate the directory
-            // in to surl and furl
-            if ($_SERVER['HTTP_HOST'] == 'localhost') {
-                $url_data = "/srinathcms";
-            } else {
-                $url_data = '';
-            }
-
-            $_SESSION['surl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
-            $_SESSION['furl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
+         
             // update the user login table
 
             echo "<script>

@@ -10,6 +10,7 @@
 
 <!-- here to start getting the data from the database  -->
 <?php
+
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
 if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
@@ -506,28 +507,32 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         if ($tbl_prospectus_insert) {
             $_SESSION['course_name'] = $prospectus_course_name;
             $_SESSION['course_session'] = $prospectus_session;
-            $_SESSION['name']=$prospectus_applicant_name;
-            $_SESSION['email']=$prospectus_emailid;
-            $_SESSION['phone']=$mobile;
-            $url_data='';
-            if($_SERVER['HTTP_HOST']=='localhost'){
-                $url_data="/srinathcms";
-            }
-            else{
-                $url_data='';
-            }
-     
-            $_SESSION['surl']='http://'.$_SERVER['HTTP_HOST'].$url_data.'/library/response.php';       
-            $_SESSION['furl']='http://'.$_SERVER['HTTP_HOST'].$url_data.'/library/response.php';      
-                 // update the user login table
-            $update_login = "UPDATE `snu_login` SET `name`='$prospectus_applicant_name',`phone`='$mobile',`email`='$prospectus_emailid' WHERE `email`='$prospectus_emailid'";
-            $update_login_result = mysqli_query($connection, $update_login);
-            if ($update_login_result) {
-                echo "<script>
-       window.location.replace('conformation.php');
-       </script>";
+            $_SESSION['name'] = $prospectus_applicant_name;
+            $_SESSION['email'] = $prospectus_emailid;
+            $_SESSION['phone'] = $mobile;
+            $url_data = '';
+            // here i have to check host name concatnate the directory
+            // in to surl and furl
+            if ($_SERVER['HTTP_HOST'] == 'localhost') {
+                $url_data = "/srinathcms";
             } else {
-                echo "<script> alert('Data already Exits');</script>";
+                $url_data = '';
+            }
+
+            $_SESSION['surl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
+            $_SESSION['furl'] = 'http://' . $_SERVER['HTTP_HOST'] . $url_data . '/library/response.php';
+            // update the user login table
+
+            echo "<script>
+          window.location.replace('conformation.php');
+            </script>";
+        } else {
+            $update_prospectus = "UPDATE `tbl_prospectus` SET `prospectus_gender`='$prospectus_gender',`prospectus_father_name`='$prospectus_father_name',`prospectus_mother_name`='$prospectus_mother_name',`prospectus_address`='$prospectus_address',`prospectus_country`='$prospectus_country',`prospectus_state`='$prospectus_state',`prospectus_city`='$prospectus_city',`prospectus_postal_code`='$prospectus_postal_code',`prospectus_dob`='$prospectus_dob',`prospectus_emailid`='$prospectus_emailid',`mobile`='$mobile',`revert_by`='$revert_by',`prospectus_course_name`='$prospectus_course_name',`prospectus_session`='$prospectus_session' WHERE `prospectus_emailid`='$prospectus_emailid'";
+            $update_prospectus_result = mysqli_query($connection, $update_prospectus);
+            if ($update_prospectus_result) {
+                echo "<script>
+                    window.location.replace('conformation.php');
+                    </script>";
             }
         }
     }

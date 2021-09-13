@@ -4,9 +4,9 @@ include './Backend/function.inc.php';
 
 if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 
-    $phone = $_SESSION['phone'];
-   $email = $_SESSION['email'];
-  $email =trim($email);
+    // $phone = $_SESSION['phone'];
+    $email = $_SESSION['email'];
+    $email = trim($email);
     $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_emailid`='$email'";
     $propactus_details = mysqli_query($connection, $user_data_query);
     $row = mysqli_fetch_array($propactus_details);
@@ -53,6 +53,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 
     <head>
         <title>Dashboard Details</title>
+        <?php include './srinath.inc/foot.php'; ?>
         <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
         <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
         <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png">
@@ -107,7 +108,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                 <!-- invoice view page -->
                                 <div class="col l10 m8 s12">
                                 </div>
-                                <div class="col l2 m4 s12">
+                                <!-- <div class="col l2 m4 s12">
                                     <div class="card invoice-action-wrapper">
                                         <div class="card-content">
                                             <div class="invoice-action-btn">
@@ -115,7 +116,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col l12 ">
                                     <div class="card">
                                         <div class="card-content invoice-print-area" id="print_pdf_file">
@@ -295,7 +296,8 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 
                         <!-- END RIGHT SIDEBAR NAV -->
                     </div>
-                    <div class="center-align red-text">For any query feel free to contact @ 7283000220</div>
+                    <div class="center-align red-text">For any query feel free to contact @ +91 9234459983
+                    </div>
                     <br>
                     <div class="content-overlay"></div>
                 </div>

@@ -229,20 +229,20 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                 <div class="row">
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="father_nameid">Father's Name <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Father's Name" id="father_name" name="father_name" type="text" class="validate" value="">
+                                                        <input required placeholder="Father's Name" id="father_name" name="father_name" type="text" class="validate" value="<?php echo $prospectus_father_name; ?>">
 
                                                     </div>
 
 
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="transportation_opted">Mother's Name <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Mothers's Name" id="mother_name" name="mother_name" type="text" class="validate" value="">
+                                                        <input required placeholder="Mothers's Name" id="mother_name" name="mother_name" type="text" class="validate" value=" <?php echo $prospectus_mother_name; ?> ">
 
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="transportation_opted">Refered(Optional)</h6>
-                                                        <input placeholder="Enter name of Refered BY" id="mother_name" name="referby" type="text" class="validate" value="">
+                                                        <input placeholder="Enter name of Refered BY" id="mother_name" name="referby" type="text" class="validate" value=" <?php echo $revert_by; ?>">
 
                                                     </div>
                                                 </div>
@@ -254,7 +254,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <path d="M7 10l5 5 5-5z"></path>
                                                                 <path d="M0 0h24v24H0z" fill="none"></path>
                                                             </svg><select required id="gender" name="gender" tabindex="-1">
-                                                                <option value="" disabled="" selected="">-Select-</option>
+                                                                <?php if ($prospectus_gender!=''){ ?>
+                                                                    <option id="gender" selected value="<?php echo $prospectus_gender; ?>"><?php echo $prospectus_gender ?></option>
+                                                                    <?php } ?>
+                                                                <option value="" disabled="">-Select-</option>
                                                                 <option id="gender" value="Male">Male</option>
                                                                 <option id="gender" value="Female">Female</option>
                                                                 <option id="gender" value="Transgender">Transgender</option>
@@ -265,7 +268,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="dob">Date Of Birth <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Date Of Birth" id="dob" name="dob" type="text" class="datepicker" value="">
+                                                        <input required placeholder="Date Of Birth" id="dob" name="dob" type="text" class="datepicker" value="<?php echo $prospectus_dob; ?>">
                                                         <div class="error" id="dob_err"></div>
                                                     </div>
                                                 </div>
@@ -281,22 +284,22 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                 </div>
                                                 <div class="row">
                                                     <div class="input-field col s6 m6 l4">
-                                                        <h6 for="address1">Permanent Address <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Address 1" id="address_1" name="address1" type="text" class="validate" value="">
+                                                        <h6 for="address1">Address 1<span class="color-red"> * </span></h6>
+                                                        <input required placeholder="Permanent Address " id="address_1" name="address1" type="text" class="validate" value="<?php echo $address->permanet; ?>">
                                                         <div class="error" id="address_1_err"></div>
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
-                                                        <h6 for="address2">Correspondence Address </h6>
-                                                        <input required placeholder="Address 2" id="address_2" name="address2" type="text" class="validate" value="">
+                                                        <h6 for="address2"> Address 2  </h6>
+                                                        <input required placeholder="Correspondence Address" id="address_2" name="address2" type="text" class="validate" value="<?php echo $address->crosspodens; ?>">
                                                     </div>
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="country">Country <span class="color-red"> * </span></h6>
                                                         <div class="select-wrapper">
 
                                                             <select required id="country" name="country" tabindex="-1">
-                                                                <option value="" disabled="" selected="">-Select-</option>
-                                                                <option id="country" value="India">India</option>
+                                                                <option value="" disabled="" >-Select-</option>
+                                                                <option selected="" id="country" value="India">India</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -304,7 +307,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <h6 for="state1">State <span class="color-red"> * &nbsp; </span></h6>
                                                         <div class="select-wrapper">
                                                             <select required id="state" name="state" tabindex="-1">
-                                                                <option id="state1" value="" disabled="" selected="">-Select-</option>
+                                                            <?php if ($prospectus_state!=''){ ?>
+                                                                    <option id="state1" selected value="<?php echo $prospectus_state ; ?>"><?php echo $prospectus_state; ?></option>
+                                                                    <?php } ?>
+                                                                <option id="state1" value="" disabled="" >-Select-</option>
                                                                 <option id="state1" value="Andhra Pradesh">Andhra Pradesh</option>
                                                                 <option id="state1" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                                 <option id="state1" value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -346,12 +352,12 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     </div>
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="district">District <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="District" id="district" name="district" type="text" class="validate" value="">
+                                                        <input required placeholder="District" id="district" name="city" type="text" class="validate" value=" <?php echo $prospectus_city; ?>">
                                                         <div class="error" id="district_err"></div>
                                                     </div>
                                                     <div class="input-field col s6 m6 l4">
                                                         <h6 for="postal">Pincode <span class="color-red"> * </span></h6>
-                                                        <input required placeholder="Postal Code" type="text" id="postal_code" name="postal_code" class="validate" value="">
+                                                        <input required placeholder="Postal Code" type="text" id="postal_code" name="postal_code" class="validate" value="<?php echo $prospectus_postal_code; ?>">
                                                         <div class="error" id="postal_code_err"></div>
                                                     </div>
                                                 </div>
@@ -377,18 +383,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <p></p>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="input-field col s12 m12 l12">
-                                                        <p>
-                                                            <label>
-                                                                <input required type="checkbox" id="declare_2" name="declare_2" value="1">
-                                                                <span>I declare that the information given above is true and to the best of my knowledge and belief ; and if any of its found to be incorrect at any time during the program , my admission shall stand cancelled and I shall be liable to such disciplinary action as may be decided by the university</span>
-                                                            </label>
-                                                        </p>
-                                                        <div class="error" id="declare_2_err"></div>
-                                                        <p></p>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <input required type="hidden" name="course_hide" id="course_hide" value="">
@@ -471,12 +466,12 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         $prospectus_gender = $_POST['gender'];
         $prospectus_dob = $_POST['dob'];
         $prospectus_father_name = $_POST['father_name'];
-        $prospectus_mother_name = $_POST['mather_name'];
+        $prospectus_mother_name = $_POST['mother_name'];
         $revert_by = $_POST['referby'];
 
         // address details
         $address1 = $_POST['address1'];
-        $address1 = $_POST['address2'];
+        $address2 = $_POST['address2'];
         // address1 and address2 has converting into the json form and send to the database
         $address = array("permanet" => $address1, "crosspodens" => $address2);
 

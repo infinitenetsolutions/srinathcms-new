@@ -26,7 +26,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
     $phone = $_SESSION['phone'];
     $email = $_SESSION['email'];
-    $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE 1";
+    $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_emailid`='$email'";
     $propactus_details = mysqli_query($connection, $user_data_query);
     $row = mysqli_fetch_array($propactus_details);
     // course details
@@ -133,25 +133,21 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <p>Academic <span class="color-red"> * </span></p>
                                                         <div class="select-wrapper">
                                                             <select required name="academic" onchange="change_course(this.value)" id="academic" tabindex="-1">
-
                                                                 <option value="" disabled="" selected="">Choose your option</option>
                                                                 <?php
                                                                 // here i have to fetch the data fo course and showing the data
                                                                 // while ($rwo = mysqli_fetch_array($coursr_result)) { 
                                                                 ?>
-
                                                                     <option id="apply_for" value="<?php
                                                                                                     // echo $rwo['name']; 
                                                                                                     ?>"><?php
                                                                                                         // echo $rwo['name']; 
                                                                                                         ?></option>
-
                                                                 <?php
                                                                 // } 
                                                                 ?>
                                                             </select>
                                                         </div>
-
                                                         <div class="error" id="academic1_err"></div>
                                                     </div> -->
                                                     <div class="input-field col l4 m4 s12" id="course_box">
@@ -161,8 +157,9 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <select required name="course" id="course_name">
                                                                     <?php if ($prospectus_course_name != '') { ?>
                                                                         <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
-                                                                    <?php } ?>
-                                                                    <option disabled="">Choose your option</option>
+                                                                    <?php } else{ ?>
+                                                                    <option selected disabled="">Choose your option</option>
+                                                                    <?php  } ?> ?>
                                                                     <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                     ?>
                                                                         <option value="<?php echo $row['course_name']; ?>"><?php echo $row['course_name']; ?></option>
@@ -181,9 +178,12 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                             ?>
                                                             </svg><select required id="transportation" name="session" tabindex="-1">
                                                                 <?php if ($prospectus_session != '') { ?>
-                                                                    <option value=" <?php echo $prospectus_session ?>" selected><?php echo $prospectus_session; ?></option>
+                                                                    <option value=" <?php echo $prospectus_session ?>" selected ><?php echo $prospectus_session; ?></option>
+                                                                <?php } else{
+
+                                                                 ?>
+                                                                <option value=" " selected disabled="">-Select-</option>
                                                                 <?php } ?>
-                                                                <option value=" " disabled="">-Select-</option>
                                                                 <option value="<?php echo date('Y');
                                                                                 echo " - ";
                                                                                 echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
@@ -256,8 +256,9 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                             </svg><select required id="gender" name="gender" tabindex="-1">
                                                                 <?php if ($prospectus_gender!=''){ ?>
                                                                     <option id="gender" selected value="<?php echo $prospectus_gender; ?>"><?php echo $prospectus_gender ?></option>
-                                                                    <?php } ?>
-                                                                <option value="" disabled="">-Select-</option>
+                                                                    <?php } else{ ?>
+                                                                <option value="" selected disabled="">-Select-</option>
+                                                                <?php } ?>
                                                                 <option id="gender" value="Male">Male</option>
                                                                 <option id="gender" value="Female">Female</option>
                                                                 <option id="gender" value="Transgender">Transgender</option>
@@ -309,8 +310,9 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                             <select required id="state" name="state" tabindex="-1">
                                                             <?php if ($prospectus_state!=''){ ?>
                                                                     <option id="state1" selected value="<?php echo $prospectus_state ; ?>"><?php echo $prospectus_state; ?></option>
-                                                                    <?php } ?>
-                                                                <option id="state1" value="" disabled="" >-Select-</option>
+                                                                    <?php } else{ ?>
+                                                                <option id="state1" selected value="" disabled="" >-Select-</option>
+                                                                <?php } ?>
                                                                 <option id="state1" value="Andhra Pradesh">Andhra Pradesh</option>
                                                                 <option id="state1" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                                 <option id="state1" value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -376,7 +378,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <p>
                                                             <label>
                                                                 <input required type="checkbox" id="declare_1" name="declare_1" value="1">
-                                                                <span>I declare that I meet all the eligibility criteria of admission as per the university guideline. In case of failure to do so or , in case of non-submission of required document by scheduled date given by university , my admission shall stand cancelled &amp; fees paid will be forfeited</span>
+                                                                <span>I declare that I meet all the eligibility criteria of admission as per the university guideline</span>
                                                             </label>
                                                         </p>
                                                         <div class="error" id="declare_1_err"></div>
@@ -533,7 +535,6 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     }
 } else {
     echo "<script>
-
     window.location.replace('./index.php');
 </script>";
 }

@@ -1902,12 +1902,12 @@ if (isset($_GET["action"])) {
                             <td><?php echo $s_no; ?></td>
                             <td><?php echo $row["prospectus_no"]; ?></td>
                             <td class="project-actions text-center">
-                                <button class="btn btn-primary btn-sm" onclick="document.getElementById('trase_prospectus_restore<?php echo $row["id"]; ?>').style.display='block'">
+                                <button class="btn btn-primary btn-sm" onclick="document.getElementById('trase_prospectus_restore<?php echo $row['id']; ?>').style.display='block'">
                                     <i class="far fa-circle nav-icon">
                                     </i>
                                     Restore
                                 </button>
-                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('trase_prospectus_delete<?php echo $row["id"]; ?>').style.display='block'">
+                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('trase_prospectus_delete<?php echo $row['id']; ?>').style.display='block'">
                                     <i class="fas fa-trash nav-icon">
                                     </i>
                                     Delete
@@ -1918,7 +1918,7 @@ if (isset($_GET["action"])) {
                             <div id="trase_prospectus_delete<?php echo $row["id"]; ?>" class="w3-modal" style="z-index:2020;">
                                 <div class="w3-modal-content w3-animate-top w3-card-4" style="width:40%">
                                     <header class="w3-container" style="background:#343a40; color:white;">
-                                        <span onclick="document.getElementById('trase_prospectus_delete<?php echo $row["id"]; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <span onclick="document.getElementById('trase_prospectus_delete<?php echo $row['id']; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <h2 align="center">Are you sure???</h2>
                                     </header>
                                     <form id="trase_prospectus_delete_form<?php echo $row["id"]; ?>" role="form" method="POST">
@@ -1930,7 +1930,7 @@ if (isset($_GET["action"])) {
                                                 <input type='hidden' name='delete_id' id="trase_prospectus_delete_id<?php echo $row["id"]; ?>" value='<?php echo $row["id"]; ?>' />
                                                 <div class="col-md-12" id="trase_prospectus_delete_loader_section<?php echo $row["id"]; ?>"></div>
                                                 <button type="button" id="trase_prospectus_delete_prospectus_button<?php echo $row["id"]; ?>" class="btn btn-danger">Delete Permanently</button>
-                                                <button type="button" onclick="document.getElementById('trase_prospectus_delete<?php echo $row["id"]; ?>').style.display='none'" class="btn btn-primary">Cancel</button>
+                                                <button type="button" onclick="document.getElementById('trase_prospectus_delete<?php echo $row['id']; ?>').style.display='none'" class="btn btn-primary">Cancel</button>
                                             </div>
                                         </div>
                                     </form>

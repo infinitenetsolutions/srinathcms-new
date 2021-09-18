@@ -50,7 +50,9 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     $prospectus_country = $row['prospectus_country'];
     $prospectus_state = $row['prospectus_state'];
     $prospectus_city = $row['prospectus_city'];
+    $payment_status=$row['payment_status'];
     $prospectus_postal_code = $row['prospectus_postal_code'];
+    if($payment_status!="success"){
 ?>
 
 
@@ -157,8 +159,8 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <select required name="course" id="course_name">
                                                                     <?php if ($prospectus_course_name != '') { ?>
                                                                         <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
-                                                                    <?php } else{ ?>
-                                                                    <option selected disabled="">Choose your option</option>
+                                                                    <?php } else { ?>
+                                                                        <option selected disabled="">Choose your option</option>
                                                                     <?php  } ?> ?>
                                                                     <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                     ?>
@@ -178,11 +180,11 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                             ?>
                                                             </svg><select required id="transportation" name="session" tabindex="-1">
                                                                 <?php if ($prospectus_session != '') { ?>
-                                                                    <option value=" <?php echo $prospectus_session ?>" selected ><?php echo $prospectus_session; ?></option>
-                                                                <?php } else{
+                                                                    <option value=" <?php echo $prospectus_session ?>" selected><?php echo $prospectus_session; ?></option>
+                                                                <?php } else {
 
-                                                                 ?>
-                                                                <option value=" " selected disabled="">-Select-</option>
+                                                                ?>
+                                                                    <option value=" " selected disabled="">-Select-</option>
                                                                 <?php } ?>
                                                                 <option value="<?php echo date('Y');
                                                                                 echo " - ";
@@ -254,10 +256,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 <path d="M7 10l5 5 5-5z"></path>
                                                                 <path d="M0 0h24v24H0z" fill="none"></path>
                                                             </svg><select required id="gender" name="gender" tabindex="-1">
-                                                                <?php if ($prospectus_gender!=''){ ?>
+                                                                <?php if ($prospectus_gender != '') { ?>
                                                                     <option id="gender" selected value="<?php echo $prospectus_gender; ?>"><?php echo $prospectus_gender ?></option>
-                                                                    <?php } else{ ?>
-                                                                <option value="" selected disabled="">-Select-</option>
+                                                                <?php } else { ?>
+                                                                    <option value="" selected disabled="">-Select-</option>
                                                                 <?php } ?>
                                                                 <option id="gender" value="Male">Male</option>
                                                                 <option id="gender" value="Female">Female</option>
@@ -291,7 +293,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l4">
-                                                        <h6 for="address2"> Address 2  </h6>
+                                                        <h6 for="address2"> Address 2 </h6>
                                                         <input required placeholder="Correspondence Address" id="address_2" name="address2" type="text" class="validate" value="<?php echo $address->crosspodens; ?>">
                                                     </div>
                                                     <div class="input-field col s6 m6 l4">
@@ -299,7 +301,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <div class="select-wrapper">
 
                                                             <select required id="country" name="country" tabindex="-1">
-                                                                <option value="" disabled="" >-Select-</option>
+                                                                <option value="" disabled="">-Select-</option>
                                                                 <option selected="" id="country" value="India">India</option>
                                                             </select>
                                                         </div>
@@ -308,10 +310,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <h6 for="state1">State <span class="color-red"> * &nbsp; </span></h6>
                                                         <div class="select-wrapper">
                                                             <select required id="state" name="state" tabindex="-1">
-                                                            <?php if ($prospectus_state!=''){ ?>
-                                                                    <option id="state1" selected value="<?php echo $prospectus_state ; ?>"><?php echo $prospectus_state; ?></option>
-                                                                    <?php } else{ ?>
-                                                                <option id="state1" selected value="" disabled="" >-Select-</option>
+                                                                <?php if ($prospectus_state != '') { ?>
+                                                                    <option id="state1" selected value="<?php echo $prospectus_state; ?>"><?php echo $prospectus_state; ?></option>
+                                                                <?php } else { ?>
+                                                                    <option id="state1" selected value="" disabled="">-Select-</option>
                                                                 <?php } ?>
                                                                 <option id="state1" value="Andhra Pradesh">Andhra Pradesh</option>
                                                                 <option id="state1" value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -385,7 +387,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                         <p></p>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <input required type="hidden" name="course_hide" id="course_hide" value="">
@@ -452,7 +454,10 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
     </html>
 
-<?php
+<?php }
+else{
+    header("location:print.php");
+}
     // here to inserting the data into the database
     if (isset($_POST['submit'])) {
 
@@ -517,7 +522,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         $tbl_prospectus_query = "INSERT INTO `tbl_prospectus`(`prospectus_no`, `prospectus_applicant_name`, `prospectus_gender`, `prospectus_father_name`, `prospectus_mother_name`, `prospectus_address`, `prospectus_country`, `prospectus_state`, `prospectus_city`, `prospectus_postal_code`, `prospectus_dob`, `prospectus_emailid`, `mobile`, `revert_by`, `prospectus_course_name`, `prospectus_session`, `payment_status`, `prospectus_rate`, `prospectus_payment_mode`, `prospectus_deposit_to`, `bank_name`, `transaction_no`, `transaction_date`, `post_at`, `type`, `easebuzz_id`, `transaction_id`, `status`) VALUES ('NULL','$prospectus_applicant_name','$prospectus_gender','$prospectus_father_name','$prospectus_mother_name','$prospectus_address','$prospectus_country','$prospectus_state','$prospectus_city','$prospectus_postal_code','$prospectus_dob','$prospectus_emailid','$mobile','$revert_by','$prospectus_course_name','$prospectus_session','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL','NULL')";
         $tbl_prospectus_insert = mysqli_query($connection, $tbl_prospectus_query);
         if ($tbl_prospectus_insert) {
-         
+
             // update the user login table
 
             echo "<script>
@@ -538,4 +543,5 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     window.location.replace('./index.php');
 </script>";
 }
+
 ?>

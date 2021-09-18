@@ -7,11 +7,11 @@ $con = $connection;
 
 
 // $_SESSION['emailid'] = 'rohit83015@gmail.com';
-if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
+if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '') ) {
   $email = trim($_SESSION['emailid']);
   // data retring from tbl_course_type table
-  $course_type = "SELECT  *  FROM `tbl_course_type` WHERE `prospectus_emailid`='$email'";
-  $coursr_result = mysqli_query($connection, $course_type);
+  // $course_type = "SELECT  *  FROM `tbl_course_type` WHERE `prospectus_emailid`='$email'";
+  // $coursr_result = mysqli_query($connection, $course_type);
   //data retring from course_name table
   $course_name = "SELECT * FROM `tbl_course` WHERE 1";
   $course_name_result = mysqli_query($connection, $course_name);
@@ -133,16 +133,16 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                       // while($result=mysqli_fetch_array($sel)){
                       ?>
                       <label>Prospectus No</label>
-                      <input id="form_no" type="text" name="add_admission_form_no" class="form-control" value="<?php echo $prospectus_no; ?>" readonly required>
+                      <input required id="form_no" type="text" name="add_admission_form_no" class="form-control" value="<?php echo $prospectus_no; ?>" readonly required>
 
                     </div>
                     <div class="col-4">
                       <label>Course Name</label>
-                      <input id="form_no" type="text" name="add_admission_form_no" value="<?= $prospectus_course_name; ?>" class="form-control" readonly required>
+                      <input required id="form_no" type="text" name="add_admission_form_no" value="<?= $prospectus_course_name; ?>" class="form-control" readonly required>
                     </div>
                     <div class="col-4">
                       <label>Session</label>
-                      <input type="text" name="add_admission_no" class="form-control" value="<?= $prospectus_session; ?>" readonly>
+                      <input required type="text" name="add_admission_no" class="form-control" value="<?= $prospectus_session; ?>" readonly>
                     </div>
 
                     <div class="col-4">
@@ -158,15 +158,15 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
                     <div class="col-4">
                       <label>Name</label>
-                      <input disabled id="first_name" type="text" name="name" value="<?= $prospectus_applicant_name; ?>" class="form-control" required>
+                      <input required disabled id="first_name" type="text" name="name" value="<?= $prospectus_applicant_name; ?>" class="form-control" required>
                     </div>
                     <div class="col-4">
                       <label>Father Name</label>
-                      <input disabled id="first_name" type="text" name="father_name" class="form-control" value="<?= $prospectus_father_name; ?>" required>
+                      <input required disabled id="first_name" type="text" name="father_name" class="form-control" value="<?= $prospectus_father_name; ?>" required>
                     </div>
                     <div class="col-4">
                       <label>Mother Name</label>
-                      <input disabled id="first_name" type="text" name="mother_name" class="form-control" value="<?= $prospectus_mother_name; ?>" required>
+                      <input required disabled id="first_name" type="text" name="mother_name" class="form-control" value="<?= $prospectus_mother_name; ?>" required>
                     </div>
 
 
@@ -179,24 +179,24 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select> -->
-                      <input disabled id="first_name" type="text" name="mother_name" class="form-control" value="<?= $prospectus_gender; ?>">
+                      <input required disabled id="first_name" type="text" name="mother_name" class="form-control" value="<?= $prospectus_gender; ?>">
 
                     </div>
 
 
                     <div class="col-4">
                       <label>Date Of Birth</label>
-                      <input id="dob" type="text" value="<?php echo $prospectus_dob; ?>" name="add_admission_dob" class="form-control" disabled required>
+                      <input required id="dob" type="text" value="<?php echo $prospectus_dob; ?>" name="add_admission_dob" class="form-control" disabled required>
                     </div>
 
                     <div class="col-4">
                       <label>Nationality</label>
-                      <input type="text" name="add_admission_nationality" class="form-control">
+                      <input required type="text" name="add_admission_nationality" class="form-control">
                     </div>
 
                     <div class="col-4">
                       <label>Aadhar No</label>
-                      <input type="text" name="add_admission_aadhar_no" class="form-control">
+                      <input required type="text" name="add_admission_aadhar_no" class="form-control">
                     </div>
 
                     <div class="col-4">
@@ -225,15 +225,15 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
                     <div class="col-md-4">
                       <label>Username</label>
-                      <input disabled type="text" name="add_admission_username" class="form-control" required value="<?php echo $prospectus_emailid ?>">
+                      <input required disabled type="text" name="add_admission_username" class="form-control" required value="<?php echo $prospectus_emailid ?>">
                     </div>
                     <div class="col-4">
                       <label>Password</label>
-                      <input type="password" name="add_admission_password" class="form-control" required>
+                      <input required type="password" name="add_admission_password" class="form-control" required>
                     </div>
                     <div class="col-4">
                       <label>Blood Group(Optional)</label>
-                      <input type="text" name="add_admission_blood_group" class="form-control">
+                      <input required type="text" name="add_admission_blood_group" class="form-control">
                     </div>
 
 
@@ -241,7 +241,7 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
                     <div class="col-4">
                       <label>Image</label>
-                      <input type="file" accept="image/*" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
+                      <input required type="file" accept="image/*" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
                     </div>
                     <div class="col-4">
                       <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
@@ -261,16 +261,16 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                   <div class="row">
                     <div class="col-4">
                       <label>Parmanent Address</label>
-                      <input type="text" disabled value="<?php echo $address->permanet; ?>" class="form-control">
+                      <input required type="text" disabled value="<?php echo $address->permanet; ?>" class="form-control">
                     </div>
                     <div class="col-4">
                       <label>Correspondence Address</label>
-                      <input type="text" disabled value=" <?php echo $address->crosspodens;  ?>" class="form-control">
+                      <input required type="text" disabled value=" <?php echo $address->crosspodens;  ?>" class="form-control">
                     </div>
 
                     <div class="col-4">
                       <label>Pin code</label>
-                      <input readonly type="text" name="pin" value="<?php echo $prospectus_postal_code;  ?>" class="form-control" value="<?php echo date('Y-m-d') ?>">
+                      <input required readonly type="text" name="pin" value="<?php echo $prospectus_postal_code;  ?>" class="form-control" value="<?php echo date('Y-m-d') ?>">
                     </div>
 
 
@@ -304,16 +304,16 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                     </div>
                     <div class="col-4">
                       <label>State</label>
-                      <input id="state" type="text" name="add_admission_state" class="form-control">
+                      <input required id="state" type="text" name="add_admission_state" class="form-control">
                     </div>
                   
                     <div class="col-4">
                       <label>District</label>
-                      <input type="text" name="add_admission_district" class="form-control">
+                      <input required type="text" name="add_admission_district" class="form-control">
                     </div>
                     <div class="col-4">
                       <label>Pin Code</label>
-                      <input id="postal_code" type="text" name="add_admission_pin_code" class="form-control">
+                      <input required id="postal_code" type="text" name="add_admission_pin_code" class="form-control">
                     </div>
                   
                   
@@ -333,15 +333,15 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                   <div class="row">
                     <div class="col-4">
                       <label>Father Name</label>
-                      <input id="father_name" type="text" name="add_admission_father_name" class="form-control">
+                      <input required id="father_name" type="text" name="add_admission_father_name" class="form-control">
                     </div>
                     <div class="col-4">
                       <label>Father Whatsapp No</label>
-                      <input type="text" name="add_admission_father_whatsappno" class="form-control">
+                      <input required type="text" name="add_admission_father_whatsappno" class="form-control">
                     </div>
                     <div class="col-4">
                       <label>Mother Name</label>
-                      <input id="mother_name" type="text" name="add_admission_mother_name" class="form-control">
+                      <input required id="mother_name" type="text" name="add_admission_mother_name" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -370,47 +370,47 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                     <tr>
                       <td>1</td>
                       <td>High School</td>
-                      <td><input type="text" name="add_admission_high_school_board_university" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_high_school_college_name" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_high_school_passing_year" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_high_school_per" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_high_school_subjects" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_high_school_board_university" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_high_school_college_name" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_high_school_passing_year" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_high_school_per" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_high_school_subjects" size="15" value=""></td>
                     </tr>
                     <tr>
                       <td>2</td>
                       <td>Intermediate</td>
-                      <td><input type="text" name="add_admission_intermediate_board_university" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_intermediate_college_name" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_intermediate_passing_year" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_intermediate_per" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_intermediate_subjects" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_intermediate_board_university" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_intermediate_college_name" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_intermediate_passing_year" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_intermediate_per" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_intermediate_subjects" size="15" value=""></td>
                     </tr>
                     <tr>
                       <td>3</td>
                       <td>Graduation</td>
-                      <td><input type="text" name="add_admission_graduation_board_university" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_graduation_college_name" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_graduation_passing_year" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_graduation_per" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_graduation_subjects" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_graduation_board_university" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_graduation_college_name" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_graduation_passing_year" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_graduation_per" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_graduation_subjects" size="15" value=""></td>
                     </tr>
                     <tr>
                       <td>4</td>
                       <td>Post Graduation</td>
-                      <td><input type="text" name="add_admission_post_graduation_board_university" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_post_graduation_college_name" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_post_graduation_others" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_post_graduation_per" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_post_graduation_subjects" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_post_graduation_board_university" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_post_graduation_college_name" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_post_graduation_others" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_post_graduation_per" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_post_graduation_subjects" size="15" value=""></td>
                     </tr>
                     <tr>
                       <td>5</td>
                       <td>Others</td>
-                      <td><input type="text" name="add_admission_others_board_university" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_others_college_name" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_others_passing_year" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_others_per" size="15" value=""></td>
-                      <td><input type="text" name="add_admission_others_subjects" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_others_board_university" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_others_college_name" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_others_passing_year" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_others_per" size="15" value=""></td>
+                      <td><input required type="text" name="add_admission_others_subjects" size="15" value=""></td>
                     </tr>
                   </tbody>
                 </table>
@@ -428,15 +428,15 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                     <div class="row">
                       <div class="col-4">
                         <label>10th Marksheet</label>
-                        <input type="file" accept="image/*" name="add_admission_tenth_marksheet" class="form-control">
+                        <input required type="file" accept="image/*" name="add_admission_tenth_marksheet" class="form-control">
                       </div>
                       <div class="col-4">
                         <label>10th Passing Certificate</label>
-                        <input type="file" accept="image/*" name="add_admission_tenth_passing_certificate" class="form-control">
+                        <input  type="file" accept="image/*" name="add_admission_tenth_passing_certificate" class="form-control">
                       </div>
                       <div class="col-4">
                         <label>12th Marksheet</label>
-                        <input type="file" accept="image/*" name="add_admission_twelve_markesheet" class="form-control">
+                        <input required type="file" accept="image/*" name="add_admission_twelve_markesheet" class="form-control">
                       </div>
 
                       <div class="col-4">
@@ -533,15 +533,15 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                     <div class="row">
                       <div class="col-4">
                         <label>Student Signature</label>
-                        <input type="file" accept="image/*" name="student_sing" class="form-control">
+                        <input required type="file" accept="image/*" name="student_sing" class="form-control">
                       </div>
                       <div class="col-4">
                         <label>Parent Signature</label>
-                        <input type="file" accept="image/*" name="parent_sing" class="form-control">
+                        <input required type="file" accept="image/*" name="parent_sing" class="form-control">
                       </div>
                       <div class="col-4">
                         <label>Date</label>
-                        <input readonly type="text" name="date" class="form-control" value="<?php echo date('Y-m-d') ?>">
+                        <input required readonly type="text" name="date" class="form-control" value="<?php echo date('Y-m-d') ?>">
                       </div>
 
 
@@ -560,7 +560,7 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
                       <div class="col-12">
                         <label>
-                          <input readonly type="checkbox" name="tandc" class="">
+                          <input required readonly type="checkbox" name="tandc" class="">
                           i have to accepts all the terms and conditions for taking the admission</label>
                       </div>
 
@@ -576,7 +576,7 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                 <div id="loader_section"></div>
               </div>
               <div class="col-md-6">
-                <!-- <input type="hidden" name="action" value="add_admission" /> -->
+                <!-- <input required required type="hidden" name="action" value="add_admission" /> -->
                 <button type="submit" name="add_admission_button" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-primary">Reset</button>
               </div>
@@ -784,8 +784,8 @@ if (isset($_POST['add_admission_button'])) {
   $add_admission_password = $_POST['add_admission_password'];
 
   $add_admission_blood_group = $_POST['add_admission_blood_group'];
-  echo "<pre>";
-  print_r($_POST);
+  // echo "<pre>";
+  // print_r($_POST);
   $add_admission_title = $_POST['add_admission_title'];
   $admission_form_no_query = "SELECT MAX(admission_id) FROM tbl_admission;";
   $admission_form_result = mysqli_query($connection, $admission_form_no_query);
@@ -797,12 +797,12 @@ if (isset($_POST['add_admission_button'])) {
   $visible_stud = 1;
   $last_name = explode(" ", "$prospectus_applicant_name")[1];
   $add_admission_password = md5($add_admission_password);
-  echo $admission_query = "INSERT INTO `tbl_admission`(`admission_form_no`, `admission_title`, `admission_first_name`,`admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`admission_category`, `admission_gender`, `admission_username`, `admission_password`, `admission_blood_group`,`admission_profile_image`,`student_signature`,`parent_signature`, `admission_residential_address`, `admission_state`, `admission_city`, `admission_district`, `admission_pin_code`, `admission_mobile_student`, `admission_emailid_student`, `admission_father_name`, `admission_mother_name`,`admission_tenth_marksheet`, `admission_tenth_passing_certificate`, `admission_twelve_markesheet`, `admission_twelve_passing_certificate`, `admission_graduation_marksheet`, `admission_recent_character_certificate`, `admission_other_certificate`, `admission_character_certificate`,`status`, `stud_status`) VALUES 
-                                                 ('$admission_form_no','$add_admission_title','$first_name','$last_name','$prospectus_course_name','$prospectus_session','$prospectus_dob','$add_admission_nationality','$add_admission_aadhar_no','$add_admission_category','$prospectus_gender','$prospectus_emailid','$add_admission_password','$add_admission_blood_group','$add_admission_profile_image','$student_sing','$parent_sing','$prospectus_address','$prospectus_state', '$prospectus_city',  '$prospectus_city','$prospectus_postal_code','$mobile', '$prospectus_emailid', '$prospectus_father_name', '$prospectus_mother_name','$add_admission_tenth_marksheet', '$add_admission_tenth_passing_certificate',      '$add_admission_twelve_markesheet','$add_admission_twelve_passing_certificate','$add_admission_graduation_marksheet', '$add_admission_recent_character_certificate','$add_admission_other_certificate','$add_admission_character_certificate','$visible','$visible_stud')";
+  $admission_query = "INSERT INTO `tbl_admission`(`admission_form_no`, `admission_title`, `admission_first_name`,`admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`admission_category`, `admission_gender`, `admission_username`, `admission_password`, `admission_blood_group`,`admission_profile_image`,`student_signature`,`parent_signature`, `admission_residential_address`, `admission_state`, `admission_city`, `admission_district`, `admission_pin_code`, `admission_mobile_student`, `admission_emailid_student`, `admission_father_name`, `admission_mother_name`,`admission_tenth_marksheet`, `admission_tenth_passing_certificate`, `admission_twelve_markesheet`, `admission_twelve_passing_certificate`, `admission_graduation_marksheet`, `admission_recent_character_certificate`, `admission_other_certificate`, `admission_character_certificate`,`status`, `stud_status`) VALUES 
+                                                 ('$admission_form_no','$add_admission_title','$prospectus_applicant_name','$last_name','$prospectus_course_name','$prospectus_session','$prospectus_dob','$add_admission_nationality','$add_admission_aadhar_no','$add_admission_category','$prospectus_gender','$prospectus_emailid','$add_admission_password','$add_admission_blood_group','$add_admission_profile_image','$student_sing','$parent_sing','$prospectus_address','$prospectus_state', '$prospectus_city',  '$prospectus_city','$prospectus_postal_code','$mobile', '$prospectus_emailid', '$prospectus_father_name', '$prospectus_mother_name','$add_admission_tenth_marksheet', '$add_admission_tenth_passing_certificate',      '$add_admission_twelve_markesheet','$add_admission_twelve_passing_certificate','$add_admission_graduation_marksheet', '$add_admission_recent_character_certificate','$add_admission_other_certificate','$add_admission_character_certificate','$visible','$visible_stud')";
 
   $result = mysqli_query($connection, $admission_query);
   if ($result) {
-    echo "data succesfulll inserted into the database";
+    header("location:thankyou.php");
   }
 }
 

@@ -14,6 +14,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
     echo "<br>";
 
     if ($_SESSION['otp'] == $otp) {
+        $_SESSION['verify']='yes';
         header("location:admission.php");
     } else {
         $smg = "Wrong OTP";

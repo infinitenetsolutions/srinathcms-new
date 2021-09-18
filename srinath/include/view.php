@@ -71,10 +71,10 @@ $objectSecond->userName = "";
 $objectSecond->password = "";
 $objectSecond->dbName =   "";
 if($_SERVER['HTTP_HOST']=='localhost'){
-    $objectDefault->new_db("localhost", "root", "", "srinath_cms");    }
+    $objectSecond->new_db("localhost", "root", "", "srinath_cms");    }
 // if the database in the server
 else{
-    $objectDefault->new_db("localhost", "phpmyadmin", "raja@#", "srinath_cms");
+    $objectSecond->new_db("localhost", "phpmyadmin", "raja@#", "srinath_cms");
     }
 // $objectSecond->new_db("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
 //All File Directries End
@@ -7872,10 +7872,14 @@ if (isset($_GET["action"])) {
                                                     <div class="form-group">
                                                         <label>Prospectus No</label>
                                                         <div class="input-group mb-3">
+                                                            <?php $_SESSION['prospectus_emailid']=$row['prospectus_emailid'];
+                                                            $_SESSION['prospectus_session']=$row['prospectus_session']; 
+                                                            $_SESSION['prospectus_applicant_name']=$row['prospectus_applicant_name'];
+                                                             ?>
                                                             <input type="text" id="unversity_prospectus_number<?php echo $row["id"] ?>" name="unversity_prospectus_number" class="form-control" value="<?php echo $row["prospectus_no"] ?>">
                                                             <input type="hidden" id="prospectus_session<?php echo $row["id"] ?>" name="prospectus_session" class="form-control" value="<?php echo $row["prospectus_session"] ?>">
                                                             <input type="hidden" id="prospectus_course_name<?php echo $row["id"] ?>" name="prospectus_course_name" class="form-control" value="<?php echo $row["prospectus_course_name"] ?>">
-                                                            <input type="hidden" id="prospectus_rate<?php echo $row["id"] ?>" name="prospectus_rate" class="form-control" value="<?php echo $row["prospectus_rate"] ?>">
+                                                            <input type="hidden" id="prospectus_rate<?php echo $row["id"] ?>" name="prospectus_rate" class="form-control" value="<?php echo $row["prospectus_emailid"] ?>">
                                                             <input type="hidden" id="post_at<?php echo $row["id"] ?>" name="post_at" class="form-control" value="<?php echo $row["post_at"] ?>">
                                                             <input type="hidden" id="unversity_prospectus_id<?php echo $row["id"] ?>" name="unversity_prospectus_id" class="form-control" value="<?php echo $row["id"] ?>">
                                                             <input type="hidden" id="action_prospectus_enquiry<?php echo $row["id"] ?>" name="action" class="form-control" value="update_prospectus_enquiry">
@@ -8198,7 +8202,7 @@ if (isset($_GET["action"])) {
     //Nsuniv Prospectus Enquiry End
     //Nsuniv Get Started Enquiry Start
     if ($_GET["action"] == "get_nsuniv-admission-enquiry") {
-        $objectSecond->update("tbl_alert", "`get_started_enquiry` = '0' WHERE `id`='1'");
+        $objectSecond->update("tbl_alert", "`tbl_prospectus` = '0' WHERE `id`='1'");
         $objectSecond->sql = "";
     ?>
         <table id="example1" class="table table-bordered table-striped">
@@ -8209,34 +8213,53 @@ if (isset($_GET["action"])) {
                     <th>Applicant Name</th>
                     <th>Email</th>
                     <th>Phone No</th>
-                    <th>Referred By</th>
+                    <th>Session</th>
                     <th>State</th>
                     <th>City</th>
-                    <th>Last Qualification</th>
-                    <th>Timing</th>
-                    <th class="project-actions text-center">Action </th>
+                    <th>Gender</th>
+                    <th>Admission District</th>
+                    <th colspan="3"  class="project-actions text-center">Action </th>
+                  
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $objectDefault->select("admission_enquiry_tbl");
-                $objectDefault->where("`is_deleted` = '0' ORDER BY `id` DESC");
-                $result = $objectDefault->get();
-                if ($result->num_rows > 0) {
-                    while ($row = $objectDefault->get_row()) {
+                
+                $admission_query="SELECT * FROM `tbl_admission` WHERE `stud_status`='1'";
+                $admission_result=$con->query($admission_query);
+
+                // $objectSecond->select("tbl_admission");
+                // $objectSecond->where("ORDER BY `id` DESC");
+                // $result = $objectSecond->get();
+                if ($admission_result) {
+                    while ($row = $admission_result->fetch_assoc()) {
                 ?>
                         <tr>
                             <td><?php echo $s_no; ?></td>
-                            <td><?php echo $row["admission_course"] ?></td>
-                            <td><?php echo $row["admission_name"] ?></td>
-                            <td><?php echo $row["admission_email"] ?></td>
-                            <td><?php echo $row["admission_phone"] ?></td>
-                            <td><?php echo $row["revert_by"] ?></td>
+                            <td><?php echo $row["admission_course_name"] ?></td>
+                            <td><?php echo $row["admission_title"]; echo " "; echo $row['admission_first_name'];?></td>
+                            <td><?php echo $row["admission_emailid_student"] ?></td>
+                            <td><?php echo $row["admission_mobile_student"] ?></td>
+                            <td><?php echo $row["admission_session"] ?></td>
                             <td><?php echo $row["admission_state"] ?></td>
                             <td><?php echo $row["admission_city"] ?></td>
-                            <td><?php echo $row["admission_last_qualify"] ?></td>
-                            <td><?php echo $row["time"] ?></td>
-                            <td class="project-actions text-center">
+                            <td><?php echo $row["admission_gender"] ?></td>
+                            <td><?php echo $row["admission_district"] ?></td>
+                            <td  class="project-actions text-center">
+                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('delete_university_get_enquiry<?php echo $row["id"]; ?>').style.display='block'">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </button>
+                                </td>
+                                <td  class="project-actions text-center">
+                                <a href="admission_form_update?edit=<?php echo $row["admission_id"];  ?>" class="btn btn-warning btn-sm" >
+                                    <i class="fas fa-edit">
+                                    </i>
+                                   Update
+                                   </a>
+                                   </td>
+                                   <td>
                                 <button class="btn btn-danger btn-sm" onclick="document.getElementById('delete_university_get_enquiry<?php echo $row["id"]; ?>').style.display='block'">
                                     <i class="fas fa-trash">
                                     </i>

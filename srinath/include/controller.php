@@ -149,12 +149,12 @@ if (isset($_POST["action"])) {
                 //         ('','$add_university_details_financial_start_date','$add_university_details_financial_end_date','$add_university_details_academic_start_date','$add_university_details_academic_end_date','$add_university_details_university_name','$add_university_details_affiliation_details','$add_university_details_address','$add_university_details_email','$add_university_details_contact','$add_university_details_logo_image_rand','$add_university_details_website_url','$visible')
                 //         ";
                 echo "<pre>";
-         echo       $sql = "INSERT INTO `tbl_university_details`
+                echo       $sql = "INSERT INTO `tbl_university_details`
                 (`university_details_financial_start_date`, `university_details_financial_end_date`, `university_details_academic_start_date`, `university_details_academic_end_date`, `university_details_university_name`, `university_details_affiliation_details`, `university_details_address`, `university_details_email`, `university_details_contact`, `university_details_logo_image`, `university_details_website_url`, `status`) 
                 VALUES 
                 ('$add_university_details_financial_start_date','$add_university_details_financial_end_date','$add_university_details_academic_start_date','$add_university_details_academic_end_date','$add_university_details_university_name','$add_university_details_affiliation_details','$add_university_details_address','$add_university_details_email','$add_university_details_contact','$add_university_details_logo_image_rand','$add_university_details_website_url','$visible')
                 ";
-             
+
                 if ($con->query($sql)) {
                     echo "<script>
                             alert('University details added successfully!!!');
@@ -1859,13 +1859,13 @@ if (isset($_POST["action"])) {
     //Delete University Home End With Ajax
     //Delete University Prospectus Start With Ajax
     if ($_POST["action"] == "delete_university_prospectus_enquiry") {
-      echo  $delete_id = $_POST["delete_id"];
-        ?>
+        echo  $delete_id = $_POST["delete_id"];
+?>
 
         <?php
         if (!empty($delete_id)) {
-            $query="UPDATE `tbl_prospectus` SET `status` = '$trash' where `id`='$delete_id' ";
-          $check= $con->query($query);
+            $query = "UPDATE `tbl_prospectus` SET `status` = '$trash' where `id`='$delete_id' ";
+            $check = $con->query($query);
             if ($check == 1)
                 echo 'success';
             else
@@ -1891,26 +1891,32 @@ if (isset($_POST["action"])) {
 
     //Delete University Prospectus Start With Ajax
     if ($_POST["action"] == "update_prospectus_enquiry") {
-    echo    $prosprectus_number = $_POST["prosprectus_number"];
+        $prosprectus_number = $_POST["prosprectus_number"];
         $prosprectus_id = $_POST["prosprectus_id"];
+        $add_prospectus_email=  $_SESSION['prospectus_emailid'];
         $prospectus_course_name = $_POST["prospectus_course_name"];
-     echo  $prospectus_session = $_POST["prospectus_session"];
+     
+        $prospectus_session = $_SESSION["prospectus_session"];
         $prospectus_rate = $_POST["prospectus_rate"];
         $post_at = $_POST["post_at"];
+        $name=$_SESSION['prospectus_applicant_name'];
+        include '../../Backend/sendprospectus.php';
         if (!empty($prosprectus_number && $prosprectus_id)) {
             // $objectSecond->select("tbl_prospectus");
             // $objectSecond->where("`status` = '$visible' && `prospectus_no` = '$prosprectus_number'");
             // $result = $objectSecond->get();
-           $exist_check="SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '$prosprectus_number' && `status`='$visible'";
-            $result=$con->query($exist_check);
+            $exist_check = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '$prosprectus_number' && `status`='$visible'";
+            $result = $con->query($exist_check);
             if ($result->num_rows > 0) {
-                echo 'exsits';
+                echo 'exists';
             } else {
                 $objectSecond->sql = "";
-              echo  $update_query="UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";
-               $check=$con->query($update_query);
+                echo  $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";
+                $check = $con->query($update_query);
                 // $check = $objectSecond->update("tbl_prospectus", "`prospectus_no` = '$prosprectus_number'  WHERE `id`='$prosprectus_id'");
+               
                 if ($check == 1) {
+                  echo   prospectus_mail($add_prospectus_email,$prosprectus_number,$prospectus_rate,$prospectus_course_name,$prospectus_session,$name);
                     $date = date_create()->format('yy-m-d');
                     $objectSecond->sql = "";
                     $objectSecond->insert("tbl_income", "(`id`,`reg_no`,`course`,`academic_year` ,`received_date`, `particulars`, `amount`, `payment_mode`, `check_no`, `bank_name`,`income_from`,`post_at`) 

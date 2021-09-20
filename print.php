@@ -128,11 +128,11 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                                         </div>
                                                     </nav>
 
-                                                    <h6>Online Prospectus Form</h6>
+                                                    <h6 >Online Prospectus Form</h6>
                                                 </div><br><br>
                                                 <div class="row">
                                                     <div class="col l12">
-                                                        <strong> Prospectus No : <?php $prospectus_no; ?></strong>
+                                                        <strong> Prospectus No : <?php echo $prospectus_no; ?></strong>
                                                     </div>
                                                 </div>
                                                 <div class="invoice-product-details">

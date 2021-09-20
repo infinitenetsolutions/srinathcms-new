@@ -110,11 +110,11 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                 <div class="col l10 m8 s12">
                                 </div>
                                 <?php if ($payment_status == 'success') { ?>
-                                    <div class="col l2 m4 s12">
+                                    <div id="printid" class="col l2 m4 s12">
                                         <div class="card invoice-action-wrapper">
                                             <div class="card-content">
                                                 <div class="invoice-action-btn">
-                                                    <button onclick="print()" class="btn btn-success"> Print </button>
+                                                    <a href="" onclick="printdata()"> <button id="printbutton" onclick="print()" class="btn btn-success"> <span>Print</span> </button> </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,5 +357,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
         WinPrint.focus();
         WinPrint.print();
         WinPrint.close();
+
+       
     }
 </script>

@@ -8245,12 +8245,12 @@ if (isset($_GET["action"])) {
                             <td><?php echo $row["admission_city"] ?></td>
                             <td><?php echo $row["admission_gender"] ?></td>
                             <td><?php echo $row["admission_district"] ?></td>
-                            <td  class="project-actions text-center">
-                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('delete_university_get_enquiry<?php echo $row["id"]; ?>').style.display='block'">
-                                    <i class="fas fa-trash">
+                                <td  class="project-actions text-center">
+                                <a href="admission_form_view?edit=<?php echo $row["admission_id"];  ?>"  class="btn btn-secondary btn-sm" >
+                                    <i class="fas fa-eye">
                                     </i>
-                                    Delete
-                                </button>
+                                    View
+                                </a>
                                 </td>
                                 <td  class="project-actions text-center">
                                 <a href="admission_form_update?edit=<?php echo $row["admission_id"];  ?>" class="btn btn-warning btn-sm" >
@@ -8260,7 +8260,7 @@ if (isset($_GET["action"])) {
                                    </a>
                                    </td>
                                    <td>
-                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('delete_university_get_enquiry<?php echo $row["id"]; ?>').style.display='block'">
+                                <button class="btn btn-danger btn-sm" onclick="document.getElementById('delete_university_get_enquiry<?php echo $row['id']; ?>').style.display='block'">
                                     <i class="fas fa-trash">
                                     </i>
                                     Delete

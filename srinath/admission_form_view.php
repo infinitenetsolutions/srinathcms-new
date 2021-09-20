@@ -200,21 +200,21 @@ $max_value = $result['id'] + 1;
 
 
                     <label>Registration No</label>
-                    <input type="text" name="add_admission_id" value="<?php echo $max_value; ?>" class="form-control">
+                    <input disabled type="text" name="add_admission_id" value="<?php echo $max_value; ?>" class="form-control">
 
                   </div>
                   <div class="col-4">
                     <label>Enter Prospectus No</label>
-                    <input disabled id="form_no" type="text" name="add_admission_form_no" class="form-control" value="<?php echo $prospectus_number; ?>" required>
+                    <input disabled disabled id="form_no" type="text" name="add_admission_form_no" class="form-control" value="<?php echo $prospectus_number; ?>" required>
                   </div>
                   <div class="col-4">
                     <label>Admission No</label>
-                    <input type="text" name="add_admission_no" class="form-control" value="<?php echo 'SU/' . $admission_course_name . '/' . trim($admission_session) . '/' . $max_value ?>" readonly placeholder="Generate By University">
+                    <input disabled type="text" name="add_admission_no" class="form-control" value="<?php echo 'SU/' . $admission_course_name . '/' . trim($admission_session) . '/' . $max_value ?>" readonly placeholder="Generate By University">
                   </div>
 
                   <div class="col-4">
                     <label>Title</label>
-                    <select name="add_admission_title" class="form-control">
+                    <select disabled name="add_admission_title" class="form-control">
                       <?php if ($admission_title != '') { ?>
                         <option value="<?php echo $admission_title ?>"><?php echo $admission_title; ?></option>
                       <?php } else { ?>
@@ -229,14 +229,14 @@ $max_value = $result['id'] + 1;
 
                   <div class="col-4">
                     <label> Name</label>
-                    <input id="first_name" type="text" name="add_admission_first_name" class="form-control" value="<?php echo $admission_first_name; ?>" required>
+                    <input disabled id="first_name" type="text" name="add_admission_first_name" class="form-control" value="<?php echo $admission_first_name; ?>" required>
                   </div>
 
 
 
                   <div class="col-4">
                     <label>Course</label>
-                    <select id="course" name="add_admission_course_name" class="form-control" required>
+                    <select disabled id="course" name="add_admission_course_name" class="form-control" required>
                       <?php if ($admission_course_name != '') { ?>
                         <option value="<?php echo $admission_course_name; ?>"><?php echo $admission_course_name ?></option>
                       <?php } else { ?>
@@ -256,7 +256,7 @@ $max_value = $result['id'] + 1;
 
                   <div class="col-4">
                     <label>Session</label>
-                    <select id="session_check" class="form-control" name="add_admission_session">
+                    <select disabled id="session_check" class="form-control" name="add_admission_session">
                       <?php if ($admission_session != '') { ?>
                         <option value=" <?php echo $admission_session ?>" selected><?php echo $admission_session; ?></option>
                       <?php } else {
@@ -278,25 +278,25 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>Date Of Birth</label>
-                    <input id="dob" type="date" name="add_admission_dob" class="form-control" value="<?php echo  date("Y-m-d", strtotime(str_replace('/', '-', $admission_dob)));   ?>" required>
+                    <input disabled id="dob" type="date" name="add_admission_dob" class="form-control" value="<?php echo  date("Y-m-d", strtotime(str_replace('/', '-', $admission_dob)));   ?>" required>
                   </div>
 
                   <div class="col-4">
                     <label>Nationality</label>
-                    <input type="text" name="add_admission_nationality" class="form-control" value="<?php echo $admission_nationality; ?>">
+                    <input disabled type="text" name="add_admission_nationality" class="form-control" value="<?php echo $admission_nationality; ?>">
                   </div>
                   <div class="col-4">
                     <label>Aadhar No</label>
-                    <input type="text" name="add_admission_aadhar_no" class="form-control" value="<?php echo $admission_aadhar_no; ?>">
+                    <input disabled type="text" name="add_admission_aadhar_no" class="form-control" value="<?php echo $admission_aadhar_no; ?>">
                   </div>
 
                   <div class="col-4">
                     <label>Date Of Admission</label>
-                    <input type="date" name="add_date_of_admission" class="form-control" value="<?php echo date("Y-m-d"); ?>">
+                    <input disabled type="date" name="add_date_of_admission" class="form-control" value="<?php echo date("Y-m-d"); ?>">
                   </div>
                   <div class="col-4">
                     <label>Category</label>
-                    <select name="add_admission_category" class="form-control">
+                    <select disabled name="add_admission_category" class="form-control">
                       <?php if ($admission_category != '0') { ?>
                         <option selected value="<?php echo $admission_category ?>"> <?php echo $admission_category; ?></option>
                       <?php } else { ?>
@@ -310,7 +310,7 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>Gender</label>
-                    <select id="gender" name="add_admission_gender" class="form-control">
+                    <select disabled id="gender" name="add_admission_gender" class="form-control">
                       <?php if ($admission_gender != '') { ?>
                         <option selected value="<?php echo $admission_gender ?>"> <?php echo $admission_gender; ?></option>
                       <?php } else { ?>
@@ -324,20 +324,20 @@ $max_value = $result['id'] + 1;
 
                   <div class="col-md-4">
                     <label>Username</label>
-                    <input type="text" name="add_admission_username" class="form-control" value="<?php echo $admission_username ?>" required>
+                    <input disabled type="text" name="add_admission_username" class="form-control" value="<?php echo $admission_username ?>" required>
                   </div>
                   <div class="col-4">
                     <label>Password</label>
-                    <input type="password" name="add_admission_password" class="form-control" disabled value="<?php echo $admission_password ?>">
+                    <input disabled type="password" name="add_admission_password" class="form-control" disabled value="<?php echo $admission_password ?>">
                   </div>
                   <div class="col-4">
                     <label>Blood Group</label>
-                    <input type="text" name="add_admission_blood_group" class="form-control" value="<?php echo $admission_blood_group; ?>">
+                    <input disabled type="text" name="add_admission_blood_group" class="form-control" value="<?php echo $admission_blood_group; ?>">
                   </div>
 
                   <div class="col-4">
                     <label>Hostel</label>
-                    <select name="add_admission_hostel" class="form-control">
+                    <select disabled name="add_admission_hostel" class="form-control">
                       <?php if ($admission_hostel != '') { ?>
                         <option selected value="<?php echo $admission_hostel ?>"> <?php echo $admission_hostel; ?></option>
                       <?php } else { ?>
@@ -349,7 +349,7 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>Transport</label>
-                    <select name="add_admission_transport" class="form-control">
+                    <select disabled name="add_admission_transport" class="form-control">
                       <?php if ($admission_transport != '') { ?>
                         <option selected value="<?php echo $admission_transport ?>"> <?php echo $admission_transport; ?></option>
                       <?php } else { ?>
@@ -363,7 +363,7 @@ $max_value = $result['id'] + 1;
   
                   <div class="col-4">
                     <label>Image</label>
-                    <input type="file" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
+                    <input disabled type="file" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
                     </div>
                     <?php if ($admission_profile_image !='') { ?>
                       <div class="col-4">
@@ -396,39 +396,39 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>State</label>
-                    <input id="state" type="text" name="add_admission_state" value="<?php echo $admission_state; ?>" class="form-control">
+                    <input disabled id="state" type="text" name="add_admission_state" value="<?php echo $admission_state; ?>" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>City</label>
-                    <input id="city" type="text" value="<?php echo $admission_city ?>" name="add_admission_city" class="form-control">
+                    <input disabled id="city" type="text" value="<?php echo $admission_city ?>" name="add_admission_city" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>District</label>
-                    <input type="text" value="<?php echo $admission_district; ?>"  name="add_admission_district" class="form-control">
+                    <input disabled type="text" value="<?php echo $admission_district; ?>"  name="add_admission_district" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Pin Code</label>
-                    <input id="postal_code" value="<?php echo $admission_pin_code ?>" type="text" name="add_admission_pin_code" class="form-control">
+                    <input disabled id="postal_code" value="<?php echo $admission_pin_code ?>" type="text" name="add_admission_pin_code" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Home Landline no.</label>
-                    <input type="text" name="add_admission_home_landlineno" value="<?php echo $admission_home_landlineno ?>" class="form-control">
+                    <input disabled type="text" name="add_admission_home_landlineno" value="<?php echo $admission_home_landlineno ?>" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Mobile No. (Student)</label>
-                    <input id="mobile_no" type="text" value="<?php echo $admission_mobile_student; ?>" name="add_admission_mobile_student" class="form-control">
+                    <input disabled id="mobile_no" type="text" value="<?php echo $admission_mobile_student; ?>" name="add_admission_mobile_student" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Father Phone No.</label>
-                    <input type="text" value="<?php echo $admission_father_phoneno ?>" name="add_admission_father_phoneno" class="form-control">
+                    <input disabled type="text" value="<?php echo $admission_father_phoneno ?>" name="add_admission_father_phoneno" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Email Id (Father)</label>
-                    <input type="email" value="<?php echo $admission_emailid_father ?>" name="add_admission_emailid_father" class="form-control">
+                    <input disabled type="email" value="<?php echo $admission_emailid_father ?>" name="add_admission_emailid_father" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Email Id (Student)</label>
-                    <input id="email_id" type="email" value="<?php echo $admission_emailid_student; ?>" name="add_admission_emailid_student" class="form-control">
+                    <input disabled id="email_id" type="email" value="<?php echo $admission_emailid_student; ?>" name="add_admission_emailid_student" class="form-control">
                   </div>
 
                 </div>
@@ -446,15 +446,15 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>Father Name</label>
-                    <input id="father_name" value="<?php echo $admission_father_name ?>" type="text" name="add_admission_father_name" class="form-control">
+                    <input disabled id="father_name" value="<?php echo $admission_father_name ?>" type="text" name="add_admission_father_name" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Father Whatsapp No</label>
-                    <input type="text" value="<?php echo $admission_father_whatsappno ?>" name="add_admission_father_whatsappno" class="form-control">
+                    <input disabled type="text" value="<?php echo $admission_father_whatsappno ?>" name="add_admission_father_whatsappno" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Mother Name</label>
-                    <input id="mother_name" value="<?php echo $admission_mother_name ?>" type="text" name="add_admission_mother_name" class="form-control">
+                    <input disabled id="mother_name" value="<?php echo $admission_mother_name ?>" type="text" name="add_admission_mother_name" class="form-control">
                   </div>
                 </div>
               </div>
@@ -483,47 +483,47 @@ $max_value = $result['id'] + 1;
                   <tr>
                     <td>1</td>
                     <td>High School</td>
-                    <td><input type="text" name="add_admission_high_school_board_university" size="15" value="<?php echo $admission_high_school_board_university; ?>"></td>
-                    <td><input type="text" name="add_admission_high_school_college_name" size="15" value="<?php echo $admission_high_school_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_high_school_passing_year" size="15" value="<?php echo $admission_high_school_passing_year ?>"></td>
-                    <td><input type="text" name="add_admission_high_school_per" size="15" value="<?php echo $admission_high_school_per ?>"></td>
-                    <td><input type="text" name="add_admission_high_school_subjects" size="15" value="<?php echo $admission_high_school_subjects ?>"></td>
+                    <td><input disabled type="text" name="add_admission_high_school_board_university" size="15" value="<?php echo $admission_high_school_board_university; ?>"></td>
+                    <td><input disabled type="text" name="add_admission_high_school_college_name" size="15" value="<?php echo $admission_high_school_college_name ?>"></td>
+                    <td><input disabled type="text" name="add_admission_high_school_passing_year" size="15" value="<?php echo $admission_high_school_passing_year ?>"></td>
+                    <td><input disabled type="text" name="add_admission_high_school_per" size="15" value="<?php echo $admission_high_school_per ?>"></td>
+                    <td><input disabled type="text" name="add_admission_high_school_subjects" size="15" value="<?php echo $admission_high_school_subjects ?>"></td>
                   </tr>
                   <tr>
                     <td>2</td>
                     <td>Intermediate</td>
-                    <td><input type="text" name="add_admission_intermediate_board_university" size="15" value="<?php echo $admission_intermediate_board_university ?>"></td>
-                    <td><input type="text" name="add_admission_intermediate_college_name" size="15" value="<?php echo $admission_intermediate_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_intermediate_passing_year" size="15" value="<?php echo $admission_intermediate_passing_year ?>"></td>
-                    <td><input type="text" name="add_admission_intermediate_per" size="15" value="<?php echo $admission_intermediate_per ?>"></td>
-                    <td><input type="text" name="add_admission_intermediate_subjects" size="15" value="<?php echo $admission_intermediate_subjects ?>"></td>
+                    <td><input disabled type="text" name="add_admission_intermediate_board_university" size="15" value="<?php echo $admission_intermediate_board_university ?>"></td>
+                    <td><input disabled type="text" name="add_admission_intermediate_college_name" size="15" value="<?php echo $admission_intermediate_college_name ?>"></td>
+                    <td><input disabled type="text" name="add_admission_intermediate_passing_year" size="15" value="<?php echo $admission_intermediate_passing_year ?>"></td>
+                    <td><input disabled type="text" name="add_admission_intermediate_per" size="15" value="<?php echo $admission_intermediate_per ?>"></td>
+                    <td><input disabled type="text" name="add_admission_intermediate_subjects" size="15" value="<?php echo $admission_intermediate_subjects ?>"></td>
                   </tr>
                   <tr>
                     <td>3</td>
                     <td>Graduation</td>
-                    <td><input type="text" name="add_admission_graduation_board_university" size="15" value="<?php echo $admission_graduation_board_university ?>"></td>
-                    <td><input type="text" name="add_admission_graduation_college_name" size="15" value="<?php echo $admission_graduation_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_graduation_passing_year" size="15" value="<?php echo $admission_graduation_passing_year ?>"></td>
-                    <td><input type="text" name="add_admission_graduation_per" size="15" value="<?php echo $admission_graduation_per ?>"></td>
-                    <td><input type="text" name="add_admission_graduation_subjects" size="15" value="<?php echo $admission_graduation_subjects ?>"></td>
+                    <td><input disabled type="text" name="add_admission_graduation_board_university" size="15" value="<?php echo $admission_graduation_board_university ?>"></td>
+                    <td><input disabled type="text" name="add_admission_graduation_college_name" size="15" value="<?php echo $admission_graduation_college_name ?>"></td>
+                    <td><input disabled type="text" name="add_admission_graduation_passing_year" size="15" value="<?php echo $admission_graduation_passing_year ?>"></td>
+                    <td><input disabled type="text" name="add_admission_graduation_per" size="15" value="<?php echo $admission_graduation_per ?>"></td>
+                    <td><input disabled type="text" name="add_admission_graduation_subjects" size="15" value="<?php echo $admission_graduation_subjects ?>"></td>
                   </tr>
                   <tr>
                     <td>4</td>
                     <td>Post Graduation</td>
-                    <td><input type="text" name="add_admission_post_graduation_board_university" size="15" value="<?php echo $admission_post_graduation_board_university ?>"></td>
-                    <td><input type="text" name="add_admission_post_graduation_college_name" size="15" value="<?php echo $admission_post_graduation_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_post_graduation_others" size="15" value="<?php echo $admission_post_graduation_others ?>"></td>
-                    <td><input type="text" name="add_admission_post_graduation_per" size="15" value="<?php echo $admission_post_graduation_per ?>"></td>
-                    <td><input type="text" name="add_admission_post_graduation_subjects" size="15" value="<?php echo $admission_post_graduation_subjects ?>"></td>
+                    <td><input disabled type="text" name="add_admission_post_graduation_board_university" size="15" value="<?php echo $admission_post_graduation_board_university ?>"></td>
+                    <td><input disabled type="text" name="add_admission_post_graduation_college_name" size="15" value="<?php echo $admission_post_graduation_college_name ?>"></td>
+                    <td><input disabled type="text" name="add_admission_post_graduation_others" size="15" value="<?php echo $admission_post_graduation_others ?>"></td>
+                    <td><input disabled type="text" name="add_admission_post_graduation_per" size="15" value="<?php echo $admission_post_graduation_per ?>"></td>
+                    <td><input disabled type="text" name="add_admission_post_graduation_subjects" size="15" value="<?php echo $admission_post_graduation_subjects ?>"></td>
                   </tr>
                   <tr>
                     <td>5</td>
                     <td>Others</td>
-                    <td><input type="text" name="add_admission_others_board_university" size="15" value="<?php echo $admission_others_board_university ?>"></td>
-                    <td><input type="text" name="add_admission_others_college_name" size="15" value="<?php echo $admission_others_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $$admission_others_passing_year ?>"></td>
-                    <td><input type="text" name="add_admission_others_per" size="15" value="<?php echo $admission_others_per ?>"></td>
-                    <td><input type="text" name="add_admission_others_subjects" size="15" value="<?php echo $admission_others_subjects ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_board_university" size="15" value="<?php echo $admission_others_board_university ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_college_name" size="15" value="<?php echo $admission_others_college_name ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $$admission_others_passing_year ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_per" size="15" value="<?php echo $admission_others_per ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_subjects" size="15" value="<?php echo $admission_others_subjects ?>"></td>
                   </tr>
                 </tbody>
               </table>
@@ -541,59 +541,59 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>10th Marksheet</label>
-                    <input type="file"   name="add_admission_tenth_marksheet" class="form-control">
+                    <input disabled type="file"   name="add_admission_tenth_marksheet" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>10th Passing Certificate</label>
-                    <input type="file" name="add_admission_tenth_passing_certificate" class="form-control">
+                    <input disabled type="file" name="add_admission_tenth_passing_certificate" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>12th Marksheet</label>
-                    <input type="file" name="add_admission_twelve_markesheet" class="form-control">
+                    <input disabled type="file" name="add_admission_twelve_markesheet" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode($admission_twelve_markesheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
 
                   <div class="col-4">
                     <label>12th Passing Certificate</label>
-                    <input type="file"  name="add_admission_twelve_passing_certificate" class="form-control">
+                    <input disabled type="file"  name="add_admission_twelve_passing_certificate" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_twelve_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>Graduation Marksheet</label>
-                    <input type="file" name="add_admission_graduation_marksheet" class="form-control">
+                    <input disabled type="file" name="add_admission_graduation_marksheet" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_graduation_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Recent Character Certificate</label>
-                    <input type="file" name="add_admission_recent_character_certificate" class="form-control">
+                    <input disabled type="file" name="add_admission_recent_character_certificate" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_recent_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
 
                   <div class="col-4">
                     <label>Other Certificate (If applicable)</label>
-                    <input type="file" name="add_admission_other_certificate" class="form-control">
+                    <input disabled type="file" name="add_admission_other_certificate" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_other_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Character Certificate (If applicable)</label>
-                    <input type="file" name="add_admission_character_certificate" class="form-control">
+                    <input disabled type="file" name="add_admission_character_certificate" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label> Student Signature </label>
-                    <input type="file" name="student_signature" class="form-control">
+                    <input disabled type="file" name="student_signature" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $student_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Parent Signature </label>
-                    <input type="file" name="parent_signature" class="form-control">
+                    <input disabled type="file" name="parent_signature" class="form-control">
                     <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $parent_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
@@ -623,38 +623,38 @@ $max_value = $result['id'] + 1;
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td><input type="text" name="add_admission_course1" size="15" value=""></td>
-                    <td><input type="text" name="add_admission_board_university1" size="15" value=""></td>
-                    <td><input type="text" name="add_admission_year_of_passing1" size="15" value=""></td>
-                    <td><input type="text" name="add_admission_percentage1" size="15" value=""></td>
+                    <td><input disabled type="text" name="add_admission_course1" size="15" value=""></td>
+                    <td><input disabled type="text" name="add_admission_board_university1" size="15" value=""></td>
+                    <td><input disabled type="text" name="add_admission_year_of_passing1" size="15" value=""></td>
+                    <td><input disabled type="text" name="add_admission_percentage1" size="15" value=""></td>
                   </tr>
                   <tr>
                     <td>2</td>
-                    <td><input type="text" name="add_admission_course2" size="15" value="<?php echo $admission_course2 ?>"></td>
-                    <td><input type="text" name="add_admission_board_university2" size="15" value="<?php echo $admission_board_university2 ?>"></td>
-                    <td><input type="text" name="add_admission_year_of_passing2" size="15" value="<?php echo $admission_year_of_passing2 ?>"></td>
-                    <td><input type="text" name="add_admission_percentage2" size="15" value="<?php echo $admission_percentage2 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_course2" size="15" value="<?php echo $admission_course2 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_board_university2" size="15" value="<?php echo $admission_board_university2 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_year_of_passing2" size="15" value="<?php echo $admission_year_of_passing2 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_percentage2" size="15" value="<?php echo $admission_percentage2 ?>"></td>
                   </tr>
                   <tr>
                     <td>3</td>
-                    <td><input type="text" name="add_admission_course3" size="15" value="<?php echo $admission_course3 ?>"></td>
-                    <td><input type="text" name="add_admission_board_university3" size="15" value="<?php echo $admission_board_university3 ?>"></td>
-                    <td><input type="text" name="add_admission_year_of_passing3" size="15" value="<?php echo $admission_year_of_passing3 ?>"></td>
-                    <td><input type="text" name="add_admission_percentage3" size="15" value="<?php echo $admission_percentage3 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_course3" size="15" value="<?php echo $admission_course3 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_board_university3" size="15" value="<?php echo $admission_board_university3 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_year_of_passing3" size="15" value="<?php echo $admission_year_of_passing3 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_percentage3" size="15" value="<?php echo $admission_percentage3 ?>"></td>
                   </tr>
                   <tr>
                     <td>4</td>
-                    <td><input type="text" name="add_admission_course4" size="15" value="<?php echo $admission_course4 ?>"></td>
-                    <td><input type="text" name="add_admission_board_university4" size="15" value="<?php echo $admission_board_university4 ?>"></td>
-                    <td><input type="text" name="add_admission_year_of_passing4" size="15" value="<?php echo $admission_year_of_passing4 ?>"></td>
-                    <td><input type="text" name="add_admission_percentage4" size="15" value="<?php echo $admission_percentage4 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_course4" size="15" value="<?php echo $admission_course4 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_board_university4" size="15" value="<?php echo $admission_board_university4 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_year_of_passing4" size="15" value="<?php echo $admission_year_of_passing4 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_percentage4" size="15" value="<?php echo $admission_percentage4 ?>"></td>
                   </tr>
                   <tr>
                     <td>5</td>
-                    <td><input type="text" name="add_admission_course5" size="15" value="<?php echo $admission_course5 ?>"></td>
-                    <td><input type="text" name="add_admission_board_university5" size="15" value="<?php echo $admission_board_university5 ?>"></td>
-                    <td><input type="text" name="add_admission_year_of_passing5" size="15" value="<?php echo $admission_year_of_passing5 ?>"></td>
-                    <td><input type="text" name="add_admission_percentage5" size="15" value="<?php echo $admission_percentage5 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_course5" size="15" value="<?php echo $admission_course5 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_board_university5" size="15" value="<?php echo $admission_board_university5 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_year_of_passing5" size="15" value="<?php echo $admission_year_of_passing5 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_percentage5" size="15" value="<?php echo $admission_percentage5 ?>"></td>
                   </tr>
                 </tbody>
               </table>
@@ -680,9 +680,9 @@ $max_value = $result['id'] + 1;
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td><input type="text" name="add_admission_name_of_org1" size="15"  value="<?php echo $admission_name_of_org1 ?>"></td>
-                    <td><input type="text" name="add_admission_designation1" size="15"  value="<?php echo $admission_designation1 ?>"></td>
-                    <td><input type="text" name="add_admission_duration1" size="15"  value="<?php echo $admission_duration1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_name_of_org1" size="15"  value="<?php echo $admission_name_of_org1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_designation1" size="15"  value="<?php echo $admission_designation1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_duration1" size="15"  value="<?php echo $admission_duration1 ?>"></td>
                   </tr>
                 </tbody>
               </table>
@@ -693,9 +693,9 @@ $max_value = $result['id'] + 1;
             <div id="loader_section"></div>
           </div>
           <div class="col-md-6">
-            <input type="hidden" name="action" value="add_admission" />
-            <button type="submit" id="add_admission_button" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-primary">Reset</button>
+            <input disabled type="hidden" name="action" value="add_admission" />
+          <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-primary">Go Back </a> 
+          <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-success">Approval </a> 
           </div>
           </form>
 
@@ -853,9 +853,3 @@ $max_value = $result['id'] + 1;
 </body>
 
 </html>
-<?php
-if(isset($_POST['submit'])){
-
-}
-
-?>

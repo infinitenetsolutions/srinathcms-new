@@ -50,9 +50,9 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                         <div style="border-collapse:collapse;display:table;width:100%;background-color:#ffffff">
                             <div class="m_7666453172668600852col" style="min-width:320px;max-width:720px;display:table-cell;vertical-align:top;width:720px">
                                 <div class="m_7666453172668600852col_cont" style="width:100%!important">
-                                    <div style="border-top:0px solid transparent;border-left:0px solid transparent;border-bottom:0px solid transparent;border-right:0px solid transparent;padding-top:20px;padding-bottom:20px;padding-right:0px;padding-left:0px">
+                                    <div style="border-top:0px solid transparent;border-left:0px solid transparent;border-bottom:0px solid transparent;border-right:0px solid transparent;padding-top:20px;padding-right:0px;padding-left:0px">
                                         <div align="center" class="m_7666453172668600852img-container m_7666453172668600852big" style="padding-right:0px;padding-left:0px">
-                                            <img align="center" alt="Image" border="0" src="http://65.2.38.42/srinath/images/logo1.png" style="text-decoration:none;height:auto;border:0;width:400px;max-width:100%;display:block" title="Image" width="400" class="CToWUd a6T" tabindex="0">
+                                            <img align="center" alt="Image" border="0" src="http://65.2.38.42/srinath/images/logo1.png" style="text-decoration:none;height:auto;border:0;width:200px;max-width:50%;display:block" title="Image" width="200" class="CToWUd a6T" tabindex="0">
                                             <div class="a6S" dir="ltr" style="opacity: 0.01; left: 516px; top: 123px;">
                                                 <div id=":1qe" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" role="button" tabindex="0" aria-label="Download attachment " data-tooltip-class="a1V" data-tooltip="Download">
                                                     <div class="akn">
@@ -64,25 +64,26 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                         <div style="color:#1c2951;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;line-height:2;padding-top:25px;padding-right:25px;padding-bottom:25px;padding-left:25px">
                                             <div style="font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;font-size:12px;line-height:2;color:#1c2951">
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Dear <b> '.$name.' </b>,</span></p>
-                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Hope you’re doing well! We re reaching out to you because we noticed that your  Propectus Number is '.$prosprectus_number.'</span></p>
-                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
+                                                <br>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Hope you’re doing well! We re reaching out to you because we noticed that your Propectus Number is <b> '.$prosprectus_number.' </b></span></p>
+                                            <br>
+                                                <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Course <b> '.$prospectus_course_name.'</b> <span></p>
-                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
+                                                <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Session <b>'.$session.' </b> </span></p>
-                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
-                                               
+                                                <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
+
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Email ID <b> '.$amount.' , </b> </span></p>
-                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Best regards,</span></p>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><strong><span style="font-size:14px">Srinath University</span></strong></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Click the Admission Apply Button and fill the form Enter the Propectus number and Your Email id  </span></p>
+
+                                                <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Best regards,</span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><strong><span style="font-size:14px">SRINATH UNIVERSITY</span></strong></p>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -107,15 +108,12 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <div align="center" style="padding-top:30px;padding-right:10px;padding-bottom:50px;padding-left:10px">
-                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank" ><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Apply Admission Form</strong></span></span></a>
+                                        <div align="center" style="padding-top:30px;padding-right:10px;padding-bottom:10px;padding-left:10px">
+                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Apply Admission Form</strong></span></span></a>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -136,12 +134,9 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                                 <p style="margin:0;font-size:10px;line-height:1.2;text-align:center;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:10px;color:#1c2951"><span style="text-decoration:underline;font-size:10px"><span style="color:#f94a29;text-decoration:underline;font-size:10px"><a href="mailto:info@srinathuniversity.in" rel="noopener" style="text-decoration:underline;color:#f94a29" target="_blank">Email Us</a></span></p>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -171,12 +166,9 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

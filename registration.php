@@ -3,7 +3,7 @@
 
     function change_course(acadmic) {
         console.log(acadmic)
-    var date=document.getElementById('date');
+    var date=document.getElementById('datechange');
 
 var year=new Date();
 
@@ -196,7 +196,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                     <?php } else {
 
                                                                     ?>
-                                                                        <option value=" " id="date" selected disabled="">-Select-</option>
+                                                                        <option value=" " id="datechange" selected>-Select-</option>
                                                                     <?php } ?>
 
                                               

@@ -2,18 +2,20 @@
     var year = 3;
 
     function change_course(acadmic) {
+        console.log(acadmic)
     var date=document.getElementById('date');
 
 var year=new Date();
 
         if (acadmic.startsWith("B") || acadmic.startsWith("P") || acadmic.startsWith("DIPLOMA")) {
          
-
-date.innerHTML=year.getFullYear()+"-"+(year.getFullYear()+3) ;
+     console.log(3)
+date.innerText=year.getFullYear()+"-"+(year.getFullYear()+3) ;
 date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+3) )
         }
         else{
-            date.innerHTML=year.getFullYear()+"-"+(year.getFullYear()+2) ;
+                 console.log(2)
+            date.innerText=year.getFullYear()+"-"+(year.getFullYear()+2) ;
 date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+2) )
         }
     }

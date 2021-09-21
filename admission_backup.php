@@ -832,16 +832,12 @@ $add_admission_others_subjects=$_POST['add_admission_others_subjects'];
 
   $result = mysqli_query($connection, $admission_query);
   if ($result) {
-   echo $update_education_details_query="UPDATE `tbl_admission` SET `admission_high_school_board_university`='$add_admission_high_school_board_university',`admission_high_school_college_name`='$add_admission_high_school_college_name',`admission_high_school_passing_year`='$add_admission_high_school_passing_year',`admission_high_school_per`='$add_admission_high_school_per',`admission_high_school_subjects`='$add_admission_high_school_subjects',`admission_intermediate_board_university`='$add_admission_intermediate_board_university',`admission_intermediate_college_name`='$add_admission_intermediate_college_name',`admission_intermediate_passing_year`='$add_admission_intermediate_passing_year',`admission_intermediate_per`='$add_admission_intermediate_per',`admission_intermediate_subjects`='$add_admission_intermediate_subjects',`admission_graduation_board_university`='$add_admission_graduation_board_university',`admission_graduation_college_name`='$add_admission_graduation_college_name',`admission_graduation_passing_year`='$add_admission_graduation_passing_year',`admission_graduation_per`='$add_admission_graduation_per',`admission_graduation_subjects`='$add_admission_graduation_subjects',`admission_post_graduation_board_university`='$add_admission_post_graduation_board_university',`admission_post_graduation_college_name`='$add_admission_post_graduation_college_name',`admission_post_graduation_others`='$add_admission_post_graduation_others',`admission_post_graduation_per`='$add_admission_post_graduation_per',`admission_post_graduation_subjects`='$add_admission_post_graduation_subjects',`admission_others_board_university`='$add_admission_others_board_university',`admission_others_college_name`='$add_admission_others_college_name',`admission_others_passing_year`='$add_admission_others_passing_year',`admission_others_per`='$add_admission_others_per',`admission_others_subjects`='$add_admission_others_subjects' WHERE `admission_emailid_student`='$prospectus_emailid'";
-    $update_education_details_result=mysqli_query($connection,$update_education_details_query);
-    if($update_education_details_result){
-      echo "<script>
-      window.location.replace('./thankyou.php')
-    </script>";
-    }
+  //  echo $update_education_details_query="UPDATE `tbl_admission` SET `admission_high_school_board_university`='$add_admission_high_school_board_university',`admission_high_school_college_name`='$add_admission_high_school_college_name',`admission_high_school_passing_year`='$add_admission_high_school_passing_year',`admission_high_school_per`='$add_admission_high_school_per',`admission_high_school_subjects`='$add_admission_high_school_subjects',`admission_intermediate_board_university`='$add_admission_intermediate_board_university',`admission_intermediate_college_name`='$add_admission_intermediate_college_name',`admission_intermediate_passing_year`='$add_admission_intermediate_passing_year',`admission_intermediate_per`='$add_admission_intermediate_per',`admission_intermediate_subjects`='$add_admission_intermediate_subjects',`admission_graduation_board_university`='$add_admission_graduation_board_university',`admission_graduation_college_name`='$add_admission_graduation_college_name',`admission_graduation_passing_year`='$add_admission_graduation_passing_year',`admission_graduation_per`='$add_admission_graduation_per',`admission_graduation_subjects`='$add_admission_graduation_subjects',`admission_post_graduation_board_university`='$add_admission_post_graduation_board_university',`admission_post_graduation_college_name`='$add_admission_post_graduation_college_name',`admission_post_graduation_others`='$add_admission_post_graduation_others',`admission_post_graduation_per`='$add_admission_post_graduation_per',`admission_post_graduation_subjects`='$add_admission_post_graduation_subjects',`admission_others_board_university`='$add_admission_others_board_university',`admission_others_college_name`='$add_admission_others_college_name',`admission_others_passing_year`='$add_admission_others_passing_year',`admission_others_per`='$add_admission_others_per',`admission_others_subjects`='$add_admission_others_subjects' WHERE `admission_emailid_student`='$prospectus_emailid'";
+  //   $update_education_details_result=mysqli_query($connection,$update_education_details_query);
+  //   if($update_education_details_result){
+  //     echo "<script>
+  //     window.location.replace('./thankyou.php')
+  //   </script>";
+    // }
   }
 }
-
-
-?>
-

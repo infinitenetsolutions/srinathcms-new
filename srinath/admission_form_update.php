@@ -106,10 +106,10 @@ $transactionid = $fetch_data['transactionid'];
 $easebuzzid = $fetch_data['easebuzzid'];
 $status = $fetch_data['status'];
 $stud_status = $fetch_data['stud_status'];
-$prospectus_number_query="SELECT `prospectus_no` FROM `tbl_prospectus` WHERE prospectus_emailid='$admission_emailid_student'";
-$prospectus_number_result=mysqli_query($con,$prospectus_number_query);
-$prospectus_number_data=mysqli_fetch_array($prospectus_number_result);
-$prospectus_number=$prospectus_number_data['prospectus_no'];
+$prospectus_number_query = "SELECT `prospectus_no` FROM `tbl_prospectus` WHERE prospectus_emailid='$admission_emailid_student'";
+$prospectus_number_result = mysqli_query($con, $prospectus_number_query);
+$prospectus_number_data = mysqli_fetch_array($prospectus_number_result);
+$prospectus_number = $prospectus_number_data['prospectus_no'];
 
 include "include/authentication.php";
 ?>
@@ -192,7 +192,7 @@ $max_value = $result['id'] + 1;
               </div>
             </div>
 
-            <form role="form" action="include/controller.php" method="POST" id="add_admission_form" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
@@ -360,23 +360,23 @@ $max_value = $result['id'] + 1;
                     </select>
                   </div>
 
-  
+
                   <div class="col-4">
                     <label>Image</label>
                     <input type="file" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
+                  </div>
+                  <?php if ($admission_profile_image != '') { ?>
+                    <div class="col-4">
+                      <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_profile_image) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                     </div>
-                    <?php if ($admission_profile_image !='') { ?>
-                      <div class="col-4">
-                        <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_profile_image ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
-                      </div> 
-                      <?php } else { ?>
+                  <?php } else { ?>
 
-                        <div class="col-4">
-                        <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
-                      </div> 
-                    <?php } ?>
-               
-             
+                    <div class="col-4">
+                      <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    </div>
+                  <?php } ?>
+
+
 
                 </div>
               </div>
@@ -392,7 +392,7 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>Residential Address</label>
-                    <textarea  id="address" name="add_admission_residential_address" class="form-control" style="height: 38px;"> <?php echo $admission_residential_address ?></textarea>
+                    <textarea id="address" name="add_admission_residential_address" class="form-control" style="height: 38px;"> <?php echo $admission_residential_address ?></textarea>
                   </div>
                   <div class="col-4">
                     <label>State</label>
@@ -404,7 +404,7 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>District</label>
-                    <input type="text" value="<?php echo $admission_district; ?>"  name="add_admission_district" class="form-control">
+                    <input type="text" value="<?php echo $admission_district; ?>" name="add_admission_district" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Pin Code</label>
@@ -521,7 +521,7 @@ $max_value = $result['id'] + 1;
                     <td>Others</td>
                     <td><input type="text" name="add_admission_others_board_university" size="15" value="<?php echo $admission_others_board_university ?>"></td>
                     <td><input type="text" name="add_admission_others_college_name" size="15" value="<?php echo $admission_others_college_name ?>"></td>
-                    <td><input type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $$admission_others_passing_year ?>"></td>
+                    <td><input type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $admission_others_passing_year ?>"></td>
                     <td><input type="text" name="add_admission_others_per" size="15" value="<?php echo $admission_others_per ?>"></td>
                     <td><input type="text" name="add_admission_others_subjects" size="15" value="<?php echo $admission_others_subjects ?>"></td>
                   </tr>
@@ -541,60 +541,60 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>10th Marksheet</label>
-                    <input type="file"   name="add_admission_tenth_marksheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <input type="file" name="add_admission_tenth_marksheet" class="form-control">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_tenth_marksheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>10th Passing Certificate</label>
                     <input type="file" name="add_admission_tenth_passing_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_tenth_passing_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>12th Marksheet</label>
                     <input type="file" name="add_admission_twelve_markesheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode($admission_twelve_markesheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_twelve_markesheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
 
                   <div class="col-4">
                     <label>12th Passing Certificate</label>
-                    <input type="file"  name="add_admission_twelve_passing_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_twelve_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <input type="file" name="add_admission_twelve_passing_certificate" class="form-control">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_twelve_passing_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>Graduation Marksheet</label>
                     <input type="file" name="add_admission_graduation_marksheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_graduation_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_graduation_marksheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Recent Character Certificate</label>
                     <input type="file" name="add_admission_recent_character_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_recent_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_recent_character_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
 
                   <div class="col-4">
                     <label>Other Certificate (If applicable)</label>
                     <input type="file" name="add_admission_other_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_other_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_other_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Character Certificate (If applicable)</label>
                     <input type="file" name="add_admission_character_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_character_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label> Student Signature </label>
                     <input type="file" name="student_signature" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $student_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($student_signature) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Parent Signature </label>
                     <input type="file" name="parent_signature" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $parent_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($parent_signature) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
 
@@ -680,9 +680,9 @@ $max_value = $result['id'] + 1;
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td><input type="text" name="add_admission_name_of_org1" size="15"  value="<?php echo $admission_name_of_org1 ?>"></td>
-                    <td><input type="text" name="add_admission_designation1" size="15"  value="<?php echo $admission_designation1 ?>"></td>
-                    <td><input type="text" name="add_admission_duration1" size="15"  value="<?php echo $admission_duration1 ?>"></td>
+                    <td><input type="text" name="add_admission_name_of_org1" size="15" value="<?php echo $admission_name_of_org1 ?>"></td>
+                    <td><input type="text" name="add_admission_designation1" size="15" value="<?php echo $admission_designation1 ?>"></td>
+                    <td><input type="text" name="add_admission_duration1" size="15" value="<?php echo $admission_duration1 ?>"></td>
                   </tr>
                 </tbody>
               </table>
@@ -693,9 +693,12 @@ $max_value = $result['id'] + 1;
             <div id="loader_section"></div>
           </div>
           <div class="col-md-6">
-            <input type="hidden" name="action" value="add_admission" />
-            <button type="submit" id="add_admission_button" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-primary">Reset</button>
+
+
+            <button type="submit" name="submit" id="add_admission_button" class="btn btn-primary">Submit</button>
+
+            <button type="Submit" class="btn btn-danger Send Mail">Not ProperData </button>
+
           </div>
           </form>
 
@@ -854,8 +857,151 @@ $max_value = $result['id'] + 1;
 
 </html>
 <?php
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
+  // echo "<pre>";
+  // print_r($_POST);
+  $admission_no = trim($_POST['add_admission_no']);
+  $admission_title = $_POST['add_admission_title'];
+  $admission_first_name = $_POST['add_admission_first_name'];
+  // $admission_middle_name = $_POST['admission_middle_name'];
+  // $admission_last_name = $_POST['admission_last_name'];
+  $admission_course_name = $_POST['add_admission_course_name'];
+  $admission_session = $_POST['add_admission_session'];
+  $admission_dob = $_POST['add_admission_dob'];
+  $admission_nationality = $_POST['add_admission_nationality'];
+  $admission_aadhar_no = $_POST['add_admission_aadhar_no'];
+  $date_of_admission = $_POST['add_date_of_admission'];
+  $admission_category = $_POST['add_admission_category'];
+  $admission_gender = $_POST['add_admission_gender'];
+  $admission_username = $_POST['add_admission_username'];
+  $admission_password = $_POST['add_admission_password'];
+  $admission_blood_group = $_POST['add_admission_blood_group'];
+  $admission_hostel = $_POST['add_admission_hostel'];
+  $admission_transport = $_POST['add_admission_transport'];
+  $admission_profile_image = $_POST['add_admission_profile_image'];
+  $student_signature = $_POST['student_signature'];
+  $parent_signature = $_POST['parent_signature'];
+  $admission_residential_address = $_POST['add_admission_residential_address'];
+  $admission_state = $_POST['add_admission_state'];
+  $admission_city = $_POST['add_admission_city'];
+  $admission_district = $_POST['add_admission_district'];
+  $admission_pin_code  = $_POST['add_admission_pin_code'];
+  $admission_home_landlineno = $_POST['add_admission_home_landlineno'];
+  $admission_mobile_student = $_POST['add_admission_mobile_student'];
+  $admission_father_phoneno = $_POST['add_admission_father_phoneno'];
+  $admission_emailid_father = $_POST['add_admission_emailid_father'];
+  $admission_emailid_student = $_POST['add_admission_emailid_student'];
+  $admission_father_name = $_POST['add_admission_father_name'];
+  $admission_father_whatsappno = $_POST['add_admission_father_whatsappno'];
+  $admission_mother_name = $_POST['add_admission_mother_name'];
+  $admission_high_school_board_university  = $_POST['add_admission_high_school_board_university'];
+  $admission_high_school_college_name = $_POST['add_admission_high_school_college_name'];
+  $admission_high_school_passing_year = $_POST['add_admission_high_school_passing_year'];
+  $admission_high_school_per = $_POST['add_admission_high_school_per'];
+  $admission_high_school_subjects = $_POST['add_admission_high_school_subjects'];
+  $admission_intermediate_board_university = $_POST['add_admission_intermediate_board_university'];
+  $admission_intermediate_college_name = $_POST['add_admission_intermediate_college_name'];
+  $admission_intermediate_passing_year = $_POST['add_admission_intermediate_passing_year'];
+  $admission_intermediate_per = $_POST['add_admission_intermediate_per'];
+  $admission_intermediate_subjects = $_POST['add_admission_intermediate_subjects'];
+  $admission_graduation_board_university = $_POST['add_admission_graduation_board_university'];
+  $admission_graduation_college_name = $_POST['add_admission_graduation_college_name'];
+  $admission_graduation_passing_year = $_POST['add_admission_graduation_passing_year'];
+  $admission_graduation_per = $_POST['add_admission_graduation_per'];
+  $admission_graduation_subjects = $_POST['add_admission_graduation_subjects'];
+  $admission_post_graduation_board_university = $_POST['add_admission_post_graduation_board_university'];
+  $admission_post_graduation_college_name = $_POST['add_admission_post_graduation_college_name'];
+  $admission_post_graduation_others = $_POST['add_admission_post_graduation_others'];
+  $admission_post_graduation_per = $_POST['add_admission_post_graduation_per'];
+  $admission_post_graduation_subjects = $_POST['add_admission_post_graduation_subjects'];
+  $admission_others_board_university = $_POST['add_admission_others_board_university'];
+  $admission_others_college_name = $_POST['add_admission_others_college_name'];
+  $admission_others_passing_year = $_POST['add_admission_others_passing_year'];
+  $admission_others_per = $_POST['add_admission_others_per'];
+  $admission_others_subjects = $_POST['add_admission_others_subjects'];
 
+
+  $tenth_marksheet = addslashes(file_get_contents($_FILES['add_admission_tenth_marksheet']['tmp_name']));
+  if (!empty($tenth_marksheet)) {
+
+    $admission_tenth_marksheet = $tenth_marksheet;
+  }
+  $tenth_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_tenth_passing_certificate']['tmp_name']));
+
+  if (!empty($tenth_passing_certificate)) {
+    $admission_tenth_passing_certificate = $tenth_passing_certificate;
+  }
+  $twelve_markesheet = addslashes(file_get_contents($_FILES['add_admission_twelve_markesheet']['tmp_name']));
+  if (!empty($twelve_markesheet)) {
+    $admission_twelve_markesheet = $twelve_markesheet;
+  }
+  $twelve_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_twelve_passing_certificate']['tmp_name']));
+  if (!empty($twelve_passing_certificate)) {
+    $admission_twelve_passing_certificate = $twelve_passing_certificate;
+  }
+  $graduation_marksheet = addslashes(file_get_contents($_FILES['add_admission_graduation_marksheet']['tmp_name']));
+  if (!empty($graduation_marksheet)) {
+    $admission_graduation_marksheet = $graduation_marksheet;
+  }
+  $recent_character_certificate = addslashes(file_get_contents($_FILES['add_admission_recent_character_certificate']['tmp_name']));
+  if (!empty($graduation_marksheet)) {
+    $admission_graduation_marksheet = $graduation_marksheet;
+  }
+  $other_certificate = addslashes(file_get_contents($_FILES['add_admission_other_certificate']['tmp_name']));
+  if (!empty($other_certificate)) {
+    $admission_other_certificate = $other_certificate;
+  }
+  $character_certificate = addslashes(file_get_contents($_FILES['add_admission_character_certificate']['tmp_name']));
+  if (!empty($tenth_marksheet)) {
+    $admission_character_certificate = $character_certificate;
+  }
+
+  // $admission_tenth_marksheet = $_POST['add_admission_tenth_marksheet'];
+  // $admission_tenth_passing_certificate = $_POST['add_admission_tenth_passing_certificate'];
+  // $admission_twelve_markesheet = $_POST['add_admission_twelve_markesheet'];
+  // $admission_twelve_passing_certificate = $_POST['add_admission_twelve_passing_certificate'];
+  // $admission_graduation_marksheet = $_POST['add_admission_graduation_marksheet'];
+  // $admission_recent_character_certificate = $_POST['add_admission_recent_character_certificate'];
+  // $admission_other_certificate = $_POST['add_admission_other_certificate'];
+  // $admission_character_certificate = $_POST['add_admission_character_certificate'];
+  $admission_board_university1 = $_POST['add_admission_board_university1'];
+  $admission_year_of_passing1 = $_POST['add_admission_year_of_passing1'];
+  $admission_percentage1 = $_POST['add_admission_percentage1'];
+  $admission_course2 = $_POST['add_admission_course2'];
+  $admission_board_university2 = $_POST['add_admission_board_university2'];
+  $admission_year_of_passing2 = $_POST['add_admission_year_of_passing2'];
+  $admission_percentage2 = $_POST['add_admission_percentage2'];
+  $admission_course3 = $_POST['add_admission_course3'];
+  $admission_board_university3 = $_POST['add_admission_board_university3'];
+  $admission_year_of_passing3 = $_POST['add_admission_year_of_passing3'];
+  $admission_percentage3 = $_POST['add_admission_percentage3'];
+  $admission_course4 = $_POST['add_admission_course4'];
+  $admission_board_university4 = $_POST['add_admission_board_university4'];
+  $admission_year_of_passing4 = $_POST['add_admission_year_of_passing4'];
+  $admission_percentage4 = $_POST['add_admission_percentage4'];
+  $admission_course5 = $_POST['add_admission_course5'];
+  $admission_board_university5  = $_POST['add_admission_board_university5'];
+  $admission_year_of_passing5 = $_POST['add_admission_year_of_passing5'];
+  $admission_percentage5 = $_POST['add_admission_percentage5'];
+  $admission_name_of_org1  = $_POST['add_admission_name_of_org1'];
+  $admission_designation1 = $_POST['add_admission_designation1'];
+  $admission_duration1 = $_POST['add_admission_duration1'];
+  $post_at = $_POST['post_at'];
+  $datetime  = $_POST['date&time'];
+  $type = $_POST['type'];
+  $approval = $_POST['approval'];
+  $transactionid = $_POST['transactionid'];
+  $easebuzzid = $_POST['easebuzzid'];
+  $status = $_POST['status'];
+  $stud_status = $_POST['stud_status'];
+
+  // echo $admission_tenth_passing_certificate;
+
+  $update_admission_query = "UPDATE `tbl_admission` SET `admission_form_no`='$admission_form_no',`admission_no`='$admission_no',`admission_title`='$admission_title',`admission_first_name`='$admission_first_name',`admission_course_name`='$admission_course_name',`admission_session`='$admission_session',`admission_dob`='$admission_dob',`admission_nationality`='$admission_nationality',`admission_aadhar_no`='$admission_aadhar_no',`date_of_admission`='$date_of_admission',`admission_category`='$admission_category',`admission_gender`='$admission_gender',`admission_username`='$admission_username',`admission_password`='$admission_password',`admission_blood_group`='$admission_blood_group',`admission_hostel`='$admission_hostel',`admission_transport`='$admission_transport',`admission_profile_image`='$admission_profile_image',`student_signature`='$student_signature',`parent_signature`='$parent_signature',`admission_residential_address`='$admission_residential_address',`admission_state`='$admission_state',`admission_city`='$admission_city',`admission_district`='$admission_district',`admission_pin_code`='$admission_pin_code',`admission_home_landlineno`='$admission_home_landlineno',`admission_mobile_student`='$admission_mobile_student',`admission_father_phoneno`='$admission_father_phoneno',`admission_emailid_father`='$admission_emailid_father',`admission_emailid_student`='$admission_emailid_student',`admission_father_name`='$admission_father_name',`admission_father_whatsappno`='$admission_father_whatsappno',`admission_mother_name`='$admission_mother_name',`admission_high_school_board_university`='$admission_high_school_board_university',`admission_high_school_college_name`='$admission_high_school_college_name',`admission_high_school_passing_year`='$admission_high_school_passing_year',`admission_high_school_per`='$admission_high_school_per',`admission_high_school_subjects`='$admission_high_school_subjects',`admission_intermediate_board_university`='$admission_intermediate_board_university',`admission_intermediate_college_name`='$admission_intermediate_college_name',`admission_intermediate_passing_year`='$admission_intermediate_passing_year',`admission_intermediate_per`='$admission_intermediate_per',`admission_intermediate_subjects`='$admission_intermediate_subjects',`admission_graduation_board_university`='$admission_graduation_board_university',`admission_graduation_college_name`='$admission_graduation_college_name',`admission_graduation_passing_year`='$admission_graduation_passing_year',`admission_graduation_per`='$admission_graduation_per',`admission_graduation_subjects`='$admission_graduation_subjects',`admission_post_graduation_board_university`='$admission_post_graduation_board_university',`admission_post_graduation_college_name`='$admission_post_graduation_college_name',`admission_post_graduation_others`='$admission_post_graduation_others',`admission_post_graduation_per`='$admission_post_graduation_per',`admission_post_graduation_subjects`='$admission_post_graduation_subjects',`admission_others_board_university`='$admission_others_board_university',`admission_others_college_name`='$admission_others_college_name',`admission_others_passing_year`='$admission_others_passing_year',`admission_others_per`='$admission_others_per',`admission_others_subjects`='$admission_others_subjects',`admission_tenth_marksheet`='$admission_tenth_marksheet',`admission_tenth_passing_certificate`='$admission_tenth_passing_certificate',`admission_twelve_markesheet`='$admission_twelve_markesheet',`admission_twelve_passing_certificate`='$admission_twelve_passing_certificate',`admission_graduation_marksheet`='$admission_graduation_marksheet',`admission_recent_character_certificate`='$admission_recent_character_certificate',`admission_other_certificate`='$admission_other_certificate',`admission_character_certificate`='$admission_character_certificate',`admission_course1`='$admission_course_name',`admission_board_university1`='$admission_board_university1',`admission_year_of_passing1`='$admission_year_of_passing1',`admission_percentage1`='$admission_percentage1',`admission_course2`='$admission_course2',`admission_board_university2`='$admission_board_university2',`admission_year_of_passing2`='$admission_year_of_passing2',`admission_percentage2`='$admission_percentage2',`admission_course3`='$admission_course3',`admission_board_university3`='$admission_board_university3',`admission_year_of_passing3`='$admission_year_of_passing3',`admission_percentage3`='$admission_percentage3',`admission_course4`='$admission_course4',`admission_board_university4`='$admission_board_university4',`admission_year_of_passing4`='$admission_year_of_passing4',`admission_percentage4`='$admission_percentage4',`admission_course5`='$admission_course5',`admission_board_university5`='$admission_board_university5',`admission_year_of_passing5`='$admission_year_of_passing5',`admission_percentage5`='$admission_percentage5',`admission_name_of_org1`='$admission_name_of_org1',`admission_designation1`='$admission_designation1',`admission_duration1`='$admission_duration1' WHERE `admission_id`='$admission_id'";
+  $update_admission_result = mysqli_query($con, $update_admission_query);
+  if ($update_admission_result) {
+    echo "data successfully update";
+  }
 }
 
 ?>

@@ -521,7 +521,7 @@ $max_value = $result['id'] + 1;
                     <td>Others</td>
                     <td><input disabled type="text" name="add_admission_others_board_university" size="15" value="<?php echo $admission_others_board_university ?>"></td>
                     <td><input disabled type="text" name="add_admission_others_college_name" size="15" value="<?php echo $admission_others_college_name ?>"></td>
-                    <td><input disabled type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $$admission_others_passing_year ?>"></td>
+                    <td><input disabled type="text" name="add_admission_others_passing_year" size="15" value="<?php echo $admission_others_passing_year ?>"></td>
                     <td><input disabled type="text" name="add_admission_others_per" size="15" value="<?php echo $admission_others_per ?>"></td>
                     <td><input disabled type="text" name="add_admission_others_subjects" size="15" value="<?php echo $admission_others_subjects ?>"></td>
                   </tr>
@@ -695,7 +695,7 @@ $max_value = $result['id'] + 1;
           <div class="col-md-6">
             <input disabled type="hidden" name="action" value="add_admission" />
           <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-primary">Go Back </a> 
-          <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-success">Approval </a> 
+          <a href="../srinath/nsuniv-admission-enquiry.php" title="Send user id and password for login student and pay the first payment" class="btn btn-success">Send UserId and Password  </a> 
           </div>
           </form>
 

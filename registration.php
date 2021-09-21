@@ -196,11 +196,11 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                     <?php } else {
 
                                                                     ?>
-                                                                        <option value=" " selected disabled="">-Select-</option>
+                                                                        <option value=" " id="date" selected disabled="">-Select-</option>
                                                                     <?php } ?>
 
                                               
-                                                                    <option style="color:#ff3c00" value="" id="date"></option>
+<!--                                                                     <option style="color:#ff3c00" value="" ></option> -->
                                                                    
                                                                 
                                                                   

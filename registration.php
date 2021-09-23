@@ -2,11 +2,21 @@
     var year = 3;
 
     function change_course(acadmic) {
-        console.log(acadmic);
+        console.log(acadmic)
+    var date=document.getElementById('datechange');
+
+var year=new Date();
 
         if (acadmic.startsWith("B") || acadmic.startsWith("P") || acadmic.startsWith("DIPLOMA")) {
-            year = 3;
-
+         
+     console.log(3)
+date.innerText=year.getFullYear()+"-"+(year.getFullYear()+3) ;
+date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+3) )
+        }
+        else{
+                 console.log(2)
+            date.innerText=year.getFullYear()+"-"+(year.getFullYear()+2) ;
+date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+2) )
         }
     }
 </script>
@@ -191,6 +201,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                     <?php } else {
 
                                                                     ?>
+<<<<<<< HEAD
                                                                         <option value="" selected disabled="">-Select-</option>
                                                                     <?php } ?>
 
@@ -209,6 +220,25 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                                                                                 echo " - ";
                                                                                                                                 echo date('Y', strtotime('+2 year')); ?></option>
 
+=======
+                                                                     <option value=" " disabled="">-Select-</option>
+                                                                    <?php } ?>
+
+                                                                  <option value="<?php echo date('Y');
+                                                                                echo " - ";
+                                                                                echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
+                                                                                                                            echo " - ";
+                                                                                                                            echo date('Y', strtotime('+2 year')); ?></option>
+                                                                <option value="<?php echo date('Y');
+                                                                                echo " - ";
+                                                                                echo date('Y', strtotime('+4 year')); ?>"><?php echo date('Y');
+                                                                                                                            echo " - ";
+                                                                                                                            echo date('Y', strtotime('+3 year')); ?></option>
+                                                                   
+                                                                
+                                                                  
+                                                                                                      
+>>>>>>> a52fbcf687522399f78e8db0d2726d0e2996433f
                                                                 </select>
                                                             </div>
                                                             <div class="error" id="transportation_err"></div>

@@ -3406,13 +3406,36 @@ if (isset($_GET["action"])) {
     // Student fee start
     if ($_GET["action"] == "fetch_student_fee_details") {
         $studentRegistrationNo = $_POST["studentRegistrationNo"];
-        if (!empty($studentRegistrationNo)) {
-            $sql = "SELECT *
-                        FROM `tbl_admission`
-                        INNER JOIN `tbl_university_details` ON `tbl_admission`.`admission_session` = `tbl_university_details`.`university_details_id`
-                        INNER JOIN `tbl_course` ON `tbl_admission`.`admission_course_name` = `tbl_course`.`course_id`
-                        WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
-                        ";
+     // getting the session id
+     $session_qury = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$studentRegistrationNo'";
+     $result_session = mysqli_query($con, $session_qury);
+     $session_data = mysqli_fetch_array($result_session);
+     $admission_sesssion = trim($session_data['admission_session']);
+     $course_name = trim($session_data['admission_course_name']);
+     // checking the condition admission session
+     if ($admission_sesssion == '01/04/ 2021 -31/03/ 2024') {
+         $admission_sesssion = 3;
+     } elseif ($admission_sesssion == '01/04/ 2021 -31/03/ 2023') {
+         $admission_sesssion = 2;
+     } else {
+         $admission_sesssion = 2;
+     }
+     // getting the se
+    $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
+     $course_id_result = mysqli_query($con, $course_id_query);
+     $course_data = mysqli_fetch_array($course_id_result);
+     $course_id = $course_data['course_id'];
+
+     if (!empty($studentRegistrationNo)) {
+
+
+          $sql = "SELECT *
+                 FROM `tbl_admission`
+                 INNER JOIN `tbl_university_details` ON '$admission_sesssion' = `tbl_university_details`.`university_details_id`
+                 INNER JOIN `tbl_course` ON '$course_id' = `tbl_course`.`course_id`
+                 WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
+                 ";
+
             $result = $con->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
@@ -3505,8 +3528,9 @@ if (isset($_GET["action"])) {
                                     <?php
                                     if (!empty($row["admission_profile_image"])) {
                                     ?>
-                                        <img class="profile-user-img " src="images/student_images/<?php echo $row["admission_profile_image"]; ?>" alt="Student profile picture">
-                                    <?php
+                                            <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
+
+<?php
                                     } else if (strtolower($row["admission_gender"]) == "female") {
                                     ?>
                                         <img class="profile-user-img img-fluid img-circle" src="images/womenIcon.png" alt="Student profile picture">

@@ -25,7 +25,7 @@ date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+2) )
 <?php
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
-$_SESSION['email']="rohit83013@gmail.com";
+// $_SESSION['email']="rohit83013@gmail.com";
 if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     $email = trim($_SESSION['email']);
     // data retring from tbl_course_type table

@@ -1,3 +1,5 @@
+
+
 <?php
 $page_no = "5";
 $page_no_inside = "5_1";
@@ -106,10 +108,10 @@ $transactionid = $fetch_data['transactionid'];
 $easebuzzid = $fetch_data['easebuzzid'];
 $status = $fetch_data['status'];
 $stud_status = $fetch_data['stud_status'];
-$prospectus_number_query="SELECT `prospectus_no` FROM `tbl_prospectus` WHERE prospectus_emailid='$admission_emailid_student'";
-$prospectus_number_result=mysqli_query($con,$prospectus_number_query);
-$prospectus_number_data=mysqli_fetch_array($prospectus_number_result);
-$prospectus_number=$prospectus_number_data['prospectus_no'];
+$prospectus_number_query = "SELECT `prospectus_no` FROM `tbl_prospectus` WHERE prospectus_emailid='$admission_emailid_student'";
+$prospectus_number_result = mysqli_query($con, $prospectus_number_query);
+$prospectus_number_data = mysqli_fetch_array($prospectus_number_result);
+$prospectus_number = $prospectus_number_data['prospectus_no'];
 
 include "include/authentication.php";
 ?>
@@ -192,7 +194,7 @@ $max_value = $result['id'] + 1;
               </div>
             </div>
 
-            <form role="form" action="include/controller.php" method="POST" id="add_admission_form" enctype="multipart/form-data">
+            <form role="form" method="POST" id="add_admission_form" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
@@ -214,11 +216,11 @@ $max_value = $result['id'] + 1;
 
                   <div class="col-4">
                     <label>Title</label>
-                    <select disabled name="add_admission_title" class="form-control">
+                    <select required disabled name="add_admission_title" class="form-control">
                       <?php if ($admission_title != '') { ?>
                         <option value="<?php echo $admission_title ?>"><?php echo $admission_title; ?></option>
                       <?php } else { ?>
-                        <option value="0">Select</option>
+                        <option >Select</option>
                       <?php } ?>
                       <option value="Master">Master</option>
                       <option value="Miss">Miss</option>
@@ -360,23 +362,23 @@ $max_value = $result['id'] + 1;
                     </select>
                   </div>
 
-  
+
                   <div class="col-4">
                     <label>Image</label>
                     <input disabled type="file" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
+                  </div>
+                  <?php if ($admission_profile_image != '') { ?>
+                    <div class="col-4">
+                      <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_profile_image) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                     </div>
-                    <?php if ($admission_profile_image !='') { ?>
-                      <div class="col-4">
-                        <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_profile_image ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
-                      </div> 
-                      <?php } else { ?>
+                  <?php } else { ?>
 
-                        <div class="col-4">
-                        <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
-                      </div> 
-                    <?php } ?>
-               
-             
+                    <div class="col-4">
+                      <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    </div>
+                  <?php } ?>
+
+
 
                 </div>
               </div>
@@ -392,7 +394,7 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>Residential Address</label>
-                    <textarea  id="address" name="add_admission_residential_address" class="form-control" style="height: 38px;"> <?php echo $admission_residential_address ?></textarea>
+                    <textarea id="address" name="add_admission_residential_address" class="form-control" style="height: 38px;"> <?php echo $admission_residential_address ?></textarea>
                   </div>
                   <div class="col-4">
                     <label>State</label>
@@ -404,7 +406,7 @@ $max_value = $result['id'] + 1;
                   </div>
                   <div class="col-4">
                     <label>District</label>
-                    <input disabled type="text" value="<?php echo $admission_district; ?>"  name="add_admission_district" class="form-control">
+                    <input disabled type="text" value="<?php echo $admission_district; ?>" name="add_admission_district" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Pin Code</label>
@@ -541,60 +543,60 @@ $max_value = $result['id'] + 1;
                 <div class="row">
                   <div class="col-4">
                     <label>10th Marksheet</label>
-                    <input disabled type="file"   name="add_admission_tenth_marksheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <input disabled type="file" name="add_admission_tenth_marksheet" class="form-control">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_tenth_marksheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>10th Passing Certificate</label>
                     <input disabled type="file" name="add_admission_tenth_passing_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_tenth_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_tenth_passing_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>12th Marksheet</label>
                     <input disabled type="file" name="add_admission_twelve_markesheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode($admission_twelve_markesheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_twelve_markesheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
 
                   <div class="col-4">
                     <label>12th Passing Certificate</label>
-                    <input disabled type="file"  name="add_admission_twelve_passing_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_twelve_passing_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <input disabled type="file" name="add_admission_twelve_passing_certificate" class="form-control">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_twelve_passing_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
                   </div>
                   <div class="col-4">
                     <label>Graduation Marksheet</label>
                     <input disabled type="file" name="add_admission_graduation_marksheet" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_graduation_marksheet ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_graduation_marksheet) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Recent Character Certificate</label>
                     <input disabled type="file" name="add_admission_recent_character_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_recent_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_recent_character_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
 
                   <div class="col-4">
                     <label>Other Certificate (If applicable)</label>
                     <input disabled type="file" name="add_admission_other_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_other_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_other_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Character Certificate (If applicable)</label>
                     <input disabled type="file" name="add_admission_character_certificate" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $admission_character_certificate ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($admission_character_certificate) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label> Student Signature </label>
                     <input disabled type="file" name="student_signature" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $student_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($student_signature) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
                   <div class="col-4">
                     <label>Parent Signature </label>
                     <input disabled type="file" name="parent_signature" class="form-control">
-                    <img src=<?php  echo  ' "data:image/jpeg;base64,'.base64_encode( $parent_signature ).'" '?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
+                    <img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($parent_signature) . '" ' ?> id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
 
                   </div>
 
@@ -680,9 +682,9 @@ $max_value = $result['id'] + 1;
                 <tbody>
                   <tr>
                     <td>1</td>
-                    <td><input disabled type="text" name="add_admission_name_of_org1" size="15"  value="<?php echo $admission_name_of_org1 ?>"></td>
-                    <td><input disabled type="text" name="add_admission_designation1" size="15"  value="<?php echo $admission_designation1 ?>"></td>
-                    <td><input disabled type="text" name="add_admission_duration1" size="15"  value="<?php echo $admission_duration1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_name_of_org1" size="15" value="<?php echo $admission_name_of_org1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_designation1" size="15" value="<?php echo $admission_designation1 ?>"></td>
+                    <td><input disabled type="text" name="add_admission_duration1" size="15" value="<?php echo $admission_duration1 ?>"></td>
                   </tr>
                 </tbody>
               </table>
@@ -694,11 +696,37 @@ $max_value = $result['id'] + 1;
           </div>
           <div class="col-md-6">
             <input disabled type="hidden" name="action" value="add_admission" />
-          <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-primary">Go Back </a> 
-          <a href="../srinath/nsuniv-admission-enquiry.php" title="Send user id and password for login student and pay the first payment" class="btn btn-success">Send UserId and Password  </a> 
+            <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-primary">Go Back </a>
+            <button type="submit" name="addmission_sucess" title="Send user id and password for login student and pay the first payment" class="btn btn-success">Send UserId and Password </button>
+            <button type="button" title="if the data not availble according to requirment the click here" class="btn btn-danger Send Mail" data-toggle="modal" data-target="#exampleModal">Not ProperData </button>
           </div>
           </form>
+          <!-- Button trigger modal -->
 
+
+          <!-- Modal -->
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <form method="POST">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Data Not Properly</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <textarea placeholder="Write the massage what's Problem " name="massage" id="" cols="55" rows="5"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="sendmassage" class="btn btn-success">Send Massage</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
       <!-- /.content -->
@@ -805,7 +833,7 @@ $max_value = $result['id'] + 1;
 
     })
   </script>
-  <script>
+  <!-- <script>
     $(document).ready(function() {
       $('#form_no').on('keyup', function(event) {
         $.ajax({
@@ -849,7 +877,34 @@ $max_value = $result['id'] + 1;
         event.preventDefault();
       });
     });
-  </script>
+  </script> -->
 </body>
 
 </html>
+<?php
+// here i have to send the mail if the user not fill the admisssion data properly
+if (isset($_POST['sendmassage'])) {
+  include '../Backend/send_massage_for_admission_update.php';
+  $massage = $_POST['massage'];
+  $email = $admission_emailid_student;
+  $name = $admission_first_name;
+  $course = $admission_course_name;
+echo $sendmail=sendmassageforupdate($massage, $email, $name, $course, $admission_session);
+  $update_student_status = "UPDATE `tbl_admission` SET `stud_status`='0' WHERE `admission_emailid_student`='$email'";
+$update_student_status_result=mysqli_query($con,$update_student_status);
+if($update_student_status_result){
+
+}
+}
+// here i have to send the mail if the data is properly availble 
+if(isset($_POST['addmission_sucess'])){
+  include '../Backend/send_massage_for_admission_conformetion.php';
+  $massage = $_POST['massage'];
+  $email = $admission_emailid_student;
+  $name = $admission_first_name;
+  $course = $admission_course_name;
+  $massage="Congratulations You are Selected in the Srinath University please Pay the first payment and get Admission number ";
+ $sendmail=sendmassageforupdate($massage, $email, $name, $course, $admission_session);
+}
+
+?>

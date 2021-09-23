@@ -8,7 +8,7 @@ if (isset($_SESSION["logger_type1"]) && isset($_SESSION["logger_username1"]) && 
 ?>
 
 <body>
-    <title> NSU Login Page</title>
+    <title> SRINATH UNIVERSITY LOGIN PAGE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">

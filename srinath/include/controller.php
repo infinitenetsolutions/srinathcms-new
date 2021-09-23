@@ -939,7 +939,7 @@ if (isset($_POST["action"])) {
 
                 function sendsmsGET($mobileNumber, $senderId, $routeId, $message, $serverUrl, $authKey)
                 {
-                    $senderId = 'NSUJSR';
+                    $senderId = 'SUJSR';
                     $routeId1 = 1;
                     $getData = 'mobileNos=' . $mobileNumber . '&message=' . urlencode($message) . '&senderId=' . $senderId . '&routeId=' . $routeId1;
                     //API URL
@@ -962,7 +962,7 @@ if (isset($_POST["action"])) {
                 }
 
                 $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards NSU";
-                sendsmsGET($mobile, '', '', $student_msg);
+                sendsmsGET($mobile, $senderId, $routeId, $student_msg, $serverUrl, $authKey);
 
                 echo "<script>
                                 alert('Prospectus details added successfully!!!');
@@ -1893,13 +1893,13 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "update_prospectus_enquiry") {
         $prosprectus_number = $_POST["prosprectus_number"];
         $prosprectus_id = $_POST["prosprectus_id"];
-        $add_prospectus_email=  $_SESSION['prospectus_emailid'];
+        $add_prospectus_email =  $_SESSION['prospectus_emailid'];
         $prospectus_course_name = $_POST["prospectus_course_name"];
-     
+
         $prospectus_session = $_SESSION["prospectus_session"];
         $prospectus_rate = $_POST["prospectus_rate"];
         $post_at = $_POST["post_at"];
-        $name=$_SESSION['prospectus_applicant_name'];
+        $name = $_SESSION['prospectus_applicant_name'];
         include '../../Backend/sendprospectus.php';
         if (!empty($prosprectus_number && $prosprectus_id)) {
             // $objectSecond->select("tbl_prospectus");
@@ -1914,9 +1914,9 @@ if (isset($_POST["action"])) {
                 echo  $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";
                 $check = $con->query($update_query);
                 // $check = $objectSecond->update("tbl_prospectus", "`prospectus_no` = '$prosprectus_number'  WHERE `id`='$prosprectus_id'");
-               
+
                 if ($check == 1) {
-                  echo   prospectus_mail($add_prospectus_email,$prosprectus_number,$prospectus_rate,$prospectus_course_name,$prospectus_session,$name);
+                    echo   prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus_rate, $prospectus_course_name, $prospectus_session, $name);
                     $date = date_create()->format('yy-m-d');
                     $objectSecond->sql = "";
                     $objectSecond->insert("tbl_income", "(`id`,`reg_no`,`course`,`academic_year` ,`received_date`, `particulars`, `amount`, `payment_mode`, `check_no`, `bank_name`,`income_from`,`post_at`) 

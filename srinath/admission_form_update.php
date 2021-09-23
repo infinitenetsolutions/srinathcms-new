@@ -697,7 +697,7 @@ $max_value = $result['id'] + 1;
 
             <button type="submit" name="submit" id="add_admission_button" class="btn btn-primary">Submit</button>
 
-            <button type="Submit" class="btn btn-danger Send Mail">Not ProperData </button>
+        
 
           </div>
           </form>

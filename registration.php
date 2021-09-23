@@ -162,7 +162,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                         <?php if ($prospectus_course_name != '') { ?>
                                                                             <option value=" <?php echo $prospectus_course_name ?>" selected><?php echo $prospectus_course_name; ?></option>
                                                                         <?php } else { ?>
-                                                                            <option selected disabled="">Choose your option</option>
+                                                                            <option selected disabled value="">Choose your option</option>
                                                                         <?php  } ?> ?>
                                                                         <?php while ($row = mysqli_fetch_array($course_name_result)) {
                                                                         ?>
@@ -181,29 +181,34 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                 $startdate = date("Y");
                                                                 ?>
                                                                 </svg><select required id="transportation" name="session" tabindex="-1">
-                                                                    <?php if ($prospectus_session != '') { ?>
+                                                                    <?php if ($prospectus_session != '') {
+                                                                        $prospectus_session = str_replace('-', '/', $prospectus_session);
+                                                                        $first = explode('/', $prospectus_session)[2];
+                                                                        $second = explode('/', $prospectus_session)[5];
+                                                                        $prospectus_session = $first . '-' . $second;
+                                                                    ?>
                                                                         <option value=" <?php echo $prospectus_session ?>" selected><?php echo $prospectus_session; ?></option>
                                                                     <?php } else {
 
                                                                     ?>
-                                                                        <option value=" " selected disabled="">-Select-</option>
+                                                                        <option value="" selected disabled="">-Select-</option>
                                                                     <?php } ?>
 
-                                              
+
                                                                     <option value="<?php echo date('Y');
                                                                                     echo " - ";
                                                                                     echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
                                                                                                                                 echo " - ";
                                                                                                                                 echo date('Y', strtotime('+3 year')); ?></option>
-                                                                   
-                                                                
-                                                                  
+
+
+
                                                                     <option value="<?php echo date('Y');
                                                                                     echo " - ";
                                                                                     echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
                                                                                                                                 echo " - ";
                                                                                                                                 echo date('Y', strtotime('+2 year')); ?></option>
-                                                               
+
                                                                 </select>
                                                             </div>
                                                             <div class="error" id="transportation_err"></div>
@@ -267,7 +272,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                     <?php if ($prospectus_gender != '') { ?>
                                                                         <option id="gender" selected value="<?php echo $prospectus_gender; ?>"><?php echo $prospectus_gender ?></option>
                                                                     <?php } else { ?>
-                                                                        <option value="" selected disabled="">-Select-</option>
+                                                                        <option selected disabled="">-Select-</option>
                                                                     <?php } ?>
                                                                     <option id="gender" value="Male">Male</option>
                                                                     <option id="gender" value="Female">Female</option>
@@ -469,7 +474,13 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     if (isset($_POST['submit'])) {
 
         //     // course Details
-        $prospectus_session = $_POST['session'];
+        // i have to write this code due to in the erp support full full date and year du to i have wirted this code
+        $str = $_POST['session'];
+        $prospectus_seession1 = '01/04/'.explode("-", $str)[0];
+        $prospectus_seession2 = trim('31/03/'.explode("-", $str)[1]);
+
+        echo $prospectus_session = trim($prospectus_seession1 .'-'.$prospectus_seession2);
+
         $prospectus_course_name = $_POST['course'];
 
         //     // persnal details
@@ -510,7 +521,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         //     $status=
 
         $_SESSION['course_name'] = $prospectus_course_name;
-        $_SESSION['course_session'] = $prospectus_session;
+        $_SESSION['course_session'] = $str;
         $_SESSION['name'] = $prospectus_applicant_name;
         $_SESSION['email'] = $prospectus_emailid;
         $_SESSION['phone'] = $mobile;

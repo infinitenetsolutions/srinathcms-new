@@ -22,7 +22,7 @@
 		        //Login Section Start With Ajax
         if($_POST["action"] == "student_login"){
             $student_login_username = $_POST["student_login_username"];
-            $student_login_password = $_POST["student_login_password"];
+            $student_login_password = md5($_POST["student_login_password"]);
             if(!empty($student_login_username && $student_login_password)){
                 $sql = "SELECT * FROM `tbl_admission`
                         WHERE `admission_username` = '$student_login_username' && `admission_password` = '$student_login_password'

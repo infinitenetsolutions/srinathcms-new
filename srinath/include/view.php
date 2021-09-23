@@ -3424,7 +3424,7 @@ if (isset($_GET["action"])) {
     $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
      $course_id_result = mysqli_query($con, $course_id_query);
      $course_data = mysqli_fetch_array($course_id_result);
-     $course_id = $course_data['course_id'];
+     $course_id_data = $course_data['course_id'];
 
      if (!empty($studentRegistrationNo)) {
 
@@ -3432,7 +3432,7 @@ if (isset($_GET["action"])) {
           $sql = "SELECT *
                  FROM `tbl_admission`
                  INNER JOIN `tbl_university_details` ON '$admission_sesssion' = `tbl_university_details`.`university_details_id`
-                 INNER JOIN `tbl_course` ON '$course_id' = `tbl_course`.`course_id`
+                 INNER JOIN `tbl_course` ON '$course_id_data' = `tbl_course`.`course_id`
                  WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
                  ";
 
@@ -3459,12 +3459,12 @@ if (isset($_GET["action"])) {
                 if (strtolower($row["admission_hostel"]) == "yes")
                     $sqlTblFee = "SELECT *
                                      FROM `tbl_fee`
-                                     WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' ORDER BY `fee_particulars` ASC
+                                     WHERE `status` = '$visible' AND `course_id` = '$course_id_data' AND `fee_academic_year` = '$admission_sesssion' ORDER BY `fee_particulars` ASC
                                      ";
                 else
                     $sqlTblFee = "SELECT *
                                      FROM `tbl_fee`
-                                     WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' AND `fee_particulars` NOT IN ('Caution fee','CAUTION FEE','Caution Fee','Caution fee','HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
+                                     WHERE `status` = '$visible' AND `course_id` = '$course_id_data' AND `fee_academic_year` = '$admission_sesssion' AND `fee_particulars` NOT IN ('Caution fee','CAUTION FEE','Caution Fee','Caution fee','HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
                                      ";
                 $resultTblFee = $con->query($sqlTblFee);
                 if ($resultTblFee->num_rows > 0)
@@ -3539,7 +3539,7 @@ if (isset($_GET["action"])) {
                                     <?php } ?>
                                 </div>
 
-                                <h3 class="profile-username text-center"><?php echo $row["admission_first_name"] . " " . $row["admission_last_name"]; ?></h3>
+                                <h3 class="profile-username text-center"><?php echo $row["admission_first_name"]; ?></h3>
                                 <?php
                                 $completeSessionStart = explode("-", $row["university_details_academic_start_date"]);
                                 $completeSessionEnd = explode("-", $row["university_details_academic_end_date"]);

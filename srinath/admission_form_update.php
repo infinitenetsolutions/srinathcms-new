@@ -921,40 +921,40 @@ if (isset($_POST['submit'])) {
   $admission_others_subjects = $_POST['add_admission_others_subjects'];
 
 
-  $tenth_marksheet = addslashes(file_get_contents($_FILES['add_admission_tenth_marksheet']['tmp_name']));
-  if (!empty($tenth_marksheet)) {
+  // $tenth_marksheet = addslashes(file_get_contents($_FILES['add_admission_tenth_marksheet']['tmp_name']));
+  // if (!empty($tenth_marksheet)) {
 
-    $admission_tenth_marksheet = $tenth_marksheet;
-  }
-  $tenth_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_tenth_passing_certificate']['tmp_name']));
+  //   $admission_tenth_marksheet = $tenth_marksheet;
+  // }
+  // $tenth_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_tenth_passing_certificate']['tmp_name']));
 
-  if (!empty($tenth_passing_certificate)) {
-    $admission_tenth_passing_certificate = $tenth_passing_certificate;
-  }
-  $twelve_markesheet = addslashes(file_get_contents($_FILES['add_admission_twelve_markesheet']['tmp_name']));
-  if (!empty($twelve_markesheet)) {
-    $admission_twelve_markesheet = $twelve_markesheet;
-  }
-  $twelve_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_twelve_passing_certificate']['tmp_name']));
-  if (!empty($twelve_passing_certificate)) {
-    $admission_twelve_passing_certificate = $twelve_passing_certificate;
-  }
-  $graduation_marksheet = addslashes(file_get_contents($_FILES['add_admission_graduation_marksheet']['tmp_name']));
-  if (!empty($graduation_marksheet)) {
-    $admission_graduation_marksheet = $graduation_marksheet;
-  }
-  $recent_character_certificate = addslashes(file_get_contents($_FILES['add_admission_recent_character_certificate']['tmp_name']));
-  if (!empty($graduation_marksheet)) {
-    $admission_graduation_marksheet = $graduation_marksheet;
-  }
-  $other_certificate = addslashes(file_get_contents($_FILES['add_admission_other_certificate']['tmp_name']));
-  if (!empty($other_certificate)) {
-    $admission_other_certificate = $other_certificate;
-  }
-  $character_certificate = addslashes(file_get_contents($_FILES['add_admission_character_certificate']['tmp_name']));
-  if (!empty($tenth_marksheet)) {
-    $admission_character_certificate = $character_certificate;
-  }
+  // if (!empty($tenth_passing_certificate)) {
+  //   $admission_tenth_passing_certificate = $tenth_passing_certificate;
+  // }
+  // $twelve_markesheet = addslashes(file_get_contents($_FILES['add_admission_twelve_markesheet']['tmp_name']));
+  // if (!empty($twelve_markesheet)) {
+  //   $admission_twelve_markesheet = $twelve_markesheet;
+  // }
+  // $twelve_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_twelve_passing_certificate']['tmp_name']));
+  // if (!empty($twelve_passing_certificate)) {
+  //   $admission_twelve_passing_certificate = $twelve_passing_certificate;
+  // }
+  // $graduation_marksheet = addslashes(file_get_contents($_FILES['add_admission_graduation_marksheet']['tmp_name']));
+  // if (!empty($graduation_marksheet)) {
+  //   $admission_graduation_marksheet = $graduation_marksheet;
+  // }
+  // $recent_character_certificate = addslashes(file_get_contents($_FILES['add_admission_recent_character_certificate']['tmp_name']));
+  // if (!empty($graduation_marksheet)) {
+  //   $admission_graduation_marksheet = $graduation_marksheet;
+  // }
+  // $other_certificate = addslashes(file_get_contents($_FILES['add_admission_other_certificate']['tmp_name']));
+  // if (!empty($other_certificate)) {
+  //   $admission_other_certificate = $other_certificate;
+  // }
+  // $character_certificate = addslashes(file_get_contents($_FILES['add_admission_character_certificate']['tmp_name']));
+  // if (!empty($tenth_marksheet)) {
+  //   $admission_character_certificate = $character_certificate;
+  // }
 
   // $admission_tenth_marksheet = $_POST['add_admission_tenth_marksheet'];
   // $admission_tenth_passing_certificate = $_POST['add_admission_tenth_passing_certificate'];

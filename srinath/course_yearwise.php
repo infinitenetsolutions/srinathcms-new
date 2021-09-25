@@ -103,7 +103,7 @@
                                                     $result_course = $con->query($sql_course);
                                                     while($row_course = $result_course->fetch_assoc()){
                                                 ?>
-                                                <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
+                                                <option value="<?php echo $row_course["course_name"]; ?>"><?php echo $row_course["course_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -120,7 +120,7 @@
                                                     $result_ac_year = $con->query($sql_ac_year);
                                                     while($row_ac_year = $result_ac_year->fetch_assoc()){
                                                 ?>
-                                                <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"]))." to ".date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?></option>
+                                                <option value="<?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"]))."-".date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?>"><?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"]))." to ".date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

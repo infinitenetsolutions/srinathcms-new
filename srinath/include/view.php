@@ -3257,7 +3257,7 @@ if (isset($_GET["action"])) {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label>Image</label>
-                                                            <img src="images/student_images/<?php echo $row["admission_profile_image"]; ?>" style="height:100%">
+                                                            <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">

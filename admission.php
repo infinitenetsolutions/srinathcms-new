@@ -835,6 +835,8 @@ if (isset($_POST['add_admission_button'])) {
   // $middle_name=explode(" ","$prospectus_applicant_name")[1];
   $visible = $status;
   $visible_stud = 1;
+  $prospectus_session=str_replace(' ','',$prospectus_session);
+  $prospectus_course_name=str_replace(' ','',$prospectus_course_name);
   $last_name = explode(" ", "$prospectus_applicant_name")[1];
   $add_admission_password = md5($add_admission_password);
   $admission_query = "INSERT INTO `tbl_admission`(`admission_form_no`, `admission_title`, `admission_first_name`,`admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`admission_category`, `admission_gender`, `admission_username`, `admission_password`, `admission_blood_group`,`admission_profile_image`,`student_signature`,`parent_signature`, `admission_residential_address`, `admission_state`, `admission_city`, `admission_district`, `admission_pin_code`, `admission_mobile_student`, `admission_emailid_student`, `admission_father_name`, `admission_mother_name`,`admission_tenth_marksheet`, `admission_tenth_passing_certificate`, `admission_twelve_markesheet`, `admission_twelve_passing_certificate`, `admission_graduation_marksheet`, `admission_recent_character_certificate`, `admission_other_certificate`, `admission_character_certificate`,`status`, `stud_status`) VALUES 

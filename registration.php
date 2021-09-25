@@ -25,6 +25,7 @@ date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+2) )
 <?php
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
+// $_SESSION['email']="rohit83013@gmail.com";
 if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
     $email = trim($_SESSION['email']);
     // data retring from tbl_course_type table
@@ -201,7 +202,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                     <?php } else {
 
                                                                     ?>
-<<<<<<< HEAD
+
                                                                         <option value="" selected disabled="">-Select-</option>
                                                                     <?php } ?>
 
@@ -220,25 +221,6 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                                                                                                 echo " - ";
                                                                                                                                 echo date('Y', strtotime('+2 year')); ?></option>
 
-=======
-                                                                     <option value=" " disabled="">-Select-</option>
-                                                                    <?php } ?>
-
-                                                                  <option value="<?php echo date('Y');
-                                                                                echo " - ";
-                                                                                echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
-                                                                                                                            echo " - ";
-                                                                                                                            echo date('Y', strtotime('+2 year')); ?></option>
-                                                                <option value="<?php echo date('Y');
-                                                                                echo " - ";
-                                                                                echo date('Y', strtotime('+4 year')); ?>"><?php echo date('Y');
-                                                                                                                            echo " - ";
-                                                                                                                            echo date('Y', strtotime('+3 year')); ?></option>
-                                                                   
-                                                                
-                                                                  
-                                                                                                      
->>>>>>> a52fbcf687522399f78e8db0d2726d0e2996433f
                                                                 </select>
                                                             </div>
                                                             <div class="error" id="transportation_err"></div>

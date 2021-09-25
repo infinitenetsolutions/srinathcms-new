@@ -3,8 +3,9 @@ if (empty(session_start()))
     session_start();
 //DataBase Connectivity
 include "include/config.php";
-if (isset($_SESSION["logger_type1"]) && isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"]))
+if (isset($_SESSION["logger_type1"]) && isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])){
     echo "<script> location.replace('dashboard'); </script>";
+}else{
 ?>
 
 <body>
@@ -114,3 +115,4 @@ if (isset($_SESSION["logger_type1"]) && isset($_SESSION["logger_username1"]) && 
 </body>
 
 </html>
+<?php } ?>

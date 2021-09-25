@@ -1,3 +1,4 @@
+
 <style>
     #example_filter {
         float: right !important;
@@ -39,6 +40,31 @@ if (empty(session_start()))
 //DataBase Connectivity
 include "config.php";
 include "db_class.php";
+// this method is getting all the data of course id and course session id
+
+ function seesion_coursse_id($studentRegistrationNo){
+    include "config.php";
+    $session_qury = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$studentRegistrationNo'";
+    $result_session = mysqli_query($con, $session_qury);
+    $session_data = mysqli_fetch_array($result_session);
+    $admission_sesssion = trim($session_data['admission_session']);
+    $course_name = trim($session_data['admission_course_name']);
+    // checking the condition admission session
+    if ($admission_sesssion == '01/04/'.date('Y').'-31/03/'.date('Y', strtotime('+3 year'))) {
+        $admission_sesssion = 3;
+    } elseif ($admission_sesssion =='01/04/'.date('Y').'-31/03/'.date('Y', strtotime('+3 year'))) {
+        $admission_sesssion = 2;
+    } else {
+        $admission_sesssion = 4;
+    }
+    // getting the session id
+   $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
+    $course_id_result = mysqli_query($con, $course_id_query);
+    $course_data = mysqli_fetch_array($course_id_result);
+    $course_id_data = $course_data['course_id'];
+    $arr=array('session_id'=>$admission_sesssion,'course_id'=>$course_id_data);
+     return $arr;
+} 
 // Setting Time Zone in India Standard Timing
 $random_number = rand(111111, 999999); // Random Number
 $s_no = 1; //Serial Number
@@ -3413,14 +3439,14 @@ if (isset($_GET["action"])) {
      $admission_sesssion = trim($session_data['admission_session']);
      $course_name = trim($session_data['admission_course_name']);
      // checking the condition admission session
-     if ($admission_sesssion == '01/04/ 2021 -31/03/ 2024') {
+     if ($admission_sesssion == '01/04/2021-31/03/'.date('Y', strtotime('+3 year'))) {
          $admission_sesssion = 3;
-     } elseif ($admission_sesssion == '01/04/ 2021 -31/03/ 2023') {
+     } elseif ($admission_sesssion == '01/04/2021-31/03/'.date('Y', strtotime('+2 year'))) {
          $admission_sesssion = 2;
      } else {
-         $admission_sesssion = 2;
+         $admission_sesssion = 4;
      }
-     // getting the se
+     // getting the session id
     $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
      $course_id_result = mysqli_query($con, $course_id_query);
      $course_data = mysqli_fetch_array($course_id_result);
@@ -8984,19 +9010,23 @@ if (isset($_GET["action"])) {
                 $result = $con->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+ $id_data=seesion_coursse_id($row['admission_id']);
+echo $course_id_data=$id_data['course_id'];
+echo $admission_session=$id_data['session_id'];
+                     
                 ?>
                         <tr>
                             <td><?php echo $s_no; ?></td>
                             <?php
                             $sql_course = "SELECT * FROM `tbl_course`
-                                                       WHERE `status` = '$visible' && `course_id` = '" . $row["admission_course_name"] . "';
+                                                       WHERE `status` = '$visible' && `course_id` = '$course_id_data';
                                                        ";
                             $result_course = $con->query($sql_course);
                             $row_course = $result_course->fetch_assoc();
                             ?>
                             <td><?php echo $row["admission_id"] ?></td>
                             <td><?php echo $row_course["course_name"] ?></td>
-                            <td><?php echo $row["admission_first_name"] ?> <?php echo $row["admission_middle_name"] ?> <?php echo $row["admission_last_name"] ?></td>
+                            <td><?php echo $row["admission_first_name"] ?></td>
                             <td>
                                 <table>
                                     <thead>
@@ -9027,16 +9057,18 @@ if (isset($_GET["action"])) {
                                         $arrayPerticular = array();
                                         $arrayTblFee = array();
                                         $objTblFee = "";
+
                                         //Checking If Hostel If Available Or Not
+                                      
                                         if (strtolower($row["admission_hostel"]) == "yes")
                                             $sqlTblFee = "SELECT *
                                                                  FROM `tbl_fee`
-                                                                 WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' ORDER BY `fee_particulars` ASC
+                                                                 WHERE `status` = '$visible' AND `course_id` = '$course_id_data' AND `fee_academic_year` = '$admission_session' ORDER BY `fee_particulars` ASC
                                                                  ";
                                         else
-                                            $sqlTblFee = "SELECT *
+                                         $sqlTblFee = "SELECT *
                                                                  FROM `tbl_fee`
-                                                                 WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' AND `fee_particulars` NOT IN ('HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
+                                                                 WHERE `status` = '$visible' AND `course_id` = '$course_id_data' AND `fee_academic_year` = '$admission_session' AND `fee_particulars` NOT IN ('HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
                                                                  ";
                                         $resultTblFee = $con->query($sqlTblFee);
                                         if ($resultTblFee->num_rows > 0)
@@ -9116,7 +9148,7 @@ if (isset($_GET["action"])) {
                                                     <?php
                                                     $sqlTblFeeStatus = "SELECT *
                                                                                          FROM `tbl_fee_status`
-                                                                                         WHERE `particular_id` = '" . $arrayTblFeeUpdate->fee_id . "' AND `admission_id` = '" . $row["admission_id"] . "' AND `course_id` = '" . $row["admission_course_name"] . "' AND `academic_year` = '" . $row["admission_session"] . "'
+                                                                                         WHERE `particular_id` = '" . $arrayTblFeeUpdate->fee_id . "' AND `admission_id` = '" . $row["admission_id"] . "' AND `course_id` = '$course_id_data' AND `academic_year` = '$admission_session'
                                                                                          ";
                                                     $resultTblFeeStatus = $con->query($sqlTblFeeStatus);
                                                     if ($resultTblFeeStatus->num_rows > 0) {

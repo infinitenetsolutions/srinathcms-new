@@ -24,42 +24,30 @@ if (isset($_GET["action"])) {
     if ($_GET["action"] == "fetch_student_fee_details") {
         $studentRegistrationNo = $_POST["studentRegistrationNo"];
         // getting the session id
-        $session_qury = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$studentRegistrationNo'";
-        $result_session = mysqli_query($con, $session_qury);
-        $session_data = mysqli_fetch_array($result_session);
-        $admission_sesssion = trim($session_data['admission_session']);
-        $course_name = trim($session_data['admission_course_name']);
-        // checking the condition admission session
-        if ($admission_sesssion == '01/04/ 2021 -31/03/ 2024') {
-            $admission_sesssion = 3;
-        } elseif ($admission_sesssion == '01/04/ 2021 -31/03/ 2023') {
-            $admission_sesssion = 2;
-        } else {
-            $admission_sesssion = 2;
-        }
+
         // getting the se
-        $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
-        $course_id_result = mysqli_query($con, $course_id_query);
-        $course_data = mysqli_fetch_array($course_id_result);
-        $course_id = $course_data['course_id'];
+        // $course_id_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
+        // $course_id_result = mysqli_query($con, $course_id_query);
+        // $course_data = mysqli_fetch_array($course_id_result);
+        // $course_id = $course_data['course_id'];
 
         if (!empty($studentRegistrationNo)) {
 
 
-            $sql = "SELECT *
-                    FROM `tbl_admission`
-                    INNER JOIN `tbl_university_details` ON '$admission_sesssion' = `tbl_university_details`.`university_details_id`
-                    INNER JOIN `tbl_course` ON '$course_id' = `tbl_course`.`course_id`
-                    WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
-                    ";
+            //   "SELECT *
+            //         FROM `tbl_admission`
+            //         INNER JOIN `tbl_university_details` ON '".$row["admission_session"]."' = `tbl_university_details`.`university_details_id`
+            //         INNER JOIN `tbl_course` ON '".$row["admission_course_name"]."' = `tbl_course`.`course_id`
+            //         WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
+            //         ";
 
             // for back perpuse only
-            // "SELECT *
-            // FROM `tbl_admission`
-            // INNER JOIN `tbl_university_details` ON `tbl_admission`.`admission_session` = `tbl_university_details`.`university_details_id`
-            // INNER JOIN `tbl_course` ON `tbl_admission`.`admission_course_name` = `tbl_course`.`course_id`
-            // WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
-            // ";
+            $sql =   "SELECT *
+            FROM `tbl_admission`
+            INNER JOIN `tbl_university_details` ON `tbl_admission`.`admission_session` = `tbl_university_details`.`university_details_id`
+            INNER JOIN `tbl_course` ON `tbl_admission`.`admission_course_name` = `tbl_course`.`course_id`
+            WHERE `tbl_admission`.`admission_id` = '$studentRegistrationNo' && `tbl_admission`.`status` = '$visible' && `tbl_course`.`status` = '$visible' && `tbl_university_details`.`status` = '$visible'
+            ";
 
             $result = $con->query($sql);
             if ($result->num_rows > 0) {
@@ -82,19 +70,15 @@ if (isset($_GET["action"])) {
                 $objTblFee = "";
                 //Checking If Hostel If Available Or Not
                 if (strtolower($row["admission_hostel"]) == "yes")
-                    $sqlTblFee = "SELECT *
-                                 FROM `tbl_fee`
-                                 WHERE `status` = '$visible' AND `course_id` = '$course_id' AND `fee_academic_year` = '$admission_sesssion' ORDER BY `fee_particulars` ASC
-                                 ";
-                else
-                    //$sqlTblFee = "SELECT *
-                    //FROM `tbl_fee`
-                    //WHERE `status` = '$visible' AND `course_id` = '".$row["admission_course_name"]."' AND `fee_academic_year` = '".$row["admission_session"]."' AND `fee_particulars` NOT IN ('HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees') ORDER BY `fee_particulars` ASC
-                    //  ";
                 $sqlTblFee = "SELECT *
-                                 FROM `tbl_fee`
-                                 WHERE `status` = '$visible' AND `course_id` = '$course_id' AND `fee_academic_year` = '$admission_sesssion' AND `fee_particulars` NOT IN ('HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
-                                 ";
+                FROM `tbl_fee`
+                WHERE `status` = '$visible' AND `course_id` = '".$row["admission_course_name"]."' AND `fee_academic_year` = '".$row["admission_session"]."' ORDER BY `fee_particulars` ASC
+                ";
+                else
+             $sqlTblFee = "SELECT *
+                FROM `tbl_fee`
+                WHERE `status` = '$visible' AND `course_id` = '".$row["admission_course_name"]."' AND `fee_academic_year` = '".$row["admission_session"]."' AND `fee_particulars` NOT IN ('Caution fee','CAUTION FEE','Caution Fee','Caution fee','HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
+                ";
                 $resultTblFee = $con->query($sqlTblFee);
                 if ($resultTblFee->num_rows > 0)
                     while ($rowTblFee = $resultTblFee->fetch_assoc()) {

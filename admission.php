@@ -153,7 +153,7 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
                       <div class="col-4">
                         <label>Title</label>
                         <select required name="add_admission_title" class="form-control">
-                          <option >Select</option>
+                          <option>Select</option>
                           <option value="Master">Master</option>
                           <option value="Miss">Miss</option>
                           <option value="Mr">Mr</option>
@@ -196,7 +196,10 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
                       <div class="col-4">
                         <label>Nationality</label>
-                        <input required type="text" name="add_admission_nationality" class="form-control">
+                        <select required  name="add_admission_nationality" class="form-control">
+                      <option value="India">INDIAN</option>  
+                      <option value="Nri">NRI</option>  
+                      </select>
                       </div>
 
                       <div class="col-4">
@@ -835,10 +838,17 @@ if (isset($_POST['add_admission_button'])) {
   // $middle_name=explode(" ","$prospectus_applicant_name")[1];
   $visible = $status;
   $visible_stud = 1;
-  $prospectus_session=str_replace(' ','',$prospectus_session);
-  $prospectus_course_name=str_replace(' ','',$prospectus_course_name);
+  $prospectus_session = str_replace(' ', '', $prospectus_session);
+  $prospectus_course_name = str_replace(' ', '', $prospectus_course_name);
   $last_name = explode(" ", "$prospectus_applicant_name")[1];
   $add_admission_password = md5($add_admission_password);
+  // retring the data of course 
+  $course_name = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
+  $course_name_result = mysqli_query($connection, $course_name);
+  $row_data = mysqli_fetch_array($course_name_result);
+  $prospectus_course_name = $row_data['course_id'];
+  $prospectus_session = $row_data['course_duration'];
+
   $admission_query = "INSERT INTO `tbl_admission`(`admission_form_no`, `admission_title`, `admission_first_name`,`admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`admission_category`, `admission_gender`, `admission_username`, `admission_password`, `admission_blood_group`,`admission_profile_image`,`student_signature`,`parent_signature`, `admission_residential_address`, `admission_state`, `admission_city`, `admission_district`, `admission_pin_code`, `admission_mobile_student`, `admission_emailid_student`, `admission_father_name`, `admission_mother_name`,`admission_tenth_marksheet`, `admission_tenth_passing_certificate`, `admission_twelve_markesheet`, `admission_twelve_passing_certificate`, `admission_graduation_marksheet`, `admission_recent_character_certificate`, `admission_other_certificate`, `admission_character_certificate`,`status`, `stud_status`) VALUES 
                                                  ('$admission_form_no','$add_admission_title','$prospectus_applicant_name','$last_name','$prospectus_course_name','$prospectus_session','$prospectus_dob','$add_admission_nationality','$add_admission_aadhar_no','$add_admission_category','$prospectus_gender','$prospectus_emailid','$add_admission_password','$add_admission_blood_group','$add_admission_profile_image','$student_sing','$parent_sing','$prospectus_address','$prospectus_state', '$prospectus_city',  '$prospectus_city','$prospectus_postal_code','$mobile', '$prospectus_emailid', '$prospectus_father_name', '$prospectus_mother_name','$add_admission_tenth_marksheet', '$add_admission_tenth_passing_certificate',      '$add_admission_twelve_markesheet','$add_admission_twelve_passing_certificate','$add_admission_graduation_marksheet', '$add_admission_recent_character_certificate','$add_admission_other_certificate','$add_admission_character_certificate','$visible','$visible_stud')";
 

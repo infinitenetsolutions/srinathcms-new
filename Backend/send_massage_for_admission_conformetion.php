@@ -40,7 +40,7 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Congratulations Admission Mail Conformation';
+    $mail->Subject = 'Congratulations Admission Mail Confirmation';
     $mail->Body    = '<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;vertical-align:top;background-color:#fff;border-spacing:0;min-width:320px;table-layout:fixed;width:100%" valign="top" width="100%">
     <tbody>
         <tr style="border-collapse:collapse;vertical-align:top" valign="top">

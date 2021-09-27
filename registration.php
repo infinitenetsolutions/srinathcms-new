@@ -3,20 +3,19 @@
 
     function change_course(acadmic) {
         console.log(acadmic)
-    var date=document.getElementById('datechange');
+        var date = document.getElementById('datechange');
 
-var year=new Date();
+        var year = new Date();
 
         if (acadmic.startsWith("B") || acadmic.startsWith("P") || acadmic.startsWith("DIPLOMA")) {
-         
-     console.log(3)
-date.innerText=year.getFullYear()+"-"+(year.getFullYear()+3) ;
-date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+3) )
-        }
-        else{
-                 console.log(2)
-            date.innerText=year.getFullYear()+"-"+(year.getFullYear()+2) ;
-date.setAttribute('value',year.getFullYear()+"-"+(year.getFullYear()+2) )
+
+            console.log(3)
+            date.innerText = year.getFullYear() + "-" + (year.getFullYear() + 3);
+            date.setAttribute('value', year.getFullYear() + "-" + (year.getFullYear() + 3))
+        } else {
+            console.log(2)
+            date.innerText = year.getFullYear() + "-" + (year.getFullYear() + 2);
+            date.setAttribute('value', year.getFullYear() + "-" + (year.getFullYear() + 2))
         }
     }
 </script>
@@ -189,37 +188,51 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                             <div class="select-wrapper">
                                                                 <?php
                                                                 //    gettiting the starting date for input the session in 
-                                                                $startdate = date("Y");
+                                                                // $startdate = date("Y");
                                                                 ?>
-                                                                </svg><select required id="transportation" name="session" tabindex="-1">
-                                                                    <?php if ($prospectus_session != '') {
+                                                                </svg><select disabled required id="transportation" name="session" tabindex="-1">
+                                                                    <?php
+                                                                    if ($prospectus_session != '') {
                                                                         $prospectus_session = str_replace('-', '/', $prospectus_session);
                                                                         $first = explode('/', $prospectus_session)[2];
                                                                         $second = explode('/', $prospectus_session)[5];
                                                                         $prospectus_session = $first . '-' . $second;
-                                                                    ?>
-                                                                        <option value=" <?php echo $prospectus_session ?>" selected><?php echo $prospectus_session; ?></option>
-                                                                    <?php } else {
 
                                                                     ?>
+                                                                        <option value=" <?php
+                                                                                        echo $prospectus_session ?>" selected><?php
+                                                                                                                                echo $prospectus_session; ?></option>
+                                                                    <?php
+                                                                    }
 
-                                                                        <option value="" selected disabled="">-Select-</option>
-                                                                    <?php } ?>
+                                                                    ?>
+
+                                                                    <!-- <option value="" selected disabled="">-Select-</option> -->
+                                                                    <?php //} 
+                                                                    ?>
 
 
-                                                                    <option value="<?php echo date('Y');
-                                                                                    echo " - ";
-                                                                                    echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
-                                                                                                                                echo " - ";
-                                                                                                                                echo date('Y', strtotime('+3 year')); ?></option>
+                                                                    <option value="<?php
+                                                                                    // echo date('Y');
+                                                                                    //                 echo " - ";
+                                                                                    //                 echo date('Y', strtotime('+3 year')); 
+                                                                                    ?>"><?php
+                                                                                        //echo date('Y');
+                                                                                        //                                                             echo " - ";
+                                                                                        //                                                             echo date('Y', strtotime('+3 year')); 
+                                                                                        ?></option>
 
 
 
-                                                                    <option value="<?php echo date('Y');
-                                                                                    echo " - ";
-                                                                                    echo date('Y', strtotime('+3 year')); ?>"><?php echo date('Y');
-                                                                                                                                echo " - ";
-                                                                                                                                echo date('Y', strtotime('+2 year')); ?></option>
+                                                                    <option value="<?php
+                                                                                    // echo date('Y');
+                                                                                    //                 echo " - ";
+                                                                                    //                 echo date('Y', strtotime('+3 year')); 
+                                                                                    ?>"><?php
+                                                                                        //echo date('Y');
+                                                                                        //                                                             echo " - ";
+                                                                                        //                                                             echo date('Y', strtotime('+2 year')); 
+                                                                                        ?></option>
 
                                                                 </select>
                                                             </div>
@@ -487,13 +500,23 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
         //     // course Details
         // i have to write this code due to in the erp support full full date and year du to i have wirted this code
-        $str = $_POST['session'];
-        $prospectus_seession1 = '01/04/'.explode("-", $str)[0];
-        $prospectus_seession2 = trim('31/03/'.explode("-", $str)[1]);
-
-        echo $prospectus_session = trim($prospectus_seession1 .'-'.$prospectus_seession2);
-
         $prospectus_course_name = $_POST['course'];
+
+        $prospectus_session_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
+        $prospectus_session_result = mysqli_query($connection, $prospectus_session_query);
+        $prospectus_session_data = mysqli_fetch_array($prospectus_session_result);
+        $course_duration = $prospectus_session_data['course_duration'];
+        $str = '';
+        if ($course_duration == 2) {
+            $str = date('Y') . "-" . date('Y', strtotime('+2 year'));
+        } else {
+            $str = date('Y') . "-" . date('Y', strtotime('+3 year'));
+        }
+
+        $prospectus_seession1 = '01/04/' . explode("-", $str)[0];
+        $prospectus_seession2 = trim('31/03/' . explode("-", $str)[1]);
+
+        $prospectus_session = trim($prospectus_seession1 . '-' . $prospectus_seession2);
 
         //     // persnal details
 

@@ -40,7 +40,7 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Admission Form Error Conformation';
+    $mail->Subject = 'Admission Form Error Confirmation';
     $mail->Body    = '<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;vertical-align:top;background-color:#fff;border-spacing:0;min-width:320px;table-layout:fixed;width:100%" valign="top" width="100%">
     <tbody>
         <tr style="border-collapse:collapse;vertical-align:top" valign="top">
@@ -107,7 +107,7 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
                                             </tbody>
                                         </table>
                                         <div align="center" style="padding-top:30px;padding-right:10px;padding-bottom:10px;padding-left:10px">
-                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong> Again Apply Admission Form</strong></span></span></a>
+                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Update Information</strong></span></span></a>
                                         </div>
                                     </div>
                                 </div>

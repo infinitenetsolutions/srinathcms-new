@@ -697,8 +697,8 @@ $max_value = $result['id'] + 1;
           <div class="col-md-6">
             <input disabled type="hidden" name="action" value="add_admission" />
             <a href="../srinath/nsuniv-admission-enquiry.php" class="btn btn-primary">Go Back </a>
-            <button type="submit" name="addmission_sucess" title="Send user id and password for login student and pay the first payment" class="btn btn-success">Send UserId and Password </button>
-            <button type="button" title="if the data not availble according to requirment the click here" class="btn btn-danger Send Mail" data-toggle="modal" data-target="#exampleModal">Not ProperData </button>
+            <button type="submit" name="addmission_sucess" title="Send user id and password for login student and pay the first payment" class="btn btn-success">Send Mail & Approve </button>
+            <button type="button" title="if the data not availble according to requirment the click here" class="btn btn-danger Send Mail" data-toggle="modal" data-target="#exampleModal">Incomplete Data </button>
           </div>
           </form>
           <!-- Button trigger modal -->
@@ -711,7 +711,7 @@ $max_value = $result['id'] + 1;
               <form method="POST">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Data Not Properly</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">INCOMPLETE DATA</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>

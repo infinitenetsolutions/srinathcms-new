@@ -40,7 +40,7 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Prospectus Mail Conformation';
+    $mail->Subject = 'Prospectus Mail Confirmation';
     $mail->Body    = '<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;vertical-align:top;background-color:#fff;border-spacing:0;min-width:320px;table-layout:fixed;width:100%" valign="top" width="100%">
     <tbody>
         <tr style="border-collapse:collapse;vertical-align:top" valign="top">
@@ -65,7 +65,7 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                             <div style="font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;font-size:12px;line-height:2;color:#1c2951">
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Dear <b> '.$name.' </b>,</span></p>
                                                 <br>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Hope you’re doing well! We re reaching out to you because we noticed that your Propectus Number is <b> '.$prosprectus_number.' </b></span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Thank you for the Payment. your Prospectus number is  <b> '.$prosprectus_number.' </b> for the below submitted details</span></p>
                                             <br>
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Course <b> :- '.$prospectus_course_name.'</b> <span></p>
@@ -74,7 +74,7 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
 
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Email ID <b> :- '.$amount.' , </b> </span></p>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Click the Admission Apply Button and fill the form Enter the Propectus number and Your Email id  </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Click on Apply now button for admission form fill up  </span></p>
 
                                                 <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Best regards,</span></p>
@@ -109,7 +109,7 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                             </tbody>
                                         </table>
                                         <div align="center" style="padding-top:30px;padding-right:10px;padding-bottom:10px;padding-left:10px">
-                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Apply Admission Form</strong></span></span></a>
+                                            <a href="http://65.2.38.42/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Apply Now</strong></span></span></a>
                                         </div>
                                     </div>
                                 </div>

@@ -31,7 +31,14 @@ $objectDefault->hostName = "";
 $objectDefault->userName = "";
 $objectDefault->password = "";
 $objectDefault->dbName =   "";
-$objectDefault->new_db("localhost", "nsucms_demo_nsuniv", "4rp5NsX7", "nsucms_demo_nsuniv");
+// $objectDefault->new_db("localhost", "nsucms_demo_nsuniv", "4rp5NsX7", "nsucms_demo_nsuniv");
+if ($_SERVER['HTTP_HOST'] == 'localhost') {
+    $objectDefault->new_db("localhost", "root", "", "srinath_demo_cms");
+}
+// if the database in the server
+else {
+    $objectDefault->new_db("localhost", "phpmyadmin", "raja@#", "srinath_demo_cms");
+}
 //Creating Object NSUCMS
 $objectSecond = new DBEVAL();
 $objectSecond->sql = "";
@@ -39,7 +46,15 @@ $objectSecond->hostName = "";
 $objectSecond->userName = "";
 $objectSecond->password = "";
 $objectSecond->dbName =   "";
-$objectSecond->new_db("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
+// $objectSecond->new_db("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
+if ($_SERVER['HTTP_HOST'] == 'localhost') {
+    $objectSecond->new_db("localhost", "root", "", "srinath_cms");
+}
+// if the database in the server
+else {
+    $objectSecond->new_db("localhost", "phpmyadmin", "raja@#", "srinath_cms");
+}
+
 //All File Directries End
 if (isset($_POST["action"])) {
     //Action Section Start
@@ -927,7 +942,7 @@ if (isset($_POST["action"])) {
         $add_transaction_no = rand(100000000000, 9999999999);
         $add_transaction_date = $_POST["add_transaction_date"];
         $date = date_create()->format('yy-m-d');
-        
+
         // getting the current time and store into the table
         $timing = date("Y/m/d   h:i:sa");
         if (!empty($add_prospectus_no && $add_prospectus_applicant_name && $add_prospectus_gender && $add_prospectus_address && $add_prospectus_emailid && $mobile && $add_prospectus_course_name && $add_prospectus_session && $add_prospectus_rate && $add_prospectus_payment_mode)) {
@@ -947,21 +962,19 @@ if (isset($_POST["action"])) {
 
 
             if ($con->query($sql)) {
-                $pro_session='';
-    if($add_prospectus_session==2){
-        $pro_session= date('Y') . '-' . date('Y', strtotime("+2 year"));
-    }
-    elseif($add_prospectus_session==3){
-        $pro_session= date('Y') . '-' . date('Y', strtotime("+3 year"));   
-    }
-    else{
-        $pro_session= date('Y') . '-' . date('Y', strtotime("+4 year"));
-    }
-    // in the add_propectus_course stored the course id so i have to retring the course name
-    $course_name_qury="SELECT * FROM `tbl_course` WHERE `course_id`='$add_prospectus_course_name'";
-    $course_name_result=mysqli_query($con,$course_name_qury);
-    $course_name_data=mysqli_fetch_array($course_name_result);
-    $course_name=$course_name_data['course_name'];
+                $pro_session = '';
+                if ($add_prospectus_session == 2) {
+                    $pro_session = date('Y') . '-' . date('Y', strtotime("+2 year"));
+                } elseif ($add_prospectus_session == 3) {
+                    $pro_session = date('Y') . '-' . date('Y', strtotime("+3 year"));
+                } else {
+                    $pro_session = date('Y') . '-' . date('Y', strtotime("+4 year"));
+                }
+                // in the add_propectus_course stored the course id so i have to retring the course name
+                $course_name_qury = "SELECT * FROM `tbl_course` WHERE `course_id`='$add_prospectus_course_name'";
+                $course_name_result = mysqli_query($con, $course_name_qury);
+                $course_name_data = mysqli_fetch_array($course_name_result);
+                $course_name = $course_name_data['course_name'];
                 include '../../Backend/sendprospectus.php';
 
                 prospectus_mail($add_prospectus_emailid, $add_prospectus_no, $add_prospectus_rate, $course_name, $pro_session, $add_prospectus_applicant_name);
@@ -1351,7 +1364,7 @@ if (isset($_POST["action"])) {
         $sql = "INSERT INTO `tbl_fee_paid`
                             (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`,`receipt_date`,`bank_name`,`transaction_no`,`transaction_date`,`receipt_no`,`paid_on`,`university_details_id`,`fee_paid_time`, `status`) 
                             VALUES 
-                            (NULL,'$admission_id','$course_id','$allPerticularsFor','$allPaid','$rebate_amount','$fine','$balance','$payment_mode','$cash_deposit_to','$cash_date','$notes','$receipt_date','$bank_name','$transaction_no','$transaction_date','NSU_$receipt_no_gen','$paid_on','$university_details_id','$fee_paid_time','$visible')
+                            (NULL,'$admission_id','$course_id','$allPerticularsFor','$allPaid','$rebate_amount','$fine','$balance','$payment_mode','$cash_deposit_to','$cash_date','$notes','$receipt_date','$bank_name','$transaction_no','$transaction_date','SU_$receipt_no_gen','$paid_on','$university_details_id','$fee_paid_time','$visible')
                             ";
         if ($con->query($sql)) {
 
@@ -1422,7 +1435,7 @@ if (isset($_POST["action"])) {
                     $sql = "INSERT INTO `tbl_fee_paid`
                                 (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
                                 VALUES 
-                                (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'NSU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
+                                (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'SU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
                                 ";
 
                     //insert into tbl_income
@@ -2057,7 +2070,7 @@ if (isset($_POST["action"])) {
                                 $prospectus_course_link = "course_bca";
                                 break;
                         }
-                        $message = "Dear $prospectus_name, Your Prospectus Form has been Successfully approved.\nYour Prospectus No - $prosprectus_number \nClick below link to apply Admission Form.\nhttps://nsuniv.ac.in/admission?course=$prospectus_course_link \n\nRegards,\nNetaji Subhas University, \nJamshedpur. ";
+                        $message = "Dear $prospectus_name, Your Prospectus Form has been Successfully approved.\nYour Prospectus No - $prosprectus_number \nClick below link to apply Admission Form.\nhttp://65.2.3842/admission?course=$prospectus_course_link \n\nRegards,\nNetaji Subhas University, \nJamshedpur. ";
                         $objectSecond->send_otp($prospectus_mobile, $message);
                         echo 'success';
                     } else {

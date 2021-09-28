@@ -7870,6 +7870,7 @@ if (isset($_GET["action"])) {
                             <td style="color:#8a0410;"><b><?php if ($row["prospectus_no"] != "") echo $row["prospectus_no"];
                                                             else echo "Please Give Prospectus No"; ?></b></td>
                               <?php
+                            //   i heve to check prospectus course name value interger or charater
                                 if(strlen($row["prospectus_course_name"])<=2){
                               $prospectus_course_name=$row["prospectus_course_name"];
                     $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";

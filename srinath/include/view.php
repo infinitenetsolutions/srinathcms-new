@@ -1,37 +1,4 @@
 
-<style>
-    #example_filter {
-        float: right !important;
-    }
-</style>
-
-
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable({
-            initComplete: function() {
-                this.api().columns().every(function() {
-                    var column = this;
-                    var select = $('<select><option value=""></option></select>')
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
-                        });
-
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
-                    });
-                });
-            }
-        });
-    });
-</script>
 <?php
 
 //Starting Session
@@ -5634,7 +5601,7 @@ if (isset($_GET["action"])) {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $nameFull = explode(" ", $row["prospectus_applicant_name"]);
-                $completeInfo[] = $nameFull[0];
+                $completeInfo[] = $row["prospectus_applicant_name"];
                 if (isset($nameFull[1]))
                     $completeInfo[] = $nameFull[1];
                 else
@@ -5649,8 +5616,20 @@ if (isset($_GET["action"])) {
                 $completeInfo[] = $row["prospectus_emailid"];
                 $completeInfo[] = $row["prospectus_dob"];
                 $completeInfo[] = $row["mobile"];
+                if(strlen($row["prospectus_course_name"])>2){
+                    $prospectus_course_name=$row["prospectus_course_name"];
+                    $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
+                    $course_no_result = mysqli_query($con, $course_no_query);
+                    $data_row1 = mysqli_fetch_array($course_no_result);
+                    $prospectus_course_id = $data_row1['course_duration'];
+                    $prospectus_session_id = $data_row1['course_id'];
+
+                    $completeInfo[] = $prospectus_session_id;
+                    $completeInfo[] = $prospectus_course_id;
+                }else{
                 $completeInfo[] = $row["prospectus_course_name"];
                 $completeInfo[] = $row["prospectus_session"];
+                }
                 $completeInfo[] = $row["prospectus_mother_name"];
                 $info = implode("|||", $completeInfo);
                 echo $info;
@@ -7858,6 +7837,7 @@ if (isset($_GET["action"])) {
                     <th>Phone No</th>
                     <th>Referred By</th>
                     <th>Payment Status</th>
+                    <th>Payment Mode</th>
                     <th>Timing</th>
                     <th class="project-actions text-center">Action </th>
                 </tr>
@@ -7889,12 +7869,29 @@ if (isset($_GET["action"])) {
                             <td><?php echo $s_no; ?></td>
                             <td style="color:#8a0410;"><b><?php if ($row["prospectus_no"] != "") echo $row["prospectus_no"];
                                                             else echo "Please Give Prospectus No"; ?></b></td>
-                            <td><?php echo $row["prospectus_course_name"] ?></td>
+                              <?php
+                                if(strlen($row["prospectus_course_name"])<=2){
+                              $prospectus_course_name=$row["prospectus_course_name"];
+                    $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";
+                    $course_no_result = mysqli_query($con, $course_no_query);
+                    $data_row1 = mysqli_fetch_array($course_no_result);
+                    $prospectus_course = $data_row1['course_name'];
+    
+
+                                }
+                                else{
+                                    $prospectus_course = $row["prospectus_course_name"];
+                                }
+                                
+                    ?>
+                           <td><?php echo $prospectus_course  ?></td>
                             <td><?php echo $row["prospectus_applicant_name"] ?></td>
                             <td><?php echo $row["mobile"] ?></td>
                             <td><?php echo $row["revert_by"] ?></td>
                             <td><?php echo $row["payment_status"] ?></td>
+                            <td><?php echo $row["prospectus_payment_mode"] ?></td>
                             <td><?php echo $row["post_at"] ?></td>
+
                             <td class="project-actions text-center">
                                 <button class="btn btn-info btn-sm" onclick="document.getElementById('view_university_prospectus_enquiry<?php echo $row['id']; ?>').style.display='block'">
                                     <i class="fas fa-eye">
@@ -7926,7 +7923,7 @@ if (isset($_GET["action"])) {
                                                             $_SESSION['prospectus_session']=$row['prospectus_session']; 
                                                             $_SESSION['prospectus_applicant_name']=$row['prospectus_applicant_name'];
                                                              ?>
-                                                            <input type="text" id="unversity_prospectus_number<?php echo $row["id"] ?>" name="unversity_prospectus_number" class="form-control" value="<?php echo $row["prospectus_no"] ?>">
+                                                            <input readonly type="text" id="unversity_prospectus_number<?php echo $row["id"] ?>" name="unversity_prospectus_number" class="form-control" value="<?php echo $row["prospectus_no"] ?>">
                                                             <input type="hidden" id="prospectus_session<?php echo $row["id"] ?>" name="prospectus_session" class="form-control" value="<?php echo $row["prospectus_session"] ?>">
                                                             <input type="hidden" id="prospectus_course_name<?php echo $row["id"] ?>" name="prospectus_course_name" class="form-control" value="<?php echo $row["prospectus_course_name"] ?>">
                                                             <input type="hidden" id="prospectus_rate<?php echo $row["id"] ?>" name="prospectus_rate" class="form-control" value="<?php echo $row["prospectus_emailid"] ?>">
@@ -7934,7 +7931,10 @@ if (isset($_GET["action"])) {
                                                             <input type="hidden" id="unversity_prospectus_id<?php echo $row["id"] ?>" name="unversity_prospectus_id" class="form-control" value="<?php echo $row["id"] ?>">
                                                             <input type="hidden" id="action_prospectus_enquiry<?php echo $row["id"] ?>" name="action" class="form-control" value="update_prospectus_enquiry">
                                                             <div class="input-group-prepend">
-                                                                <button id="update_prospectus<?php echo $row["id"] ?>" type="button" class="btn btn-info"><span id="update_loader_section<?php echo $row["id"] ?>"></span>Update</button>
+                                                            <!-- <button id="update_prospectus<?php 
+                                                            // echo $row["id"] ?>" type="button" class="btn btn-info"><span id="update_loader_section<?php 
+                                                            // echo $row["id"] ?>"></span>Update</button>     -->
+                                                         
                                                             </div>
 
                                                         </div>

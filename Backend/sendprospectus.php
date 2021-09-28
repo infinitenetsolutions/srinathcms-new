@@ -73,7 +73,7 @@ function prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Session <b> :-'.$session.' </b> </span></p>
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
 
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Email ID <b> :- '.$amount.' , </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Payment Amount <b> :- '.$amount.' , </b> </span></p>
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Click on Apply now button for admission form fill up  </span></p>
 
                                                 <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>

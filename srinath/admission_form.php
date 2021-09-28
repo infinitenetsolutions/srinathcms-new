@@ -84,11 +84,11 @@ include "include/authentication.php";
 
                     <?php
                     $sel = mysqli_query($con, " SELECT MAX(admission_id) + 1 AS id FROM tbl_admission");
-                    while ($result = mysqli_fetch_array($sel)) {
+                    $result = mysqli_fetch_array($sel)
                     ?>
                       <label>Registration No</label>
                       <input type="text" name="add_admission_id" value="<?php echo $result['id'] ?>" class="form-control">
-                    <?php } ?>
+        
                   </div>
                   <div class="col-4">
                     <label>Enter Prospectus No</label>
@@ -111,19 +111,20 @@ include "include/authentication.php";
                   </div>
 
                   <div class="col-4">
-                    <label>First Name</label>
+                    <label>Full  Name</label>
+                    <!-- <input id="first_name" type="hidden" name="add_admission_first_name" class="form-control" required> -->
                     <input id="first_name" type="text" name="add_admission_first_name" class="form-control" required>
                   </div>
 
-                  <div class="col-4">
+                  <!-- <div class="col-4">
                     <label>Middle Name</label>
                     <input type="text" name="add_admission_middle_name" class="form-control">
-                  </div>
+                  </div> -->
 
-                  <div class="col-4">
+                  <!-- <div class="col-4">
                     <label>Last Name</label>
                     <input id="last_name" type="text" name="add_admission_last_name" class="form-control">
-                  </div>
+                  </div> -->
 
                   <div class="col-4">
                     <label>Course</label>
@@ -643,7 +644,7 @@ include "include/authentication.php";
           type: 'POST',
           data: $('#add_admission_form').serializeArray(),
           success: function(result) {
-            $('#first_name').val('');
+            $('#first_name').val('0');
             $('#last_name').val('');
             $('#gender').val('0');
             $('#father_name').val('');

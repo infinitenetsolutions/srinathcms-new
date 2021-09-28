@@ -897,7 +897,15 @@ if (isset($_POST["action"])) {
 
     //Add prospectus Start With Ajax
     if ($_POST["action"] == "add_prospectus") {
-        $add_prospectus_no = $_POST["add_prospectus_no"];
+
+        include './config.php';
+        $propectus_no_query = "SELECT MAX(`id`) as `id` FROM `tbl_prospectus` WHERE 1 ";
+
+        $propectus_no_query_result = mysqli_query($con, $propectus_no_query);
+        $propectus_data = mysqli_fetch_array($propectus_no_query_result);
+
+
+        echo  $add_prospectus_no = 'SU/P/' . $propectus_data['id'];
         $add_prospectus_applicant_name = $_POST["add_prospectus_applicant_name"];
         $add_prospectus_gender = $_POST["add_prospectus_gender"];
         $add_prospectus_father_name = $_POST["add_prospectus_father_name"];
@@ -916,16 +924,18 @@ if (isset($_POST["action"])) {
         $add_prospectus_payment_mode = $_POST["add_prospectus_payment_mode"];
         $cashDepositTo = $_POST["cashDepositTo"];
         $add_bank_name = $_POST["add_bank_name"];
-        $add_transaction_no = $_POST["add_transaction_no"];
+        $add_transaction_no = rand(100000000000, 9999999999);
         $add_transaction_date = $_POST["add_transaction_date"];
         $date = date_create()->format('yy-m-d');
-
+        
+        // getting the current time and store into the table
+        $timing = date("Y/m/d   h:i:sa");
         if (!empty($add_prospectus_no && $add_prospectus_applicant_name && $add_prospectus_gender && $add_prospectus_address && $add_prospectus_emailid && $mobile && $add_prospectus_course_name && $add_prospectus_session && $add_prospectus_rate && $add_prospectus_payment_mode)) {
 
             $sql = "INSERT INTO `tbl_prospectus`
                             (`id`, `prospectus_no`, `prospectus_applicant_name`, `prospectus_gender`, `prospectus_father_name`, `prospectus_mother_name`, `prospectus_address`, `prospectus_country`, `prospectus_state`, `prospectus_city`, `prospectus_postal_code`, `prospectus_dob`, `prospectus_emailid`,`mobile`,`prospectus_course_name`,`prospectus_session`,`prospectus_rate`,`prospectus_payment_mode`,`prospectus_deposit_to`,`bank_name`,`transaction_no`,`transaction_date`,`post_at`, `type`,`easebuzz_id`,`transaction_id`,`status`) 
                             VALUES 
-                            (NULL,'$add_prospectus_no','$add_prospectus_applicant_name','$add_prospectus_gender','$add_prospectus_father_name','$add_prospectus_mother_name','$add_prospectus_address','$add_prospectus_country','$add_prospectus_state','$add_prospectus_city','$add_prospectus_postal_code','$add_prospectus_dob','$add_prospectus_emailid','$mobile','$add_prospectus_course_name','$add_prospectus_session','$add_prospectus_rate','$add_prospectus_payment_mode','$cashDepositTo','$add_bank_name','$add_transaction_no','$add_transaction_date','$date','','','','$visible')
+                            (NULL,'$add_prospectus_no','$add_prospectus_applicant_name','$add_prospectus_gender','$add_prospectus_father_name','$add_prospectus_mother_name','$add_prospectus_address','$add_prospectus_country','$add_prospectus_state','$add_prospectus_city','$add_prospectus_postal_code','$add_prospectus_dob','$add_prospectus_emailid','$mobile','$add_prospectus_course_name','$add_prospectus_session','$add_prospectus_rate','$add_prospectus_payment_mode','$cashDepositTo','$add_bank_name','$add_transaction_no','$add_transaction_date','$timing','','','','$visible')
                             ";
 
             $sql_prospectus = "INSERT INTO `tbl_income`
@@ -935,7 +945,27 @@ if (isset($_POST["action"])) {
                     				";
             $query = mysqli_query($con, $sql_prospectus);
 
+
             if ($con->query($sql)) {
+                $pro_session='';
+    if($add_prospectus_session==2){
+        $pro_session= date('Y') . '-' . date('Y', strtotime("+2 year"));
+    }
+    elseif($add_prospectus_session==3){
+        $pro_session= date('Y') . '-' . date('Y', strtotime("+3 year"));   
+    }
+    else{
+        $pro_session= date('Y') . '-' . date('Y', strtotime("+4 year"));
+    }
+    // in the add_propectus_course stored the course id so i have to retring the course name
+    $course_name_qury="SELECT * FROM `tbl_course` WHERE `course_id`='$add_prospectus_course_name'";
+    $course_name_result=mysqli_query($con,$course_name_qury);
+    $course_name_data=mysqli_fetch_array($course_name_result);
+    $course_name=$course_name_data['course_name'];
+                include '../../Backend/sendprospectus.php';
+
+                prospectus_mail($add_prospectus_emailid, $add_prospectus_no, $add_prospectus_rate, $course_name, $pro_session, $add_prospectus_applicant_name);
+
 
                 function sendsmsGET($mobileNumber, $senderId, $routeId, $message, $serverUrl, $authKey)
                 {

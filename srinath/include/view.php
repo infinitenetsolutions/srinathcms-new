@@ -979,6 +979,7 @@ if (isset($_GET["action"])) {
                     <th>S.No</th>
                     <th>Course</th>
                     <th>Prospectus fee</th>
+                    <th>Course Duration</th>
                     <th class="project-actions text-center">Action </th>
                 </tr>
             </thead>
@@ -996,6 +997,7 @@ if (isset($_GET["action"])) {
                             <td><?php echo $s_no; ?></td>
                             <td><?php echo $row["course_name"] ?></td>
                             <td><?php echo $row["prospectus_rate"] ?></td>
+                            <td><?php echo $row["course_duration"] ?></td>
                             <td class="project-actions text-center">
                                 <button class="btn btn-info btn-sm" onclick="document.getElementById('edit_courses<?php echo $row["course_id"]; ?>').style.display='block'">
                                     <i class="fas fa-pencil-alt">
@@ -1014,7 +1016,7 @@ if (isset($_GET["action"])) {
                             <div id="edit_courses<?php echo $row["course_id"]; ?>" class="w3-modal" style="z-index:2020;">
                                 <div class="w3-modal-content w3-animate-top w3-card-4" style="width:40%">
                                     <header class="w3-container" style="background:#343a40; color:white;">
-                                        <span onclick="document.getElementById('edit_courses<?php echo $row["course_id"]; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <span onclick="document.getElementById('edit_courses<?php echo $row['course_id']; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <h2 align="center">Edit Course</h2>
                                     </header>
                                     <form id="edit_course_form<?php echo $row["course_id"]; ?>" role="form" method="POST">
@@ -1028,8 +1030,16 @@ if (isset($_GET["action"])) {
                                                         </label>
                                                     </div>
                                                     <div class="form-group col-sm-6">
-                                                     <label>Prospectus Price
-                                                       <input type="text" name="prospectus_fee" class="form-control">
+                                                     <label>Prospectus fee
+                                                     <input type="text" name="prospectus_fee" id="propectus_fee<?php echo $row["course_id"]; ?>" class="form-control" value="<?php echo $row["prospectus_rate"]; ?>">
+
+                                                      </label>
+                                                      
+                                                     </div>
+                                                     <div class="form-group col-sm-6">
+                                                     <label>Course Duration 
+                                                     <input type="text" name="edit_course_duration" id="duration<?php echo $row["course_id"]; ?>" class="form-control" value="<?php echo $row["course_duration"]; ?>">
+
                                                       </label>
                                                       
                                                      </div>
@@ -1052,7 +1062,9 @@ if (isset($_GET["action"])) {
                                                 var action = $("#action<?php echo $row["course_id"]; ?>").val();
                                                 var edit_course_id = $("#edit_course_id<?php echo $row["course_id"]; ?>").val();
                                                 var edit_course_name = $("#edit_course_name<?php echo $row["course_id"]; ?>").val();
-                                                var dataString = 'action=' + action + '&edit_course_id=' + edit_course_id + '&edit_course_name=' + edit_course_name;
+                                                var edit_course_fee = $("#prospectus_fee<?php echo $row["course_id"]; ?>").val();
+                                                var edit_course_duration = $("#duration<?php echo $row["course_id"]; ?>").val();
+                                                var dataString = 'action=' + action + '&edit_course_id=' + edit_course_id + '&edit_course_name=' + edit_course_name+'&edit_course_fee='+edit_course_fee+'&edit_course_duration='+edit_course_duration;
 
                                                 $.ajax({
                                                     url: 'include/controller.php',

@@ -85,7 +85,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                    <h5 class="m-0 text-dark">&emsp;&emsp;Hello, <?php echo ucfirst($row["admission_first_name"]) ?> <?php echo ucfirst($row["admission_middle_name"]) ?> <?php echo ucfirst($row["admission_last_name"]) ?> - Welcome to your dashboard
+                    <h5 class="m-0 text-dark">&emsp;&emsp;Hello, <a href="#"><?php echo ucfirst($row["admission_first_name"]) ?> </a>- Welcome to your dashboard
                    <br>&emsp;&emsp;If you want to update your profile information than please drop a message in <a href="complaint">Complaint Management</a>
                     </h5>
                     </div>

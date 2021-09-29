@@ -195,8 +195,9 @@ if (isset($_POST["action"])) {
     //Add University Details End
     //Add Courses Start With Ajax
     if ($_POST["action"] == "add_courses") {
-        $add_course_name = $_POST["add_course_name"];
-        $prospectus_fee = $_POST['prospectus_fee'];
+         $add_course_name = $_POST["add_course_name"];
+         $prospectus_fee = $_POST['prospectus_fee'];
+         $duration = $_POST['prospectus_duration'];
         if (!empty($add_course_name)) {
             $sql = "SELECT * FROM `tbl_course`
                         WHERE `status` = '$visible' && `course_name` = '$add_course_name'
@@ -209,11 +210,16 @@ if (isset($_POST["action"])) {
                             <i class="icon fas fa-exclamation-triangle"></i> This Course already exsits!!!
                         </div>';
             else {
-                $sql = "INSERT INTO `tbl_course`
-                            (`course_id`, `course_name`, `prospectus_rate`,`course_time`, `status`) 
-                            VALUES 
-                            (NULL,'$add_course_name','$prospectus_fee','$date_variable_today_month_year_with_timing','$visible')
-                            ";
+                  $sql ="INSERT INTO `tbl_course`(`course_name`, `prospectus_rate`, `course_duration`, `course_time`, `status`, `course_type_id`) VALUES 
+                ('$add_course_name','$prospectus_fee','$duration','$date_variable_today_month_year_with_timing','$visible','0')";
+                
+                
+                
+                // "INSERT INTO `tbl_course`
+                //             (`course_id`, `course_name`, `prospectus_rate`,`course_time`, `status`) 
+                //             VALUES 
+                //             (NULL,'$add_course_name','$prospectus_fee','$date_variable_today_month_year_with_timing','$visible')
+                //             ";
                 if ($con->query($sql))
                     echo '
                             <div class="alert alert-success alert-dismissible">
@@ -307,9 +313,10 @@ if (isset($_POST["action"])) {
 
     //Edit Courses Start With Ajax
     if ($_POST["action"] == "edit_courses") {
-        $edit_course_name = $_POST["edit_course_name"];
-        $edit_course_id = $_POST["edit_course_id"];
-        $prospectus_fee = $_POST['prospectus_fee'];
+     echo   $edit_course_name = $_POST["edit_course_name"];
+     echo   $edit_course_id = $_POST["edit_course_id"];
+     echo   $edit_course_duration = $_POST['edit_course_duration'];
+     echo   $edit_course_fee = $_POST['prospectus_fee'];
         if (!empty($edit_course_name && $edit_course_id)) {
             $sql = "SELECT * FROM `tbl_course`
                         WHERE `status` = '$visible' && `course_name` = '$edit_course_name';

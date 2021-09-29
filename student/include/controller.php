@@ -32,7 +32,7 @@
                     //$_SESSION["logger_type1"] = "student";
                     $_SESSION["logger_username1"] = $student_login_username;
                     $_SESSION["logger_password1"] = $student_login_password;
-                    $_SESSION["logger_time1"] = time();
+                    $_SESSION["logger_time1"] =time();
                     echo '
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

@@ -1004,7 +1004,7 @@ if (isset($_POST["action"])) {
                     return $output;
                 }
 
-                $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards NSU";
+                $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards SU";
                 sendsmsGET($mobile, $senderId, $routeId, $student_msg, $serverUrl, $authKey);
 
                 echo "<script>

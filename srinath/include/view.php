@@ -225,7 +225,7 @@ if (isset($_GET["action"])) {
                                     <?php
                                     if (!empty($row["admission_profile_image"])) {
                                     ?>
-                                        <img class="profile-user-img " src="images/student_images/<?php echo $row["admission_profile_image"]; ?>" alt="Student profile picture">
+                                         <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
                                     <?php
                                     } else if (strtolower($row["admission_gender"]) == "female") {
                                     ?>
@@ -8299,11 +8299,33 @@ if (isset($_GET["action"])) {
                 ?>
                         <tr>
                             <td><?php echo $s_no; ?></td>
-                            <td><?php echo $row["admission_course_name"] ?></td>
+                            <?php
+                            //   i heve to check prospectus course name value interger or charater
+                            
+                              $prospectus_course_name=$row["admission_course_name"];
+                    $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";
+                    $course_no_result = mysqli_query($con, $course_no_query);
+                    $data_row1 = mysqli_fetch_array($course_no_result);
+                    $prospectus_course = $data_row1['course_name'];
+                    $course_session = $data_row1['course_duration'];
+if($course_session==2){
+    $course_session=date('Y').'-'.date('Y',strtotime('+2 year'));
+}
+elseif($course_session==3){
+ $course_session=date('Y').'-'.date('Y',strtotime('+3 year'));
+}
+else{
+    $course_session=date('Y').'-'.date('Y',strtotime('+4 year'));
+
+}
+                                
+                    ?>
+                           <td><?php echo $prospectus_course  ?></td>
+            
                             <td><?php echo $row["admission_title"]; echo " "; echo $row['admission_first_name'];?></td>
                             <td><?php echo $row["admission_emailid_student"] ?></td>
                             <td><?php echo $row["admission_mobile_student"] ?></td>
-                            <td><?php echo $row["admission_session"] ?></td>
+                            <td><?php echo $course_session ?></td>
                             <td><?php echo $row["admission_state"] ?></td>
                             <td><?php echo $row["admission_city"] ?></td>
                             <td><?php echo $row["admission_gender"] ?></td>

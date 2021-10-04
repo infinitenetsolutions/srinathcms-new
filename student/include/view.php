@@ -70,14 +70,14 @@ if (isset($_GET["action"])) {
                 $objTblFee = "";
                 //Checking If Hostel If Available Or Not
                 if (strtolower($row["admission_hostel"]) == "yes")
-                $sqlTblFee = "SELECT *
+                    $sqlTblFee = "SELECT *
                 FROM `tbl_fee`
-                WHERE `status` = '$visible' AND `course_id` = '".$row["admission_course_name"]."' AND `fee_academic_year` = '".$row["admission_session"]."' ORDER BY `fee_particulars` ASC
+                WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' ORDER BY `fee_particulars` ASC
                 ";
                 else
-             $sqlTblFee = "SELECT *
+                    $sqlTblFee = "SELECT *
                 FROM `tbl_fee`
-                WHERE `status` = '$visible' AND `course_id` = '".$row["admission_course_name"]."' AND `fee_academic_year` = '".$row["admission_session"]."' AND `fee_particulars` NOT IN ('Caution fee','CAUTION FEE','Caution Fee','Caution fee','HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
+                WHERE `status` = '$visible' AND `course_id` = '" . $row["admission_course_name"] . "' AND `fee_academic_year` = '" . $row["admission_session"] . "' AND `fee_particulars` NOT IN ('Caution fee','CAUTION FEE','Caution Fee','Caution fee','HOSTEL FEE', 'hostel fee', 'Hostel Fee', 'HOSTELS FEES', 'hostels fees', 'Hostels Fees', 'HOSTELS FEE', 'hostels fee', 'Hostels Fee', 'HOSTEL FEES', 'hostel fees', 'Hostel Fees', '1st Year Hostel Fee', '1ST YEAR HOSTEL FEE', '2nd Year Hostel Fee', '2ND YEAR HOSTEL FEE', '3rd Year Hostel Fee', '3RD YEAR HOSTEL FEE', '4th Year Hostel Fee', '4TH YEAR HOSTEL FEE', '5th Year Hostel Fee', '5TH YEAR HOSTEL FEE', '6th Year Hostel Fee', '6TH YEAR HOSTEL FEE') ORDER BY `fee_particulars` ASC
                 ";
                 $resultTblFee = $con->query($sqlTblFee);
                 if ($resultTblFee->num_rows > 0)
@@ -323,9 +323,9 @@ if (isset($_GET["action"])) {
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
-                                                                        <span class="input-group-text">Payment Date</span>
+                                                                        <!-- <span class="input-group-text">Payment Date</span> -->
                                                                     </div>
-                                                                    <input type="date" name="paymentDate" class="form-control" value="<?php echo date("Y-m-d"); ?>" onkeyup="completeCalculation();" onclick="completeCalculation();" onchange="completeCalculation();" />
+                                                                    <input type="hidden" name="paymentDate" class="form-control" value="<?php echo date("Y-m-d"); ?>" onkeyup="completeCalculation();" onclick="completeCalculation();" onchange="completeCalculation();" />
                                                                 </div>
                                                                 <!-- /.input group -->
                                                             </div>
@@ -347,6 +347,7 @@ if (isset($_GET["action"])) {
                                                                 foreach ($arrayTblFee as $arrayTblFeeUpdate) {
                                                                 ?>
                                                                     <tr>
+                                                                        <?php  ?>
                                                                         <td><?php echo $tmpSNo; ?></td>
                                                                         <td><?php echo $arrayTblFeeUpdate->fee_particulars; ?></td>
                                                                         <td>
@@ -365,6 +366,7 @@ if (isset($_GET["action"])) {
 
                                                                             </div>
                                                                         </td>
+
                                                                     </tr>
                                                                 <?php
                                                                     $Idno++;
@@ -415,7 +417,8 @@ if (isset($_GET["action"])) {
                                                                             <div class="input-group-prepend">
                                                                                 <span class="input-group-text">&#8377;</span>
                                                                             </div>
-                                                                            <input id="total_amount" name="total_amount" min="0" max="<?php echo $totalRemainings ?>" type="number" class="form-control" readonly>
+                                                                            <input id="remaininga"  value="<?php echo $totalRemainings ?>" type="hidden" class="form-control">
+                                                                            <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="0" max="<?php echo $totalRemainings ?>" type="number" class="form-control">
                                                                         </div>
                                                                         <small class="text-red" id="totalErr"></small>
                                                                     </td>
@@ -428,7 +431,7 @@ if (isset($_GET["action"])) {
                                                                             <div class="input-group-prepend">
                                                                                 <span class="input-group-text">&#8377;</span>
                                                                             </div>
-                                                                            <input id="remaining_amount" name="remaining_amount" min="0" value="<?php echo $totalRemainings ?>" type="number" style="font-weight: 900;color: #dc3545;" class="form-control" readonly>
+                                                                            <input id="remaining_amount" name="remaining_amount" min="0" value="<?php echo $totalRemainings ?>" type="text" style="font-weight: 900;color: #dc3545;" class="form-control" readonly>
                                                                             <!--<input id="remaining_amount" name="remaining_amount" min="0" value="0<?php //echo $totalRemainings 
                                                                                                                                                         ?>" type="number" style="font-weight: 900;color: #dc3545;" class="form-control" readonly>-->
 
@@ -461,13 +464,13 @@ if (isset($_GET["action"])) {
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3" id="cash_div" style="">
-                                                        <label>Deposit To</label>
+                                                        <!-- <label>Deposit To</label> -->
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="fas fa-money-check"></i></span>
+                                                                    <!-- <span class="input-group-text"><i class="fas fa-money-check"></i></span> -->
                                                                 </div>
-                                                                <select id="cashDepositTo" name="cashDepositTo" class="form-control">
+                                                                <select hidden id="cashDepositTo" name="cashDepositTo" class="form-control">
                                                                     <option value="University Office">University Office</option>
                                                                 </select>
                                                             </div>
@@ -475,13 +478,13 @@ if (isset($_GET["action"])) {
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4" id="receiptDate_div" style="">
-                                                        <label>Receipt Date</label>
+                                                        <!-- <label>Receipt Date</label> -->
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                                                    <!-- <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span> -->
                                                                 </div>
-                                                                <input id="paidDate" name="paidDate" type="date" class="form-control" value="<?php echo date("Y-m-d"); ?>" />
+                                                                <input id="paidDate" name="paidDate" type="hidden" class="form-control" value="<?php echo date("Y-m-d"); ?>" />
                                                             </div>
                                                             <!-- /.input group -->
                                                         </div>
@@ -520,8 +523,8 @@ if (isset($_GET["action"])) {
                                                         <div class="modal-body">
                                                             <?php
                                                             $len = 10;   // total number of numbers
-                                                            $min = 1000;  // minimum
-                                                            $max = 9999;  // maximum
+                                                            $min = 100000000;  // minimum
+                                                            $max = 999999999;  // maximum
                                                             $range = []; // initialize array
                                                             foreach (range(0, $len - 1) as $i) {
                                                                 while (in_array($num = mt_rand($min, $max), $range));

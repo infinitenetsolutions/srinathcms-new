@@ -7944,9 +7944,9 @@ if (isset($_GET["action"])) {
                                                             <input type="hidden" id="unversity_prospectus_id<?php echo $row["id"] ?>" name="unversity_prospectus_id" class="form-control" value="<?php echo $row["id"] ?>">
                                                             <input type="hidden" id="action_prospectus_enquiry<?php echo $row["id"] ?>" name="action" class="form-control" value="update_prospectus_enquiry">
                                                             <div class="input-group-prepend">
-                                                            <!-- <button id="update_prospectus<?php 
-                                                            // echo $row["id"] ?>" type="button" class="btn btn-info"><span id="update_loader_section<?php 
-                                                            // echo $row["id"] ?>"></span>Update</button>     -->
+                                                             <button id="update_prospectus<?php 
+                                                            echo $row["id"] ?>" type="button" class="btn btn-info"><span id="update_loader_section<?php 
+                                                          echo $row["id"] ?>"></span>Update</button>     
                                                          
                                                             </div>
 

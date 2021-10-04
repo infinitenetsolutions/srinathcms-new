@@ -59,13 +59,16 @@ if ($payment_status == 'success') {
     $email = $result['data']['email'];
     $_SESSION['email'] = $email;
     // here to gettiong the propectus no automatic
-    $propectus_no_query = "SELECT MAX(`id`) as `id` FROM tbl_prospectus  WHERE 1";
-    $p_no_result = mysqli_query($connection, $propectus_no_query);
+    $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+    $getmaxid_result = mysqli_query($connection, $getmaxid);
+    $getmaxid_data = mysqli_fetch_array($getmaxid_result);
+    $prosprectus_number = $getmaxid_data['id'];
+    $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
     // getting the current time and store into the table
     $timing = date("Y/m/d   h:i:sa");
     // $prospectus_number=rand(1000000,999999);
     $data_row = mysqli_fetch_array($p_no_result);
-    $prospectus_number = 'SU/P/' . $data_row['id'];
+    $prospectus_number = 'SU/P/' . $prosprectus_number;
 
     $update_payment = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prospectus_number', `payment_status`='$payment_status',`prospectus_rate`='$prospectus_rate',`prospectus_payment_mode`='$prospectus_payment_mode',`prospectus_deposit_to`='$prospectus_deposit_to',`bank_name`='$bank_name',`transaction_no`='$transaction_no',`transaction_date`='$transaction_date',`post_at`='$timing',`type`='$type',`easebuzz_id`='$easebuzz_id',`transaction_id`='$transaction_id',`status`='$status' WHERE `prospectus_emailid`='$email' ";
     $update_payment_result = mysqli_query($connection, $update_payment);
@@ -80,12 +83,12 @@ if ($payment_status == 'success') {
 
         $p_no_result = mysqli_query($connection, $propectus_no_query);
 
-          // here to start send the email to the user 
-          include '../Backend/sendprospectus.php';
+        // here to start send the email to the user 
+        include '../Backend/sendprospectus.php';
 
-          prospectus_mail($email, $prosprectus_number, $prospectus_rate, $prospectus_course_name, $prospectus_session, $name);
-          // for printing the propectus reference pdf
-  
+        prospectus_mail($email, $prosprectus_number, $prospectus_rate, $prospectus_course_name, $prospectus_session, $name);
+        // for printing the propectus reference pdf
+
         // getting the course id and session id
         // $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
         // $course_no_result = mysqli_query($connection, $course_no_query);
@@ -97,7 +100,7 @@ if ($payment_status == 'success') {
         // $update_payment = "UPDATE `tbl_prospectus` SET `prospectus_course_name`='$prospectus_course_id',`prospectus_session`='$prospectus_session_id' WHERE `prospectus_emailid`='$email' ";
         // $update_payment_result = mysqli_query($connection, $update_payment);
 
-      
+
         echo '<script> window.location.replace("../print.php") </script>';
     }
 } else {

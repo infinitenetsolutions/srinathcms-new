@@ -195,9 +195,9 @@ if (isset($_POST["action"])) {
     //Add University Details End
     //Add Courses Start With Ajax
     if ($_POST["action"] == "add_courses") {
-         $add_course_name = $_POST["add_course_name"];
-         $prospectus_fee = $_POST['prospectus_fee'];
-         $duration = $_POST['prospectus_duration'];
+        $add_course_name = $_POST["add_course_name"];
+        $prospectus_fee = $_POST['prospectus_fee'];
+        $duration = $_POST['prospectus_duration'];
         if (!empty($add_course_name)) {
             $sql = "SELECT * FROM `tbl_course`
                         WHERE `status` = '$visible' && `course_name` = '$add_course_name'
@@ -210,11 +210,11 @@ if (isset($_POST["action"])) {
                             <i class="icon fas fa-exclamation-triangle"></i> This Course already exsits!!!
                         </div>';
             else {
-                  $sql ="INSERT INTO `tbl_course`(`course_name`, `prospectus_rate`, `course_duration`, `course_time`, `status`, `course_type_id`) VALUES 
+                $sql = "INSERT INTO `tbl_course`(`course_name`, `prospectus_rate`, `course_duration`, `course_time`, `status`, `course_type_id`) VALUES 
                 ('$add_course_name','$prospectus_fee','$duration','$date_variable_today_month_year_with_timing','$visible','0')";
-                
-                
-                
+
+
+
                 // "INSERT INTO `tbl_course`
                 //             (`course_id`, `course_name`, `prospectus_rate`,`course_time`, `status`) 
                 //             VALUES 
@@ -313,10 +313,10 @@ if (isset($_POST["action"])) {
 
     //Edit Courses Start With Ajax
     if ($_POST["action"] == "edit_courses") {
-     echo   $edit_course_name = $_POST["edit_course_name"];
-     echo   $edit_course_id = $_POST["edit_course_id"];
-     echo   $edit_course_duration = $_POST['edit_course_duration'];
-     echo   $edit_course_fee = $_POST['prospectus_fee'];
+        echo   $edit_course_name = $_POST["edit_course_name"];
+        echo   $edit_course_id = $_POST["edit_course_id"];
+        echo   $edit_course_duration = $_POST['edit_course_duration'];
+        echo   $edit_course_fee = $_POST['prospectus_fee'];
         if (!empty($edit_course_name && $edit_course_id)) {
             $sql = "SELECT * FROM `tbl_course`
                         WHERE `status` = '$visible' && `course_name` = '$edit_course_name';
@@ -921,13 +921,13 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "add_prospectus") {
 
         include './config.php';
-        $propectus_no_query = "SELECT MAX(`id`) as `id` FROM `tbl_prospectus` WHERE 1 ";
+        $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+        $getmaxid_result = mysqli_query($con, $getmaxid);
+        $getmaxid_data = mysqli_fetch_array($getmaxid_result);
+        $prosprectus_number = $getmaxid_data['id'];
+        $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
 
-        $propectus_no_query_result = mysqli_query($con, $propectus_no_query);
-        $propectus_data = mysqli_fetch_array($propectus_no_query_result);
-
-
-        echo  $add_prospectus_no = 'SU/P/' . $propectus_data['id'];
+        echo  $add_prospectus_no =  'SU/P/' . $prosprectus_number;
         $add_prospectus_applicant_name = $_POST["add_prospectus_applicant_name"];
         $add_prospectus_gender = $_POST["add_prospectus_gender"];
         $add_prospectus_father_name = $_POST["add_prospectus_father_name"];
@@ -1945,7 +1945,6 @@ if (isset($_POST["action"])) {
         $prosprectus_id = $_POST["prosprectus_id"];
         $add_prospectus_email =  $_SESSION['prospectus_emailid'];
         $prospectus_course_name = $_POST["prospectus_course_name"];
-
         $prospectus_session = $_SESSION["prospectus_session"];
         $prospectus_rate = $_POST["prospectus_rate"];
         $post_at = $_POST["post_at"];
@@ -1957,9 +1956,16 @@ if (isset($_POST["action"])) {
             // $result = $objectSecond->get();
             $exist_check = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '$prosprectus_number' && `status`='$visible'";
             $result = $con->query($exist_check);
-            if ($result->num_rows > 0) {
+            if ($result->num_rows < 0) {
                 echo 'exists';
             } else {
+                $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+                $getmaxid_result = mysqli_query($con, $getmaxid);
+                $getmaxid_data = mysqli_fetch_array($getmaxid_result);
+                $prosprectus_number = $getmaxid_data['id'];
+                $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
+                $prosprectus_number = 'SU/P/' . $prosprectus_number;
+
                 $objectSecond->sql = "";
                 echo  $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";
                 $check = $con->query($update_query);

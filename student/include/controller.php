@@ -157,9 +157,9 @@
 			$message=$_POST['message'];
  
 				  $sql = "INSERT INTO `tbl_complaint`
-                            (`complaint_id`, `admission_id`,`subject`, `message`,`create_time` ,`status`) 
+                            (`admission_id`,`subject`, `message`,`create_time` ,`status`) 
                             VALUES 
-                            ('$complaint_id','$admission_id','$subject','$message','$date_variable_today_month_year_with_timing','$visible')
+                            ('$admission_id','$subject','$message','$date_variable_today_month_year_with_timing','$visible')
                             ";							
 				  if($con->query($sql)){
                         echo "<script>

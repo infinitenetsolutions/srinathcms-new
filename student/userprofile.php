@@ -11,16 +11,32 @@ include "include/authentication.php";
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Srinath University| User Profile</title>
   <!-- Tell the browser to be responsive to screen width -->
+  <link rel="icon" href="images/logo.png" />
+  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -142,7 +158,7 @@ include "include/authentication.php";
                       <!-- Post -->
                       <div class="timeline timeline-inverse">
                         <div>
-                          <i class="fas fa-camera bg-purple"></i>
+                          <i class="fa fa-camera bg-purple"></i>
                           <div class="timeline-item">
                             <div class="timeline-body">
                               <p><b>Date Of Birth :</b><?php echo $row["admission_dob"]; ?></p>
@@ -172,7 +188,7 @@ include "include/authentication.php";
                       <!-- The timeline -->
                       <div class="timeline timeline-inverse">
                         <div>
-                          <i class="fas fa-camera bg-purple"></i>
+                          <i class="fa fa-camera bg-purple"></i>
                           <div class="timeline-item">
                             <div class="timeline-body">
                               <p><b>Mobile No :</b> <?php echo $row["admission_mobile_student"]; ?></p>
@@ -195,7 +211,7 @@ include "include/authentication.php";
                     <div class="tab-pane" id="timeline2">
                       <div class="timeline timeline-inverse">
                         <div>
-                          <i class="fas fa-camera bg-purple"></i>
+                          <i class="fa fa-camera bg-purple"></i>
                           <div class="timeline-item">
                             <div class="timeline-body">
                               <p><b>Residential Address :</b><?php echo $row["admission_residential_address"]; ?></p>
@@ -217,18 +233,18 @@ include "include/authentication.php";
                       <div>
                         <div class="timeline-item">
                           <div class="timeline-body">
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_markesheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_markesheet"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_markesheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_markesheet"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_passing_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_passing_certificate"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_passing_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_twelve_passing_certificate"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_graduation_marksheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_graduation_marksheet"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_tenth_marksheet"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_recent_character_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_recent_character_certificate"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_recent_character_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_recent_character_certificate"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_other_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_other_certificate"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_other_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_other_certificate"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
-                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_character_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_character_certificate"]) . '" ' ?>  alt="..." style="width: 100px;height: 100px;"></a>
+                            <a href=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_character_certificate"]) . '" ' ?>><img src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_character_certificate"]) . '" ' ?> alt="..." style="width: 100px;height: 100px;"></a>
 
 
                           </div>

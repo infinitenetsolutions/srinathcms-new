@@ -85,10 +85,13 @@ include "include/authentication.php";
     </div>
     <?php
     include '../srinath/include/config.php';
-    $propectus_no_query = "SELECT MAX(`id`) as `id` FROM `tbl_prospectus` WHERE 1 ";
+    $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+    $getmaxid_result = mysqli_query($con, $getmaxid);
+    $getmaxid_data = mysqli_fetch_array($getmaxid_result);
+    $prosprectus_number = $getmaxid_data['id'];
+    $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
 
-    $propectus_no_query_result = mysqli_query($con, $propectus_no_query);
-    $propectus_data = mysqli_fetch_array($propectus_no_query_result);
+      $add_prospectus_no =  'SU/P/' . $prosprectus_number;
 
     ?>
     <!-- ./wrapper -->
@@ -106,7 +109,7 @@ include "include/authentication.php";
                         <div class="col-md-12" id="error_section"></div>
                         <div class="col-4">
                             <label>Prospectus No.</label>
-                            <input readonly type="text" id="add_prospectus_no" name="add_prospectus_no" class="form-control" value="<?php echo 'SU/P/' . $propectus_data['id'] ?>" required>
+                            <input readonly type="text" id="add_prospectus_no" name="add_prospectus_no" class="form-control" value="<?php echo $add_prospectus_no ?>" required>
                         </div>
 
                         <div class="col-4">
@@ -133,8 +136,12 @@ include "include/authentication.php";
                         </div>
 
                         <div class="col-4">
-                            <label>Address</label>
+                            <label>Address 1</label>
                             <textarea id="add_prospectus_address" name="add_prospectus_address" class="form-control" style="height:38px;"></textarea>
+                        </div>
+                        <div class="col-4">
+                            <label>Address 2</label>
+                            <textarea id="add_prospectus_address1" name="add_prospectus_address1" class="form-control" style="height:38px;"></textarea>
                         </div>
                         <div class="col-4">
                             <label>Country</label>

@@ -1,3 +1,4 @@
+
 <?php
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
@@ -45,7 +46,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
     $post_at = $row['post_at'];
     $type = $row['type'];
     $easebuzz_id = $row['easebuzz_id'];
-    $transaction_id = $row['transaction_id'];
+    $transaction_id = $row['transaction_no'];
     $status = $row['status'];
 
 ?>

@@ -9,3 +9,4 @@ console.log(totalRemainingValue)
     document.getElementById('amount').value = amount+'.00';
     }
 }
+// somthing is changed 

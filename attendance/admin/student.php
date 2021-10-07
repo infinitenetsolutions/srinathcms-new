@@ -2,7 +2,7 @@
 $conn = '';
 if (isset($_POST["importExcelButton"])) {
 
-
+// here i to creating the connection for exporting the data in to excel
   if ($_SERVER['HTTP_HOST'] == "localhost") {
     $conn = mysqli_connect("localhost", "root", "", "srinath_atteandance");
   } else {

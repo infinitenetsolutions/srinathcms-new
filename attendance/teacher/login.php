@@ -90,7 +90,7 @@ if (isset($_SESSION["admin_id"])) {
   <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
+<body class="loginback" >
 
   <div class="text-center">
     <img src="../nsu_logo.png" class="logo" >

@@ -4,8 +4,17 @@
 }
 .logo{
     margin-top: 48px;
-    height:120px
+    height:120px;
+
+    
 }
 .nav-link{
     font-family: "Lucida Console", "Courier New", monospace;
+}
+.loginback{
+    background-image: url('../img/backgroud/backgroud.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 42rem;
+
 }

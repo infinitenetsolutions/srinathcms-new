@@ -136,7 +136,10 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
         }
     </style>
 
-    <?php include "../attendance/include/footer.php"; ?>
+<footer class=" footer text-center mt-5 p-5">
+
+<strong><p>&copy; <?php echo date("Y"); ?> <a class="or" style="color: #a82b12;" target="_blank" href="#">SRINATH UNIVERSITY </a> All Right Reserved. Powered By  <a class="text-success" href="#" target="_blank">Infinite Net Solutions</a></p>
+</footer>
 
     </html>
 <?php } ?>

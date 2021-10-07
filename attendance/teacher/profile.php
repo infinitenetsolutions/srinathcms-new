@@ -270,6 +270,7 @@ $result = $statement->fetchAll();
 </div>
 <br />
 <br />
+<?php include '../include/footer.php'; ?>
 </body>
 
 </html>

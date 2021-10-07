@@ -124,7 +124,7 @@ include('header.php');
 </div>
 
 </body>
-
+<?php include '../include/footer.php'; ?>
 </html>
 
 <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>

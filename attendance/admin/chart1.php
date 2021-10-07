@@ -90,7 +90,7 @@ if($total_row > 0)
   	</div>
   </div>
 </div>
-
+<?php include '../include/footer.php'; ?>
 </body>
 </html>
 

@@ -222,6 +222,7 @@ $result = $statement->fetchAll();
     </div>
   </div>
 </div>
+<?php include '../include/footer.php'; ?>
 <script>
     function changeGrade(){
         var changeValue = document.getElementById('changeGradeId').value;

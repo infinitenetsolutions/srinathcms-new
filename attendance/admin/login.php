@@ -66,7 +66,7 @@ if (isset($_SESSION["admin_id"])) {
       </div>
     </div>
   </div>
-
+  <?php include '../include/footer.php'; ?>
 </body>
 
 </html>

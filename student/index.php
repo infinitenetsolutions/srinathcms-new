@@ -113,7 +113,16 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
     </script>
 
 </body>
+<style>
+             .text-center{
+           
+                 color: white;
+             
+                 margin-top: 63rem;
+             }
+         </style>
 
+        <?php include "../attendance/include/footer.php"; ?>
 </html>
 <?php } ?>
 <!--  rtrt-->

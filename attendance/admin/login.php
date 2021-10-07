@@ -40,6 +40,7 @@ if (isset($_SESSION["admin_id"])) {
 
       </div>
       <div class="col-md-4" style="margin-top:20px;">
+      <h3 class="text-center text-danger " >ATTENDANCE MANAGEMENT SYSTEM</h3>
         <div class="card">
           <div class="card-header  login">Admin Login</div>
           <div class="card-body">

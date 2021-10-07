@@ -4,10 +4,10 @@
 
 $connect = '';
 if($_SERVER['HTTP_HOST']=="localhost"){
-	new PDO("mysql:host=localhost;dbname=srinath_atteandance","root","");
+	$connect = 	new PDO("mysql:host=localhost;dbname=srinath_atteandance","root","");
 }
 else{
-	new PDO("mysql:host=localhost;dbname=srinath_atteandance","phpmyadmin","raja@#");
+	$connect = 	new PDO("mysql:host=localhost;dbname=srinath_atteandance","phpmyadmin","raja@#");
   
 }
 

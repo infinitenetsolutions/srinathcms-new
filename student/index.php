@@ -123,7 +123,7 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
 
             color: white;
 
-            margin-top: 90rem;
+            margin-top: 110rem;
         }
 
         @media screen and (min-width: 560px) {

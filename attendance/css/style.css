@@ -1,0 +1,11 @@
+.login{
+    background-color: #a82b12;
+    color: aliceblue;
+}
+.logo{
+    margin-top: 48px;
+    height:120px
+}
+.nav-link{
+    font-family: "Lucida Console", "Courier New", monospace;
+}

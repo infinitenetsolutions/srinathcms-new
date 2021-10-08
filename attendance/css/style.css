@@ -15,9 +15,19 @@
     background-image: url('../img/backgroud/backgroud.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 42rem;
+    height: 48rem;
 
 }
+@media screen and (min-width: 560px) {
+    .loginback{
+        background-image: url('../img/backgroud/backgroud.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 35rem;
+    
+    }
+}
+
 .main-footer{
     color: #a82b12;
 }

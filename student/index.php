@@ -75,7 +75,7 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
                             </form>
                         </center>
                         <br><br>
-                        <p class="p-white"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If you don't have your Login User Id and Password <a href="http://65.2.38.42/" style="color:red"> Click </a></p>
+                        <!-- <p class="p-white"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If you don't have your Login User Id and Password <a href="http://65.2.38.42/" style="color:red"> Click </a></p> -->
                         <br>
                         <br>
                     </div>

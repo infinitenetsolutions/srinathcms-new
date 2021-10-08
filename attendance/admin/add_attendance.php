@@ -122,7 +122,7 @@ $result = $statement->fetchAll();
             <div class="row">
               <label class="col-md-4 text-right">Attendance Date <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" name="attendance_date" id="attendance_date" class="form-control" readonly />
+                <input type="text" name="attendance_date" id="attendance_date" value="<?php echo date('Y-m-d'); ?>" class="form-control" readonly />
                 <span id="error_attendance_date" class="text-danger"></span>
               </div>
             </div>

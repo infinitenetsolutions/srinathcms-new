@@ -120,9 +120,9 @@ $result = $statement->fetchAll();
           </div>
           <div class="form-group">
             <div class="row">
-              <label class="col-md-4 text-right">Attendance Date <span class="text-danger">*</span></label>
+              <label class="col-md-4 text-right">Attendance Date  <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" name="attendance_date" id="attendance_date" class="form-control" readonly />
+                <input type="text" name="attendance_date" id="attendance_date" value="<?php echo date('Y-m-d'); ?>" class="form-control" readonly />
                 <span id="error_attendance_date" class="text-danger"></span>
               </div>
             </div>
@@ -182,7 +182,9 @@ $result = $statement->fetchAll();
         <div class="modal-footer">
           <input type="hidden" name="action" id="action" value="Add" />
           <input type="submit" name="button_action" id="button_action" class="btn btn-success btn-sm" value="Add" />
+          <span id="error_attendance_date" class="text-danger"></span>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+
         </div>
 
       </div>

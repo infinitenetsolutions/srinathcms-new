@@ -220,8 +220,8 @@ if(isset($_POST["action"]))
                         {
                             $mobileNumber = $student["parent_mob_no_1"];
                             $mobileNumber2 = $student["parent_mob_no_2"];
-                            $message="Dear Sir/Madam,\n Your ward is ABSENT today.\n\n Regards NSU, \nJamshedpur. ";
-                            $senderId="NSUJSR";
+                            $message="Dear Sir/Madam,\n Your ward is ABSENT today.\n\n Regards SRINATH, \nJamshedpur. ";
+                            $senderId="SRINATH JSR";
                             $serverUrl="msg.msgclub.net";
                             $authKey="6a4743a8355fb97aa42dc2452185a1cd";
                             $route="1";

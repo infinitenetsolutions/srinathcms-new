@@ -15,7 +15,7 @@ if (!isset($_SESSION["admin_id"])) {
 <html lang="en">
 
 <head>
-  <title>NSU Student Attendance System </title>
+  <title>SRINATH Student Attendance System </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" sizes="56x56" href="../img/icon/icon.png">

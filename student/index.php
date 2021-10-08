@@ -28,7 +28,8 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
             }
 
             .img-title {
-                margin-top: 30%;
+                margin-top: 20%;
+                width: 300px;
             }
 
             .title {

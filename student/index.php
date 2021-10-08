@@ -73,9 +73,12 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
                                     <div class="col-12" id="loader_section"></div>
                                 </div>
                             </form>
+                            <br><br>
+                            <!-- write code for sending the otp and forget the password -->
+                            <p class="p-white" ><a style="color: white;" href="#"> Forget Password </a></p>
                         </center>
-                        <br><br>
-                        <!-- <p class="p-white"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; If you don't have your Login User Id and Password <a href="http://65.2.38.42/" style="color:red"> Click </a></p> -->
+      
+              
                         <br>
                         <br>
                     </div>

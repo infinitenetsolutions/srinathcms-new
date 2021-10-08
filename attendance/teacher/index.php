@@ -3,7 +3,9 @@
 //index.php
 
 include('header.php');
-
+if (isset($_SESSION["admin_id"])) {
+  header('location:add_attendance.php');
+}
 ?>
 
 <div class="container" style="margin-top:30px">

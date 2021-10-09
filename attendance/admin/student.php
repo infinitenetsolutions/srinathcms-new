@@ -2,7 +2,7 @@
 $conn = '';
 if (isset($_POST["importExcelButton"])) {
 
-
+// here i to creating the connection for exporting the data in to excel
   if ($_SERVER['HTTP_HOST'] == "localhost") {
     $conn = mysqli_connect("localhost", "root", "", "srinath_atteandance");
   } else {
@@ -75,7 +75,7 @@ include('header.php');
         <div class="col-md-6" align="right">
           <select style="width:100%;" class="form-control" onchange="changeGrade()" id="changeGradeId">
             <option value="all" <?php
-                                echo "disabled selected";
+                                  echo "disabled selected";
                                 ?>>-Select Semester-</option>
             <?php
             $query = "
@@ -85,7 +85,7 @@ include('header.php');
             $statement->execute();
             $result = $statement->fetchAll();
             foreach ($result as $row) {
-
+              
             ?>
               <option value="<?php echo $row["grade_id"]; ?>" <?php if ($row["grade_id"] == $_GET["grade"]) {
                                                                 echo "disabled selected";
@@ -122,9 +122,8 @@ include('header.php');
     </div>
   </div>
 </div>
-
-</body>
 <?php include '../include/footer.php'; ?>
+</body>
 
 </html>
 
@@ -184,15 +183,6 @@ include('header.php');
               <div class="col-md-8">
                 <input type="text" name="parent_mob_no_2" id="parent_mob_no_2" class="form-control" />
                 <span id="error_parent_mob_no_2" class="text-danger"></span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <label class="col-md-4 text-right">Email id. <span class="text-danger">*</span></label>
-              <div class="col-md-8">
-                <input required type="email" name="email_id" id="email_id" placeholder="Enter student email id " class="form-control" />
-                <span id="error_email_id" class="text-danger"></span>
               </div>
             </div>
           </div>
@@ -406,7 +396,6 @@ include('header.php');
             } else {
               $('#error_student_grade_id').text('');
             }
-          
           }
         }
       })

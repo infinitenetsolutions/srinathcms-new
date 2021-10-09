@@ -179,9 +179,9 @@ include('header.php');
           </div>
           <div class="form-group">
             <div class="row">
-              <label class="col-md-4 text-right">Alternate no. <span class="text-danger">*</span></label>
+              <label class="col-md-4 text-right">Student no. <span class="text-danger">*</span></label>
               <div class="col-md-8">
-                <input type="text" name="parent_mob_no_2" id="parent_mob_no_2" class="form-control" />
+                <input type="text" name="parent_mob_no_2" placeholder="Enter Student Mobile Number" id="parent_mob_no_2" class="form-control" />
                 <span id="error_parent_mob_no_2" class="text-danger"></span>
               </div>
             </div>

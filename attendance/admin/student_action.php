@@ -2,6 +2,7 @@
 
 //student_action.php
 
+
 include('database_connection.php');
 
 session_start();
@@ -278,6 +279,7 @@ if(isset($_POST["action"]))
 		{
 			$student_grade_id = $_POST["student_grade_id"];
 		}
+		$student_email_id = $_POST["email_id"];
 		if($error > 0)
 		{
 			$output = array(
@@ -299,13 +301,14 @@ if(isset($_POST["action"]))
 					':student_roll_number'	=>	$student_roll_number,
 					':parent_mob_no_1'	=>	$parent_mob_no_1,
 					':parent_mob_no_2'	=>	$parent_mob_no_2,
+					':student_email_id'  =>  $student_email_id,
 					':student_dob'		=>	$student_dob,
 					':student_grade_id'	=>	$student_grade_id
 				);
 				$query = "
 				INSERT INTO tbl_student 
 				(student_name, student_roll_number,parent_mob_no_1,parent_mob_no_2, student_dob, student_grade_id) 
-				VALUES (:student_name, :student_roll_number,:parent_mob_no_1,:parent_mob_no_2, :student_dob, :student_grade_id)
+				VALUES (:student_name, :student_roll_number,:parent_mob_no_1,:parent_mob_no_2,:student_email_id, :student_dob, :student_grade_id)
 				";
 
 				$statement = $connect->prepare($query);

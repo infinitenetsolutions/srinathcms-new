@@ -1,6 +1,11 @@
+
+
 <?php
 
 use Dompdf\FrameDecorator\Inline;
+$year_err='';
+$year = date('Y');
+$month = date('m');
 $page_no = "10";
 $page_no_inside = "6_2";
 include "include/authentication.php";
@@ -10,6 +15,16 @@ include './include/config.php';
 $sql = "SELECT * FROM `tbl_admission` WHERE `status` = '$visible' && `admission_username` = '" . $_SESSION["logger_username1"] . "'";
 $result = $con->query($sql);
 $row = $result->fetch_assoc();
+$student_mobile = $row['admission_mobile_student'];
+$student_name=$row['admission_first_name'];
+if (isset($_POST['submit'])) {
+    if (!empty($_POST['date']) && !empty($_POST['month'])) {
+        $year = $_POST['date'];
+    } else {
+        $year_err = "please select Year and Month";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,8 +54,10 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="./dist/css/calender.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -94,388 +111,146 @@ $row = $result->fetch_assoc();
 
                                 </div>
                             </div>
-                            <div class="row filter-row">
-                                <div class="col-sm-6 col-md-3">
+                            <form method="POST" action="">
+                                <div class="row filter-row">
 
-                                </div>
 
-                                <div class="col-sm-6 col-md-3">
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group form-focus select-focus">
+                                            <label class="focus-label">Select Year</label>
+                                            <select name="date" class="form-control select floating">
+                                                <option selected disabled>-Select-</option>
+                                                <?php for ($i = 2010; $i <= date('Y'); $i++) { ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                <?php } ?>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <div class="form-group form-focus select-focus">
+                                            <label class="focus-label">Select Year</label>
+                                            <select name="month" class="form-control select floating">
+                                                <option selected disabled>-Select-</option>
+                                                <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                <?php } ?>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-3">
                                     <div class="form-group form-focus select-focus">
-                                        <label class="focus-label">Select Year</label>
-                                        <select class="form-control select floating">
-                                            <option selected disabled >-Select-</option>
-                                            <option>2017</option>
-                                            <option>2016</option>
-                                            <option>2015</option>
-                                            <option>2014</option>
-                                            <option>2013</option>
-                                        </select>
+                                        <br>
+                                        <label class="focus-label">&nbsp; </label>
+                                        <button name="submit" type="submit" class="btn btn-success"> Search </a>
+                                    </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <br>
-                                                                        <a href="#" class="btn btn-success"> Search </a>
-                                </div>
+                            </form>
+                            <?php if($year_err!=''){ ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              
+                                <strong>! Hay <?php  echo $student_name; ?>  </strong> <?php echo $year_err; ?>
+                                
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <?php } ?>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                        <table class="table table-striped custom-table mb-0">
+
+                                        <table>
+                                            <summary><strong><?php $jd = gregoriantojd($month, 13, 1998);
+                                                                echo jdmonthname($jd, 0); ?></strong> <?php echo $year ?></summary>
                                             <thead>
                                                 <tr>
-                                                    <th>Month</th>
-                                                    <?php for($i=1;$i<=31;$i++){ 
-                                                  echo'<th>'.$i.'</th>';
-                                                     } ?>
-                                                 
+                                                    <th>Mon</th>
+                                                    <th>Tue</th>
+                                                    <th>Wed</th>
+                                                    <th>Thu</th>
+                                                    <th>Fri</th>
+                                                    <th>Sat</th>
+                                                    <th>Sun</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>January</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td>
-                                                        <div class="half-day"><span class="first-off"><i class="fa fa-check text-success"></i></span> <span class="first-off"><i class="fa fa-times text-danger"></i></span></div>
-                                                    </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td>
-                                                        <div class="half-day"><span class="first-off"><i class="fa fa-times text-danger"></i></span> <span class="first-off"><i class="fa fa-check text-success"></i></span></div>
-                                                    </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Febrairy</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>March</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Arile</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>June</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>July</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>August</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sectember</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>October</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Novmber</td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-times text-danger"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                    <td><i class="fa fa-check text-success"></i> </td>
-                                                </tr>
-                                            </tbody>
-                                            <thead>
-                                                <tr>
-                                                    <th>Month</th>
-                                                    <?php for($i=1;$i<=31;$i++){ 
-                                                  echo'<th>'.date('Y').'</th>';
-                                                     } ?>
-                                                 
-                                                </tr>
-                                            </thead>
+
+                                            <?php
+
+
+
+                                            ?>
+
+                                            <?php
+                                            //here to getting the attendance of the user
+                                            // here to getting attendance of user
+                                            function attendance_check($attendace_day, $student_mobile, $con_attendance)
+                                            {
+                                                $arr = '';
+                                                $days = '';
+                                                $attendace_days = '';
+                                                $attendace_query = "SELECT * FROM `tbl_attendance` WHERE  `student_id` IN(SELECT student_id FROM tbl_student WHERE `parent_mob_no_2`='$student_mobile'  ) && `attendance_date`='$attendace_day'";
+                                                $attendace_result = mysqli_query($con_attendance, $attendace_query);
+                                                if (mysqli_num_rows($attendace_result) > 0) {
+                                                    while ($attendace_row = mysqli_fetch_array($attendace_result)) {
+                                                        $attendace_date = $attendace_row['attendance_date'];
+                                                        $day = explode('-', $attendace_date)[2];
+                                                        $attendace_day = $attendace_row['attendance_status'];
+                                                        $arr = array('day' => $day, 'attendance' => $attendace_day);
+                                                    }
+                                                    return $arr;
+                                                }
+                                            }
+                                            $k = 1;
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                echo "  <tr>";
+                                                for ($j = 1; $j <= 7; $j++) {
+
+                                                    if ($k == 32)
+                                                        break;
+                                                    $date = $year . '-' . $month . '-' . $k;
+                                                    $attendace_day = attendance_check($date, $student_mobile, $con_attendance);
+
+
+                                                    if ($attendace_day['attendance'] == 'Present' && $attendace_day['day'] == $k) {
+                                                        echo '     <td title="present">
+                                                                    <span class="date btn btn-success">
+                                                                      ' . $k . '
+                                                                    </span>
+                                                                </td> ';
+                                                        $k++;
+                                                    } elseif ($attendace_day['attendance'] == 'Absent' && $attendace_day['day'] == $k) {
+
+                                                        echo '     <td title="Absent">
+                                                                    <span class="date btn btn-danger">
+                                                                      ' . $k . '
+                                                                    </span>
+                                                                </td> ';
+                                                        $k++;
+                                                    } else {
+                                                        echo '<td>
+                                                            <span class="date">
+                                                              ' . $k . '
+                                                            </span>
+                                                        </td> ';
+                                                        $k++;
+                                                    }
+                                                }
+
+                                                echo "</tr>";
+                                            ?>
+                                            <?php } ?>
+
+
+
+
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -485,7 +260,9 @@ $row = $result->fetch_assoc();
                 </div>
                 <div class="sidebar-overlay" data-reff=""></div>
             </section>
-            <section class="content">
+            <br>
+            <br>
+            <!-- <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <h5 class="m-0 text-dark">&emsp;&emsp;Hello, <a href="#"><?php echo ucfirst($row["admission_first_name"]) ?> </a>- Welcome to your dashboard
@@ -493,7 +270,8 @@ $row = $result->fetch_assoc();
                         </h5>
                     </div>
                 </div>
-            </section>
+            </section> -->
+
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -541,6 +319,25 @@ $row = $result->fetch_assoc();
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript" src="js/moment-with-locales.js"></script>
+    <!-- Calendar js -->
+    <script src="./dist/js/calender.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

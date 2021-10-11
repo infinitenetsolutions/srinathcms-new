@@ -1012,14 +1012,14 @@ if (isset($_POST["action"])) {
                 prospectus_mail($add_prospectus_emailid, $add_prospectus_no, $add_prospectus_rate, $course_name, $pro_session, $add_prospectus_applicant_name);
 
 
-                function sendsmsGET($mobileNumber, $senderId, $routeId, $message, $serverUrl, $authKey)
+                function sendsmsGET($mobileNumber, $message)
                 {
                     $senderId = 'SUJSR';
                     $routeId1 = 1;
                     $getData = 'mobileNos=' . $mobileNumber . '&message=' . urlencode($message) . '&senderId=' . $senderId . '&routeId=' . $routeId1;
                     //API URL
                     $serverUrl1 = 'msg.msgclub.net';
-                    $authKey1 = '6a4743a8355fb97aa42dc2452185a1cd';
+                    $authKey1 = 'fbfdee58a904a1d82641561a74c354';
                     $url = "http://" . $serverUrl1 . "/rest/services/sendSMS/sendGroupSms?AUTH_KEY=" . $authKey1 . "&" . $getData;
                     $ch = curl_init();
                     curl_setopt_array($ch, array(
@@ -1037,7 +1037,8 @@ if (isset($_POST["action"])) {
                 }
 
                 $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards SU";
-                sendsmsGET($mobile, $senderId, $routeId, $student_msg, $serverUrl, $authKey);
+                sendsmsGET($mobile, $student_msg);
+             
                 $_SESSION['email'] = $add_prospectus_emailid;
                 echo "<script>
                                

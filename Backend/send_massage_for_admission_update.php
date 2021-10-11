@@ -13,7 +13,6 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
     $port = 465;
     $sender_email_id = "admissions.srinathuniversity@gmail.com";  //here put the sender email id he show in the clint email
     $sender_password = "Rafiganj"; //here put the password of email id to send the email otp
-
     // here is the actual logic to send the otp on the email id show keep changes quirefully
     include 'phpmailer/PHPMailerAutoload.php';
 

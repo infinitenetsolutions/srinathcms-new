@@ -153,7 +153,7 @@ if (isset($_POST['submit'])) {
                             <?php if($year_err!=''){ ?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                               
-                                <strong>! Hay <?php  echo $student_name; ?>  </strong> <?php echo $year_err; ?>
+                                <strong>! Hey <?php  echo $student_name; ?>  </strong> <?php echo $year_err; ?>
                                 
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>

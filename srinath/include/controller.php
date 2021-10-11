@@ -2144,7 +2144,7 @@ if (isset($_POST["action"])) {
         $ThemeColor = $_POST["ThemeColor"];
         $notification = str_replace("'", "&#39;", $_POST["notification"]);
         if (!empty($ThemeColor && $notification)) {
-            $check = $objectDefault->insert("notification_tbl", "(`id`, `theme`, `notification`, `visibility`, `timing`, `status`) VALUES ('', '$ThemeColor', '$notification', 'active', '$date_variable_today_month_year_with_timing', '$visible')");
+            $check = $objectDefault->insert("notification_tbl", "(`theme`, `notification`, `visibility`, `timing`, `status`) VALUES ('$ThemeColor', '$notification', 'active', '$date_variable_today_month_year_with_timing', '$visible')");
             if ($check == 1)
                 echo 'success';
             else

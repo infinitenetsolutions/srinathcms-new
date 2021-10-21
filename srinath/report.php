@@ -64,132 +64,7 @@ include "include/authentication.php";
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-12">
-                            <?php
-                            if (isset($autority)) {
-                                echo '<h1 class="m-0 text-dark">Hello, ' . $_SESSION["admin_name"] . ' ~ Welcome to your Dashboard';
-                            } else {
-                            ?>
-                                <h1 class="m-0 text-dark">Dashboard</h1>
-                            <?php } ?>
-                        </div><!-- /.col -->
-                        <!--<div class="col-sm-6">-->
-                        <!--    <ol class="breadcrumb float-sm-right">-->
-                        <!--        <li class="breadcrumb-item"><a href="dashboard">Home</a></li>-->
-                        <!--        <li class="breadcrumb-item active">Dashboard</li>-->
-                        <!--    </ol>-->
-                        <!--</div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-            <?php if (!isset($autority)) { ?>
-                <!-- Main content -->
-                <section class="content">
-                    <div class="container-fluid">
-                        <!-- Small boxes (Stat box) -->
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3><?php $sel_enquiry = mysqli_fetch_assoc(mysqli_query($con, "select count(id) as e_no from tbl_prospectus"));
-                                            echo $sel_enquiry['e_no']; ?>
-                                        </h3>
-
-                                        <p>Enquiry</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-bag"></i>
-                                    </div>
-                                    <a href="nsuniv-prospectus-enquiry" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-warning">
-                                    <div class="inner">
-                                        <h3><?php $sel_course = mysqli_fetch_assoc(mysqli_query($con, "select count(course_id) as c_no from tbl_course"));
-                                            echo $sel_course['c_no']; ?></h3>
-                                        <p>Courses</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-graduation-cap"></i>
-                                    </div>
-                                    <a href="course_view" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3><?php $sel_subjects = mysqli_fetch_assoc(mysqli_query($con, "select count(subject_id) as sub_no from tbl_subject"));
-                                            echo $sel_subjects['sub_no']; ?></h3>
-
-                                        <p>Subjects</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
-                                    </div>
-                                    <a href="subject_view" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3><?php $sel_students = mysqli_fetch_assoc(mysqli_query($con, "select count(admission_id) as s_no from tbl_admission"));
-                                            echo $sel_students['s_no']; ?>
-                                        </h3>
-                                        <p>Students</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <a href="student_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3><?php $sel_fee = mysqli_fetch_assoc(mysqli_query($con, "select count(feepaid_id) as f_no from tbl_fee_paid"));
-                                            echo $sel_fee['f_no']; ?>
-                                        </h3>
-
-                                        <p>Fee Payment</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-rupee-sign"></i>
-                                    </div>
-                                    <a href="income" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-muted">
-                                    <div class="inner">
-                                        <h3><?php $sel_fee = mysqli_fetch_assoc(mysqli_query($con, "select count(feepaid_id) as f_no from tbl_fee_paid"));
-                                            echo $sel_fee['f_no']; ?>
-                                        </h3>
-
-                                        <p>Report</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                    </div>
-                                    <a href="report" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                </section>
-            <?php } ?>
-            <!-- /.content -->
-            <section class="content">
+                            <section class="content">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -318,8 +193,14 @@ include "include/authentication.php";
                                     <!-- /.row -->
                                 </div><!-- /.container-fluid -->
                             </section>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- /.content -->
         </div>
-        
         <!-- /.content-wrapper -->
         <?php include 'include/footer.php'; ?>
 
@@ -547,4 +428,5 @@ include "include/authentication.php";
         })
     })
 </script>
+
 </html>

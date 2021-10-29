@@ -519,7 +519,7 @@ expense.push('" . $total_expense_amount . "')
 
             ],
             datasets: [{
-                data: [admission_fee, prospectus_fee, extra_fee, 60000000, ],
+                data: [admission_fee, prospectus_fee, extra_fee, 600, ],
                 backgroundColor: ['#00a65a', '#ffc107', '#dc3545', '#00c0ef'],
             }]
         }

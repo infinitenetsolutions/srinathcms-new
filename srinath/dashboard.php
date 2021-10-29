@@ -575,7 +575,7 @@ expense.push('" . $total_expense_amount . "')
             data: barChartData,
             options: barChartOptions
         })
-
+// adding some comment
         //---------------------
         //- STACKED BAR CHART -
         //---------------------

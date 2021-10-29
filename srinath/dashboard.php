@@ -396,7 +396,8 @@ for ($i = 0; $i < $last_date; $i++) {
 
 date1.push('" . $d . "')
 </script>";
-    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
+if($i<9){
+  echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
     $income_result = mysqli_query($con, $total_income);
     $total_income_data = mysqli_fetch_array($income_result);
     $total_income_amount = $total_income_data['total'];
@@ -415,6 +416,29 @@ income.push('" . $total_income_amount . "')
 
 expense.push('" . $total_expense_amount . "')
 </script>";
+}
+else{
+  
+  echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-$i-01' AND '$year-0$next-01' ";
+    $income_result = mysqli_query($con, $total_income);
+    $total_income_data = mysqli_fetch_array($income_result);
+    $total_income_amount = $total_income_data['total'];
+
+    echo "<script>
+
+income.push('" . $total_income_amount . "')
+</script>";
+
+    $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-$i-01' AND '$year-0$next-01' ";
+    $expense_result = mysqli_query($con, $total_expense);
+    $total_expense_data = mysqli_fetch_array($expense_result);
+    $total_expense_amount = $total_expense_data['total'];
+
+    echo "<script>
+
+expense.push('" . $total_expense_amount . "')
+</script>";
+}
 }
 
 ?>
@@ -519,7 +543,7 @@ expense.push('" . $total_expense_amount . "')
 
             ],
             datasets: [{
-                data: [admission_fee, prospectus_fee, extra_fee, 600, ],
+                data: [admission_fee, prospectus_fee, extra_fee, 6000, ],
                 backgroundColor: ['#00a65a', '#ffc107', '#dc3545', '#00c0ef'],
             }]
         }

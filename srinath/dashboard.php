@@ -352,7 +352,7 @@ include "include/authentication.php";
     const expense = []
 </script>
 <?php
-$year=date('Y');
+$year = date('Y');
 // getting the total fee admission and semester
 $sql = "select * from tbl_fee_paid  WHERE `status` = '$visible' &&  cash_date BETWEEN '$year-01-01' AND '$year-12-31' ";
 $query = mysqli_query($con, $sql);
@@ -388,34 +388,33 @@ extra_fee=" . $sum13 . "
 echo $last_date = date('m');
 $arr = array();
 
-$year=date('Y');
+$year = date('Y');
 for ($i = 0; $i < $last_date; $i++) {
-     $d =  date("M", strtotime("+" . $i . " month", $last_date));
-    $next=$i+1;
+    $d =  date("M", strtotime("+" . $i . " month", $last_date));
+    $next = $i + 1;
     echo "<script>
 
 date1.push('" . $d . "')
 </script>";
- $total_income="SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
-$income_result = mysqli_query($con, $total_income);
-$total_income_data=mysqli_fetch_array($income_result);
-$total_income_amount=$total_income_data['total'];
+    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
+    $income_result = mysqli_query($con, $total_income);
+    $total_income_data = mysqli_fetch_array($income_result);
+    $total_income_amount = $total_income_data['total'];
 
-echo "<script>
+    echo "<script>
 
 income.push('" . $total_income_amount . "')
 </script>";
 
-$total_expense="SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
-$expense_result = mysqli_query($con, $total_expense);
-$total_expense_data=mysqli_fetch_array($expense_result);
-$total_expense_amount=$total_expense_data['total'];
+    $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
+    $expense_result = mysqli_query($con, $total_expense);
+    $total_expense_data = mysqli_fetch_array($expense_result);
+    $total_expense_amount = $total_expense_data['total'];
 
-echo "<script>
+    echo "<script>
 
 expense.push('" . $total_expense_amount . "')
 </script>";
-
 }
 
 ?>
@@ -520,7 +519,7 @@ expense.push('" . $total_expense_amount . "')
 
             ],
             datasets: [{
-                data: [admission_fee, prospectus_fee, extra_fee, 60000000, ],
+                data: [admission_fee, prospectus_fee, extra_fee, 6000, ],
                 backgroundColor: ['#00a65a', '#ffc107', '#dc3545', '#00c0ef'],
             }]
         }
@@ -575,7 +574,7 @@ expense.push('" . $total_expense_amount . "')
             data: barChartData,
             options: barChartOptions
         })
-// adding some comment
+        // adding some comment
         //---------------------
         //- STACKED BAR CHART -
         //---------------------

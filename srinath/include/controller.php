@@ -113,7 +113,7 @@ if (isset($_POST["action"])) {
                 if (isset($_SESSION["OTP_REAR"]))
                     unset($_SESSION["OTP_REAR"]);
                 $_SESSION["OTP_REAR"] = $random_number;
-                $message = "Your OTP for Change password $random_number, Please do not share this OTP to anyone.\n\n Regards,\nNetaji Subhas University, JSR";
+                $message = "Your OTP for Change password $random_number, Please do not share this OTP to anyone.\n\n Regards,\nSrinath University, JSR";
                 $objectSecond->send_otp($row["admin_mobile"], $message);
                 echo "success";
             }
@@ -936,8 +936,8 @@ if (isset($_POST["action"])) {
         $add_prospectus_mother_name = $_POST["add_prospectus_mother_name"];
         $add_prospectus_address1 = $_POST["add_prospectus_address"];
         $add_prospectus_address2 = $_POST["add_prospectus_address1"];
-        $all_address=array("permanet"=>$add_prospectus_address1,"crosspodens"=>$add_prospectus_address2);
-        $add_prospectus_address=json_encode($all_address);
+        $all_address = array("permanet" => $add_prospectus_address1, "crosspodens" => $add_prospectus_address2);
+        $add_prospectus_address = json_encode($all_address);
         $add_prospectus_country = $_POST["add_prospectus_country"];
         $add_prospectus_state = $_POST["add_prospectus_state"];
         $add_prospectus_city = $_POST["add_prospectus_city"];
@@ -952,20 +952,17 @@ if (isset($_POST["action"])) {
         $course_getting_result = mysqli_query($con, $course_getting_query);
         $course_getting_data = mysqli_fetch_array($course_getting_result);
         $add_prospectus_course_name = $course_getting_data['course_name'];
-        $course_session=$course_getting_data['course_duration'];
+        $course_session = $course_getting_data['course_duration'];
         $add_prospectus_session = $_POST["add_prospectus_session"];
-        if($course_session==2){
-            $add_prospectus_session=date('Y').'-'.date('Y',strtotime('+2 year'));
-        }
-        elseif($course_session==3){
-         $add_prospectus_session=date('Y').'-'.date('Y',strtotime('+3 year'));
-        }
-        else{
-            $add_prospectus_session=date('Y').'-'.date('Y',strtotime('+4 year'));
-        
+        if ($course_session == 2) {
+            $add_prospectus_session = date('Y') . '-' . date('Y', strtotime('+2 year'));
+        } elseif ($course_session == 3) {
+            $add_prospectus_session = date('Y') . '-' . date('Y', strtotime('+3 year'));
+        } else {
+            $add_prospectus_session = date('Y') . '-' . date('Y', strtotime('+4 year'));
         }
         // end the getting course name
-       
+
         $add_prospectus_rate = $_POST["add_prospectus_rate"];
         $add_prospectus_payment_mode = $_POST["add_prospectus_payment_mode"];
         $cashDepositTo = $_POST["cashDepositTo"];
@@ -1038,7 +1035,7 @@ if (isset($_POST["action"])) {
 
                 $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards SU";
                 sendsmsGET($mobile, $student_msg);
-             
+
                 $_SESSION['email'] = $add_prospectus_emailid;
                 echo "<script>
                                
@@ -2171,7 +2168,7 @@ if (isset($_POST["action"])) {
             $allSemester = count($semester);
             $allExamname = count($examname);
             if ($course_id == "all") {
-              echo  $sql = "SELECT * FROM `tbl_course`
+                echo  $sql = "SELECT * FROM `tbl_course`
                             WHERE `status` = '$visible'
                             ";
                 $result = $con->query($sql);

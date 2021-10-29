@@ -128,7 +128,7 @@ include "include/authentication.php";
 
 								<div class="info-box-content">
 									<?php
-									$sql = "select * from tbl_prospectus WHERE  `status` = '$visible'";
+									$sql = "select * from tbl_prospectus WHERE  1";
 									$query = mysqli_query($con, $sql);
 									$sum7 = 0;
 									while ($row = mysqli_fetch_array($query)) {

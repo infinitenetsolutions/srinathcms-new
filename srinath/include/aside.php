@@ -757,6 +757,35 @@
                           </li>						  
                       </ul>
                   </li>
+
+                <!-- here is added new event -->
+                <li class="nav-item has-treeview <?php if($page_no == "16"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 13; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                      <a href="#" class="nav-link <?php if($page_no == "16"){ echo 'active'; } ?>">
+                      <i class=" nav-icon fas fa-hand-holding-heart"></i>
+                          <p>
+                              Event
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                    
+                          <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 13; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "13_1"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                              <a href="event_add" class="nav-link <?php if($page_no_inside == "16_1"){ echo 'active'; } ?>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Add Event</p>
+                              </a>
+                          </li>		
+                          <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 13; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "13_1"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                              <a href="event_hindi.php" class="nav-link <?php if($page_no_inside == "16_2"){ echo 'active'; } ?>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Add Participants</p>
+                              </a>
+                          </li>					  
+                  	  
+                      </ul>
+                </li>
+
+
                   <li class="nav-item has-treeview" <?php if(isset($autority)){ $page_no_temp = 10; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="../../attendance/admin/login.php" class="nav-link <?php if($page_no == "10"){ echo 'active'; } ?>">
                       <i class="fas fa-book-reader nav-icon"></i>

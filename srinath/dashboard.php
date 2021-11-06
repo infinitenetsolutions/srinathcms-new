@@ -397,7 +397,7 @@ for ($i = 0; $i < $last_date; $i++) {
 date1.push('" . $d . "')
 </script>";
 if($i<9){
-    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
+  echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
     $income_result = mysqli_query($con, $total_income);
     $total_income_data = mysqli_fetch_array($income_result);
     $total_income_amount = $total_income_data['total'];
@@ -419,7 +419,7 @@ expense.push('" . $total_expense_amount . "')
 }
 else{
   
-    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-$i-01' AND '$year-$next-01' ";
+  echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-$i-01' AND '$year-$next-01' ";
     $income_result = mysqli_query($con, $total_income);
     $total_income_data = mysqli_fetch_array($income_result);
     $total_income_amount = $total_income_data['total'];

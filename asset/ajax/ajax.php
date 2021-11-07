@@ -24,20 +24,20 @@ $result1 = mysqli_query($connection, $event_qury1);
     <input type="text" disabled value="<?php echo $date['endoe'] ?>" name="department" class="form-control" value="" placeholder="विभाग">
 </div>
 
-<div class="col-4  mt-3">
+<div class="col-3  mt-3">
     <label>गतिविधियों का नाम : <br>
         Activities Name :</label>
     <br>
 
 </div>
-<div class="col-4  mt-3">
+<div class="col-3  mt-3">
     <label>प्रारंभ समय
         : <br>
         Started time :</label>
     <br>
 
 </div>
-<div class="col-4  mt-3">
+<div class="col-3  mt-3">
     <label>समाप्त समय
 
         : <br>
@@ -45,27 +45,66 @@ $result1 = mysqli_query($connection, $event_qury1);
     <br>
 
 </div>
+<div class="col-3  mt-3">
+    <label>
+        नियम व शर्तें
+
+        : <br>
+        Term and Conditions :</label>
+
+
+</div>
 <?php while ($row1 = mysqli_fetch_array($result1)) { ?>
-    <div class="col-4  mt-3">
+
+    <section>
 
 
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal<?php echo $row1['id']; ?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <?php echo $row1['t&c']; ?> </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <div class="col-3  mt-3">
         <label class="la" for="">
-            <input type="checkbox" name="name" required> <?php echo $row1['name']; ?> :</label>
+            <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>" > <?php echo $row1['name']; ?> :</label>
     </div>
 
-
-
-    <div class="col-4  mt-3">
-
-
+    <div class="col-3  mt-3">
+        <input type="hidden" name="start[]" value="<?php echo $row1['start_time_doe']; ?>">
         <label class="la" for=""><?php echo $row1['start_time_doe']; ?></label>
-
-
     </div>
-    <div class="col-4  mt-3">
 
-
+    <div class="col-3  mt-3">
+        <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe']; ?>">
         <label class="la" for=""><?php echo $row1['end_time_doe']; ?></label>
+    </div>
+    <div class="col-3  mt-3">
+        <!-- Button to Open the Modal -->
+        <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
+            T&C
+        </a>
 
     </div>
 <?php } ?>

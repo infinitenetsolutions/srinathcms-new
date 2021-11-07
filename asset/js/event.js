@@ -29,3 +29,21 @@ function change_event(event) {
     xhttp.send();
 
 }
+
+function pin(pincode) {
+    if (pincode.length == 6) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+
+            var string = xhttp.responseText
+            var array = string.split(",").map(String);
+            console.log(array);
+            document.getElementById('state').value=array[2]
+            document.getElementById('city').value=array[1]
+            document.getElementById('district').value=array[4]
+        }
+        xhttp.open("GET", "./asset/ajax/pincode.php?code=" + pincode, true);
+        xhttp.send();
+
+    }
+}

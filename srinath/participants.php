@@ -3,7 +3,7 @@ $page_no = "16";
 $page_no_inside = "16_3";
 include '../Backend/connection.inc.php';
 
-$get_event = "SELECT * FROM `tbl_sub_events` WHERE 1";
+$get_event = "SELECT * FROM `participants_list` WHERE 1";
 $event_result = mysqli_query($connection, $get_event);
 
 ?>
@@ -48,12 +48,12 @@ $event_result = mysqli_query($connection, $get_event);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Events</h1>
+                            <h1>Participants</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Events</li>
+                                <li class="breadcrumb-item active">Participants</li>
                             </ol>
                         </div>
                     </div>
@@ -69,37 +69,57 @@ $event_result = mysqli_query($connection, $get_event);
                             <div class="card-header">
                                 <div class="card-body">
 
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        ADD Activities
-                                    </button>
+                                    
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="table-responsive">
                                     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                                         <thead>
-                                            <tr>
+                                        <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
-                                                <th class="th-sm">Activities Name
+                                                <th class="th-sm">Name
                                                 </th>
-                                                <th class="th-sm">Event Name
+                                                <th class="th-sm">department
                                                 </th>
-                                                <th class="th-sm">Event start
+                                                <th class="th-sm">Father 
                                                 </th>
-                                                <th class="th-sm">Event End
+                                                <th class="th-sm">DOB
                                                 </th>
-                                                <th class="th-sm">No Of Participants
+                                                <th class="th-sm">gender
                                                 </th>
-                                                <th class="th-sm">Place
+                                                <th class="th-sm">student_mobile
                                                 </th>
-                                                <th class="th-sm">T&C
+                                                <th class="th-sm">student_email
                                                 </th>
-                                                <th class="th-sm text-center"> Action 1
+                                                <th class="th-sm">event_name
                                                 </th>
-                                                <th class="th-sm text-center"> Action 2
+                                                <th class="th-sm text-center">name
                                                 </th>
-
-
+                                                <th class="th-sm text-center">type
+                                                </th>
+                                                <th class="th-sm text-center">board name
+                                                </th>
+                                                <th class="th-sm">affiliated_name
+                                                </th>
+                                               
+                                                <th class="th-sm text-center">mobile
+                                                </th>
+                                                <th class="th-sm text-center">Email
+                                                </th>
+                                                <th class="th-sm">state
+                                                </th>
+                                                <th class="th-sm text-center">city
+                                                </th>
+                                                <th class="th-sm text-center">pincode
+                                                </th>
+                                                <th class="th-sm text-center">address1
+                                                </th>
+                                                <th class="th-sm text-center">address2
+                                                </th>
+                                                <th class="th-sm text-center">Action
+                                                </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,10 +127,7 @@ $event_result = mysqli_query($connection, $get_event);
                                             $i = 1;
                                             while ($get_row = mysqli_fetch_array($event_result)) {
 
-                                                include './event_hindi_inc/event_hindi/update.php';
-                                                $get_event2 = "SELECT * FROM `tbl_event` WHERE `id`='" . $get_row['event_id'] . "'";
-                                                $event_result2 = mysqli_query($connection, $get_event2);
-                                                $event_row2 = mysqli_fetch_array($event_result2)
+                                             
                                             ?>
                                                 <!-- Button trigger modal -->
 
@@ -137,18 +154,30 @@ $event_result = mysqli_query($connection, $get_event);
 
                                                 <tr>
                                                     <td><?php echo $i; ?></td>
-                                                    <td><?php echo $get_row['name']; ?></td>
-                                                    <td><?php echo $event_row2['name']; ?></td>
-                                                    <td><?php echo $get_row['startsubdoe'] . ' ' . $get_row['start_time_doe'] ?></td>
-                                                    <td><?php echo $get_row['endsubdoe'] . ' ' . $get_row['end_time_doe'] ?></td>
-                                                    <td><?php echo $get_row['limit']; ?></td>
-                                                    <td><?php echo $get_row['place']; ?></td>
-                                                    <td> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $get_row['id']; ?>">
-                                                            Read
-                                                        </button></td>
-                                                    <td> <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal1<?php echo $get_row['id']; ?>">
-                                                            Update </button></td>
-                                                    <td> <a href="./event_hindi_inc/event_hindi/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
+                                                    <td><?php echo $get_row['s_name']; ?></td>
+                                                    <td><?php echo $get_row['s_department']; ?></td>
+                                                    <td><?php echo $get_row['s_f_name']; ?></td>
+                                                    <td><?php echo $get_row['s_dob']; ?></td>
+                                                    <td><?php echo $get_row['s_gender']; ?></td>
+                                                    <td><?php echo $get_row['s_mobile']; ?></td>
+                                                    <td><?php echo $get_row['s_email']; ?></td>
+                                                    <td><?php $event= str_replace("["," ",$get_row['event_name']); 
+                                                    $event= str_replace("]"," ",$event); 
+                                                    echo str_replace('"'," ",$event); 
+                                                    ?></td>
+                                                       <td><?php echo $get_row['college_name']; ?></td>
+                                                    <td><?php echo $get_row['type']; ?></td>                                     
+                                                    <td><?php echo $get_row['board_name']; ?></td>
+                                                    <td><?php echo $get_row['affiliated_name']; ?></td>
+                                                    <td><?php echo $get_row['mobile']; ?></td>
+                                                    <td><?php echo $get_row['email']; ?></td>
+                                                    <td><?php echo $get_row['state']; ?></td>
+                                                    <td><?php echo $get_row['city']; ?></td>
+                                                    <td><?php echo $get_row['pincode']; ?></td>
+                                                    <td><?php echo $get_row['address1']; ?></td>
+                                                    <td><?php echo $get_row['address2']; ?></td>
+                                                   
+                                                    <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
 
                                                 </tr>
                                             <?php $i++;
@@ -156,29 +185,50 @@ $event_result = mysqli_query($connection, $get_event);
 
                                         </tbody>
                                         <tfoot>
-                                            <tr>
+                                        <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
-                                                <th class="th-sm">Activities Name
+                                                <th class="th-sm">Name
                                                 </th>
-                                                <th class="th-sm">Event Name
+                                                <th class="th-sm">department
                                                 </th>
-                                                <th class="th-sm">Event start
+                                                <th class="th-sm">Father 
                                                 </th>
-                                                <th class="th-sm">Event End
+                                                <th class="th-sm">DOB
                                                 </th>
-                                                <th class="th-sm">No Of Participants
+                                                <th class="th-sm">gender
                                                 </th>
-                                                <th class="th-sm">Place
+                                                <th class="th-sm">student_mobile
                                                 </th>
-                                                <th class="th-sm">T&C
+                                                <th class="th-sm">student_email
                                                 </th>
-                                                <th class="th-sm text-center"> Action 1
+                                                <th class="th-sm">event_name
                                                 </th>
-                                                <th class="th-sm text-center"> Action 2
+                                                <th class="th-sm text-center">name
                                                 </th>
-
-
+                                                <th class="th-sm text-center">type
+                                                </th>
+                                                <th class="th-sm text-center">board name
+                                                </th>
+                                                <th class="th-sm">affiliated_name
+                                                </th>
+                                               
+                                                <th class="th-sm text-center">mobile
+                                                </th>
+                                                <th class="th-sm text-center">Email
+                                                </th>
+                                                <th class="th-sm">state
+                                                </th>
+                                                <th class="th-sm text-center">city
+                                                </th>
+                                                <th class="th-sm text-center">pincode
+                                                </th>
+                                                <th class="th-sm text-center">address1
+                                                </th>
+                                                <th class="th-sm text-center">address2
+                                                </th>
+                                                <th class="th-sm text-center">Action
+                                                </th>
                                             </tr>
                                         </tfoot>
                                     </table>

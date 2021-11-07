@@ -1,13 +1,17 @@
 <?php
 
-if (isset($_POST['update'])) {
+if (isset($_POST['update']) && ($_POST['id'] == $get_row['id'])) {
+    $id = $_POST['id'];
+    $event_id = $_POST['event_id'];
     $name = $_POST['name'];
     $startdoe = $_POST['startd&t'];
     $enddoe = $_POST['endd&t'];
-    $no_of_participants = $_POST['no_of_participants'];
+    $no_of_participants = $_POST['limit'];
     $place = $_POST['place'];
+    $start_time = $_POST['start'];
+    $end_time = $_POST['end'];
     $term_and_conditions = $_POST['t&c'];
-    $insert_event = "UPDATE `tbl_event` SET `name`='$name',`startdoe`='$startdoe',`endoe`='$enddoe',`t&c`='$term_and_conditions',`no_of_participants`='$no_of_participants',`place`='$place',`status`='1' WHERE `id`='" . $get_row['id'] . "'";
+    $insert_event = "UPDATE `tbl_sub_events` SET `name`='$name',`startsubdoe`='$startdoe',`start_time_doe`='$start_time',`endsubdoe`='$enddoe',`end_time_doe`='$end_time',`limit`='$no_of_participants',`place`='$place',`t&c`='$term_and_conditions',`event_id`='$event_id' WHERE `id`='$id'";
     $result_event = mysqli_query($connection, $insert_event);
     if ($result_event > 0) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,7 +23,7 @@ if (isset($_POST['update'])) {
 
         echo "<script>
         setTimeout(function() {
-            window.location.replace('../srinath/event_add')
+            window.location.replace('../srinath/event_hindi.php')
           }, 1000);
 
     </script>";
@@ -55,6 +59,7 @@ if (isset($_POST['update'])) {
 
 
                         ?>
+                        <input type="hidden" name="id" value="<?php echo $get_row['id']; ?>">
                         <div class="col-4">
                             <label>Event Name</label>
                             <select type="text" name="event_id" class="form-control" required>
@@ -77,7 +82,7 @@ if (isset($_POST['update'])) {
                         </div>
                         <div class="col-4">
                             <label>Start Time</label>
-                            <input type="time" value="<?php echo $get_row['start_time_doe']; ?>" placeholder="Event start date and time " name="startd&t" class="form-control">
+                            <input type="time" value="<?php echo $get_row['start_time_doe']; ?>" placeholder="Event start date and time " name="start" class="form-control">
                         </div>
                         <div class="col-4">
                             <label> End Date</label>
@@ -85,11 +90,11 @@ if (isset($_POST['update'])) {
                         </div>
                         <div class="col-4">
                             <label> End Time</label>
-                            <input type="time" value="<?php echo $get_row['end_time_doe']; ?>" name="endd&t" class="form-control">
+                            <input type="time" value="<?php echo $get_row['end_time_doe']; ?>" name="end" class="form-control">
                         </div>
                         <div class="col-4">
                             <label>Limit</label>
-                            <input type="text" name="no_of_participants" value="<?php echo $get_row['limit']; ?>" placeholder="Total number of Participants from one organizations" class="form-control" title="Total number of Participants from one organizations ">
+                            <input type="text" name="limit" value="<?php echo $get_row['limit']; ?>" placeholder="Total number of Participants from one organizations" class="form-control" title="Total number of Participants from one organizations ">
 
                         </div>
                         <div class="col-4">

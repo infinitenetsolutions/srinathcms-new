@@ -1,9 +1,9 @@
 <?php
 $page_no = "16";
-$page_no_inside = "16_1";
+$page_no_inside = "16_3";
 include '../Backend/connection.inc.php';
 
-$get_event = "SELECT * FROM `tbl_event` WHERE 1";
+$get_event = "SELECT * FROM `tbl_sub_events` WHERE 1";
 $event_result = mysqli_query($connection, $get_event);
 
 ?>
@@ -41,7 +41,7 @@ $event_result = mysqli_query($connection, $get_event);
         <?php
         // included the file for inserting the event and updating the event
 
-        include './event_hindi_inc/event_add/insert.php'; ?>
+        include './event_hindi_inc/event_hindi/insert.php'; ?>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -70,7 +70,7 @@ $event_result = mysqli_query($connection, $get_event);
                                 <div class="card-body">
 
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        ADD EVENTS
+                                        ADD Activities
                                     </button>
                                 </div>
                                 <!-- /.card-header -->
@@ -79,6 +79,8 @@ $event_result = mysqli_query($connection, $get_event);
                                         <thead>
                                             <tr>
                                                 <th class="th-sm">S.NO
+                                                </th>
+                                                <th class="th-sm">Activities Name
                                                 </th>
                                                 <th class="th-sm">Event Name
                                                 </th>
@@ -105,8 +107,10 @@ $event_result = mysqli_query($connection, $get_event);
                                             $i = 1;
                                             while ($get_row = mysqli_fetch_array($event_result)) {
 
-                                                include './event_hindi_inc/event_add/update.php';
-
+                                                include './event_hindi_inc/event_hindi/update.php';
+                                                $get_event2 = "SELECT * FROM `tbl_event` WHERE `id`='" . $get_row['event_id'] . "'";
+                                                $event_result2 = mysqli_query($connection, $get_event2);
+                                                $event_row2 = mysqli_fetch_array($event_result2)
                                             ?>
                                                 <!-- Button trigger modal -->
 
@@ -134,16 +138,17 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <tr>
                                                     <td><?php echo $i; ?></td>
                                                     <td><?php echo $get_row['name']; ?></td>
-                                                    <td><?php echo $get_row['startdoe']; ?></td>
-                                                    <td><?php echo $get_row['endoe']; ?></td>
-                                                    <td><?php echo $get_row['no_of_participants']; ?></td>
+                                                    <td><?php echo $event_row2['name']; ?></td>
+                                                    <td><?php echo $get_row['startsubdoe'] . ' ' . $get_row['start_time_doe'] ?></td>
+                                                    <td><?php echo $get_row['endsubdoe'] . ' ' . $get_row['end_time_doe'] ?></td>
+                                                    <td><?php echo $get_row['limit']; ?></td>
                                                     <td><?php echo $get_row['place']; ?></td>
                                                     <td> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $get_row['id']; ?>">
                                                             Read
                                                         </button></td>
                                                     <td> <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal1<?php echo $get_row['id']; ?>">
                                                             Update </button></td>
-                                                    <td> <a href="./event_hindi_inc/event_add/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
+                                                    <td> <a href="./event_hindi_inc/event_hindi/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
 
                                                 </tr>
                                             <?php $i++;
@@ -154,9 +159,13 @@ $event_result = mysqli_query($connection, $get_event);
                                             <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
+                                                <th class="th-sm">Activities Name
+                                                </th>
                                                 <th class="th-sm">Event Name
                                                 </th>
-                                                <th class="th-sm">Date of Event
+                                                <th class="th-sm">Event start
+                                                </th>
+                                                <th class="th-sm">Event End
                                                 </th>
                                                 <th class="th-sm">No Of Participants
                                                 </th>
@@ -168,6 +177,7 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm text-center"> Action 2
                                                 </th>
+
 
                                             </tr>
                                         </tfoot>
@@ -220,8 +230,23 @@ $event_result = mysqli_query($connection, $get_event);
             });
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var i = 1;
 
-   
+            $('#add').click(function() {
+                i++;
+                $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added" ><td><input type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control" style="border:none;" /></td><td><input type="text" name="name[]" placeholder="Enter Activities name" class="form-control" /></td><td><input type="text" name="limit[]" placeholder="Limit of the participants" class="form-control" /></td><td><input type="text" name="place[]" placeholder="Enter the place of the Event" class="form-control" /></td>   <td width="5%" ><input type="time" name="start[]" placeholder="place" class="form-control" /></td>                                     <td width="5%" ><input type="time" name="end[]" placeholder="place" class="form-control" /></td>    <td width="35%"><textarea name="t&c[]" placeholder="" class="form-control"> </textarea></td> <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            });
+
+            $(document).on('click', '.btn_remove', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
+
+        });
+    </script>
+
 </body>
 
 </html>

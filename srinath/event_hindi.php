@@ -70,7 +70,7 @@ $event_result = mysqli_query($connection, $get_event);
                 <div class="card-body">
 
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    ADD EVENTS
+                    ADD Activities
                   </button>
                 </div>
                 <!-- /.card-header -->
@@ -81,6 +81,8 @@ $event_result = mysqli_query($connection, $get_event);
                         <th class="th-sm">S.NO
                         </th>
                         <th class="th-sm">Activities Name
+                        </th>
+                        <th class="th-sm">Event Name
                         </th>
                         <th class="th-sm">Event start
                         </th>
@@ -106,7 +108,9 @@ $event_result = mysqli_query($connection, $get_event);
                       while ($get_row = mysqli_fetch_array($event_result)) {
 
                         include './event_hindi_inc/event_hindi/update.php';
-
+                        $get_event2 = "SELECT * FROM `tbl_event` WHERE `id`='".$get_row['event_id']."'";
+                        $event_result2 = mysqli_query($connection, $get_event2);
+                        $event_row2 = mysqli_fetch_array($event_result2)
                       ?>
                         <!-- Button trigger modal -->
 
@@ -134,8 +138,9 @@ $event_result = mysqli_query($connection, $get_event);
                         <tr>
                           <td><?php echo $i; ?></td>
                           <td><?php echo $get_row['name']; ?></td>
-                          <td><?php echo $get_row['startsubdoe'].' '.$get_row['start_time_doe'] ?></td>
-                          <td><?php echo $get_row['endsubdoe'].' '.$get_row['end_time_doe'] ?></td>
+                          <td><?php echo $event_row2['name']; ?></td>
+                          <td><?php echo $get_row['startsubdoe'] . ' ' . $get_row['start_time_doe'] ?></td>
+                          <td><?php echo $get_row['endsubdoe'] . ' ' . $get_row['end_time_doe'] ?></td>
                           <td><?php echo $get_row['limit']; ?></td>
                           <td><?php echo $get_row['place']; ?></td>
                           <td> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $get_row['id']; ?>">
@@ -151,12 +156,16 @@ $event_result = mysqli_query($connection, $get_event);
 
                     </tbody>
                     <tfoot>
-                      <tr>
+                    <tr>
                         <th class="th-sm">S.NO
+                        </th>
+                        <th class="th-sm">Activities Name
                         </th>
                         <th class="th-sm">Event Name
                         </th>
-                        <th class="th-sm">Date of Event
+                        <th class="th-sm">Event start
+                        </th>
+                        <th class="th-sm">Event End
                         </th>
                         <th class="th-sm">No Of Participants
                         </th>
@@ -168,6 +177,7 @@ $event_result = mysqli_query($connection, $get_event);
                         </th>
                         <th class="th-sm text-center"> Action 2
                         </th>
+
 
                       </tr>
                     </tfoot>

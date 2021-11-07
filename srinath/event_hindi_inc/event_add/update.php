@@ -1,13 +1,14 @@
 <?php
 
-if (isset($_POST['update'])) {
+if (isset($_POST['update']) && ($_POST['id']==$get_row['id'])) {
+    $ev_id=$_POST['id'];
     $name = $_POST['name'];
     $startdoe = $_POST['startd&t'];
     $enddoe = $_POST['endd&t'];
     $no_of_participants = $_POST['no_of_participants'];
     $place = $_POST['place'];
     $term_and_conditions = $_POST['t&c'];
-        $insert_event = "UPDATE `tbl_event` SET `name`='$name',`startdoe`='$startdoe',`endoe`='$enddoe',`t&c`='$term_and_conditions',`no_of_participants`='$no_of_participants',`place`='$place',`status`='1' WHERE `id`='".$get_row['id']."'";
+        $insert_event = "UPDATE `tbl_event` SET `name`='$name',`startdoe`='$startdoe',`endoe`='$enddoe',`t&c`='$term_and_conditions',`no_of_participants`='$no_of_participants',`place`='$place',`status`='1' WHERE `id`='$ev_id'";
     $result_event = mysqli_query($connection, $insert_event);
     if ($result_event > 0) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -50,7 +51,7 @@ if (isset($_POST['update'])) {
                 <div class="container">
                     <div class="row">
 
-
+                    <input type="hidden" name="id" value="<?php echo $get_row['id']; ?>">
                         <div class="col-6">
                             <label>Event Name</label>
                             <input type="text" value="<?php echo $get_row['name']; ?>" placeholder="Enter the Event Name" name="name" class="form-control" required>

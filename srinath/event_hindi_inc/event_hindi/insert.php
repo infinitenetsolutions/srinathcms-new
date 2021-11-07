@@ -54,7 +54,7 @@ $event_result1 = mysqli_query($connection, $get_event1);
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header ">
-                <h3 class="modal-title text-center btn-sm" id="exampleModalLabel">Add Event</h3>
+                <h3 class="modal-title text-center btn-sm" id="exampleModalLabel">Add Activities</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

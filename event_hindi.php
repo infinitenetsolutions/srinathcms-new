@@ -4,76 +4,73 @@ include './Backend/connection.inc.php';
 
 $msg = '';
 if (isset($_POST['submit'])) {
-  $_SESSION['post'] = $_POST;
 
+  for ($i = 0; $i <= count($_POST['mobile']); $i++) {
+    // event info
+    $event_id = $_POST['event'];
+    $event_name = $_POST['event_name'];
+    $event_name = json_encode($event_name);
+    // college info
+    $type = $_POST['type'];
+    $board_name = $_POST['board'] . " " . $_POST['board_name'];
+    $affiliated_name = $_POST['affiliated_name'];
+    $college_name = $_POST['college_name'];
+    $mobile = $_POST['mobile'];
+    $email = $_POST['email'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
+    $district = $_POST['district'];
+    $pincode = $_POST['pincode'];
+    $address1 = $_POST['address1'];
+    $address2 = $_POST['address2'];
 
-  // event info
+    // student info
+    $s_department = $_POST['department'][$i];
+    $s_student_name = $_POST['student_name'][$i];
+    $s_f_name = $_POST['f_name'][$i];
+    $s_dob = $_POST['dob'][$i];
+    $s_gender = $_POST['gender'][$i];
+    $s_student_mobile = $_POST['student_mobile'][$i];
+    $s_student_email = $_POST['student_email'][$i];
 
+    // getting the events total number of  limit for a events
 
-  $event_id = $_POST['event'];
-  $event_name = $_POST['event_name'];
-  $event_name = json_encode($event_name);
+    $event_limit = "SELECT * FROM `tbl_event` WHERE `id`='$event_id' ";
+    $e_result = mysqli_query($connection, $event_limit);
+    $total_event_limit = mysqli_fetch_array($e_result)['no_of_participants'];
+    // getting the all events
+    $participants_limit = "SELECT * FROM `participants_list` WHERE `event_id`='$event_id' ";
+    $participants_result = mysqli_query($connection, $participants_limit);
+    $total_participants_limit = mysqli_num_rows($participants_result);
 
-  // college info
-  $type = $_POST['type'];
-  $board_name = $_POST['board'] . " " . $_POST['board_name'];
-  $affiliated_name = $_POST['affiliated_name'];
-  $college_name = $_POST['college_name'];
-  $mobile = $_POST['mobile'];
-  $email = $_POST['email'];
-  $state = $_POST['state'];
-  $city = $_POST['city'];
-  $district = $_POST['district'];
-  $pincode = $_POST['pincode'];
-  $address1 = $_POST['address1'];
-  $address2 = $_POST['address2'];
-
-  // student info
-  $s_department = $_POST['department'];
-  $s_student_name = $_POST['student_name'];
-  $s_f_name = $_POST['f_name'];
-  $s_dob = $_POST['dob'];
-  $s_gender = $_POST['gender'];
-  $s_student_mobile = $_POST['student_mobile'];
-  $s_student_email = $_POST['student_email'];
-
-  // getting the events total number of  limit for a events
-
-  $event_limit = "SELECT * FROM `tbl_event` WHERE `id`='$event_id' ";
-  $e_result = mysqli_query($connection, $event_limit);
-  $total_event_limit = mysqli_fetch_array($e_result)['no_of_participants'];
-  // getting the all events
-  $participants_limit = "SELECT * FROM `participants_list` WHERE `event_id`='$event_id' ";
-  $participants_result = mysqli_query($connection, $participants_limit);
-  $total_participants_limit = mysqli_num_rows($participants_result);
-
-  if ($total_event_limit >= $total_participants_limit) {
-    $insert_query = "INSERT INTO `participants_list`( `s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`,`event_id`) VALUES
+    if ($total_event_limit >= $total_participants_limit) {
+      $insert_query = "INSERT INTO `participants_list`( `s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`,`event_id`) VALUES
                                              ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$state','$district','$city','$pincode','$address1','$address2','$event_name','$event_id')";
 
-    $insert_resutl = mysqli_query($connection, $insert_query);
-    if ($insert_resutl) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+      $insert_resutl = mysqli_query($connection, $insert_query);
+    }
+  }
+  if ($insert_resutl) {
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Success</strong> Your Data Successfully Added into the Database
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>';
 
-      echo "<script>
+    echo "<script>
       setTimeout(function() {
           window.location.replace('event_hindi.php')
         }, 1000);
 
   </script>";
-    } else {
-      $msg = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  } else {
+    $msg = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
       <strong>Alert!</strong> Data Already Exits Please Check Your Input Data
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>';
-    }
   }
 }
 
@@ -243,6 +240,27 @@ if (isset($_POST['submit'])) {
 
               <br>
 
+
+              <!-- <div class="card un-color">
+                <h5 class="card-title ml-5  text-white">हिन्दी महोत्सव</h5>
+              </div>
+
+
+              <div class="card-body">
+
+                <div class="col-md-12" id="error_section"></div>
+
+                <div class="row">
+                  <div class="col-md-12" id="error_section"></div>
+                  <div class="container">
+
+
+                    <div class="row" id="all_data">
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
               <div class="card un-color">
                 <h5 class="card-title ml-5  text-white">हिन्दी महोत्सव</h5>
               </div>
@@ -254,7 +272,8 @@ if (isset($_POST['submit'])) {
 
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
-
+                  <?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+                  $result1 = mysqli_query($connection, $event_qury1); ?>
                   <div class="card-body">
                     <table class="table table-bordered table-responsive" id="dynamic_field" style="overflow-y:auto;">
                       <thead>
@@ -272,6 +291,9 @@ if (isset($_POST['submit'])) {
                               Mobile No. :</label></th>
                           <th> <label>ई&मेल : <br>
                               E-mail :</label></th>
+                          <th> <label>ई&मेल : <br>
+                              Activities :</label></th>
+
 
                           <th rowspan="2">Actions</th>
                         </tr>
@@ -290,42 +312,25 @@ if (isset($_POST['submit'])) {
                             </select>
                           </td>
                           <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>
-                          <td> <input type="text" name="student_email" placeholder="ई&मेल" class="form-control"></td>
-
+                          <td> <input type="text" name="student_email[]" placeholder="ई&मेल" class="form-control"></td>
+                          <td> <select name="activites[]" placeholder="ई&मेल" class="form-control">
+                              <option selected disabled> - select -</option>
+                              <?php while ($row1 = mysqli_fetch_array($result1)) { ?>
+                                <option value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?> </option>
+                              <?php } ?>
+                            </select>
+                          </td>
                           <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add</i></button></td>
-                          <div class="container">
-
-
-                            <div class="row" id="all_data">
-                            </div>
-                          </div>
                         </tr>
-
                       </tbody>
-
                     </table>
-
                     <br>
-
                   </div>
                 </div>
-
-
-
-
-
-
               </div>
               <br>
-
-
-
               <div class="card-body">
-
               </div>
-
-
-
             </div>
 
             <?php echo $msg; ?>
@@ -409,7 +414,7 @@ if (isset($_POST['submit'])) {
 
     $('#add').click(function() {
       i++;
-      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added" ><td><input type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control" style="border:none;" /></td> </td><td> <input type="text" name="student_name[]" class="form-control" required></td> <td> <input id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender" class="form-control">  <option value="0">Select</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>                  </select>        </td>                  <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>                <td> <input type="text" name="student_email" placeholder="ई&मेल" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added" ><td><input type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control" style="border:none;" /></td> </td><td> <input type="text" name="student_name[]" class="form-control" required></td> <td> <input id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender" class="form-control">  <option value="0">Select</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>                  </select>        </td>                  <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>                <td> <input type="text" name="student_email" placeholder="ई&मेल" class="form-control"></td>    <td> <select name="activites[]" placeholder="ई&मेल" class="form-control">                            <option selected disabled> - select -</option>                           <?php while ($row1 = mysqli_fetch_array($result1)) { ?>                              <option value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?> </option>                           <?php } ?>                          </select>                      </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
 
     $(document).on('click', '.btn_remove', function() {

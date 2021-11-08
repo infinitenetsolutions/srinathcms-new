@@ -6,6 +6,7 @@ include '../Backend/connection.inc.php';
 $get_event = "SELECT * FROM `tbl_sub_events` WHERE 1";
 $event_result = mysqli_query($connection, $get_event);
 
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -4,17 +4,15 @@ include './Backend/connection.inc.php';
 
 // echo "<pre>";
 // print_r($_SESSION['post']);
+$i = 0;
 $msg = '';
 if (isset($_POST['submit'])) {
   $_SESSION['post'] = $_POST;
-
+  $_POST['student'] = $i;
   // event info
-
-
   $event_id = $_POST['event'];
   $event_name = $_POST['event_name'];
   $event_name = json_encode($event_name);
-
   // college info
   $type = $_POST['type'];
   $board_name = $_POST['board'] . " " . $_POST['board_name'];
@@ -54,19 +52,9 @@ if (isset($_POST['submit'])) {
 
     $insert_resutl = mysqli_query($connection, $insert_query);
     if ($insert_resutl) {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>Success</strong> Your Data Successfully Added into the Database
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>';
-
-      echo "<script>
-      setTimeout(function() {
-          window.location.replace('event_hindi.php')
-        }, 1000);
-
-  </script>";
+      echo '<script> alert("Success Do you want to Add more Data")
+        window.location.replace("event_hindi.php")
+       </script>';
     } else {
       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
       <strong>Alert!</strong> Data Already Exits Please Check Your Input Data
@@ -75,6 +63,10 @@ if (isset($_POST['submit'])) {
       </button>
     </div>';
     }
+  } else {
+    echo '<script> alert("Events has been full")
+    window.location.replace("event_hindi.php")
+   </script>';
   }
 }
 $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
@@ -163,7 +155,7 @@ $result = mysqli_query($connection, $event_qury);
                   <div class="col-sm-4  mt-3">
                     <label>विद्यालय/महावि़द्यालय/विश्वविद्यालय/संस्थान का नाम : <br>
                       Name of the School/College/Institution/University :</label>
-                    <input type="text" name="college_name" value="<?php echo $_SESSION['post']['college_name']; ?>"  placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
+                    <input type="text" name="college_name" value="<?php echo $_SESSION['post']['college_name']; ?>" placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
                   </div>
                   <div id="board" style="display: none;" class="col-sm-4  mt-3">
 
@@ -201,7 +193,7 @@ $result = mysqli_query($connection, $event_qury);
                   <div class="col-sm-4  mt-3">
                     <label>विभाग : <br>
                       Department :</label>
-                    <input type="text" name="department" value="<?php echo $_SESSION['post']['department']; ?>"  class="form-control" value="" placeholder="विभाग">
+                    <input type="text" name="department" value="<?php echo $_SESSION['post']['department']; ?>" class="form-control" value="" placeholder="विभाग">
                   </div>
 
                   <div class="col-sm-4  mt-3">
@@ -315,7 +307,7 @@ $result = mysqli_query($connection, $event_qury);
 
                   <div class="col-sm-2  mt-3">
                     <label>लिंग : <br>
-                      Sex :</label>
+                      gender :</label>
                     <select id="gender" name="gender" class="form-control">
                       <option value="0">Select</option>
                       <option value="Male">Male</option>
@@ -411,7 +403,7 @@ $result = mysqli_query($connection, $event_qury);
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./asset/js/event.js"></script>
 

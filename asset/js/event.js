@@ -4,24 +4,15 @@
 if(type=="school"){
     document.getElementById('board').style.display = 'block'
     document.getElementById('affiliated').style.display = 'none'
-    document.getElementById('board_name').style.display = 'none'
+    document.getElementById('board_name').style.display = 'block'
 }
-else{
-    document.getElementById('affiliated').style.display = 'block'
-    document.getElementById('board').style.display = 'none'
-    document.getElementById('board_name').style.display = 'none'
-}
+
 
 
 if(board=="others"){
     document.getElementById('board').style.display = 'block'
     document.getElementById('affiliated').style.display = 'none'
     document.getElementById('board_name').style.display = 'block'
-}
-else{
-    document.getElementById('board').style.display = 'none'
-    document.getElementById('affiliated').style.display = 'block'
-    document.getElementById('board_name').style.display = 'none'
 }
 
 
@@ -60,13 +51,6 @@ function change_event(event) {
 
 }
 
-var event= document.getElementById('event').value
-
-if(event!=null) {
-    var event= document.getElementById('event').value
-   change_event(event)
-
-}
 
 function pin(pincode) {
     if (pincode.length == 6) {

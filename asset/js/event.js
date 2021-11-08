@@ -1,3 +1,33 @@
+ var type= document.getElementById('type').value
+ var board= document.getElementById('board').value
+ console.log(board)
+if(type=="school"){
+    document.getElementById('board').style.display = 'block'
+    document.getElementById('affiliated').style.display = 'none'
+    document.getElementById('board_name').style.display = 'none'
+}
+else{
+    document.getElementById('affiliated').style.display = 'block'
+    document.getElementById('board').style.display = 'none'
+    document.getElementById('board_name').style.display = 'none'
+}
+
+
+if(board=="others"){
+    document.getElementById('board').style.display = 'block'
+    document.getElementById('affiliated').style.display = 'none'
+    document.getElementById('board_name').style.display = 'block'
+}
+else{
+    document.getElementById('board').style.display = 'none'
+    document.getElementById('affiliated').style.display = 'block'
+    document.getElementById('board_name').style.display = 'none'
+}
+
+
+
+
+
 function change(name) {
     console.log(name)
     if (name == 'school') {
@@ -27,6 +57,14 @@ function change_event(event) {
     }
     xhttp.open("GET", "./asset/ajax/ajax.php?event=" + event, true);
     xhttp.send();
+
+}
+
+var event= document.getElementById('event').value
+
+if(event!=null) {
+    var event= document.getElementById('event').value
+   change_event(event)
 
 }
 

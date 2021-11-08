@@ -1,29 +1,34 @@
 <?php
 include './Backend/connection.inc.php';
+// getting the all events name
+
+// echo "<pre>";
+// print_r($_SESSION['post']);
+$msg = '';
 if (isset($_POST['submit'])) {
   $_SESSION['post'] = $_POST;
-  echo "<pre>";
-  print_r($_SESSION);
 
   // event info
+
+
+  $event_id = $_POST['event'];
   $event_name = $_POST['event_name'];
   $event_name = json_encode($event_name);
+
   // college info
   $type = $_POST['type'];
-
   $board_name = $_POST['board'] . " " . $_POST['board_name'];
-
   $affiliated_name = $_POST['affiliated_name'];
   $college_name = $_POST['college_name'];
   $mobile = $_POST['mobile'];
   $email = $_POST['email'];
   $state = $_POST['state'];
   $city = $_POST['city'];
+  $district = $_POST['district'];
   $pincode = $_POST['pincode'];
   $address1 = $_POST['address1'];
   $address2 = $_POST['address2'];
 
-  // college info end
   // student info
   $s_department = $_POST['department'];
   $s_student_name = $_POST['student_name'];
@@ -33,16 +38,48 @@ if (isset($_POST['submit'])) {
   $s_student_mobile = $_POST['student_mobile'];
   $s_student_email = $_POST['student_email'];
 
-  echo $insert_query = "INSERT INTO `participants_list`(`s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `state`, `city`, `pincode`, `address1`, `address2`, `event_name`) VALUES 
-                          ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$state','$city','$pincode','$address1','$address2','$event_name')";
+  // getting the events total number of  limit for a events
 
-  $insert_resutl = mysqli_query($connection, $insert_query);
-  if ($insert_resutl) {
-    echo "success";
+  $event_limit = "SELECT * FROM `tbl_event` WHERE `id`='$event_id' ";
+  $e_result = mysqli_query($connection, $event_limit);
+  $total_event_limit = mysqli_fetch_array($e_result)['no_of_participants'];
+  // getting the all events
+  $participants_limit = "SELECT * FROM `participants_list` WHERE `event_id`='$event_id' ";
+  $participants_result = mysqli_query($connection, $participants_limit);
+  $total_participants_limit = mysqli_num_rows($participants_result);
+
+  if ($total_event_limit >= $total_participants_limit) {
+    $insert_query = "INSERT INTO `participants_list`( `s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`,`event_id`) VALUES
+                                             ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$state','$district','$city','$pincode','$address1','$address2','$event_name','$event_id')";
+
+    $insert_resutl = mysqli_query($connection, $insert_query);
+    if ($insert_resutl) {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success</strong> Your Data Successfully Added into the Database
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>';
+
+      echo "<script>
+      setTimeout(function() {
+          window.location.replace('event_hindi.php')
+        }, 1000);
+
+  </script>";
+    } else {
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Alert!</strong> Data Already Exits Please Check Your Input Data
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>';
+    }
   }
 }
 $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
 $result = mysqli_query($connection, $event_qury);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -110,8 +147,12 @@ $result = mysqli_query($connection, $event_qury);
                     <form action="" method="POST">
                       <label>विद्यालय/महावि़द्यालय/संस्थान का नाम : <br>
                         School/College/Institution :</label>
-                      <select onchange="change(this.value)" name="type" class="form-control">
-                        <option selected disabled>विद्यालय/महावि़द्यालय/संस्थान का नाम </option>
+                      <select id="type" onchange="change(this.value)" name="type" class="form-control">
+                        <?php if ($_SESSION['post']['type']) { ?>
+                          <option value="<?php echo $_SESSION['post']['type']; ?>"><?php echo $_SESSION['post']['type']; ?></option>
+                        <?php } ?>
+
+                        <option disabled>विद्यालय/महावि़द्यालय/संस्थान का नाम </option>
                         <option value="school">School</option>
                         <option value="college">College</option>
                         <option value="institution">Institution</option>
@@ -122,85 +163,121 @@ $result = mysqli_query($connection, $event_qury);
                   <div class="col-sm-4  mt-3">
                     <label>विद्यालय/महावि़द्यालय/विश्वविद्यालय/संस्थान का नाम : <br>
                       Name of the School/College/Institution/University :</label>
-                    <input type="text" name="college_name" value="" placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
+                    <input type="text" name="college_name" value="<?php echo $_SESSION['post']['college_name']; ?>"  placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
                   </div>
                   <div id="board" style="display: none;" class="col-sm-4  mt-3">
 
                     <label>
                       बोर्ड का नाम चुनें : <br>
                       Choose the Board:</label>
-                    <select onchange="change_board(this.value)" name="board" class="form-control">
-                      <option selected disabled>बोर्ड का नाम चुनें</option>
-                      <option value="CBSE">CBSE</option>
-                      <option value="ICSE">ICSE</option>
-                      <option value="CISCE">CISCE</option>
-                      <option value="NIOS">NIOS</option>
-                      <option value="IB">IB</option>
-                      <option value="CIE">CIE</option>
-                      <option value="others">Others</option>
+                    <select onchange="change_board(this.value)" id="board" name="board" class="form-control">
+                      <?php if ($_SESSION['post']['board']) { ?>
+                        <option selected value="CBSE"><?php echo $_SESSION['post']['board_name']; ?></option>
+                      <?php } else { ?>
+                        <option disabled>बोर्ड का नाम चुनें</option>
+                        <option value="CBSE">CBSE</option>
+                        <option value="ICSE">ICSE</option>
+                        <option value="CISCE">CISCE</option>
+                        <option value="NIOS">NIOS</option>
+                        <option value="IB">IB</option>
+                        <option value="CIE">CIE</option>
+                        <option value="others">Others</option>
+                      <?php } ?>
                     </select>
                   </div>
 
                   <div id="board_name" style="display: none;" class="col-sm-4   mt-3">
                     <label>बोर्ड का नाम : <br>
                       Name of the Board :</label>
-                    <input id="form_no" type="text" name="board_name" class="form-control" placeholder="बोर्ड का नाम :">
+                    <input id="form_no" value="<?php echo $_SESSION['post']['board_name']; ?>" type="text" name="board_name" class="form-control" placeholder="बोर्ड का नाम :">
                   </div>
 
                   <div id="affiliated" style="display: none;" class="col-sm-4   mt-3">
                     <label>संबद्ध का नाम : <br>
                       Affiliated with/to :</label>
-                    <input id="form_no" type="text" name="affiliated_name" class="form-control" placeholder="संबद्ध का नाम :">
+                    <input id="form_no" value="<?php echo $_SESSION['post']['affiliated_name']; ?>" type="text" name="affiliated_name" class="form-control" placeholder="संबद्ध का नाम :">
                   </div>
 
+                  <div class="col-sm-4  mt-3">
+                    <label>विभाग : <br>
+                      Department :</label>
+                    <input type="text" name="department" value="<?php echo $_SESSION['post']['department']; ?>"  class="form-control" value="" placeholder="विभाग">
+                  </div>
 
                   <div class="col-sm-4  mt-3">
                     <label>मोबाईल नं. : <br>
                       Mobile No. :</label>
-                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                    <input type="text" value="<?php echo $_SESSION['post']['mobile']; ?>" name="mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>ई&मेल : <br>
                       E-mail :</label>
-                    <input type="text" name="email" placeholder="ई&मेल" class="form-control">
+                    <input type="text" value="<?php echo $_SESSION['post']['email']; ?>" name="email" placeholder="ई&मेल" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>पिन कोड
                       : <br>
                       Pin code :</label>
-                    <input required onkeyup="pin(this.value)" type="text" name="pincode" placeholder="पिन कोड" class="form-control">
+                    <input required onkeyup="pin(this.value)" type="text" value="<?php echo $_SESSION['post']['pincode']; ?>" name="pincode" placeholder="पिन कोड" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>राज्य : <br>
                       State :</label>
-                    <input readonly id="state" type="text" name="state" placeholder="राज्य " class="form-control">
+                    <input readonly id="state" value="<?php echo $_SESSION['post']['state']; ?>" type="text" name="state" placeholder="राज्य " class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>जिला : <br>
                       District :</label>
-                    <input readonly id="district" type="text" name="district" placeholder="शहर" class="form-control">
+                    <input readonly id="district" value="<?php echo $_SESSION['post']['district']; ?>" type="text" name="district" placeholder="शहर" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>शहर : <br>
                       City :</label>
-                    <input id="city" type="text" name="city" placeholder="शहर" class="form-control">
+                    <input id="city" value="<?php echo $_SESSION['post']['city']; ?>" type="text" name="city" placeholder="शहर" class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
                     <label>पता - 1 : <br>
                       Address - 1 :</label>
-                    <input type="text" name="address1" placeholder="पता - 1" class="form-control">
+                    <input value="<?php echo $_SESSION['post']['address1']; ?>" type="text" name="address1" placeholder="पता - 1" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>पता - 2 : <br>
                       Address - 2 :</label>
-                    <input type="text" name="address2" placeholder="पता - 2 " class="form-control">
+                    <input value="<?php echo $_SESSION['post']['address2']; ?>" type="text" name="address2" placeholder="पता - 2 " class="form-control">
                   </div>
 
                 </div>
 
               </div>
 
+              <br>
+
+              <div class="card un-color">
+                <h5 class="card-title ml-5  text-white">हिन्दी महोत्सव</h5>
+              </div>
+
+
+              <div class="card-body">
+
+                <div class="col-md-12" id="error_section"></div>
+                <div class="col-sm-4  mt-3">
+
+                  <label>आयोजन का नाम : <br>
+                    Name of Events :</label>
+                  <select id="event" required onchange="change_event(this.value)" name="event" class="form-control">
+                    <option selected disabled>आयोजन का नाम </option>
+                    <?php while ($row = mysqli_fetch_array($result)) { ?>
+                      <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+
+                <div class="container">
+                  <div class="row" id="all_data">
+                  </div>
+                </div>
+              </div>
               <br>
               <div class="card un-color">
                 <h5 class="card-title ml-5  text-white">Participant’s Details</h5>
@@ -211,11 +288,6 @@ $result = mysqli_query($connection, $event_qury);
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
 
-                  <div class="col-sm-4  mt-3">
-                    <label>विभाग : <br>
-                      Department :</label>
-                    <input type="text" name="department" class="form-control" value="" placeholder="विभाग">
-                  </div>
 
 
 
@@ -264,35 +336,10 @@ $result = mysqli_query($connection, $event_qury);
               </div>
 
 
-              <br>
-
-              <div class="card un-color">
-                <h5 class="card-title ml-5  text-white">हिन्दी महोत्सव</h5>
-              </div>
-
-
-              <div class="card-body">
-
-                <div class="col-md-12" id="error_section"></div>
-                <div class="col-sm-4  mt-3">
-
-                  <label>आयोजन का नाम : <br>
-                    Name of Events :</label>
-                  <select required onchange="change_event(this.value)" name="event_name" class="form-control">
-                    <option selected disabled>आयोजन का नाम </option>
-                    <?php while ($row = mysqli_fetch_array($result)) { ?>
-                      <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-
-                <div class="container">
-                  <div class="row" id="all_data">
-                  </div>
-                </div>
-              </div>
 
             </div>
+
+            <?php echo $msg; ?>
             <div class="col-md-12 mt-5 ">
               <label for="">
                 <input type="checkbox" name="" id="" required> &nbsp; सामान्य नीति नियम एवं विशिष्ट निर्देश <a href="" class="text-un" data-toggle="modal" data-target="#exampleModal">Term & Conditions</a>
@@ -312,12 +359,7 @@ $result = mysqli_query($connection, $event_qury);
     </div>
     <section class="card mt-5 un-color">
       <img src="./asset/img/event/hindi1.png" class="img-fluid" alt="">
-
       <br>
-
-
-
-
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

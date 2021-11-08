@@ -1,19 +1,19 @@
- var type= document.getElementById('type').value
- var board= document.getElementById('board').value
- console.log(board)
-if(type=="school"){
-    document.getElementById('board').style.display = 'block'
-    document.getElementById('affiliated').style.display = 'none'
-    document.getElementById('board_name').style.display = 'block'
-}
+//  var type= document.getElementById('type').value
+//  var board= document.getElementById('board').value
+//  console.log(board)
+// // if(type=="school"){
+// //     document.getElementById('board').style.display = 'block'
+// //     document.getElementById('affiliated').style.display = 'none'
+// //     document.getElementById('board_name').style.display = 'none'
+// // }
 
 
 
-if(board=="others"){
-    document.getElementById('board').style.display = 'block'
-    document.getElementById('affiliated').style.display = 'none'
-    document.getElementById('board_name').style.display = 'block'
-}
+// // if(board=="others"){
+// //     document.getElementById('board').style.display = 'block'
+// //     document.getElementById('affiliated').style.display = 'none'
+// //     document.getElementById('board_name').style.display = 'block'
+// // }
 
 
 
@@ -40,16 +40,16 @@ function change_board(board) {
     }
 }
 
-function change_event(event) {
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onload = function () {
-        document.getElementById('all_data').innerHTML = xhttp.responseText;
-    }
-    xhttp.open("GET", "./asset/ajax/ajax.php?event=" + event, true);
-    xhttp.send();
-
+event = "18";
+var xhttp = new XMLHttpRequest();
+xhttp.onload = function () {
+    document.getElementById('all_data').innerHTML = xhttp.responseText;
 }
+xhttp.open("GET", "./asset/ajax/ajax.php?event=" + event, true);
+xhttp.send();
+
+
 
 
 function pin(pincode) {
@@ -60,12 +60,13 @@ function pin(pincode) {
             var string = xhttp.responseText
             var array = string.split(",").map(String);
             console.log(array);
-            document.getElementById('state').value=array[2]
-            document.getElementById('city').value=array[1]
-            document.getElementById('district').value=array[4]
+            document.getElementById('state').value = array[2]
+            document.getElementById('city').value = array[1]
+            document.getElementById('district').value = array[4]
         }
         xhttp.open("GET", "./asset/ajax/pincode.php?code=" + pincode, true);
         xhttp.send();
 
     }
 }
+

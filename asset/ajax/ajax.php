@@ -2,7 +2,7 @@
 include '../../Backend/connection.inc.php';
 $id = $_GET['event'];
 
-$event_qury = "SELECT * FROM `tbl_event` WHERE `id`='$id'";
+$event_qury = "SELECT * FROM `tbl_event` WHERE 1";
 $result = mysqli_query($connection, $event_qury);
 $date = mysqli_fetch_array($result);
 // getting the all activities of the event
@@ -88,7 +88,7 @@ $result1 = mysqli_query($connection, $event_qury1);
     </section>
     <div class="col-3  mt-3">
         <label class="la" for="">
-            <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>" > <?php echo $row1['name']; ?> :</label>
+            <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?> :</label>
     </div>
 
     <div class="col-3  mt-3">

@@ -115,9 +115,7 @@ $event_result1 = mysqli_query($connection, $get_event1);
                                 </tr>
                             </tbody>
                         </table>
-
                         <br>
-
                     </div>
                 </div>
                 <div class="modal-footer">

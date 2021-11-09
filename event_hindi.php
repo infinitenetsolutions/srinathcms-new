@@ -4,12 +4,14 @@ include './Backend/connection.inc.php';
 
 $msg = '';
 if (isset($_POST['submit'])) {
-
-  for ($i = 0; $i <= count($_POST['mobile']); $i++) {
+// echo "<pre>";
+// print_r($_POST);
+// exit;
+  for ($i = 0; $i < count($_POST['student_name']); $i++) {
     // event info
     $event_id = $_POST['event'];
-    $event_name = $_POST['event_name'];
-    $event_name = json_encode($event_name);
+    // $event_name = $_POST['event_name'];
+    // $event_name = json_encode($event_name);
     // college info
     $type = $_POST['type'];
     $board_name = $_POST['board'] . " " . $_POST['board_name'];
@@ -19,23 +21,25 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $state = $_POST['state'];
     $city = $_POST['city'];
+    $s_department = $_POST['department'];
     $district = $_POST['district'];
     $pincode = $_POST['pincode'];
     $address1 = $_POST['address1'];
     $address2 = $_POST['address2'];
 
     // student info
-    $s_department = $_POST['department'][$i];
+
     $s_student_name = $_POST['student_name'][$i];
     $s_f_name = $_POST['f_name'][$i];
     $s_dob = $_POST['dob'][$i];
     $s_gender = $_POST['gender'][$i];
     $s_student_mobile = $_POST['student_mobile'][$i];
     $s_student_email = $_POST['student_email'][$i];
+     $event_name = $_POST['activites'][$i];
 
     // getting the events total number of  limit for a events
 
-    $event_limit = "SELECT * FROM `tbl_event` WHERE `id`='$event_id' ";
+    $event_limit = "SELECT * FROM `tbl_event` WHERE 1";
     $e_result = mysqli_query($connection, $event_limit);
     $total_event_limit = mysqli_fetch_array($e_result)['no_of_participants'];
     // getting the all events
@@ -49,6 +53,11 @@ if (isset($_POST['submit'])) {
 
       $insert_resutl = mysqli_query($connection, $insert_query);
     }
+    else{
+      echo" <script>
+        alert('event is full')
+        </script>";
+      }
   }
   if ($insert_resutl) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -65,7 +74,7 @@ if (isset($_POST['submit'])) {
 
   </script>";
   } else {
-    $msg = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
       <strong>Alert!</strong> Data Already Exits Please Check Your Input Data
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -76,6 +85,15 @@ if (isset($_POST['submit'])) {
 
 
 ?>
+
+<?php              $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+                  $result1 = mysqli_query($connection, $event_qury1); 
+
+
+                  $event_qury2 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+                  $result3 = mysqli_query($connection, $event_qury2); 
+                  
+                  ?>
 <!DOCTYPE html>
 <html>
 
@@ -86,7 +104,8 @@ if (isset($_POST['submit'])) {
   <link rel="icon" href="images/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./asset/css/event.css">
-
+  <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
@@ -199,7 +218,7 @@ if (isset($_POST['submit'])) {
                   <div class="col-sm-4  mt-3">
                     <label>ई&मेल : <br>
                       E-mail :</label>
-                    <input type="text" name="email" placeholder="ई&मेल" class="form-control">
+                    <input type="email" name="email" placeholder="ई&मेल" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>पिन कोड
@@ -272,8 +291,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
-                  <?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-                  $result1 = mysqli_query($connection, $event_qury1); ?>
+                
                   <div class="card-body">
                     <table class="table table-bordered table-responsive" id="dynamic_field" style="overflow-y:auto;">
                       <thead>
@@ -291,7 +309,7 @@ if (isset($_POST['submit'])) {
                               Mobile No. :</label></th>
                           <th> <label>ई&मेल : <br>
                               E-mail :</label></th>
-                          <th> <label>ई&मेल : <br>
+                          <th> <label>गतिविधियां : <br>
                               Activities :</label></th>
 
 
@@ -301,18 +319,18 @@ if (isset($_POST['submit'])) {
                       <tbody>
                         <tr>
                           <td width="5%"><input type="text" id="slno1" value="1" readonly class="form-control" style="border:none;" /></td>
-                          <td> <input type="text" name="student_name[]" class="form-control" required></td>
-                          <td> <input id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>
-                          <td> <input id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>
+                          <td> <input required type="text" name="student_name[]" class="form-control" required></td>
+                          <td> <input required id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>
+                          <td> <input required id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>
                           <td>
-                            <select id="gender" name="gender" class="form-control">
+                            <select id="gender" name="gender[]" class="form-control">
                               <option value="0">Select</option>
                               <option value="Male">Male</option>
                               <option value="Female">Female</option>
                             </select>
                           </td>
-                          <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>
-                          <td> <input type="text" name="student_email[]" placeholder="ई&मेल" class="form-control"></td>
+                          <td> <input required type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>
+                          <td> <input required type="email" name="student_email[]" placeholder="ई&मेल" class="form-control"></td>
                           <td> <select name="activites[]" placeholder="ई&मेल" class="form-control">
                               <option selected disabled> - select -</option>
                               <?php while ($row1 = mysqli_fetch_array($result1)) { ?>
@@ -328,9 +346,8 @@ if (isset($_POST['submit'])) {
                   </div>
                 </div>
               </div>
-              <br>
-              <div class="card-body">
-              </div>
+            
+            
             </div>
 
             <?php echo $msg; ?>
@@ -339,7 +356,7 @@ if (isset($_POST['submit'])) {
                 <input type="checkbox" name="" id="" required> &nbsp; सामान्य नीति नियम एवं विशिष्ट निर्देश <a href="" class="text-un" data-toggle="modal" data-target="#exampleModal">Term & Conditions</a>
               </label>
             </div>
-            <br>
+        
             <div class=" text-center">
 
 
@@ -414,7 +431,7 @@ if (isset($_POST['submit'])) {
 
     $('#add').click(function() {
       i++;
-      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added" ><td><input type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control" style="border:none;" /></td> </td><td> <input type="text" name="student_name[]" class="form-control" required></td> <td> <input id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender" class="form-control">  <option value="0">Select</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>                  </select>        </td>                  <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>                <td> <input type="text" name="student_email" placeholder="ई&मेल" class="form-control"></td>    <td> <select name="activites[]" placeholder="ई&मेल" class="form-control">                            <option selected disabled> - select -</option>                           <?php while ($row1 = mysqli_fetch_array($result1)) { ?>                              <option value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?> </option>                           <?php } ?>                          </select>                      </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+      $('#dynamic_field').append('<tr id="row' + i + '" class="dynamic-added" ><td><input type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control" style="border:none;" /></td> </td><td> <input type="text" name="student_name[]" class="form-control" required></td> <td> <input id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option value="0">Select</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>                  </select>        </td>                  <td> <input type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>                <td> <input type="text" name="student_email[]" placeholder="ई&मेल" class="form-control"></td>    <td> <select name="activites[]" placeholder="activites" class="form-control">                            <option selected disabled> - select -</option>                           <?php while ($row3 = mysqli_fetch_array($result3)) { ?>                              <option value="<?php echo $row3['name']; ?>"> <?php echo $row3['name']; ?> </option>                           <?php } ?>                          </select>                      </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
 
     $(document).on('click', '.btn_remove', function() {

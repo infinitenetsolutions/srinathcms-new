@@ -24,6 +24,7 @@ function pincode($pincode)
         }
     } else {
         $_SESSION['notvalid'] = 'pin code not valid';
+//         somthig is missing
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 include './Backend/connection.inc.php';
 // getting the all events name
-
+// changing into the pages
 $msg = '';
 if (isset($_POST['submit'])) {
 // echo "<pre>";

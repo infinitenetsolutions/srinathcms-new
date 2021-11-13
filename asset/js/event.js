@@ -21,11 +21,19 @@
 
 function change(name) {
     console.log(name)
-    if (name == 'school') {
+    if(name=="university"){
+        document.getElementById('affiliated').style.display = 'none'
+        document.getElementById('board').style.display = 'none'
+        document.getElementById('board_name').style.display = 'none'
+    }
+    else if (name == 'school') {
         document.getElementById('board').style.display = 'block'
         document.getElementById('affiliated').style.display = 'none'
         document.getElementById('board_name').style.display = 'none'
-    } else {
+    }
+ 
+    
+    else {
         document.getElementById('affiliated').style.display = 'block'
         document.getElementById('board').style.display = 'none'
         document.getElementById('board_name').style.display = 'none'
@@ -63,6 +71,7 @@ function pin(pincode) {
             document.getElementById('state').value = array[2]
             document.getElementById('city').value = array[1]
             document.getElementById('district').value = array[4]
+            document.getElementById('country').value = array[3]
         }
         xhttp.open("GET", "./asset/ajax/pincode.php?code=" + pincode, true);
         xhttp.send();

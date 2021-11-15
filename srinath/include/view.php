@@ -6887,7 +6887,7 @@ if (isset($_GET["action"])) {
                                                                     <div class="col-sm-12">
                                                                         <div class="card card-warning">
                                                                             <div class="card-header">
-                                                                                <h3 class="card-title">Nsuniv Informations</h3>
+                                                                                <h3 class="card-title">Srinath Informations</h3>
                                                                             </div>
                                                                             <div class="card-body pl-5 pr-5">
                                                                                 <!-- Minimal style -->
@@ -7607,7 +7607,7 @@ if (isset($_GET["action"])) {
     }
     //Admin list End
 
-    //Nsuniv Home Enquiry Start
+    //Srinath Home Enquiry Start
     if ($_GET["action"] == "get_nsuniv_home_enquiry") {
     ?>
         <table id="example1" class="table table-bordered table-striped">
@@ -7828,8 +7828,8 @@ if (isset($_GET["action"])) {
         </script>
     <?php
     }
-    //Nsuniv Home Enquiry End
-    //Nsuniv Prospectus Enquiry Start
+    //Srinath Home Enquiry End
+    //Srinath Prospectus Enquiry Start
     if ($_GET["action"] == "get_nsuniv_prospectus_enquiry") {
         $objectSecond->update("tbl_alert", "`prospectus_enquiry` = '0' WHERE `id`='1'");
         $objectSecond->sql = "";
@@ -8262,8 +8262,8 @@ if (isset($_GET["action"])) {
         </script>
     <?php
     }
-    //Nsuniv Prospectus Enquiry End
-    //Nsuniv Get Started Enquiry Start
+    //Srinath Prospectus Enquiry End
+    //Srinath Get Started Enquiry Start
     if ($_GET["action"] == "get_nsuniv-admission-enquiry") {
         $objectSecond->update("tbl_alert", "`tbl_prospectus` = '0' WHERE `id`='1'");
         $objectSecond->sql = "";
@@ -8452,9 +8452,9 @@ else{
         </script>
     <?php
     }
-    //Nsuniv Get Started Enquiry End
+    //Srinath Get Started Enquiry End
 
-    //Nsuniv Online Admission Start
+    //Srinath Online Admission Start
     if ($_GET["action"] == "get_nsuniv_admission_enquiry") {
         $objectSecond->update("tbl_alert", "`admission_enquiry` = '0' WHERE `id`='1'");
         $objectSecond->sql = "";
@@ -8785,9 +8785,9 @@ else{
         </script>
     <?php
     }
-    //Nsuniv Online Admission  End
+    //Srinath Online Admission  End
 
-    //Nsuniv All Notification Start
+    //Srinath All Notification Start
     if ($_GET["action"] == "get_all_nsuniv_notifications") {
         $total_Notifications = 0;
         $objectSecond->select("tbl_alert");
@@ -8803,7 +8803,7 @@ else{
             echo $total_Notifications;
         }
     }
-    //Nsuniv Prospectus Notification Start
+    //Srinath Prospectus Notification Start
     if ($_GET["action"] == "get_all_nsuniv_prospectus_notifications") {
         $total_Notifications = 0;
         $objectSecond->select("tbl_alert");
@@ -8817,8 +8817,8 @@ else{
             echo $total_Notifications;
         }
     }
-    //Nsuniv Prospectus Notification End
-    //Nsuniv Admission Notification Start
+    //Srinath Prospectus Notification End
+    //Srinath Admission Notification Start
     if ($_GET["action"] == "get_all_nsuniv_admission_notifications") {
         $total_Notifications = 0;
         $objectSecond->select("tbl_alert");
@@ -8832,8 +8832,8 @@ else{
             echo $total_Notifications;
         }
     }
-    //Nsuniv Admission Notification End
-    //Nsuniv Get Started Notification Start
+    //Srinath Admission Notification End
+    //Srinath Get Started Notification Start
     if ($_GET["action"] == "get_all_nsuniv_get_started_notifications") {
         $total_Notifications = 0;
         $objectSecond->select("tbl_alert");
@@ -8847,9 +8847,9 @@ else{
             echo $total_Notifications;
         }
     }
-    //Nsuniv Get Started Notification End
+    //Srinath Get Started Notification End
 
-    //Nsuniv Notification Start
+    //Srinath Notification Start
     if ($_GET["action"] == "get_nsuniv_notifications") {
     ?>
         <table id="example1" class="table table-bordered table-striped">
@@ -8998,7 +8998,7 @@ else{
         </script>
     <?php
     }
-    //Nsuniv Notification End
+    //Srinath Notification End
     /* ---------- All Fetch Codes End ------------------------ */
 
     //Fetching course & year wise fee report Start

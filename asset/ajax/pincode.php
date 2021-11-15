@@ -12,12 +12,10 @@ function pincode($pincode)
             echo  $_SESSION['pincode'] = $variable->Pincode . "," ;
             echo  $_SESSION['block'] = $variable->Block.",";
             echo  $_SESSION['state'] = $variable->State .",";
-            echo  $_SESSION['country'] = $variable->State.",";
+            echo  $_SESSION['country'] = $variable->Country.",";
             echo   $_SESSION['distric'] = $variable->District .",";
 ?>
-            <script>
 
-            </script>
 <?php
         } else {
             $_SESSION['notvalid'] = 'pin code not valid';

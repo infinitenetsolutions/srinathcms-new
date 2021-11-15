@@ -7,7 +7,7 @@ if(isset($_GET['delete'])){
 if($success_result){
     echo "<script>
     setTimeout(function() {
-        window.location.replace('../srinath/participants')
+        window.location.replace('../../participants.php')
       }, 10);
 
 </script>";
@@ -16,3 +16,5 @@ else{
     echo "data not deleted";
 }
 }
+?>
+

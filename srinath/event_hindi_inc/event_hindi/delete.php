@@ -7,7 +7,7 @@ if(isset($_GET['delete'])){
 if($success_result){
     echo "<script>
     setTimeout(function() {
-        window.location.replace('../srinath/event_add')
+        window.location.replace('../../event_hindi.php')
       }, 10);
 
 </script>";

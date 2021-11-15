@@ -414,7 +414,7 @@ $result1 = mysqli_query($connection, $event_qury1);
             <tr>
 
                 <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i
-                            class="fa fa-plus" aria-hidden="true"> Add</i></button></td>
+                            class="fa fa-plus" aria-hidden="true">+</i></button></td>
             </tr>
         </tbody>
     </table>
@@ -503,7 +503,7 @@ $result1 = mysqli_query($connection, $event_qury1);
             <div class=" text-center">
 
 
-              <button type="submit" name="submit" class="btn btn-success  btn-xl ">Submit</button>
+              <button type="submit" name="submit" class="btn btn-success">&nbsp; &nbsp; Submit &nbsp; &nbsp;</button>
 
             </div>
           </form>

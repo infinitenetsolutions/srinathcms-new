@@ -218,15 +218,19 @@ if (isset($_POST['submit'])) {
 
 
                   <div class="col-sm-4  mt-3">
-                  <label>मोबाईल नं. : <br>
-                      Mobile No. :</label>
+                    <label>संस्थान का मोबाईल नं. : <br>
+                    Institute  Mobile No. :</label>
                     <input type="text" name="stu_mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
-                 
                   <div class="col-sm-4  mt-3">
-                    <label>ई-मेल : <br>
+                    <label>मोबाईल नं. : <br>
+                      Mobile No. :</label>
+                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                  </div>
+                  <div class="col-sm-4  mt-3">
+                    <label>ई&मेल : <br>
                       E-mail :</label>
-                    <input type="email" name="email" placeholder="ई-मेल" class="form-control">
+                    <input type="email" name="email" placeholder="ई&मेल" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>पिन कोड
@@ -275,49 +279,7 @@ if (isset($_POST['submit'])) {
 
 
               <div class="card un-color">
-                <h5 class="card-title ml-5  text-white">2. शिक्षक का विवरण ( Teachers Details )</h5>
-              </div>
-
-
-              <div class="card-body">
-
-             
-
-           
-             
-
-
-                    <div class="row" >
-
-                    <div class="col-sm-3  mt-3">
-                    <label>नाम : <br>
-                    Name :</label>
-                    <input id="" type="text" name="t_name" placeholder="नाम" class="form-control">
-                  </div>
-
-                  <div class="col-sm-3  mt-3">
-                    <label>मोबाईल नं. : <br>
-                      Mobile No. :</label>
-                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
-                  </div>
-                  <div class="col-sm-3  mt-3">
-                    <label>ई-मेल : <br>
-                      E-mail :</label>
-                    <input type="email" name="t_email" placeholder="ई-मेल" class="form-control">
-                  </div>
-                  <div class="col-sm-3  mt-3">
-                    <label> पहचान : <br>
-                      id :</label>
-                    <input type="file" name="t_idimg" placeholder=" पहचान " class="form-control">
-                  </div>
-                    </div>
-    
-              </div>
-              <br>
-              <br>
-
-              <div class="card un-color">
-                <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participants Details )</h5>
+                <h5 class="card-title ml-5  text-white">2. प्रतिभागियों का विवरण ( Participants Details )</h5>
               </div>
 
 
@@ -451,7 +413,71 @@ Competition Name :</label>
                   </div>
               </div>
 
-            
+              <!-- <div class="card un-color">
+                <h5 class="card-title ml-5  text-white">हिन्दी महोत्सव</h5>
+              </div> -->
+
+
+              <!-- <div class="card-body">
+
+             
+                <div class="row">
+              
+                
+                  <div class="card-body"> -->
+                    <!-- <table class="table table-bordered table-responsive" id="dynamic_field" style="overflow-y:auto;">
+                      <thead> -->
+                        <!-- <tr>
+                          <th>S.NO</th>
+                          <th> <label>प्रतिभागी का नाम : <br>
+                              Participant’s Name :</label></th>
+                          <th> <label>पिता का नाम : <br>
+                              Father’s Name :</label></th>
+                          <th> <label>जन्म तिथि : <br>
+                              Date of Birth :</label></th>
+                          <th> <label>लिंग : <br>
+                              Sex :</label></th>
+                          <th><label>मोबाईल नं. : <br>
+                              Mobile No. :</label></th>
+                          <th> <label>ई&मेल : <br>
+                              E-mail :</label></th>
+                          <th> <label>गतिविधियां : <br>
+                              Activities :</label></th>
+
+
+                          <th rowspan="2">Actions</th>
+                        </tr> -->
+                      <!-- </thead>
+                      <tbody>
+                        <tr> -->
+                          <!-- <td width="5%"><input type="text" id="slno1" value="1" readonly class="form-control" style="border:none;" /></td>
+                          <td> <input required type="text" name="student_name[]" class="form-control" required></td>
+                          <td> <input required id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>
+                          <td> <input required id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>
+                          <td>
+                            <select id="gender" name="gender[]" class="form-control">
+                              <option value="0">Gender</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                            </select>
+                          </td>
+                          <td> <input required type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>
+                          <td> <input required type="email" name="student_email[]" placeholder="ई&मेल" class="form-control"></td>
+                          <td> <select name="activites[]" placeholder="ई&मेल" class="form-control">
+                              <option selected disabled> - select -</option>
+                              <?php  while ($row1 = mysqli_fetch_array($result1)) { ?>
+                                <option value="<?php echo $row1['name']; ?>"> <?php  echo $row1['name']; ?> </option>
+                              <?php  } ?>
+                            </select>
+                          </td> -->
+                          <!-- <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"> Add</i></button></td>
+                        </tr>
+                      </tbody>
+                    </table> -->
+                    <!-- <br>
+                  </div>
+                </div>
+              </div> -->
             
             
             </div>
@@ -534,11 +560,6 @@ Competition Name :</label>
 <?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
 $result1 = mysqli_query($connection, $event_qury1); 
 while ($row1 = mysqli_fetch_array($result1)) {
-  $limit=$row1['limit'];
-  $id=$row1['id'];
-  echo "<script>
-  limit$id=$limit
-</script>";
 ?>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -546,7 +567,6 @@ while ($row1 = mysqli_fetch_array($result1)) {
 
     $('#add<?php echo $row1['id'] ?>').click(function() {
       i++;
-      if(limit<?php echo $row1['id'] ?> >=i)
       $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row' + i + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागि का नाम " type="text" placeholder="प्रतिभागि का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled value="0">Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>                  </select>        </td>                  <td> <input title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
     });
 

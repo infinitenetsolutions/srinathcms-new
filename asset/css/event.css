@@ -15,7 +15,8 @@
     color: #7e2b1d;
 }
 td .form-control {
-    width: 7rem;
+    width: 8rem;
+    color: #7e2b1d;
 }
 
 td .form-control1
@@ -33,4 +34,10 @@ td .form-control1
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+::placeholder{
+    color: #7e2b1d !important;
+}
+div .form-control{
+  color: #7e2b1d;
 }

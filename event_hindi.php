@@ -43,17 +43,18 @@ if (isset($_POST['submit'])) {
     $s_student_email = $_POST['student_email'][$i];
      $event_name = $_POST['activites'][$i];
 
-    // getting the events total number of  limit for a events
+    // getting the events total number of  limit for a colleges
 
-    $event_limit = "SELECT * FROM `tbl_event` WHERE 1";
+    $event_limit = "SELECT COUNT(college_name) as college_name FROM `participants_list` WHERE college_name='nsu';";
     $e_result = mysqli_query($connection, $event_limit);
-    $total_event_limit = mysqli_fetch_array($e_result)['no_of_participants'];
-    // getting the all events
-    $participants_limit = "SELECT * FROM `participants_list` WHERE `event_id`='$event_id' ";
+    $total_college_limit = mysqli_fetch_array($e_result)['college_name'];
+    // getting the all events 
+    $participants_limit = "SELECT * FROM `tbl_sub_events` WHERE  `name`='$event_name' ";
     $participants_result = mysqli_query($connection, $participants_limit);
-    $total_participants_limit = mysqli_num_rows($participants_result);
+    $total_participants_limit = mysqli_fetch_array($participants_result);
+    $total_event_limit=$total_participants_limit['limit'];
 
-    if ($total_event_limit >= $total_participants_limit) {
+    if ($total_event_limit >= $total_college_limit) {
       $insert_query="INSERT INTO `participants_list`(`s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `s_whatsapp`, `s_address`, `s_imgages`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `country`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`, `event_id`) VALUES
       ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$student_whatsapp','$student_address','$student_images','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$country','$state','$district','$city','$pincode','$address1','$address2','$event_name','$event_id')";
           $insert_resutl = mysqli_query($connection, $insert_query);

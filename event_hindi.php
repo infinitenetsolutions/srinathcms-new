@@ -330,6 +330,7 @@ if (isset($_POST['submit'])) {
 
 
                     <div class="row" >
+                  
                     <?php
 
 
@@ -337,12 +338,14 @@ $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
 $result = mysqli_query($connection, $event_qury);
 $date = mysqli_fetch_array($result);
 // getting the all activities of the event
-$event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+$event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE `name` LIKE '%विद्यालय%'";
 $result1 = mysqli_query($connection, $event_qury1);
 
 ?>
 
-
+<div class="card un-color col-sm-12">
+                                <h5 class="card-title ml-5  text-white">1. विद्यालय ,+2 विद्यालय </h5>
+                            </div>
 
 <div class="col-4  mt-3">
     <label>
@@ -376,7 +379,10 @@ Competition Name :</label>
 
 </div>
 
-<?php while ($row1 = mysqli_fetch_array($result1)) { ?>
+<?php while ($row1 = mysqli_fetch_array($result1)) {
+  
+
+  ?>
 
 <section>
 

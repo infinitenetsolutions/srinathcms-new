@@ -217,7 +217,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                                         $result1 = mysqli_query($connection, $event_qury1);
 
                                         ?>
-
+      
                                         <div class="col-sm-5  mt-3">
                                             <label>
                                                 प्रारंभ दिनांक और समय: <br>

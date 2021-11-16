@@ -21,19 +21,15 @@
 
 function change(name) {
     console.log(name)
-    if(name=="university"){
+    if (name == "university") {
         document.getElementById('affiliated').style.display = 'none'
         document.getElementById('board').style.display = 'none'
         document.getElementById('board_name').style.display = 'none'
-    }
-    else if (name == 'school') {
+    } else if (name == 'school') {
         document.getElementById('board').style.display = 'block'
         document.getElementById('affiliated').style.display = 'none'
         document.getElementById('board_name').style.display = 'none'
-    }
- 
-    
-    else {
+    } else {
         document.getElementById('affiliated').style.display = 'block'
         document.getElementById('board').style.display = 'none'
         document.getElementById('board_name').style.display = 'none'

@@ -69,20 +69,20 @@ $event_result = mysqli_query($connection, $get_event);
                             <div class="card-header">
                                 <div class="card-body">
 
-                                    
+
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="table-responsive">
                                     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                                         <thead>
-                                        <tr>
+                                            <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
                                                 <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
-                                                <th class="th-sm">Father 
+                                                <th class="th-sm">Father
                                                 </th>
                                                 <th class="th-sm">DOB
                                                 </th>
@@ -91,6 +91,12 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm">student_mobile
                                                 </th>
                                                 <th class="th-sm">student_email
+                                                </th>
+                                                <th class="th-sm">student_whatsapp
+                                                </th>
+                                                <th class="th-sm">student_address
+                                                </th>
+                                                <th class="th-sm">student_imgages
                                                 </th>
                                                 <th class="th-sm">event_name
                                                 </th>
@@ -102,10 +108,12 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm">affiliated_name
                                                 </th>
-                                               
+
                                                 <th class="th-sm text-center">mobile
                                                 </th>
                                                 <th class="th-sm text-center">Email
+                                                </th>
+                                                <th class="th-sm">country
                                                 </th>
                                                 <th class="th-sm">state
                                                 </th>
@@ -119,7 +127,7 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm text-center">Action
                                                 </th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -127,7 +135,7 @@ $event_result = mysqli_query($connection, $get_event);
                                             $i = 1;
                                             while ($get_row = mysqli_fetch_array($event_result)) {
 
-                                             
+
                                             ?>
                                                 <!-- Button trigger modal -->
 
@@ -161,22 +169,32 @@ $event_result = mysqli_query($connection, $get_event);
                                                     <td><?php echo $get_row['s_gender']; ?></td>
                                                     <td><?php echo $get_row['s_mobile']; ?></td>
                                                     <td><?php echo $get_row['s_email']; ?></td>
-                                                    <td><?php $event= str_replace("["," ",$get_row['event_name']); 
-                                                    $event= str_replace("]"," ",$event); 
-                                                    echo str_replace('"'," ",$event); 
-                                                    ?></td>
-                                                       <td><?php echo $get_row['college_name']; ?></td>
-                                                    <td><?php echo $get_row['type']; ?></td>                                     
+                                                    <td><?php echo $get_row['s_whatsapp']; ?></td>
+                                                    <td><?php echo $get_row['s_address']; ?></td>
+                                                    <td>
+                                                       
+                                                            <img class="img-fluid" src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($get_row["s_imgages"]) . '" ' ?>>
+
+
+                                                    </td>
+
+                                                    <td><?php $event = str_replace("[", " ", $get_row['event_name']);
+                                                        $event = str_replace("]", " ", $event);
+                                                        echo str_replace('"', " ", $event);
+                                                        ?></td>
+                                                    <td><?php echo $get_row['college_name']; ?></td>
+                                                    <td><?php echo $get_row['type']; ?></td>
                                                     <td><?php echo $get_row['board_name']; ?></td>
                                                     <td><?php echo $get_row['affiliated_name']; ?></td>
                                                     <td><?php echo $get_row['mobile']; ?></td>
                                                     <td><?php echo $get_row['email']; ?></td>
                                                     <td><?php echo $get_row['state']; ?></td>
+                                                    <td><?php echo $get_row['state']; ?></td>
                                                     <td><?php echo $get_row['city']; ?></td>
                                                     <td><?php echo $get_row['pincode']; ?></td>
                                                     <td><?php echo $get_row['address1']; ?></td>
                                                     <td><?php echo $get_row['address2']; ?></td>
-                                                   
+
                                                     <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
 
                                                 </tr>
@@ -185,14 +203,14 @@ $event_result = mysqli_query($connection, $get_event);
 
                                         </tbody>
                                         <tfoot>
-                                        <tr>
+                                            <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
                                                 <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
-                                                <th class="th-sm">Father 
+                                                <th class="th-sm">Father
                                                 </th>
                                                 <th class="th-sm">DOB
                                                 </th>
@@ -201,6 +219,12 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm">student_mobile
                                                 </th>
                                                 <th class="th-sm">student_email
+                                                </th>
+                                                <th class="th-sm">student_whatsapp
+                                                </th>
+                                                <th class="th-sm">student_address
+                                                </th>
+                                                <th class="th-sm">student_imgages
                                                 </th>
                                                 <th class="th-sm">event_name
                                                 </th>
@@ -212,10 +236,12 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm">affiliated_name
                                                 </th>
-                                               
+
                                                 <th class="th-sm text-center">mobile
                                                 </th>
                                                 <th class="th-sm text-center">Email
+                                                </th>
+                                                <th class="th-sm">country
                                                 </th>
                                                 <th class="th-sm">state
                                                 </th>
@@ -229,6 +255,7 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm text-center">Action
                                                 </th>
+
                                             </tr>
                                         </tfoot>
                                     </table>

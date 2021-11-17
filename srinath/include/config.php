@@ -7,7 +7,8 @@
     else{
     $con = mysqli_connect("localhost", "root", "raja@#", "srinath_cms");
     // Check connection
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }}
+    // if ($con->connect_error) {
+    //     die("Connection failed: " . $con->connect_error);
+    // }
+}
 ?>

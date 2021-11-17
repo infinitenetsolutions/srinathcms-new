@@ -1,5 +1,6 @@
 <?php
 include './Backend/connection.inc.php';
+include './Backend/sendevent.php';
 // getting the all events name
 
 $msg = '';
@@ -7,16 +8,39 @@ if (isset($_POST['submit'])) {
 // echo "<pre>";
 // print_r($_POST);
 // exit;
+
+// teacher info
+$college_name = $_POST['college_name'];
+for ($i = 0; $i < count($_POST['t_name']); $i++) {
+$t_name = $_POST['t_name'][$i];
+$t_mobile = $_POST['t_mobile'][$i];
+$t_email = $_POST['t_email'][$i];
+ $t_img = addslashes(file_get_contents($_FILES['img']['tmp_name'][$i]));
+
+$update_teachers="INSERT INTO `event_teachers`(`name`, `email`, `phone`, `images`, `college_name`)
+ VALUES ('$t_name','$t_mobile','$t_email','$t_img','$college_name')";
+$insert_resutl=mysqli_query($connection,$update_teachers);
+
+}
+
+
   for ($i = 0; $i < count($_POST['student_name']); $i++) {
+
+
+
+
     // event info
     $event_id = $_POST['event'];
+
+
+
     // $event_name = $_POST['event_name'];
     // $event_name = json_encode($event_name);
     // college info
     $type = $_POST['type'];
     $board_name = $_POST['board'] . " " . $_POST['board_name'];
     $affiliated_name = $_POST['affiliated_name'];
-    $college_name = $_POST['college_name'];
+    // $college_name = $_POST['college_name'];
     $stu_mobile = $_POST['stu_mobile'];
     $mobile = $_POST['mobile'];
     $email = $_POST['email'];
@@ -59,6 +83,8 @@ if (isset($_POST['submit'])) {
       ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$student_whatsapp','$student_address','$student_images','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$country','$state','$district','$city','$pincode','$address1','$address2','$event_name','$event_id')";
           $insert_resutl = mysqli_query($connection, $insert_query);
 
+
+
     }
     else{
       echo" <script>
@@ -68,12 +94,14 @@ if (isset($_POST['submit'])) {
   }
   if ($insert_resutl) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>Success</strong> Your Data Successfully Added into the Database
+      <strong>Success</strong>“५वाँ अंतरराष्ट्रीय श्रीनाथ हिंदी महोत्सव, जमशेदपुर २०२१”
+       में आपका नामांकन दर्ज करने के लिए धन्यवाद !!
+       पुष्टिकरण मेल आपके द्वारा दिए गए ई-मेल पते  पर भेज दिया गया है।
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>';
-
+    event_mail($email, $mobile,$college_name);
     echo "<script>
       setTimeout(function() {
           window.location.replace('printevent.php?ins=$college_name')
@@ -145,7 +173,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
 
           <div class="card-header un-color">
-            <h3 class="card-title text-center text-white">५ वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर 2021</h3>
+            <h3 class="card-title text-center text-white">५ वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर  २०२१</h3>
 
 
           </div>
@@ -172,7 +200,7 @@ if (isset($_POST['submit'])) {
                         <option selected disabled>संस्थान का प्रकार</option>
                         <option value="school">School</option>
                         <option value="college">College</option>
-                        <option value="institution">Institution</option>
+                        <!-- <option value="institution">Institution</option> -->
                         <option value="university">University</option>
                       </select>
 
@@ -216,11 +244,16 @@ if (isset($_POST['submit'])) {
                     <input type="text" name="department" class="form-control" value="" placeholder="विभाग">
                   </div>
 
+                  <div class="col-sm-4  mt-3">
+                    <label>फ़ोन नं. : <br>
+                    Phone No. :</label>
+                    <input type="text" name="phone" placeholder="फ़ोन नं." class="form-control">
+                  </div>
 
                   <div class="col-sm-4  mt-3">
                   <label>मोबाईल नं. : <br>
                       Mobile No. :</label>
-                    <input type="text" name="stu_mobile" placeholder="मोबाईल नं." class="form-control">
+                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
                  
                   <div class="col-sm-4  mt-3">
@@ -273,49 +306,59 @@ if (isset($_POST['submit'])) {
 
               <br>
 
-
+            <!-- here to started the representetives details -->
               <div class="card un-color">
-                <h5 class="card-title ml-5  text-white">2. शिक्षक का विवरण ( Teachers Details )</h5>
+                <h5 class="card-title ml-5  text-white">2. प्रतिनिधि का विवरण ( Details of Representativies )</h5>
               </div>
 
 
               <div class="card-body">
-
-             
-
-           
-             
-
-
+                     
                     <div class="row" >
-
                     <div class="col-sm-3  mt-3">
                     <label>नाम : <br>
-                    Name :</label>
-                    <input id="" type="text" name="t_name" placeholder="नाम" class="form-control">
+                    Name :</label> 
+                   <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
 
                   <div class="col-sm-3  mt-3">
                     <label>मोबाईल नं. : <br>
                       Mobile No. :</label>
-                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
                     <label>ई-मेल : <br>
                       E-mail :</label>
-                    <input type="email" name="t_email" placeholder="ई-मेल" class="form-control">
+                    <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
-                    <label> पहचान : <br>
+                  <label> पहचान : <br>
                       id :</label>
-                    <input type="file" name="t_idimg" placeholder=" पहचान " class="form-control">
+                    <input type="file" name="t_idimg[]" placeholder=" पहचान " class="form-control">
+                  </div>
+                  <div class="col-sm-3  mt-3">
+                 
+                    <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
+                  </div>
+
+                  <div class="col-sm-3  mt-3">
+                  
+                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
+                  </div>
+                  <div class="col-sm-3  mt-3">
+                 
+                    <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
+                  </div>
+                  <div class="col-sm-3  mt-3">
+                   
+                  <input type="file" name="img[]" placeholder="ई-मेल" class="form-control">
                   </div>
                     </div>
     
               </div>
               <br>
               <br>
-
+<!-- here to started the events details -->
               <div class="card un-color">
                 <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participants Details )</h5>
               </div>
@@ -438,6 +481,7 @@ Competition Name :</label>
 </div>
 <div class="col-12  mt-3">
     <!-- Button to Open the Modal -->
+    <!-- here to started the student entire details -->
     <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id']?>"
         style="overflow-y:auto;">
         <thead>

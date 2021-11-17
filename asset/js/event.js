@@ -45,13 +45,13 @@ function change_board(board) {
 }
 
 
-event = "18";
-var xhttp = new XMLHttpRequest();
-xhttp.onload = function () {
-    document.getElementById('all_data').innerHTML = xhttp.responseText;
-}
-xhttp.open("GET", "./asset/ajax/ajax.php?event=" + event, true);
-xhttp.send();
+// event = "18";
+// var xhttp = new XMLHttpRequest();
+// xhttp.onload = function () {
+//     document.getElementById('all_data').innerHTML = xhttp.responseText;
+// }
+// xhttp.open("GET", "./asset/ajax/ajax.php?event=" + event, true);
+// xhttp.send();
 
 
 

@@ -1,20 +1,20 @@
 <?php
 include './Backend/connection.inc.php';
 // getting the all events name
-$institute_name=$_GET['ins'];
+$institute_name = $_GET['ins'];
 $get_event = "SELECT * FROM `participants_list` WHERE `college_name`='$institute_name' ";
 $event_result = mysqli_query($connection, $get_event);
+$row = mysqli_fetch_array($event_result);
 
+$get_event1 = "SELECT * FROM `participants_list` WHERE `college_name`='$institute_name' ";
+$event_result1 = mysqli_query($connection, $get_event1);
+
+
+$teacher_event = "SELECT * FROM `event_teachers` WHERE  `college_name`='$institute_name' ";
+$teacher_result = mysqli_query($connection, $teacher_event);
 ?>
 
-<?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-$result1 = mysqli_query($connection, $event_qury1);
 
-
-$event_qury2 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-$result3 = mysqli_query($connection, $event_qury2);
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -42,7 +42,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-12">
-                            <h1 class="text-center text-white">हिन्दी महोत्सव</h1>
+                            <h1 class="text-center text-white"></h1>
                             <img class="img-fluid" src="./asset/img/event/hindi.png" alt="">
                         </div>
 
@@ -59,8 +59,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                 <div class="container-fluid">
 
                     <div class="card-header un-color">
-                        <h3 class="card-title text-center text-white">5 वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर, झारखण्ड 2021</h3>
-
+                        <h3 class="card-title text-center text-white">५ वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
 
                     </div>
                     <!-- SELECT2 EXAMPLE -->
@@ -78,111 +77,76 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                                 <div class="row">
 
-                                    <div class="col-sm-4  mt-3">
-                                        <form action="" method="POST">
-                                            <label> संस्थान का प्रकार : <br>
-                                                type of Orgnization :</label>
-                                            <select onchange="change(this.value)" name="type" class="form-control">
-                                                <option selected disabled>संस्थान का प्रकार</option>
-                                                <option value="school">School</option>
-                                                <option value="college">College</option>
-                                                <option value="institution">Institution</option>
-                                                <option value="university">University</option>
-                                            </select>
 
-                                    </div>
-                                    <div class="col-sm-4  mt-3">
-                                        <label>विद्यालय/महावि़द्यालय/विश्वविद्यालय/संस्थान का नाम : <br>
-                                            Name of the School/College/Institution/University :</label>
-                                        <input type="text" name="college_name" value="" placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
-                                    </div>
-                                    <div id="board" style="display: none;" class="col-sm-4  mt-3">
-
-                                        <label>
-                                            बोर्ड का नाम चुनें : <br>
-                                            Choose the Board:</label>
-                                        <select onchange="change_board(this.value)" name="board" class="form-control">
-                                            <option selected disabled>बोर्ड का नाम चुनें</option>
-                                            <option value="CBSE">CBSE</option>
-                                            <option value="ICSE">ICSE</option>
-                                            <option value="CISCE">CISCE</option>
-                                            <option value="NIOS">NIOS</option>
-                                            <option value="IB">IB</option>
-                                            <option value="CIE">CIE</option>
-                                            <option value="others">Others</option>
-                                        </select>
+                                    <div class="col-sm-3  mt-3">
+                                        <label><?php echo ucwords($row['type']) ?> का नाम : <br>
+                                            Name of the <?php echo $row['type'] ?> :</label>
+                                        <input disabled type="text" name="college_name" value="<?php echo $row['college_name'] ?>" placeholder="विद्यालय/महावि़द्यालय/संस्थान का नाम" class="form-control">
                                     </div>
 
-                                    <div id="board_name" style="display: none;" class="col-sm-4   mt-3">
-                                        <label>बोर्ड का नाम : <br>
-                                            Name of the Board :</label>
-                                        <input id="form_no" type="text" name="board_name" class="form-control" placeholder="बोर्ड का नाम :">
-                                    </div>
 
-                                    <div id="affiliated" style="display: none;" class="col-sm-4   mt-3">
-                                        <label>संबद्ध का नाम : <br>
-                                            Affiliated with/to :</label>
-                                        <input id="form_no" type="text" name="affiliated_name" class="form-control" placeholder="संबद्ध का नाम :">
-                                    </div>
-                                    <div class="col-sm-4  mt-3">
+
+
+
+                                    <div class="col-sm-3  mt-3">
                                         <label>विभाग : <br>
                                             Department :</label>
-                                        <input type="text" name="department" class="form-control" value="" placeholder="विभाग">
+                                        <input disabled type="text" value="<?php echo $row['s_department'] ?>" name="department" class="form-control" value="" placeholder="विभाग">
                                     </div>
 
 
-                                    <div class="col-sm-4  mt-3">
-                                        <label>संस्थान का मोबाईल नं. : <br>
-                                            Institute Mobile No. :</label>
-                                        <input type="text" name="stu_mobile" placeholder="मोबाईल नं." class="form-control">
-                                    </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>मोबाईल नं. : <br>
                                             Mobile No. :</label>
-                                        <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                                        <input disabled type="text" value="<?php echo $row['mobile'] ?>" name="stu_mobile" placeholder="मोबाईल नं." class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
+                                        <label>फ़ोन नं. : <br>
+                                            Phone No. :</label>
+                                        <input disabled type="text" value="<?php echo $row['mobile'] ?>" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                                    </div>
+                                    <div class="col-sm-3  mt-3">
                                         <label>ई&मेल : <br>
                                             E-mail :</label>
-                                        <input type="email" name="email" placeholder="ई&मेल" class="form-control">
+                                        <input disabled type="email" value="<?php echo $row['email'] ?>" name="email" placeholder="ई&मेल" class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>पिन कोड
                                             : <br>
                                             Pin code :</label>
-                                        <input required onkeyup="pin(this.value)" type="text" name="pincode" placeholder="पिन कोड" class="form-control">
+                                        <input disabled required onkeyup="pin(this.value)" value="<?php echo $row['pincode'] ?>" type="text" name="pincode" placeholder="पिन कोड" class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>देश : <br>
                                             Country :</label>
-                                        <input readonly id="country" type="text" name="country" placeholder="देश" class="form-control">
+                                        <input disabled readonly id="country" value="<?php echo $row['country'] ?>" type="text" name="country" placeholder="देश" class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>राज्य : <br>
                                             State :</label>
-                                        <input readonly id="state" type="text" name="state" placeholder="राज्य " class="form-control">
+                                        <input disabled readonly id="state" value="<?php echo $row['state'] ?>" type="text" name="state" placeholder="राज्य " class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>जिला : <br>
                                             District :</label>
-                                        <input readonly id="district" type="text" name="district" placeholder="शहर" class="form-control">
+                                        <input disabled readonly id="district" value="<?php echo $row['district'] ?>" type="text" name="district" placeholder="शहर" class="form-control">
                                     </div>
 
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>शहर : <br>
                                             City :</label>
-                                        <input id="city" type="text" name="city" placeholder="शहर" class="form-control">
+                                        <input disabled id="city" type="text" value="<?php echo $row['s_department'] ?>" name="city" placeholder="शहर" class="form-control">
                                     </div>
 
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>पता - 1 : <br>
                                             Address - 1 :</label>
-                                        <input type="text" name="address1" placeholder="पता - 1" class="form-control">
+                                        <input disabled type="text" name="address1" value="<?php echo $row['address1'] ?>" placeholder="पता - 1" class="form-control">
                                     </div>
-                                    <div class="col-sm-4  mt-3">
+                                    <div class="col-sm-3  mt-3">
                                         <label>पता - 2 : <br>
                                             Address - 2 :</label>
-                                        <input type="text" name="address2" placeholder="पता - 2 " class="form-control">
+                                        <input disabled type="text" name="address2" value="<?php echo $row['address2'] ?>" placeholder="पता - 2 " class="form-control">
                                     </div>
 
                                 </div>
@@ -190,10 +154,66 @@ $result3 = mysqli_query($connection, $event_qury2);
                             </div>
 
                             <br>
+                            <!-- here to started the representetives details -->
+                            <div class="card un-color">
+                                <h5 class="card-title ml-5  text-white">2. प्रतिनिधि का विवरण ( Details of Representativies )</h5>
+                            </div>
 
+
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-sm-3  mt-3">
+                                        <label>नाम : <br>
+                                            Name :</label>
+                                        <input disabled id="" type="hidden" name="t_name[]" placeholder="नाम" class="form-control">
+                                    </div>
+
+                                    <div class="col-sm-3  mt-3">
+                                        <label>मोबाईल नं. : <br>
+                                            Mobile No. :</label>
+                                        <input disabled type="hidden" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
+                                    </div>
+                                    <div class="col-sm-3  mt-3">
+                                        <label>ई-मेल : <br>
+                                            E-mail :</label>
+                                        <input disabled type="hidden" name="t_email[]" placeholder="ई-मेल" class="form-control">
+                                    </div>
+                                    <div class="col-sm-3  mt-3">
+                                        <label> पहचान : <br>
+                                            id :</label>
+                                        <input disabled type="hidden" name="t_idimg[]" placeholder=" पहचान " class="form-control">
+                                    </div>
+                                    <?php while ($row3 = mysqli_fetch_array($teacher_result)) {
+                                        if ($row3['name'] != '') {
+                                    ?>
+                                            <div class="col-sm-3  mt-3">
+
+                                                <input disabled id="" value="<?php echo $row3['name'] ?>" type="text" name="t_name[]" placeholder="नाम" class="form-control">
+                                            </div>
+
+                                            <div class="col-sm-3  mt-3">
+
+                                                <input disabled type="text" value="<?php echo $row3['phone'] ?>" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
+                                            </div>
+                                            <div class="col-sm-3  mt-3">
+
+                                                <input disabled type="email" value="<?php echo $row3['email'] ?>" name="t_email[]" placeholder="ई-मेल" class="form-control">
+                                            </div>
+                                            <div class="col-sm-3  mt-3">
+
+                                                <img width="60" class="img-fluid mini" src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row3["images"]) . '" ' ?>>
+                                            </div>
+                                    <?php }
+                                    } ?>
+                                </div>
+
+                            </div>
+                            <br>
+                            <br>
 
                             <div class="card un-color">
-                                <h5 class="card-title ml-5  text-white">2. प्रतिभागियों का विवरण ( Participats Details )</h5>
+                                <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participants Details )</h5>
                             </div>
 
 
@@ -202,159 +222,119 @@ $result3 = mysqli_query($connection, $event_qury2);
 
 
 
-                                <div class="container">
 
 
-                                    <div class="row">
-                                        <?php
+                                <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm"> प्रतिभागि का नाम
+                                            </th>
+                                            <th class="th-sm">पिता का नाम
+                                            </th>
+                                            <th class="th-sm">जन्म तिथि
+                                            </th>
+                                            <th class="th-sm">लिंग
+                                            </th>
+                                            <th class="th-sm">मोबाईल नं.
+                                            </th>
+                                            <th class="th-sm">व्हाट्स एप नं.
+                                            </th>
+
+                                            <th class="th-sm">ई-मेल
+                                            </th>
+
+                                            <th class="th-sm">पता
+                                            </th>
+
+                                            <th class="th-sm">गतिविधियों
+                                            </th>
+                                            <th class="th-sm">छात्र छवि
+                                            </th>
+                                        </tr>
+                                    </thead>
 
 
-                                        $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
-                                        $result = mysqli_query($connection, $event_qury);
-                                        $date = mysqli_fetch_array($result);
-                                        // getting the all activities of the event
-                                        $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-                                        $result1 = mysqli_query($connection, $event_qury1);
+                                    <tbody>
+                                        <?php while ($row = mysqli_fetch_array($event_result1)) { ?>
+                                            <tr>
 
-                                        ?>
-      
-                                        <div class="col-sm-5  mt-3">
-                                            <label>
-                                                प्रारंभ दिनांक और समय: <br>
-                                                Start Date & Time :</label>
-                                            <input disabled id="form_no" value="<?php echo $date['startdoe'] ?>" type="text" name="university" class="form-control" placeholder="विश्वविद्यालय का नाम " required>
-                                        </div>
-                                        <div class="col-sm-5  mt-3">
-                                            <label>समाप्ति दिनांक और समय:
-                                                <br>
-                                                End Date & Time :</label>
-                                            <input type="text" disabled value="<?php echo $date['endoe'] ?>" name="department" class="form-control" value="" placeholder="विभाग">
-                                        </div>
-
-                                        <div class="col-4  mt-3">
-                                            <label>गतिविधियों का नाम : <br>
-                                                Activities Name :</label>
-                                            <br>
-
-                                        </div>
-                                        <div class="col-2  mt-3">
-                                            <label>प्रारंभ समय
-                                                : <br>
-                                                Started time :</label>
-                                            <br>
-
-                                        </div>
-                                        <div class="col-2  mt-3">
-                                            <label>समाप्त समय
-
-                                                : <br>
-                                                Ended time :</label>
-                                            <br>
-
-                                        </div>
-                                        <div class="col-2  mt-3">
-                                            <label>
-                                                नियम व शर्तें
-
-                                                : <br>
-                                                Term and Conditions :</label>
+                                                <td><?php echo $row['s_name']; ?></td>
 
 
-                                        </div>
+                                                <td><?php echo $row['s_f_name']; ?></td>
 
-                                        <?php while ($row1 = mysqli_fetch_array($result1)) { ?>
+                                                <td><?php echo $row['s_dob']; ?></td>
 
-                                            <section>
+                                                <td><?php echo $row['s_gender']; ?></td>
+
+                                                <td><?php echo $row['s_mobile']; ?></td>
+                                                <td><?php echo $row['s_whatsapp']; ?></td>
+                                                <td><?php echo $row['s_email']; ?></td>
+                                                <td><?php echo $row['s_address']; ?></td>
+                                                <td><?php echo $row['event_name']; ?></td>
+
+
+                                                <td>
+
+                                                    <img width="60" class="img-fluid mini" src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["s_imgages"]) . '" ' ?>>
+
+
+                                                </td>
 
 
 
-                                                <!-- The Modal -->
-                                                <div class="modal" id="myModal<?php echo $row1['id']; ?>">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-
-                                                            <!-- Modal Header -->
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
-                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            </div>
-
-                                                            <!-- Modal body -->
-                                                            <div class="modal-body">
-                                                                <?php echo $row1['t&c']; ?> </div>
-
-                                                            <!-- Modal footer -->
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </section>
-                                            <div class="col-4  mt-3">
-                                                <label class="la" for="">
-                                                    <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
-                                                    :</label>
-                                            </div>
-
-                                            <div class="col-2  mt-3">
-                                                <input type="hidden" name="start[]" value="<?php echo $row1['start_time_doe']; ?>">
-                                                <label class="la" for=""><?php echo $row1['start_time_doe']; ?></label>
-                                            </div>
-
-                                            <div class="col-2  mt-3">
-                                                <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe']; ?>">
-                                                <label class="la" for=""><?php echo $row1['end_time_doe']; ?></label>
-                                            </div>
-                                            <div class="col-2  mt-3">
-                                                <!-- Button to Open the Modal -->
-                                                <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
-                                                    T&C
-                                                </a>
-
-                                            </div>
-                                            <div class="col-12  mt-3">
-                                                <!-- Button to Open the Modal -->
-                                                <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id'] ?>" style="overflow-y:auto;">
-                                                    <thead>
-
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-
-                                                            <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true">+</i></button></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            </tr>
                                         <?php } ?>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                    <!-- <tfoot>
+                                        <th class="th-sm"> प्रतिभागि का नाम
+                                        </th>
+                                        <th class="th-sm">पिता का नाम
+                                        </th>
+                                        <th class="th-sm">जन्म तिथि
+                                        </th>
+                                        <th class="th-sm">लिंग
+                                        </th>
+                                        <th class="th-sm">मोबाईल नं.
+                                        </th>
+                                        <th class="th-sm">व्हाट्स एप नं.
+                                        </th>
+
+                                        <th class="th-sm">ई-मेल
+                                        </th>
+
+                                        <th class="th-sm">पता
+                                        </th>
+
+                                        <th class="th-sm">गतिविधियों
+                                        </th>
+                                        <th class="th-sm">छात्र छवि
+                                        </th>
+                                    </tfoot> -->
+                                </table>
                             </div>
-
-
                         </div>
 
-                        <?php echo $msg; ?>
-                        <div class="col-md-12 mt-5 ">
-                            
-                        </div>
 
-                        <div class=" text-center">
+                </div>
 
 
-                            <button type="submit" name="submit" class="btn btn-success">&nbsp; &nbsp; Print &nbsp; &nbsp;</button>
+                <div class="col-md-12 mt-5 ">
 
-                        </div>
-                    </form>
+                </div>
+
+                <div class=" text-center">
+
+
+                    <button type="button" id="prin" onclick="hidebutton()" name="submit" class="btn btn-success">&nbsp; &nbsp; Print &nbsp; &nbsp;</button>
+
+                </div>
+                </form>
             </section>
 
             <!-- /.content -->
         </div>
-     
+
 
 
     </div>
@@ -369,5 +349,11 @@ $result3 = mysqli_query($connection, $event_qury2);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./asset/js/event.js"></script>
 
+<script>
+    function hidebutton() {
+        document.getElementById("prin").style.display = "none";
+        print()
+    }
+</script>
 
 </html>

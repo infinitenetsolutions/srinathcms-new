@@ -2,13 +2,12 @@
     // Create connection
     //$con = new mysqli("localhost", "", "", "");
     if($_SERVER['HTTP_HOST']=='localhost'){
-        $con = mysqli_connect('localhost','root','','srinath_cms');
+        $con = new mysqli('localhost','root','','srinath_cms');
     }
     else{
-    $con = mysqli_connect("localhost", "root", "raja@#", "srinath_cms");
+    $con = new mysqli("localhost", "phpmyadmin", "raja@#", "srinath_cms");
     // Check connection
-    // if ($con->connect_error) {
-    //     die("Connection failed: " . $con->connect_error);
-    // }
-}
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }}
 ?>

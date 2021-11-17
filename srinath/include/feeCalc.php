@@ -29,7 +29,7 @@
     }
     // if the database in the server
     else{
-        $objectDefault->new_db("localhost", "root", "raja@#", "srinath_demo_cms");
+        $objectDefault->new_db("localhost", "phpmyadmin", "raja@#", "srinath_demo_cms");
     }
     // $objectDefault->new_db("localhost", "nsucms_demo_nsuniv", "4rp5NsX7", "nsucms_demo_nsuniv");
    
@@ -44,7 +44,7 @@
         $objectSecond->new_db("localhost", "root", "", "srinath_cms");    }
     // if the database in the server
     else{
-        $objectSecond->new_db("localhost", "root", "raja@#", "srinath_cms");
+        $objectSecond->new_db("localhost", "phpmyadmin", "raja@#", "srinath_cms");
         }
         // $objectSecond->new_db("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
 

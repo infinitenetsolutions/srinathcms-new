@@ -59,7 +59,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                 <div class="container-fluid">
 
                     <div class="card-header un-color">
-                        <h3 class="card-title text-center text-white">५ वाँ अंतरराष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
+                        <h3 class="card-title text-center text-white">५ वाँ अंतर्राष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
 
                     </div>
                     <!-- SELECT2 EXAMPLE -->

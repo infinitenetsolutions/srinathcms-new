@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
   }
   if ($insert_resutl) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>“५वाँ अंतरराष्ट्रीय श्रीनाथ हिंदी महोत्सव, जमशेदपुर २०२१”</strong>
+      <strong>“५वाँ अंतर्राष्ट्रीय श्रीनाथ हिंदी महोत्सव, जमशेदपुर २०२१”</strong>
        में आपका नामांकन दर्ज करने के लिए धन्यवाद !!
        पुष्टिकरण मेल आपके द्वारा दिए गए ई-मेल पते  पर भेज दिया गया है।
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -161,7 +161,7 @@ $result3 = mysqli_query($connection, $event_qury2);
         <div class="container-fluid">
 
           <div class="card-header un-color">
-            <h3 class="card-title text-center text-white">५ वाँ अंतरराष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
+            <h3 class="card-title text-center text-white">५ वाँ अंतर्राष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
 
 
           </div>

@@ -182,8 +182,8 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                   <div class="col-sm-4  mt-3">
                     <form action="" method="POST">
-                      <label> संस्थान का प्रकार : <br>
-                        Type of Organization :</label>
+                      <b> संस्थान का प्रकार : <br>
+                        Type of Organization :</b>
                       <select onchange="change(this.value)" name="type" class="form-control">
                         <option selected disabled>संस्थान का प्रकार</option>
                         <option value="school">School</option>
@@ -194,15 +194,15 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम : <br>
-                      Name of the School/College/University :</label>
+                    <b>विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम : <br>
+                      Name of the School/College/University :</b>
                     <input type="text" name="college_name" value="" placeholder="विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम" class="form-control">
                   </div>
                   <div id="board" style="display: none;" class="col-sm-4  mt-3">
 
-                    <label>
+                    <b>
                       बोर्ड का नाम चुनें : <br>
-                      Choose the Board:</label>
+                      Choose the Board:</b>
                     <select onchange="change_board(this.value)" name="board" class="form-control">
                       <option selected disabled>बोर्ड का नाम चुनें</option>
                       <option value="CBSE">CBSE</option>
@@ -216,75 +216,75 @@ $result3 = mysqli_query($connection, $event_qury2);
                   </div>
 
                   <div id="board_name" style="display: none;" class="col-sm-4   mt-3">
-                    <label>बोर्ड का नाम : <br>
-                      Name of the Board :</label>
+                    <b>बोर्ड का नाम : <br>
+                      Name of the Board :</b>
                     <input id="form_no" type="text" name="board_name" class="form-control" placeholder="बोर्ड का नाम :">
                   </div>
 
                   <div id="affiliated" style="display: none;" class="col-sm-4   mt-3">
-                    <label>संबद्ध का नाम : <br>
-                      Affiliated with/to :</label>
+                    <b>संबद्ध का नाम : <br>
+                      Affiliated with/to :</b>
                     <input id="form_no" type="text" name="affiliated_name" class="form-control" placeholder="संबद्ध का नाम :">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>विभाग : <br>
-                      Department :</label>
+                    <b>विभाग : <br>
+                      Department :</b>
                     <input type="text" name="department" class="form-control" value="" placeholder="विभाग">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <label>फ़ोन नं. : <br>
-                      Phone No. :</label>
+                    <b>फ़ोन नं. : <br>
+                      Phone No. :</b>
                     <input type="text" name="phone" placeholder="फ़ोन नं." class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <label>मोबाईल नं. : <br>
-                      Mobile No. :</label>
+                    <b>मोबाईल नं. : <br>
+                      Mobile No. :</b>
                     <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <label>ई-मेल : <br>
-                      E-mail :</label>
+                    <b>ई-मेल : <br>
+                      E-mail :</b>
                     <input type="email" name="email" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>पिन कोड
+                    <b>पिन कोड
                       : <br>
-                      Pin code :</label>
+                      Pin code :</b>
                     <input required onkeyup="pin(this.value)" type="text" name="pincode" placeholder="पिन कोड" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>देश : <br>
-                      Country :</label>
+                    <b>देश : <br>
+                      Country :</b>
                     <input readonly id="country" type="text" name="country" placeholder="देश" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>राज्य : <br>
-                      State :</label>
+                    <b>राज्य : <br>
+                      State :</b>
                     <input readonly id="state" type="text" name="state" placeholder="राज्य " class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>जिला : <br>
-                      District :</label>
+                    <b>जिला : <br>
+                      District :</b>
                     <input readonly id="district" type="text" name="district" placeholder="जिला" class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <label>शहर : <br>
-                      City :</label>
+                    <b>शहर : <br>
+                      City :</b>
                     <input id="city" type="text" name="city" placeholder="शहर" class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <label>पता - 1 : <br>
-                      Address - 1 :</label>
+                    <b>पता - 1 : <br>
+                      Address - 1 :</b>
                     <input type="text" name="address1" placeholder="पता - 1" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
-                    <label>पता - 2 : <br>
-                      Address - 2 :</label>
+                    <b>पता - 2 : <br>
+                      Address - 2 :</b>
                     <input type="text" name="address2" placeholder="पता - 2 " class="form-control">
                   </div>
 

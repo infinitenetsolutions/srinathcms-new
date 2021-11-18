@@ -531,21 +531,21 @@ $result3 = mysqli_query($connection, $event_qury2);
                       <h5 class="card-title ml-5  text-white">2. महाविद्यालय / विश्वविद्यालय (College / University)</h5>
                     </div>
 
-                    <div class="col-sm-4  mt-2">
+                    <div class="col-4  mt-2">
                       <b>
                         प्रतियोगिता का नाम <br>
                         Name of Competition </b>
                       <br>
 
                     </div>
-                    <div class="col-sm-2  mt-2">
+                    <div class="col-2  mt-2">
                       <b>दिनांक
                         <br>
                         Date </b>
                       <br>
 
                     </div>
-                    <div class="col-sm-2  mt-2">
+                    <div class="col-2  mt-2">
                       <b>प्रारंभ
                         <br>
                         Start </b>
@@ -554,7 +554,7 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                     </div>
 
-                    <div class="col-sm-2  mt-2">
+                    <div class="col-2  mt-2">
                       <b>समाप्त </b>
 
 
@@ -562,7 +562,7 @@ $result3 = mysqli_query($connection, $event_qury2);
 
 
 
-                    <div class="col-sm-2  mt-2">
+                    <div class="col-2  mt-2">
                       <b>
                         नियम व शर्तें
 
@@ -776,13 +776,20 @@ while ($row1 = mysqli_fetch_array($result1)) {
 
       $('#add<?php echo $row1['id'] ?>').click(function() {
         i++;
-        if (limit<?php echo $row1['id'] ?> >= i)
+        console.log(i)
+        if (limit<?php echo $row1['id'] ?> >= i){
+      
           $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row' + i + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागि का नाम " type="text" placeholder="प्रतिभागि का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled >Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>   <option value="Others">Others</option>               </select>        </td>                  <td> <input title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
-      });
+        }
+        else{
+          i=limit<?php echo $row1['id'] ?>
+        }
+      
+        });
 
       $(document).on('click', '.btn_remove', function() {
         var button_id = $(this).attr("id");
-
+        i--;
         $('#row' + button_id + '').remove();
 
       });

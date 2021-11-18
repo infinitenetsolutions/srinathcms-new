@@ -16,10 +16,11 @@ if (isset($_POST['submit'])) {
     $t_name = $_POST['t_name'][$i];
     $t_mobile = $_POST['t_mobile'][$i];
     $t_email = $_POST['t_email'][$i];
+    $t_post = $_POST['t_post'][$i];
     $t_img = addslashes(file_get_contents($_FILES['img']['tmp_name'][$i]));
 
-    $update_teachers = "INSERT INTO `event_teachers`(`name`, `email`, `phone`, `images`, `college_name`)
- VALUES ('$t_name','$t_email','$t_mobile','$t_img','$college_name')";
+    $update_teachers = "INSERT INTO `event_teachers`(`name`, `email`, `phone`,`post`, `images`, `college_name`)
+ VALUES ('$t_name','$t_email','$t_mobile','$t_post','$t_img','$college_name')";
     $insert_resutl = mysqli_query($connection, $update_teachers);
   }
   for ($i = 0; $i < count($_POST['student_name']); $i++) {

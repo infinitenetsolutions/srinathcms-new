@@ -443,7 +443,7 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                               <!-- Modal Header -->
                               <div class="modal-header">
-                                <h4 class="modal-title"><?php echo  str_replace("(विद्यालय)"," ",$row1['name']);  ?></h4>
+                                <h4 class="modal-title"><?php echo  $row1['name']; ?></h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                               </div>
 
@@ -464,7 +464,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                       </section>
                       <div class="col-4  mt-3">
                         <b class="la" for="">
-                          <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
+                          <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo str_replace("(विद्यालय)","",$row1['name']); ?>
                         </b>
                       </div>
 

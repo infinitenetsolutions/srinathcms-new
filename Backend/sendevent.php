@@ -77,7 +77,7 @@ function event_mail($add_prospectus_email, $prosprectus_number,$college_name)
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">८४३४०१३२४६ / ८८२५२१७८३९ पर सम्पर्क कर सकते हैं। </span></p>
                                                 <br>
                                                 <br>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> <b> सभी प्रतिभागियों को प्रिंट करने के लिए प्रिंट और शो बटन पर क्लिक करें </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> <b> प्रतिभागी सूची को प्रिंट करने के लिए प्रिंट बटन पर क्लिक करें </b> </span></p>
 
                                                 <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p>
                                                 <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Best regards,</span></p>

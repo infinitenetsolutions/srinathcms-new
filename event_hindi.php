@@ -309,6 +309,11 @@ $result3 = mysqli_query($connection, $event_qury2);
                       Name :</b>
                     <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
+                  <div class="col-sm-2  mt-3">
+                    <b>संस्थान में  पद : <br>
+                    Designation :</b>
+                    <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">
+                  </div>
                   <div class="col-sm-3  mt-3">
                     <b>ई-मेल : <br>
                       E-mail :</b>
@@ -319,16 +324,12 @@ $result3 = mysqli_query($connection, $event_qury2);
                       Mobile No. :</b>
                     <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
                   </div>
-                  <div class="col-sm-2  mt-3">
-                    <b>संस्थान में  पद : <br>
-                    Designation in  Organization :</b>
-                    <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">
-                  </div>
+                  
                   <div class="col-sm-2  mt-3">
                     <b> फोटो
                       : <br>
-                      photograph:</b>
-                     <input type="file" name="img[]" placeholder=" पहचान " class="form-control">
+                      Photograph:</b>
+                     <input type="file" name="img[]" placeholder=" फोटो " class="form-control">
                  
                      
                    
@@ -338,7 +339,10 @@ $result3 = mysqli_query($connection, $event_qury2);
                     <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
 
-                 
+                  <div class="col-sm-2  mt-3">
+
+                  <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">  
+                    </div>
                   <div class="col-sm-3  mt-3">
 
                     <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
@@ -347,13 +351,10 @@ $result3 = mysqli_query($connection, $event_qury2);
 
                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">  
                    </div>
-                   <div class="col-sm-2  mt-3">
-
-                  <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">  
-                    </div>
+                  
                   <div class="col-sm-2  mt-3">
 
-                    <input type="file" name="img[]" placeholder="ई-मेल" class="form-control">
+                    <input type="file" name="img[]" placeholder="फोटो" class="form-control">
                   </div>
                 </div>
 
@@ -384,7 +385,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">A. मैट्रिक / इंटरमीडिएट अथवा समकक्ष विद्यार्थियों के लिए प्रतियोगिताएँ (compation for  Matriculation / Intermediate or plus 2 students) </h5>
+                      <h5 class="card-title ml-5  text-white">A. मैट्रिक / इंटरमीडिएट अथवा समकक्ष विद्यार्थियों के लिए प्रतियोगिताएँ (Competition for  Matriculation / Intermediate or plus 2 students) </h5>
                     </div>
                     <div class="col-4  mt-2">
                       <b>
@@ -538,7 +539,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">B. महाविद्यालय / विश्वविद्यालय  विद्यार्थियों के लिए प्रतियोगिताएँ ( compation for College / University students)</h5>
+                      <h5 class="card-title ml-5  text-white">B. महाविद्यालय / विश्वविद्यालय  विद्यार्थियों के लिए प्रतियोगिताएँ ( Competition for College / University students)</h5>
                     </div>
 
                     <div class="col-4  mt-2">

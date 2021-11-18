@@ -328,7 +328,11 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
                   <b> पहचान पत्र
  : <br>
                   Identity Card:</b>
+
                     <input type="file" name="img[]" placeholder=" पहचान " class="form-control">
+
+                    <input type="file" name="t_idimg[]" placeholder=" पहचान " class="form-control">
+
                   </div>
                   <div class="col-sm-3  mt-3">
                  
@@ -559,12 +563,21 @@ $result1 = mysqli_query($connection, $event_qury1);
      <br>
     Start </b>
   <br>
+<<<<<<< HEAD
 
 </div>
 
 <div class="col-2  mt-2">
   <b>समाप्त
 
+=======
+
+</div>
+
+<div class="col-2  mt-2">
+  <b>समाप्त
+
+>>>>>>> 2a4d0f8b1d79da3868f04c2e7054a71f68211f4b
      <br>
     End </b>
   <br>

@@ -1,9 +1,9 @@
 <?php
 
-function event_mail($add_prospectus_email, $prosprectus_number,$college_name)
+function event_mail1($add_prospectus_email, $prosprectus_number,$college_name)
 
 {
-    $reciever_email = $add_prospectus_email;
+    $reciever_email = "info@srinathuniversity.in";
     // $reciever_name = $name;
     // $amount = $prospectus_rate;
     // $prosprectus_number = $prosprectus_number;

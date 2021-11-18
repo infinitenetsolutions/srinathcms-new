@@ -59,7 +59,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                 <div class="container-fluid">
 
                     <div class="card-header un-color">
-                        <h3 class="card-title text-center text-white">५ वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
+                        <h3 class="card-title text-center text-white">५ वाँ अंतरराष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
 
                     </div>
                     <!-- SELECT2 EXAMPLE -->
@@ -68,7 +68,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
 
                             <br>
                             <div class="card un-color">
-                                <h5 class="card-title ml-5  text-white">1. संस्थान का विवरण (Details of Orgnization) </h5>
+                                <h5 class="card-title ml-5  text-white">1. संस्थान का विवरण (Details of the Organization) </h5>
                             </div>
 
 
@@ -106,9 +106,9 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                                         <input disabled type="text" value="<?php echo $row['mobile'] ?>" name="mobile" placeholder="मोबाईल नं." class="form-control">
                                     </div>
                                     <div class="col-sm-3  mt-3">
-                                        <label>ई&मेल : <br>
+                                        <label>ई-मेल : <br>
                                             E-mail :</label>
-                                        <input disabled type="email" value="<?php echo $row['email'] ?>" name="email" placeholder="ई&मेल" class="form-control">
+                                        <input disabled type="email" value="<?php echo $row['email'] ?>" name="email" placeholder="ई-मेल" class="form-control">
                                     </div>
                                     <div class="col-sm-3  mt-3">
                                         <label>पिन कोड
@@ -154,9 +154,9 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                             </div>
 
                             <br>
-                            <!-- here to started the representetives details -->
+                            <!-- here to started the representetives Detailss -->
                             <div class="card un-color">
-                                <h5 class="card-title ml-5  text-white">2. प्रतिनिधि का विवरण ( Details of Representativies )</h5>
+                                <h5 class="card-title ml-5  text-white">2. शिक्षक प्रतिनिधि का विवरण ( Details of Teacher Representatives )</h5>
                             </div>
 
 
@@ -180,9 +180,10 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                                         <input disabled type="hidden" name="t_email[]" placeholder="ई-मेल" class="form-control">
                                     </div>
                                     <div class="col-sm-3  mt-3">
-                                        <label> पहचान : <br>
-                                            id :</label>
-                                        <input disabled type="hidden" name="t_idimg[]" placeholder=" पहचान " class="form-control">
+                                        <label> पहचान पत्र : <br>
+                                            Identity Card
+                                            :</label>
+                                        <input disabled type="hidden" name="t_idimg[]" placeholder=" पहचान पत्र " class="form-control">
                                     </div>
                                     <?php while ($row3 = mysqli_fetch_array($teacher_result)) {
                                         if ($row3['name'] != '') {
@@ -213,7 +214,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                             <br>
 
                             <div class="card un-color">
-                                <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participants Details )</h5>
+                                <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participant's Detail )</h5>
                             </div>
 
 
@@ -246,7 +247,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                                             <th class="th-sm">पता
                                             </th>
 
-                                            <th class="th-sm">गतिविधियों
+                                            <th class="th-sm">प्रतियोगिता
                                             </th>
                                             <th class="th-sm">छात्र छवि
                                             </th>
@@ -286,31 +287,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                                             </tr>
                                         <?php } ?>
                                     </tbody>
-                                    <!-- <tfoot>
-                                        <th class="th-sm"> प्रतिभागि का नाम
-                                        </th>
-                                        <th class="th-sm">पिता का नाम
-                                        </th>
-                                        <th class="th-sm">जन्म तिथि
-                                        </th>
-                                        <th class="th-sm">लिंग
-                                        </th>
-                                        <th class="th-sm">मोबाईल नं.
-                                        </th>
-                                        <th class="th-sm">व्हाट्स एप नं.
-                                        </th>
 
-                                        <th class="th-sm">ई-मेल
-                                        </th>
-
-                                        <th class="th-sm">पता
-                                        </th>
-
-                                        <th class="th-sm">गतिविधियों
-                                        </th>
-                                        <th class="th-sm">छात्र छवि
-                                        </th>
-                                    </tfoot> -->
                                 </table>
                             </div>
                         </div>

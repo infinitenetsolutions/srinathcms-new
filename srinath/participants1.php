@@ -3,10 +3,7 @@ $page_no = "16";
 $page_no_inside = "16_3";
 include '../Backend/connection.inc.php';
 
-$get_event = "SELECT *
-FROM participants_list
-GROUP BY college_name
-ORDER BY COUNT(college_name) DESC;";
+$get_event = "SELECT * FROM `participants_list` WHERE 1";
 $event_result = mysqli_query($connection, $get_event);
 
 ?>
@@ -81,7 +78,7 @@ $event_result = mysqli_query($connection, $get_event);
                                             <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
-                                                <!-- <th class="th-sm">Name
+                                                <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
@@ -102,7 +99,7 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm">student_imgages
                                                 </th>
                                                 <th class="th-sm">event_name
-                                                </th> -->
+                                                </th>
                                                 <th class="th-sm text-center">name
                                                 </th>
                                                 <th class="th-sm text-center">type
@@ -127,8 +124,6 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm text-center">address1
                                                 </th>
                                                 <th class="th-sm text-center">address2
-                                                </th>
-                                                <th class="th-sm text-center">Print
                                                 </th>
                                                 <th class="th-sm text-center">Action
                                                 </th>
@@ -166,8 +161,8 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </div>
 
                                                 <tr>
-                                                 <td><?php echo $i; ?></td>
-                                                    <!-- <td><?php echo $get_row['s_name']; ?></td> 
+                                                    <td><?php echo $i; ?></td>
+                                                    <td><?php echo $get_row['s_name']; ?></td>
                                                     <td><?php echo $get_row['s_department']; ?></td>
                                                     <td><?php echo $get_row['s_f_name']; ?></td>
                                                     <td><?php echo $get_row['s_dob']; ?></td>
@@ -180,13 +175,13 @@ $event_result = mysqli_query($connection, $get_event);
                                                        
                                                             <img class="img-fluid" src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($get_row["s_imgages"]) . '" ' ?>>
 
-  
+
                                                     </td>
 
                                                     <td><?php $event = str_replace("[", " ", $get_row['event_name']);
                                                         $event = str_replace("]", " ", $event);
                                                         echo str_replace('"', " ", $event);
-                                                        ?></td> -->
+                                                        ?></td>
                                                     <td><?php echo $get_row['college_name']; ?></td>
                                                     <td><?php echo $get_row['type']; ?></td>
                                                     <td><?php echo $get_row['board_name']; ?></td>
@@ -200,8 +195,8 @@ $event_result = mysqli_query($connection, $get_event);
                                                     <td><?php echo $get_row['address1']; ?></td>
                                                     <td><?php echo $get_row['address2']; ?></td>
 
-                                                    <td> <a href="http://65.2.20.135/printevent?ins=<?php echo $get_row['college_name'] ?>" class="btn btn-success btn-sm"> Print</a></td>
-                                                    <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['college_name'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
+                                                    <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['id'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
+
                                                 </tr>
                                             <?php $i++;
                                             } ?>
@@ -211,7 +206,7 @@ $event_result = mysqli_query($connection, $get_event);
                                             <tr>
                                                 <th class="th-sm">S.NO
                                                 </th>
-                                                <!-- <th class="th-sm">Name
+                                                <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
@@ -230,9 +225,9 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm">student_address
                                                 </th>
                                                 <th class="th-sm">student_imgages
-                                                </th> -->
-                                                <!-- <th class="th-sm">event_name
-                                                </th> -->
+                                                </th>
+                                                <th class="th-sm">event_name
+                                                </th>
                                                 <th class="th-sm text-center">name
                                                 </th>
                                                 <th class="th-sm text-center">type
@@ -257,8 +252,6 @@ $event_result = mysqli_query($connection, $get_event);
                                                 <th class="th-sm text-center">address1
                                                 </th>
                                                 <th class="th-sm text-center">address2
-                                                </th>
-                                                <th class="th-sm text-center">Print
                                                 </th>
                                                 <th class="th-sm text-center">Action
                                                 </th>

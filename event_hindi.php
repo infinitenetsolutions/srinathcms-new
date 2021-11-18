@@ -6,23 +6,22 @@ include './Backend/sendevent.php';
 
 $msg = '';
 if (isset($_POST['submit'])) {
-// echo "<pre>";
-// print_r($_POST);
-// exit;
+  // echo "<pre>";
+  // print_r($_POST);
+  // exit;
 
-// teacher info
-$college_name = $_POST['college_name'];
-for ($i = 0; $i < count($_POST['t_name']); $i++) {
-$t_name = $_POST['t_name'][$i];
-$t_mobile = $_POST['t_mobile'][$i];
-$t_email = $_POST['t_email'][$i];
- $t_img = addslashes(file_get_contents($_FILES['img']['tmp_name'][$i]));
+  // teacher info
+  $college_name = $_POST['college_name'];
+  for ($i = 0; $i < count($_POST['t_name']); $i++) {
+    $t_name = $_POST['t_name'][$i];
+    $t_mobile = $_POST['t_mobile'][$i];
+    $t_email = $_POST['t_email'][$i];
+    $t_img = addslashes(file_get_contents($_FILES['img']['tmp_name'][$i]));
 
-$update_teachers="INSERT INTO `event_teachers`(`name`, `email`, `phone`, `images`, `college_name`)
+    $update_teachers = "INSERT INTO `event_teachers`(`name`, `email`, `phone`, `images`, `college_name`)
  VALUES ('$t_name','$t_email','$t_mobile','$t_img','$college_name')";
-$insert_resutl=mysqli_query($connection,$update_teachers);
-
-}
+    $insert_resutl = mysqli_query($connection, $update_teachers);
+  }
   for ($i = 0; $i < count($_POST['student_name']); $i++) {
     // event info
     $event_id = $_POST['event'];
@@ -57,7 +56,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
     $student_images = addslashes(file_get_contents($_FILES['student_images']['tmp_name'][$i]));
 
     $s_student_email = $_POST['student_email'][$i];
-     $event_name = $_POST['activites'][$i];
+    $event_name = $_POST['activites'][$i];
 
     // getting the events total number of  limit for a colleges
 
@@ -68,21 +67,17 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
     $participants_limit = "SELECT * FROM `tbl_sub_events` WHERE  `name`='$event_name' ";
     $participants_result = mysqli_query($connection, $participants_limit);
     $total_participants_limit = mysqli_fetch_array($participants_result);
-    $total_event_limit=$total_participants_limit['limit'];
+    $total_event_limit = $total_participants_limit['limit'];
 
     if ($total_event_limit >= $total_college_limit) {
-      $insert_query="INSERT INTO `participants_list`(`s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `s_whatsapp`, `s_address`, `s_imgages`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `country`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`, `event_id`) VALUES
+      $insert_query = "INSERT INTO `participants_list`(`s_name`, `s_department`, `s_f_name`, `s_dob`, `s_gender`, `s_mobile`, `s_email`, `s_whatsapp`, `s_address`, `s_imgages`, `type`, `board_name`, `affiliated_name`, `college_name`, `mobile`, `email`, `country`, `state`, `district`, `city`, `pincode`, `address1`, `address2`, `event_name`, `event_id`) VALUES
       ('$s_student_name','$s_department','$s_f_name','$s_dob','$s_gender','$s_student_mobile','$s_student_email','$student_whatsapp','$student_address','$student_images','$type','$board_name','$affiliated_name','$college_name','$mobile','$email','$country','$state','$district','$city','$pincode','$address1','$address2','$event_name','$event_id')";
-          $insert_resutl = mysqli_query($connection, $insert_query);
-
-
-
-    }
-    else{
-      echo" <script>
+      $insert_resutl = mysqli_query($connection, $insert_query);
+    } else {
+      echo " <script>
         alert('event is full')
         </script>";
-      }
+    }
   }
   if ($insert_resutl) {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -93,7 +88,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
         <span aria-hidden="true">&times;</span>
       </button>
     </div>';
-  echo  event_mail($email, $mobile,$college_name);
+    echo  event_mail($email, $mobile, $college_name);
 
     echo "<script>
       setTimeout(function() {
@@ -114,14 +109,14 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
 
 ?>
 
-<?php              $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-                  $result1 = mysqli_query($connection, $event_qury1); 
+<?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+$result1 = mysqli_query($connection, $event_qury1);
 
 
-                  $event_qury2 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-                  $result3 = mysqli_query($connection, $event_qury2); 
-                  
-                  ?>
+$event_qury2 = "SELECT * FROM `tbl_sub_events` WHERE 1";
+$result3 = mysqli_query($connection, $event_qury2);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -133,7 +128,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./asset/css/event.css">
   <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
@@ -166,12 +161,12 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
         <div class="container-fluid">
 
           <div class="card-header un-color">
-            <h3 class="card-title text-center text-white">५ वाँ अंतरराष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर  २०२१</h3>
+            <h3 class="card-title text-center text-white">५ वाँ अंतरराष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१</h3>
 
 
           </div>
           <!-- SELECT2 EXAMPLE -->
-          <form action="" method="POST" enctype="multipart/form-data" >
+          <form action="" method="POST" enctype="multipart/form-data">
             <div class="card card-default">
 
               <br>
@@ -188,7 +183,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
                   <div class="col-sm-4  mt-3">
                     <form action="" method="POST">
                       <label> संस्थान का प्रकार : <br>
-                      Type of Organization :</label>
+                        Type of Organization :</label>
                       <select onchange="change(this.value)" name="type" class="form-control">
                         <option selected disabled>संस्थान का प्रकार</option>
                         <option value="school">School</option>
@@ -239,16 +234,16 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
 
                   <div class="col-sm-4  mt-3">
                     <label>फ़ोन नं. : <br>
-                    Phone No. :</label>
+                      Phone No. :</label>
                     <input type="text" name="phone" placeholder="फ़ोन नं." class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                  <label>मोबाईल नं. : <br>
+                    <label>मोबाईल नं. : <br>
                       Mobile No. :</label>
                     <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
-                 
+
                   <div class="col-sm-4  mt-3">
                     <label>ई-मेल : <br>
                       E-mail :</label>
@@ -262,7 +257,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
                   </div>
                   <div class="col-sm-4  mt-3">
                     <label>देश : <br>
-                    Country :</label>
+                      Country :</label>
                     <input readonly id="country" type="text" name="country" placeholder="देश" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
@@ -275,7 +270,7 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
                       District :</label>
                     <input readonly id="district" type="text" name="district" placeholder="जिला" class="form-control">
                   </div>
-                  
+
                   <div class="col-sm-4  mt-3">
                     <label>शहर : <br>
                       City :</label>
@@ -299,19 +294,19 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
 
               <br>
 
-            <!-- here to started the representetives Detailss -->
+              <!-- here to started the representetives Detailss -->
               <div class="card un-color">
                 <h5 class="card-title ml-5  text-white">2. शिक्षक प्रतिनिधि का विवरण ( Details of Teacher Representatives )</h5>
               </div>
 
 
               <div class="card-body">
-                     
-                    <div class="row" >
-                    <div class="col-sm-3  mt-3">
+
+                <div class="row">
+                  <div class="col-sm-3  mt-3">
                     <b>नाम : <br>
-                    Name :</b> 
-                   <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
+                      Name :</b>
+                    <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
 
                   <div class="col-sm-3  mt-3">
@@ -325,378 +320,362 @@ $insert_resutl=mysqli_query($connection,$update_teachers);
                     <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
-                  <b> पहचान पत्र
- : <br>
-                  Identity Card:</b>
-
-                    <input type="file" name="img[]" placeholder=" पहचान " class="form-control">
-
-                    <input type="file" name="t_idimg[]" placeholder=" पहचान " class="form-control">
-
+                    <b> पहचान पत्र
+                      : <br>
+                      Identity Card:</b>
+                     <input type="file" name="img[]" placeholder=" पहचान " class="form-control">
+                 
+                     
+                   
                   </div>
                   <div class="col-sm-3  mt-3">
-                 
+
                     <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
 
                   <div class="col-sm-3  mt-3">
-                  
+
                     <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
-                 
+
                     <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
-                   
-                  <input type="file" name="img[]" placeholder="ई-मेल" class="form-control">
+
+                    <input type="file" name="img[]" placeholder="ई-मेल" class="form-control">
                   </div>
-                    </div>
-    
+                </div>
+
               </div>
               <br>
               <br>
-<!-- here to started the events details -->
+              <!-- here to started the events details -->
               <div class="card un-color">
                 <h5 class="card-title ml-5  text-white">3. प्रतिभागियों का विवरण ( Participant's Detail )</h5>
               </div>
 
 
               <div class="card-body">
-
-             
-
-           
-                  <div class="container">
+                <div class="container">
 
 
-                    <div class="row" >
-                  
+                  <div class="row">
+
+                    <?php
+
+                    $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
+                    $result = mysqli_query($connection, $event_qury);
+                    $date = mysqli_fetch_array($result);
+                    // getting the all activities of the event
+                    $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE `name` LIKE '%विद्यालय%' ORDER BY endsubdoe ASC";
+                    $result1 = mysqli_query($connection, $event_qury1);
+
+                    ?>
+
+                    <div class="card un-color col-sm-12">
+                      <h5 class="card-title ml-5  text-white">1. मैट्रिक / इंटरमीडिएट (Matriculation / Intermediate) </h5>
+                    </div>
+                    <div class="col-4  mt-2">
+                      <b>
+                        प्रतियोगिता का नाम <br>
+                        Name of Competition </b>
+                      <br>
+
+                    </div>
+                    <div class="col-2  mt-2">
+                      <b>दिनांक
+                        <br>
+                        Date </b>
+                      <br>
+
+                    </div>
+                    <div class="col-2  mt-2">
+                      <b>प्रारंभ
+                        <br>
+                        Start </b>
+                      <br>
+
+                    </div>
+                    <div class="col-2  mt-2">
+                      <b>समाप्त
+
+                        <br>
+                        End</b>
+                      <br>
+
+                    </div>
+
+                    <div class="col-2  mt-3">
+                      <b>
+                        नियम व शर्तें
+
+                        <br>
+                        Terms and Conditions </b>
+
+
+                    </div>
+
+                    <?php while ($row1 = mysqli_fetch_array($result1)) {
+
+
+                    ?>
+
+                      <section>
+
+
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal<?php echo $row1['id']; ?>">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                <?php echo $row1['t&c']; ?> </div>
+
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </section>
+                      <div class="col-4  mt-3">
+                        <b class="la" for="">
+                          <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
+                        </b>
+                      </div>
+
+                      <div class="col-2  mt-2">
+                        <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                        <label class="la" for=""><?php echo date('d-m-Y', strtotime($row1['endsubdoe'])) ?></label>
+                      </div>
+                      <?php if ((int)$row1['start_time_doe'] < 12 && (int)$row1['start_time_doe'] > 8) { ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo  $row1['start_time_doe'] . ' AM'; ?></label>
+                        </div>
+                      <?php } else {
+                      ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['start_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo $row1['start_time_doe'] . ' PM'; ?></label>
+                        </div>
+
+                      <?php } ?>
+
+
+
+                      <?php if ((int)$row1['end_time_doe'] < 12 && (int)$row1['end_time_doe'] > 8) { ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo  $row1['end_time_doe'] . ' AM'; ?></label>
+                        </div>
+                      <?php } else {
+                      ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo $row1['end_time_doe'] . ' PM'; ?></label>
+                        </div>
+
+                      <?php } ?>
+
+                      <div class="col-2  mt-3">
+                        <!-- Button to Open the Modal -->
+                        <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
+                          T&C
+                        </a>
+
+                      </div>
+                      <div class="col-12  mt-3">
+                        <!-- Button to Open the Modal -->
+                        <!-- here to started the student entire details -->
+                        <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id'] ?>" style="overflow-y:auto;">
+                          <thead>
+
+                          </thead>
+                          <tbody>
+                            <tr>
+
+                              <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true">+</i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    <?php } ?>
+
                     <?php
 
 
-$event_qury = "SELECT * FROM `tbl_event` WHERE 1";
-$result = mysqli_query($connection, $event_qury);
-$date = mysqli_fetch_array($result);
-// getting the all activities of the event
-$event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE `name` LIKE '%विद्यालय%' ORDER BY endsubdoe ASC";
-$result1 = mysqli_query($connection, $event_qury1);
-
-?>
-
-<div class="card un-color col-sm-12">
-                                <h5 class="card-title ml-5  text-white">1. मैट्रिक / इंटरमीडिएट (Matriculation / Intermediate) </h5>
-                            </div>
-                            <div class="col-4  mt-2">
-  <b>
-    प्रतियोगिता का नाम  <br>
-    Name of Competition </b>
-  <br>
-
-</div>
-<div class="col-2  mt-2">
-  <b>दिनांक
-     <br>
-    Date </b>
-  <br>
-
-</div>
-<div class="col-2  mt-2">
-    <b>प्रारंभ
-         <br>
-        Start </b>
-    <br>
-
-</div>
-<div class="col-2  mt-2">
-    <b>समाप्त
-
-         <br>
-        End</b>
-    <br>
-
-</div>
-
-<div class="col-2  mt-3">
-    <b>
-        नियम व शर्तें
-
-         <br>
-        Terms and Conditions </b>
-
-
-</div>
-
-<?php while ($row1 = mysqli_fetch_array($result1)) {
-  
-
-  ?>
-
-<section>
-
-
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal<?php echo $row1['id']; ?>">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <?php echo $row1['t&c']; ?> </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-</section>
-<div class="col-4  mt-3">
-    <b class="la" for="">
-        <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
-</b>
-</div>
-
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo date('d-m-Y',strtotime($row1['endsubdoe'])) ?></label>
-</div>
-<?php if((int)$row1['start_time_doe']<12 && (int)$row1['start_time_doe']>8){ ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo  $row1['start_time_doe'].' AM'; ?></label>
-</div>
-<?php }else{
- ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['start_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo $row1['start_time_doe'].' PM'; ?></label>
-</div>
-
-<?php } ?>
-
-
-
-<?php if((int)$row1['end_time_doe']<12 && (int)$row1['end_time_doe']>8){ ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo  $row1['end_time_doe'].' AM'; ?></label>
-</div>
-<?php }else{
- ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo $row1['end_time_doe'].' PM'; ?></label>
-</div>
-
-<?php } ?>
-
-<div class="col-2  mt-3">
-    <!-- Button to Open the Modal -->
-    <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
-        T&C
-    </a>
-
-</div>
-<div class="col-12  mt-3">
-    <!-- Button to Open the Modal -->
-    <!-- here to started the student entire details -->
-    <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id']?>"
-        style="overflow-y:auto;">
-        <thead>
-
-        </thead>
-        <tbody>
-            <tr>
-
-                <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i
-                            class="fa fa-plus" aria-hidden="true">+</i></button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<?php } ?>
-
-<?php
-
-
-$event_qury = "SELECT * FROM `tbl_event` WHERE 1";
-$result = mysqli_query($connection, $event_qury);
-$date = mysqli_fetch_array($result);
-// getting the all activities of the event
-$event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE `name` NOT LIKE '%विद्यालय%' ORDER BY endsubdoe ASC";
-$result1 = mysqli_query($connection, $event_qury1);
-
-?>
-
-<div class="card un-color col-sm-12">
-  <h5 class="card-title ml-5  text-white">2. महाविद्यालय / विश्वविद्यालय  (College / University)</h5>
-</div>
-
-<div class="col-4  mt-2">
-  <b>
-    प्रतियोगिता का नाम  <br>
-    Name of Competition </b>
-  <br>
-
-</div>
-<div class="col-2  mt-2">
-  <b>दिनांक
-     <br>
-    Date </b>
-  <br>
-
-</div>
-<div class="col-2  mt-2">
-  <b>प्रारंभ
-     <br>
-    Start </b>
-  <br>
-
-</div>
-
-<div class="col-2  mt-2">
-  <b>समाप्त
-
-
-
-</div>
-
-<div class="col-2  mt-2">
-  <b>समाप्त
-
-
-     <br>
-    End </b>
-  <br>
-
-</div>
-
-<div class="col-2  mt-3">
-  <b>
-    नियम व शर्तें
-
-     <br>
-    Terms and Conditions </b>
-
-
-</div>
-
-<?php while ($row1 = mysqli_fetch_array($result1)) {
-
-
-?>
-
-  <section>
-
-
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal<?php echo $row1['id']; ?>">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-
-          <!-- Modal body -->
-          <div class="modal-body">
-            <?php echo $row1['t&c']; ?> </div>
-
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-
-  </section>
-  <div class="col-4  mt-3">
-    <b class="la" for="">
-      <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
-</b>
-  </div>
-
-  <div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo date('d-m-Y',strtotime($row1['endsubdoe'])) ?></label>
-</div>
-  <?php if((int)$row1['start_time_doe']<12 && (int)$row1['start_time_doe']>8){ ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo  $row1['start_time_doe'].' AM'; ?></label>
-</div>
-<?php }else{
- ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['start_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo $row1['start_time_doe'].' PM'; ?></label>
-</div>
-
-<?php } ?>
-
-
-
-<?php if((int)$row1['end_time_doe']<12 && (int)$row1['end_time_doe']>8){ ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo  $row1['end_time_doe'].' AM'; ?></label>
-</div>
-<?php }else{
- ?>
-<div class="col-2  mt-2">
-    <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'].$row1['end_time_doe']; ?>">
-    <label class="la" for=""><?php echo $row1['end_time_doe'].' PM'; ?></label>
-</div>
-
-<?php } ?>
-
-  <div class="col-2  mt-3">
-    <!-- Button to Open the Modal -->
-    <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
-      T&C
-    </a>
-
-  </div>
-  <div class="col-12  mt-3">
-    <!-- Button to Open the Modal -->
-    <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id'] ?>" style="overflow-y:auto;">
-      <thead>
-
-      </thead>
-      <tbody>
-        <tr>
-
-          <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true">+</i></button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-<?php } ?>
+                    $event_qury = "SELECT * FROM `tbl_event` WHERE 1";
+                    $result = mysqli_query($connection, $event_qury);
+                    $date = mysqli_fetch_array($result);
+                    // getting the all activities of the event
+                    $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE `name` NOT LIKE '%विद्यालय%' ORDER BY endsubdoe ASC";
+                    $result1 = mysqli_query($connection, $event_qury1);
+
+                    ?>
+
+                    <div class="card un-color col-sm-12">
+                      <h5 class="card-title ml-5  text-white">2. महाविद्यालय / विश्वविद्यालय (College / University)</h5>
                     </div>
+
+                    <div class="col-sm-4  mt-2">
+                      <b>
+                        प्रतियोगिता का नाम <br>
+                        Name of Competition </b>
+                      <br>
+
+                    </div>
+                    <div class="col-sm-2  mt-2">
+                      <b>दिनांक
+                        <br>
+                        Date </b>
+                      <br>
+
+                    </div>
+                    <div class="col-sm-2  mt-2">
+                      <b>प्रारंभ
+                        <br>
+                        Start </b>
+                      <br>
+
+
+                    </div>
+
+                    <div class="col-sm-2  mt-2">
+                      <b>समाप्त </b>
+
+
+                    </div>
+
+
+
+                    <div class="col-sm-2  mt-2">
+                      <b>
+                        नियम व शर्तें
+
+                        <br>
+                        Terms and Conditions </b>
+
+
+                    </div>
+
+                    <?php while ($row1 = mysqli_fetch_array($result1)) {
+
+
+                    ?>
+
+                      <section>
+
+
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal<?php echo $row1['id']; ?>">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-title"><?php echo $row1['name']; ?></h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                <?php echo $row1['t&c']; ?> </div>
+
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </section>
+                      <div class="col-4  mt-3">
+                        <b class="la" for="">
+                          <input type="checkbox" name="event_name[]" value="<?php echo $row1['name']; ?>"> <?php echo $row1['name']; ?>
+                        </b>
+                      </div>
+
+                      <div class="col-2  mt-2">
+                        <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                        <label class="la" for=""><?php echo date('d-m-Y', strtotime($row1['endsubdoe'])) ?></label>
+                      </div>
+                      <?php if ((int)$row1['start_time_doe'] < 12 && (int)$row1['start_time_doe'] > 8) { ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo  $row1['start_time_doe'] . ' AM'; ?></label>
+                        </div>
+                      <?php } else {
+                      ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['start_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo $row1['start_time_doe'] . ' PM'; ?></label>
+                        </div>
+
+                      <?php } ?>
+
+
+
+                      <?php if ((int)$row1['end_time_doe'] < 12 && (int)$row1['end_time_doe'] > 8) { ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo  $row1['end_time_doe'] . ' AM'; ?></label>
+                        </div>
+                      <?php } else {
+                      ?>
+                        <div class="col-2  mt-2">
+                          <input type="hidden" name="end[]" value="<?php echo $row1['end_time_doe'] . $row1['end_time_doe']; ?>">
+                          <label class="la" for=""><?php echo $row1['end_time_doe'] . ' PM'; ?></label>
+                        </div>
+
+                      <?php } ?>
+
+                      <div class="col-2  mt-3">
+                        <!-- Button to Open the Modal -->
+                        <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
+                          T&C
+                        </a>
+
+                      </div>
+                      <div class="col-12  mt-3">
+                        <!-- Button to Open the Modal -->
+                        <table class="table table-bordered table-responsive" id="dynamic_field<?php echo $row1['id'] ?>" style="overflow-y:auto;">
+                          <thead>
+
+                          </thead>
+                          <tbody>
+                            <tr>
+
+                              <td><button type="button" name="add" id="add<?php echo $row1['id'] ?>" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true">+</i></button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    <?php } ?>
                   </div>
+                </div>
               </div>
 
-            
-            
-            
+
+
+
             </div>
 
             <?php echo $msg; ?>
@@ -705,7 +684,7 @@ $result1 = mysqli_query($connection, $event_qury1);
                 <input type="checkbox" name="" id="" required> &nbsp; सामान्य नीति नियम एवं विशिष्ट निर्देश <a href="" class="text-un" data-toggle="modal" data-target="#exampleModal">Terms & Conditions</a>
               </label>
             </div>
-        
+
             <div class=" text-center">
 
 
@@ -733,27 +712,27 @@ $result1 = mysqli_query($connection, $event_qury1);
             <div class="modal-body">
               <p class="ml-2">
 
-              
-    • प्रत्येक विद्यालय /  महाविद्यालय / विश्वविद्यालय अपनी प्रतिभागी सूची श्रीनाथ विश्वविद्यालय के वेबसाइट srinathuniversity.in पर उपलब्ध ऑनलाइन फ़ॉर्म भर कर ही जमा करेंगे। 
-    <br>• प्रत्येक विद्यालय / महाविद्यालय / विश्वविद्यालय के प्रतिनिधि के द्वारा उपलब्ध कराई गई सूची ही मान्य होगी। 
-    <br>• ऑनलाइन फ़ॉर्म के माध्यम से प्राप्त  प्रतिभागी सूची ही मान्य होगी। 
-    <br>• प्रतिभागी सूची जमा करने के अंतिम तिथि १० दिसम्बर २०२१, दिन शुक्रवार होगी 
-    <br>• प्रतिभागियों एवं प्रतिनिधियों का प्रवेश तथा पंजीयन नि:शुल्क  होगा।
-    <br>• प्रतिभागियों एवं प्रतिनिधियों का प्रवेश आयोजन समिति द्वारा  निर्गत “प्रवेश पत्र” द्वारा होगा। 
-    <br>• प्रतिभागी एवं प्रतिनिधि अपने महाविद्यालय / विद्यालय / विश्वविद्यालय द्वारा निर्गत पहचान पत्र साथ लाएँगे।
-    <br>• प्रतियोगिता में प्रयुक्त होने वाली सभी सामग्री प्रतिभागी स्वयं ले कर आएँगे। 
-    <br>• पूर्व सूचना दिए जाने पर प्रतिभागियों एवं प्रतिनिधियों के रहने की समुचित व्यवस्था  नि:शुल्क की जाएगी।
-    <br>• प्रत्येक प्रतियोगिता के लिए जो समय-सीमा सुनिश्चित की गई है वह अपरिवर्तनीय तथा सर्वमान्य होगी।
-    <br>• सभी प्रतियोगितायों में निर्णायक मंडली का निर्णय अंतिम एवं सर्वमान्य होगा। 
-    <br>• प्रत्येक विद्यालय / महाविद्यालय का प्रतियोगिता के लिए चयन  पहले पंजीयन कराने के आधार पर होगा। 
-    <br>• प्रतिभागी  तथा शिक्षक-प्रतिनिधि विश्वविद्यालय परिसर की स्वच्छता बनाए रखने में आयोजन समिति का सहयोग करेंगे। 
-    <br>• वाहनों  के ठहराव स्थल पर वाहनों को सलीके से खड़ा करेंगे। 
-    <br>• विश्वविद्यालय के सम्पत्ति को किसी भी प्रकार का कोई नुक़सान नहीं पहुँचाएँगे।
-    <br>• भोजन के समय पंक्तिबद्ध होकर भोजन का आनंद लेंगे। 
-    <br>• विश्वविद्यालय परिसर में किसी भी प्रकार की हिंसा तथा अपशब्दों का प्रयोग पूर्णतः वर्जित होगा। 
-    <br>• प्रतिभागी अपने सामान की सुरक्षा स्वयं करेंगे। 
-    <br>• किसी भी प्रकार का भत्ता देय नहीं है। 
-    <br>• विस्तृत जानकारी srinathuniversity.in पर  उपलब्ध है अथवा दूरभाष संख्या ७९०९०३३३१८ / ७००४२११४२६ / ८४३४०१३२४६ / ८८२५२१७८३९ पर सम्पर्क कर सकते हैं। 
+
+                • प्रत्येक विद्यालय / महाविद्यालय / विश्वविद्यालय अपनी प्रतिभागी सूची श्रीनाथ विश्वविद्यालय के वेबसाइट srinathuniversity.in पर उपलब्ध ऑनलाइन फ़ॉर्म भर कर ही जमा करेंगे।
+                <br>• प्रत्येक विद्यालय / महाविद्यालय / विश्वविद्यालय के प्रतिनिधि के द्वारा उपलब्ध कराई गई सूची ही मान्य होगी।
+                <br>• ऑनलाइन फ़ॉर्म के माध्यम से प्राप्त प्रतिभागी सूची ही मान्य होगी।
+                <br>• प्रतिभागी सूची जमा करने के अंतिम तिथि १० दिसम्बर २०२१, दिन शुक्रवार होगी
+                <br>• प्रतिभागियों एवं प्रतिनिधियों का प्रवेश तथा पंजीयन नि:शुल्क होगा।
+                <br>• प्रतिभागियों एवं प्रतिनिधियों का प्रवेश आयोजन समिति द्वारा निर्गत “प्रवेश पत्र” द्वारा होगा।
+                <br>• प्रतिभागी एवं प्रतिनिधि अपने महाविद्यालय / विद्यालय / विश्वविद्यालय द्वारा निर्गत पहचान पत्र साथ लाएँगे।
+                <br>• प्रतियोगिता में प्रयुक्त होने वाली सभी सामग्री प्रतिभागी स्वयं ले कर आएँगे।
+                <br>• पूर्व सूचना दिए जाने पर प्रतिभागियों एवं प्रतिनिधियों के रहने की समुचित व्यवस्था नि:शुल्क की जाएगी।
+                <br>• प्रत्येक प्रतियोगिता के लिए जो समय-सीमा सुनिश्चित की गई है वह अपरिवर्तनीय तथा सर्वमान्य होगी।
+                <br>• सभी प्रतियोगितायों में निर्णायक मंडली का निर्णय अंतिम एवं सर्वमान्य होगा।
+                <br>• प्रत्येक विद्यालय / महाविद्यालय का प्रतियोगिता के लिए चयन पहले पंजीयन कराने के आधार पर होगा।
+                <br>• प्रतिभागी तथा शिक्षक-प्रतिनिधि विश्वविद्यालय परिसर की स्वच्छता बनाए रखने में आयोजन समिति का सहयोग करेंगे।
+                <br>• वाहनों के ठहराव स्थल पर वाहनों को सलीके से खड़ा करेंगे।
+                <br>• विश्वविद्यालय के सम्पत्ति को किसी भी प्रकार का कोई नुक़सान नहीं पहुँचाएँगे।
+                <br>• भोजन के समय पंक्तिबद्ध होकर भोजन का आनंद लेंगे।
+                <br>• विश्वविद्यालय परिसर में किसी भी प्रकार की हिंसा तथा अपशब्दों का प्रयोग पूर्णतः वर्जित होगा।
+                <br>• प्रतिभागी अपने सामान की सुरक्षा स्वयं करेंगे।
+                <br>• किसी भी प्रकार का भत्ता देय नहीं है।
+                <br>• विस्तृत जानकारी srinathuniversity.in पर उपलब्ध है अथवा दूरभाष संख्या ७९०९०३३३१८ / ७००४२११४२६ / ८४३४०१३२४६ / ८८२५२१७८३९ पर सम्पर्क कर सकते हैं।
 
 
 
@@ -783,32 +762,33 @@ $result1 = mysqli_query($connection, $event_qury1);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="./asset/js/event.js"></script>
 <?php $event_qury1 = "SELECT * FROM `tbl_sub_events` WHERE 1";
-$result1 = mysqli_query($connection, $event_qury1); 
+$result1 = mysqli_query($connection, $event_qury1);
 while ($row1 = mysqli_fetch_array($result1)) {
-  $limit=$row1['limit'];
-  $id=$row1['id'];
+  $limit = $row1['limit'];
+  $id = $row1['id'];
   echo "<script>
   limit$id=$limit
 </script>";
 ?>
-<script type="text/javascript">
-  $(document).ready(function() {
-    var i = 0;
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var i = 0;
 
-    $('#add<?php echo $row1['id'] ?>').click(function() {
-      i++;
-      if(limit<?php echo $row1['id'] ?> >=i)
-      $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row' + i + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागि का नाम " type="text" placeholder="प्रतिभागि का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled >Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>   <option value="Others">Others</option>               </select>        </td>                  <td> <input title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+      $('#add<?php echo $row1['id'] ?>').click(function() {
+        i++;
+        if (limit<?php echo $row1['id'] ?> >= i)
+          $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row' + i + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + i + '" value="' + i + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागि का नाम " type="text" placeholder="प्रतिभागि का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled >Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>   <option value="Others">Others</option>               </select>        </td>                  <td> <input title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+      });
+
+      $(document).on('click', '.btn_remove', function() {
+        var button_id = $(this).attr("id");
+
+        $('#row' + button_id + '').remove();
+
+      });
+
     });
-
-    $(document).on('click', '.btn_remove', function() {
-      var button_id = $(this).attr("id");
-     
-      $('#row' + button_id + '').remove();
-
-    });
-
-  });
-</script>
+  </script>
 <?php } ?>
+
 </html>

@@ -385,7 +385,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">A. मैट्रिक / इंटरमीडिएट अथवा समकक्ष विद्यार्थियों के लिए प्रतियोगिताएँ (Competition for  Matriculation / Intermediate or plus 2 students) </h5>
+                      <h5 class="card-title ml-5  text-white">A. मैट्रिक / इंटरमीडिएट अथवा समकक्ष विद्यार्थियों के लिए प्रतियोगिताएँ (Competition's for  Matriculation / Intermediate or Equivalent students) </h5>
                     </div>
                     <div class="col-4  mt-2">
                       <b>
@@ -539,7 +539,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">B. महाविद्यालय / विश्वविद्यालय  विद्यार्थियों के लिए प्रतियोगिताएँ ( Competition for College / University students)</h5>
+                      <h5 class="card-title ml-5  text-white">B. महाविद्यालय / विश्वविद्यालय  विद्यार्थियों के लिए प्रतियोगिताएँ ( Competition's for College / University students)</h5>
                     </div>
 
                     <div class="col-4  mt-2">

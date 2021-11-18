@@ -296,7 +296,7 @@ $result3 = mysqli_query($connection, $event_qury2);
 
               <!-- here to started the representetives Detailss -->
               <div class="card un-color">
-                <h5 class="card-title ml-5  text-white">2. शिक्षक प्रतिनिधि का विवरण ( Details of Teacher Representatives )</h5>
+                <h5 class="card-title ml-5  text-white">2. संस्थान प्रतिनिधि का विवरण ( Details of Organization's Representatives )</h5>
               </div>
 
 
@@ -308,21 +308,25 @@ $result3 = mysqli_query($connection, $event_qury2);
                       Name :</b>
                     <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
-
-                  <div class="col-sm-3  mt-3">
-                    <b>मोबाईल नं. : <br>
-                      Mobile No. :</b>
-                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
-                  </div>
                   <div class="col-sm-3  mt-3">
                     <b>ई-मेल : <br>
                       E-mail :</b>
                     <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
-                  <div class="col-sm-3  mt-3">
-                    <b> पहचान पत्र
+                  <div class="col-sm-2  mt-3">
+                    <b>मोबाईल नं. : <br>
+                      Mobile No. :</b>
+                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
+                  </div>
+                  <div class="col-sm-2  mt-3">
+                    <b>संस्थान में  पद : <br>
+                    Designation in  Organization :</b>
+                    <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">
+                  </div>
+                  <div class="col-sm-2  mt-3">
+                    <b> फोटो
                       : <br>
-                      Identity Card:</b>
+                      photograph:</b>
                      <input type="file" name="img[]" placeholder=" पहचान " class="form-control">
                  
                      
@@ -333,15 +337,20 @@ $result3 = mysqli_query($connection, $event_qury2);
                     <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
 
-                  <div class="col-sm-3  mt-3">
-
-                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
-                  </div>
+                 
                   <div class="col-sm-3  mt-3">
 
                     <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
-                  <div class="col-sm-3  mt-3">
+                  <div class="col-sm-2  mt-3">
+
+                   <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">  
+                   </div>
+                   <div class="col-sm-2  mt-3">
+
+                  <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">  
+                    </div>
+                  <div class="col-sm-2  mt-3">
 
                     <input type="file" name="img[]" placeholder="ई-मेल" class="form-control">
                   </div>
@@ -374,7 +383,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">1. मैट्रिक / इंटरमीडिएट (Matriculation / Intermediate) </h5>
+                      <h5 class="card-title ml-5  text-white">A. मैट्रिक / इंटरमीडिएट अथवा समकक्ष विद्यार्थियों के लिए प्रतियोगिताएँ (compation for  Matriculation / Intermediate or plus 2 students) </h5>
                     </div>
                     <div class="col-4  mt-2">
                       <b>
@@ -494,7 +503,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                       <div class="col-2  mt-3">
                         <!-- Button to Open the Modal -->
                         <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
-                          T&C
+                        नीति - नियम
                         </a>
 
                       </div>
@@ -528,7 +537,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                     ?>
 
                     <div class="card un-color col-sm-12">
-                      <h5 class="card-title ml-5  text-white">2. महाविद्यालय / विश्वविद्यालय (College / University)</h5>
+                      <h5 class="card-title ml-5  text-white">B. महाविद्यालय / विश्वविद्यालय  विद्यार्थियों के लिए प्रतियोगिताएँ ( compation for College / University students)</h5>
                     </div>
 
                     <div class="col-4  mt-2">
@@ -555,7 +564,10 @@ $result3 = mysqli_query($connection, $event_qury2);
                     </div>
 
                     <div class="col-2  mt-2">
-                      <b>समाप्त </b>
+                      <b>समाप्त
+                      <br>
+                        End </b>    
+                
 
 
                     </div>
@@ -650,7 +662,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                       <div class="col-2  mt-3">
                         <!-- Button to Open the Modal -->
                         <a type="button" class="text-danger" data-toggle="modal" data-target="#myModal<?php echo $row1['id']; ?>">
-                          T&C
+                        नीति - नियम
                         </a>
 
                       </div>

@@ -20,6 +20,7 @@ $student_name=$row['admission_first_name'];
 if (isset($_POST['submit'])) {
     if (!empty($_POST['date']) && !empty($_POST['month'])) {
         $year = $_POST['date'];
+        $month=$_POST['month'];
     } else {
         $year_err = "please select Year and Month";
     }

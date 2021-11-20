@@ -115,7 +115,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                         <div class="card invoice-action-wrapper">
                                             <div class="card-content">
                                                 <div class="invoice-action-btn">
-                                                    <a href="" onclick="printdata()"> <button id="printbutton" onclick="print()" class="btn btn-success"> <span>Print</span> </button> </a>
+                                                    <a href="" > <button id="printbutton" onclick="printdata()" class="btn btn-success"> <span>Print</span> </button> </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -128,11 +128,11 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
                                                 <div class="col l12" style="text-align: center; width: 100%;">
                                                     <nav class="whitenav" style="background-color: white; box-shadow: none;">
                                                         <div class="nav-wrapper">
-                                                            <img src="./asset/img/logo.png" alt="srinth Logo">
+                                                            <img  width="250" class="img-fluid" src="./asset/img/logo.png" alt="srinth Logo">
                                                         </div>
                                                     </nav>
 
-                                                    <h6 class="printhead">Online Prospectus Form</h6>
+                                                <h6>   <strong>Online Application Form </strong></h6>  
                                                 </div><br><br>
                                                 <div class="row">
                                                     <div class="col l12">
@@ -350,14 +350,11 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 }
 ?>
 <script>
-    function printPageArea(areaID) {
-        var printContent = document.getElementById(areaID);
-        var WinPrint = window.open('', '', 'width=900,height=850');
-        WinPrint.document.write(printContent.innerHTML);
-        WinPrint.document.close();
-        WinPrint.focus();
-        WinPrint.print();
-        WinPrint.close();
+    function printdata() {
+        document.getElementById('printid').style.display='none'
+        document.getElementById('header').style.display='none'
+window.print()
+
 
        
     }

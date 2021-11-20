@@ -78,7 +78,7 @@ if ($payment_status == 'success') {
         $p_no_result = mysqli_query($connection, $propectus_no_query);
         $data_row = mysqli_fetch_array($p_no_result);
         $name = $data_row['prospectus_applicant_name'];
-        $prospectus_course_name = $data_row['prospectus_course_name'];
+        $prospectus_course_name = trim($data_row['prospectus_course_name']);
         $prospectus_session = $data_row['prospectus_session'];
 
         $p_no_result = mysqli_query($connection, $propectus_no_query);
@@ -90,16 +90,21 @@ if ($payment_status == 'success') {
         // for printing the propectus reference pdf
 
         // getting the course id and session id
-        // $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
-        // $course_no_result = mysqli_query($connection, $course_no_query);
-        // $data_row1 = mysqli_fetch_array($course_no_result);
+      echo  $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name'";
+        $course_no_result = mysqli_query($connection, $course_no_query);
+        $data_row1 = mysqli_fetch_array($course_no_result);
 
-        // $prospectus_course_id = $data_row1['course_duration'];
-        // $prospectus_session_id = $data_row1['course_id'];
+        $propectus_rate_amount = $data_row1['prospectus_rate'];
+        $prospectus_session_id = $data_row1['course_id'];
+        $course_duration = $data_row1['course_duration'];
+        $update_payment = "UPDATE `tbl_prospectus` SET `prospectus_rate`='$propectus_rate_amount' WHERE `prospectus_emailid`='$email' ";
+        $update_payment_result = mysqli_query($connection, $update_payment);
 
-        // $update_payment = "UPDATE `tbl_prospectus` SET `prospectus_course_name`='$prospectus_course_id',`prospectus_session`='$prospectus_session_id' WHERE `prospectus_emailid`='$email' ";
-        // $update_payment_result = mysqli_query($connection, $update_payment);
 
+        $insert_income = "INSERT INTO `tbl_income`(`reg_no`, `course`, `academic_year`, `received_date`, `particulars`, `amount`, `payment_mode`, `check_no`, `bank_name`, `income_from`, `post_at`) VALUES 
+                                                ('$prospectus_number','$prospectus_session_id','$course_duration','$transaction_date','Prospectus','$propectus_rate_amount','$prospectus_payment_mode','NULL','$bank_name','Prospectus','$timing')";
+
+        $insert_income_result = mysqli_query($connection, $insert_income);
 
         echo '<script> window.location.replace("../print.php") </script>';
     }

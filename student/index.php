@@ -7,7 +7,7 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
     echo "<script> location.replace('dashboard'); </script>";
 } else {
 ?>
-
+<!-- this the comments -->
     <body>
         <title> SRINATH UNIVERSITY LOGIN PAGE</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">

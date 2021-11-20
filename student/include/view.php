@@ -286,20 +286,20 @@ if (isset($_GET["action"])) {
                                                                     <tr>
                                                                         <td><?php echo $tmpSNo; ?></td>
                                                                         <td><?php echo $arrayTblFeeUpdate->fee_particulars; ?></td>
-                                                                        <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_amount); ?></td>
-                                                                        <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_paid); ?></td>
-                                                                        <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_rebate); ?></td>
+                                                                        <td>&#8377; &nbsp; &nbsp; <?php echo number_format($arrayTblFeeUpdate->fee_amount); ?></td>
+                                                                        <td>&#8377; &nbsp; &nbsp; <?php echo number_format($arrayTblFeeUpdate->fee_paid); ?></td>
+                                                                        <td>&#8377; &nbsp; &nbsp; <?php echo number_format($arrayTblFeeUpdate->fee_rebate); ?></td>
                                                                         <?php
                                                                         if ((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0) {
                                                                         ?>
-                                                                            <td>&#8377; <?php echo 0; ?></td>
-                                                                            <td>&#8377; <?php echo 0; ?></td>
-                                                                            <td><span class="text-red text-bold">&#8377; <?php echo 0; ?></span></td>
+                                                                            <td>&#8377; &nbsp; &nbsp; <?php echo 0; ?></td>
+                                                                            <td>&#8377; &nbsp; &nbsp; <?php echo 0; ?></td>
+                                                                            <td><span class="text-red text-bold">&#8377; &nbsp; &nbsp; <?php echo 0; ?></span></td>
                                                                         <?php } else {
                                                                         ?>
-                                                                            <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)); ?></td>
-                                                                            <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)); ?></td>
-                                                                            <td><span class="text-red text-bold">&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)) - ($arrayTblFeeUpdate->fee_rebate)); ?></span></td>
+                                                                            <td>&#8377; &nbsp; &nbsp; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)); ?></td>
+                                                                            <td>&#8377; &nbsp; &nbsp; <?php echo number_format(($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)); ?></td>
+                                                                            <td><span class="text-red text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)) - ($arrayTblFeeUpdate->fee_rebate)); ?></span></td>
                                                                         <?php
                                                                         } ?>
                                                                     </tr>
@@ -310,12 +310,12 @@ if (isset($_GET["action"])) {
                                                                 <tr>
                                                                     <td></td>
                                                                     <td class="text-right text-bold">Total</td>
-                                                                    <td class="text-bold">&#8377; <?php echo number_format($totalFee); ?></td>
-                                                                    <td class="text-bold">&#8377; <?php echo number_format($totalPaid); ?></td>
-                                                                    <td class="text-bold">&#8377; <?php echo number_format($totalRebate); ?></td>
-                                                                    <td class="text-bold">&#8377; <?php echo number_format($totalRemaining); ?></td>
-                                                                    <td class="text-bold">&#8377; <?php echo number_format($totalFine); ?></td>
-                                                                    <td class="text-bold"><span class="text-red"> &#8377; <?php echo number_format($totalRemainings); ?></span></td>
+                                                                    <td class="text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format($totalFee); ?></td>
+                                                                    <td class="text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format($totalPaid); ?></td>
+                                                                    <td class="text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format($totalRebate); ?></td>
+                                                                    <td class="text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format($totalRemaining); ?></td>
+                                                                    <td class="text-bold">&#8377; &nbsp; &nbsp; <?php echo number_format($totalFine); ?></td>
+                                                                    <td class="text-bold"><span class="text-red"> &#8377; &nbsp; &nbsp; <?php echo number_format($totalRemainings); ?></span></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -354,7 +354,7 @@ if (isset($_GET["action"])) {
                                                                             <input type="hidden" name="particular_paid_id[<?php echo $Idno; ?>]" value="<?php echo $arrayTblFeeUpdate->fee_id; ?>" />
                                                                             <div class="input-group">
                                                                                 <div class="input-group-prepend">
-                                                                                    <span class="input-group-text">&#8377;</span>
+                                                                                    <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                                 </div>
                                                                                 <!--<input id="particular_paid_amount[<?php //echo $Idno; 
                                                                                                                         ?>]" name="particular_paid_amount[<?php //echo $Idno; 
@@ -379,7 +379,7 @@ if (isset($_GET["action"])) {
                                                                     <td>
                                                                         <div class="input-group">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text">&#8377;</span>
+                                                                                <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
                                                                             <input id="fine_amount" name="fine_amount" min="0" max="<?php echo $totalFine; ?>" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" <?php if ($totalFine == 0) echo "readonly"; ?>>
                                                                         </div>
@@ -391,7 +391,7 @@ if (isset($_GET["action"])) {
                                                                     <td>
                                                                         <div class="input-group">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text">&#8377;</span>
+                                                                                <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
                                                                             <input id="rebate_amount" name="rebate_amount" min="0" max="" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
                                                                             <div class="input-group-prepend">
@@ -415,7 +415,7 @@ if (isset($_GET["action"])) {
                                                                     <td class="text-bold">
                                                                         <div class="input-group">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text">&#8377;</span>
+                                                                                <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
                                                                             <input id="remaininga"  value="<?php echo $totalRemainings ?>" type="hidden" class="form-control">
                                                                             <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="0" max="<?php echo $totalRemainings ?>" type="number" class="form-control">
@@ -429,7 +429,7 @@ if (isset($_GET["action"])) {
                                                                     <td class="text-bold">
                                                                         <div class="input-group">
                                                                             <div class="input-group-prepend">
-                                                                                <span class="input-group-text">&#8377;</span>
+                                                                                <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
                                                                             <input id="remaining_amount" name="remaining_amount" min="0" value="<?php echo $totalRemainings ?>" type="text" style="font-weight: 900;color: #dc3545;" class="form-control" readonly>
                                                                             <!--<input id="remaining_amount" name="remaining_amount" min="0" value="0<?php //echo $totalRemainings 
@@ -580,8 +580,8 @@ if (isset($_GET["action"])) {
                                                                         <label for="">Status</label>
                                                                         <input id="productinfo" class="form-control" name="productinfo" value="<?php echo "Fee"; ?>" placeholder="" readonly>
                                                                     </div>
-                                                                    <input type="hidden" id="surl" class="surl" name="surl" value="https://nsucms.in/nsucms/student/success" placeholder="">
-                                                                    <input type="hidden" id="furl" class="furl" name="furl" value="https://nsucms.in/nsucms/student/success" placeholder="">
+                                                                    <input type="hidden" id="surl" class="surl" name="surl" value="http://localhost/srinathcms/student/success" placeholder="">
+                                                                    <input type="hidden" id="furl" class="furl" name="furl" value="http://localhost/srinathcms/student/success" placeholder="">
                                                                     <div class="form-group col-md-4 mt-2">
                                                                         <button class="btn btn-primary btn-lg btn-block" type="submit" name="button"><i class="fa fa-paper-plane"></i> Pay </button>
                                                                     </div>
@@ -792,11 +792,11 @@ if (isset($_GET["action"])) {
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td>&#8377; <?php echo number_format(intval($totalPerticular)); ?></td>
-                                                                                <td>&#8377; <?php echo number_format(intval($row_paid_time["fine"])); ?></td>
-                                                                                <td>&#8377; <?php echo number_format(intval($row_paid_time["rebate_amount"])); ?></td>
-                                                                                <td>&#8377; <?php echo number_format(intval($totalAmount) + intval($row_paid_time["rebate_amount"])); ?></td>
-                                                                                <td>&#8377; <?php echo number_format(intval($row_paid_time["balance"])); ?></td>
+                                                                                <td>&#8377; &nbsp; &nbsp; <?php echo number_format(intval($totalPerticular)); ?></td>
+                                                                                <td>&#8377; &nbsp; &nbsp; <?php echo number_format(intval($row_paid_time["fine"])); ?></td>
+                                                                                <td>&#8377; &nbsp; &nbsp; <?php echo number_format(intval($row_paid_time["rebate_amount"])); ?></td>
+                                                                                <td>&#8377; &nbsp; &nbsp; <?php echo number_format(intval($totalAmount) + intval($row_paid_time["rebate_amount"])); ?></td>
+                                                                                <td>&#8377; &nbsp; &nbsp; <?php echo number_format(intval($row_paid_time["balance"])); ?></td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>

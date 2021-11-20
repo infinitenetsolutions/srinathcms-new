@@ -89,14 +89,17 @@ $row = $result->fetch_assoc();
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3><?php echo "Profile" ?></h3>
+                                    <a class="text-white" href="userprofile">
+                                        <h3><?php echo "Profile" ?></h3>
 
-                                    <p>Details</p>
+                                        <p>Details</p>
+                                    </a>
                                 </div>
+
                                 <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="./userprofile.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="./userprofile" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -104,14 +107,16 @@ $row = $result->fetch_assoc();
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>Fee<sup style="font-size: 20px"></sup></h3>
+                                    <a class="text-white" href="payfee">
+                                        <h3>Fee<sup style="font-size: 20px"></sup></h3>
 
-                                    <p>Payment</p>
+                                        <p>Payment</p>
+                                    </a>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="./payfee.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="./payfee" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -119,12 +124,14 @@ $row = $result->fetch_assoc();
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3><?php echo "Payment";  ?></h3>
+                                    <a class="text-white" href="fee_details">
+                                        <h3><?php echo "Payment";  ?></h3>
 
-                                    <p>Details</p>
+                                        <p>Details</p>
+                                    </a>
                                 </div>
                                 <div class="icon">
-                                <i class="fas fa-receipt"></i>
+                                    <i class="fas fa-receipt"></i>
                                 </div>
                                 <a href="./fee_details.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
@@ -134,53 +141,67 @@ $row = $result->fetch_assoc();
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3><?php echo "Admit" ?></h3>
+                                    <a class="text-white" href="admitcard">
+                                        <h3><?php echo "Admit" ?></h3>
 
-                                    <p>Card</p>
+                                        <p>Card</p>
+                                    </a>
                                 </div>
                                 <div class="icon">
-                                <i class="fas fa-address-card"></i>
+                                    <i class="fas fa-address-card"></i>
                                 </div>
-                                <a href="./admitcard.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="./admitcard" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
-                           <!-- ./col -->
-                           <div class="col-lg-3 col-6">
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
                             <!-- small box -->
                             <div class="small-box bg-secondary">
                                 <div class="inner">
-                                    <h3><?php echo "Attendance" ?></h3>
+                                    <a class="text-white" href="attendance">
+                                        <h3><?php echo "Attendance" ?></h3>
 
-                                    <p>Report</p>
+                                        <p>Report</p>
+                                    </a>
                                 </div>
                                 <div class="icon">
-                                <i class="fas fa-book-reader"></i>
+                                    <i class="fas fa-book-reader"></i>
                                 </div>
-                                <a href="./admitcard.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="./attendance" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
-                           <!-- ./col -->
-                           <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-primary">
-                                <div class="inner">
-                                    <h3><?php echo "Bus" ?></h3>
+                        <!-- ./col -->
 
-                                    <p> Tracking</p>
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+
+                            <div class="small-box bg-primary">
+
+                                <div class="inner">
+                                    <a class="text-white" href="admitcard">
+                                        <h3><?php echo "Bus" ?></h3>
+
+                                        <p> Tracking</p>
                                 </div>
+                                </a>
                                 <div class="icon">
-                                <i class="fas fa-location-arrow"></i>
+                                    <i class="fas fa-location-arrow"></i>
                                 </div>
-                                <a href="./admitcard.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
+                                <a href="./admitcard" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
                             </div>
+
                         </div>
+
                         <!-- ./col -->
                     </div>
                     <!-- /.row -->
                     <!-- Main row -->
-
+                </div>
+                
             </section>
             <section class="content">
                 <div class="container-fluid">

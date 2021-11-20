@@ -99,7 +99,7 @@
                     <a href="#" class="nav-link <?php if($page_no == "7"){ echo 'active'; } ?>">
                         <i class="nav-icon fas fa-address-card"></i>
                         <p>
-                            Admit Card Management
+                            Admit Card 
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -116,7 +116,7 @@
                     <a href="#" class="nav-link <?php if($page_no == "10"){ echo 'active'; } ?>">
                         <i class="nav-icon fas fa-book-reader"></i>
                         <p>
-                            Attendance Management
+                            Attendance 
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -133,7 +133,7 @@
                     <a href="#" class="nav-link <?php if($page_no == "6"){ echo 'active'; } ?>">
                         <i class="nav-icon fa fa-comments"></i>
                         <p>
-                            Complaint Management
+                            Complaint 
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

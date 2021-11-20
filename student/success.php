@@ -10,7 +10,7 @@ $date_variable_today_month_year_with_timing = date("d M, Y. h:i A");
 //   $SALT = "M87TPWFJ44";
 
 // 	//live
-	 $SALT = "LNRNU85EPI";
+$SALT = "92HHB0OBFH";
 ?>
 
 

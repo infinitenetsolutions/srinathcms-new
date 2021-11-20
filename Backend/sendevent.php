@@ -41,7 +41,7 @@ function event_mail($add_prospectus_email, $prosprectus_number,$college_name)
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = '५ वाँ श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१';
+    $mail->Subject = '५ वाँ अंतर्राष्ट्रीय श्रीनाथ हिन्दी महोत्सव, जमशेदपुर २०२१';
     $mail->Body    = '<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;vertical-align:top;background-color:#fff;border-spacing:0;min-width:320px;table-layout:fixed;width:100%" valign="top" width="100%">
     <tbody>
         <tr style="border-collapse:collapse;vertical-align:top" valign="top">

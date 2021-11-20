@@ -156,7 +156,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                             <br>
                             <!-- here to started the representetives Detailss -->
                             <div class="card un-color">
-                                <h5 class="card-title ml-5  text-white">2. शिक्षक प्रतिनिधि का विवरण ( Details of Teacher Representatives )</h5>
+                            <h5 class="card-title ml-5  text-white">2. संस्थान प्रतिनिधि का विवरण ( Details of Organization's Representatives )</h5>
                             </div>
 
 
@@ -228,7 +228,7 @@ $teacher_result = mysqli_query($connection, $teacher_event);
                                 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="th-sm"> प्रतिभागि का नाम
+                                            <th class="th-sm"> प्रतिभागी का नाम
                                             </th>
                                             <th class="th-sm">पिता का नाम
                                             </th>

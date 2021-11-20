@@ -12,7 +12,7 @@
                             <div class="header-top-left-icon">
                                 <span>
                                     <i class="far fa-envelope"></i>
-                                    srinathuniversity@gmail.com
+                                    info@srinathuniversity.com
                                 </span>
                             </div>
                         </a>

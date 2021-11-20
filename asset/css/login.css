@@ -330,3 +330,6 @@ border: 1px orange solid;
 .header-top-left-icon span{
 color: white !important ;
 }
+.nav-wrapper a img{
+    width: 220px;
+}

@@ -104,7 +104,7 @@ if (isset($_POST['done'])) {
     <nav class="whitenav">
         <div class="nav-wrapper">
             <a href="index.php">
-                <img src="./asset/img/logo.png" alt="Srinath logo">
+                <img  class="img-fluid" src="./asset/img/logo.png" alt="Srinath logo">
             </a>
 
             <ul class="right">

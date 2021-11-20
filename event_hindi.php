@@ -234,9 +234,9 @@ $result3 = mysqli_query($connection, $event_qury2);
                   </div>
 
                   <div class="col-sm-4  mt-3">
-                    <b>फ़ोन नं. : <br>
+                    <b> दूरभाष संख्या  : <br>
                       Phone No. :</b>
-                    <input type="text" name="phone" placeholder="फ़ोन नं." class="form-control">
+                    <input type="text" name="phone" placeholder=" दूरभाष संख्या " class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">

@@ -38,7 +38,6 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
         <!-- END Custom CSS-->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     </head>
 
     <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-modern-menu" data-color="" data-col="2-columns">
@@ -51,7 +50,7 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
 
             <nav class="whitenav">
                 <div class="nav-wrapper">
-                    <img src="./asset/img/logo.png" alt="Srinath logo">
+                    <img width="220" src="./asset/img/logo.png" alt="Srinath logo">
                     <ul class="right">
                         <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1"><?php echo $_SESSION['name']; ?><i class="material-icons right">arrow_drop_down</i></a>
                             <div id="dropdown1" class="dropdown-content" tabindex="0">
@@ -79,8 +78,8 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                         <div class="row">
                             <div class="col s12">
                                 <form action="./library/easebuzz.php?api_name=initiate_payment" id="payment_form" method="POST">
-                                  <!-- here i hava to set the ammount for paying fee in sesssion  -->
-                                <?php $_SESSION['ammount'] = $ammout; ?>
+                                    <!-- here i hava to set the ammount for paying fee in sesssion  -->
+                                    <?php $_SESSION['ammount'] = $ammout; ?>
                                     <table border="1">
                                         <tbody>
                                             <tr>

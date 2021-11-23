@@ -2,18 +2,19 @@
 // send the main in the email variable
 function generate_otp($email)
 {
-  
-$otp= $_SESSION['otp'] = rand(100000, 999999);
 
-return $otp;
+    $otp = $_SESSION['otp'] = rand(100000, 999999);
+
+    return $otp;
 }
 function send_otp()
 {
+    $phone = $_SESSION['phone'];
     $reciever_email = $_SESSION['email'];
     $reciever_name = $_SESSION['name'];
-    $otp=$_SESSION['otp'];
-    $smtp_host="smtp.gmail.com";
-    $port=465;
+    $otp = $_SESSION['otp'];
+    $smtp_host = "smtp.gmail.com";
+    $port = 465;
     $sender_email_id = "admissions.srinathuniversity@gmail.com";  //here put the sender email id he show in the clint email
     $sender_password = "Rafiganj"; //here put the password of email id to send the email otp
 
@@ -21,7 +22,8 @@ function send_otp()
     include 'phpmailer/PHPMailerAutoload.php';
 
     $mail = new PHPMailer;
-
+    $message = "Your OTP is " . $otp . ". Please do not share this OTP to anyone. Regards, Srinath University, JSR";
+    sendsmsGET($phone, $message);
     //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
     $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -51,6 +53,38 @@ function send_otp()
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
     } else {
-        return  'OTP Sent To '.$reciever_email;
+        return  'OTP Sent To ' . $reciever_email .' and '.$phone;
     }
+}
+
+
+
+function sendsmsGET($mobileNumber, $message)
+{
+
+    $senderId = "SRIUNI";
+    $serverUrl = "msg.msgclub.net";
+    //put the auth key;			
+    $authKey = "fbfdee58a904a1d82641561a74c354";
+    $routeId = "1";
+    $route = "default";
+    $getData = 'mobileNos=' . $mobileNumber . '&message=' . urlencode($message) . '&senderId=' . $senderId . '&routeId=' . $routeId;
+    //API URL			
+    $url = "http://" . $serverUrl . "/rest/services/sendSMS/sendGroupSms?AUTH_KEY=" . $authKey . "&" . $getData;
+    // init the resource			
+    $ch = curl_init();
+    curl_setopt_array($ch, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0
+    ));
+    //get response			
+    $output = curl_exec($ch);
+    //Print error if any		
+    if (curl_errno($ch)) {
+        echo 'error:' . curl_error($ch);
+    }
+    curl_close($ch);
+    return $output;
 }

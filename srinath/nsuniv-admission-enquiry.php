@@ -59,30 +59,52 @@ include "include/authentication.php";
                 <div class="col-md-12">
                     <div class="card card-danger card-outline">
                         <div class="card-header card-warning">
-                            <div class="form-group float-left mb-0">
-                                <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" id="dynamicChangeLimit">
-                                    <option selected="selected">5</option>
-                                    <option>10</option>
-                                    <option>25</option>
-                                    <option>50</option>
-                                    <option>75</option>
-                                    <option>100</option>
-                                    <option>125</option>
-                                    <option>150</option>
-                                    <option>175</option>
-                                    <option>200</option>
-                                    <option>250</option>
-                                    <option>500</option>
-                                    <option>1000</option>
-                                    <option>2000</option>
-                                    <option>5000</option>
-                                    <option>10000</option>
-                                    <option>All</option>
-                                </select>
-                            </div>
-                            <form method="POST" action="export-list" class="float-right mb-0">
-                                <input type="hidden" name="action" value="export_all_prospectus_details" />
-                                <button type="submit" class="btn btn-warning pull-right"><i class="fa fa-download"></i> Export All</button>
+
+                            <form method="POST" action="export-admission.php">
+                                <div class="card-body" style="margin-top: 0px;">
+                                    <div class="row">
+                                        <div class="col-12" id="error_section"></div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label>Course Name</label>
+                                                <select class="form-control" name="course_id">
+                                                    <option value="all">All</option>
+                                                    <?php
+                                                    $sql_course = "SELECT * FROM `tbl_course`
+                                                                   WHERE `status` = '$visible';
+                                                                   ";
+                                                    $result_course = $con->query($sql_course);
+                                                    while ($row_course = $result_course->fetch_assoc()) {
+                                                    ?>
+                                                        <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label>Academic Year</label>
+                                                <select class="form-control" name="academic_year">
+                                                    <option value="all">All</option>
+                                                    <?php
+                                                    $sql_ac_year = "SELECT * FROM `tbl_university_details`
+                                                                   WHERE `status` = '$visible';
+                                                                   ";
+                                                    $result_ac_year = $con->query($sql_ac_year);
+                                                    while ($row_ac_year = $result_ac_year->fetch_assoc()) {
+                                                    ?>
+                                                        <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"])) . " to " . date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2" style="margin-top: 29px;">
+                                            <input type="hidden" name="action" value="export_student_details" />
+                                            <button type="submit" class="btn btn-warning pull-right"><i class="fa fa-download"></i> Export All</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -154,6 +176,7 @@ include "include/authentication.php";
                 "autoWidth": false,
             });
         });
+
     </script>
     <script>
         $(document).ready(function() {

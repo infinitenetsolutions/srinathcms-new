@@ -92,7 +92,7 @@
                                         <option>All</option>
                                     </select>
                                 </div>
-                                <form method="POST" action="export-list" class="float-right mb-0">
+                                <form method="POST" action="./export/propectus" class="float-right mb-0">
                                     <input type="hidden" name="action" value="export_all_prospectus_details" />
                                     <button type="submit" class="btn btn-warning pull-right"><i class="fa fa-download"></i> Export All</button>
                                 </form>

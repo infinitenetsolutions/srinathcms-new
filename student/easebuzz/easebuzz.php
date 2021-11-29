@@ -60,28 +60,17 @@ if (!empty($_POST) && (sizeof($_POST) > 0)) {
     $paidDate = $_SESSION["paidDate"];
     $paymentDate = $_SESSION["paymentDate"];
 
-     $particular_paid_id = json_encode($_SESSION["particular_paid_id"]);
-     $particular_paid_amount = json_encode($_SESSION["particular_paid_amount"]);
+    $particular_paid_id = json_encode($_SESSION["particular_paid_id"]);
+    $particular_paid_amount = json_encode($_SESSION["particular_paid_amount"]);
     $date = date('d-m-Y');
     $payment_check = "INSERT INTO `tbl_payment_check`( `particular_paid_id`, `particular_paid_amount`, `date`, `txno`, `student_id`) VALUES
                                                          ('$particular_paid_id','$particular_paid_amount','$date','$transation_id','$registrationNumber')";
 
     $success_result = mysqli_query($con, $payment_check);
 
-
-
-
-
-
-
-
-
-
-
-
-    // if($amount<5000){
-    // $amount='5000.00';
-    // }
+    if ($amount < 5000) {
+        $amount = '5000.00';
+    }
 
     /*
         * There are three approch to call easebuzz API.

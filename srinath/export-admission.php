@@ -79,8 +79,8 @@
             // Create new PHPExcel object
             $objPHPExcel = new PHPExcel();
             // Set document properties
-            $objPHPExcel->getProperties()->setCreator("Nsucms")
-                                         ->setLastModifiedBy("Nsucms")
+            $objPHPExcel->getProperties()->setCreator("Srinath University")
+                                         ->setLastModifiedBy("Srinath University")
                                          ->setTitle("$fileName")
                                          ->setSubject("$fileName")
                                          ->setDescription("Here is your $fileName.")
@@ -214,7 +214,7 @@
                         ->setCellValue('B'.$inc, $count_i.". ")
                         ->setCellValue('C'.$inc, $row["admission_id"])
                         ->setCellValue('D'.$inc, $row["course_name"])
-                        ->setCellValue('E'.$inc, $row["admission_first_name"]." ".$row["admission_middle_name"]." ".$row["admission_last_name"])
+                        ->setCellValue('E'.$inc, $row["admission_first_name"])
                         ->setCellValue('F'.$inc, $row["admission_father_name"])
                         ->setCellValue('G'.$inc, $row["admission_mother_name"])
                         ->setCellValue('H'.$inc, $row["admission_mobile_student"])
@@ -224,7 +224,7 @@
                         ->setCellValue('L'.$inc, $row["admission_form_no"])
                         ->setCellValue('M'.$inc, $row["admission_username"])
                         ->setCellValue('N'.$inc, $row["admission_password"])
-                        ->setCellValue('O'.$inc, $row["admission_residential_address"]." ".$row["admission_state"]." ".$row["admission_city"]." ".$row["admission_district"]." ".$row["admission_pin_code"])
+                        ->setCellValue('O'.$inc, str_replace('"','', (str_replace('}','' ,str_replace('{','',$row["admission_residential_address"]))))." ".$row["admission_state"]." ".$row["admission_city"]." ".$row["admission_district"]." ".$row["admission_pin_code"])
                         ->setCellValue('P'.$inc, $row["admission_gender"])
                         ->setCellValue('Q'.$inc, $row["admission_father_phoneno"])
                         ->setCellValue('R'.$inc, $row["admission_father_whatsappno"]);
@@ -330,8 +330,8 @@
             // Create new PHPExcel object
             $objPHPExcel = new PHPExcel();
             // Set document properties
-            $objPHPExcel->getProperties()->setCreator("Nsucms")
-                                         ->setLastModifiedBy("Nsucms")
+            $objPHPExcel->getProperties()->setCreator("Srinath University")
+                                         ->setLastModifiedBy("Srinath University")
                                          ->setTitle("$fileName")
                                          ->setSubject("$fileName")
                                          ->setDescription("Here is your $fileName.")

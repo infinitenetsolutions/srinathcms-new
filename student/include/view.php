@@ -530,6 +530,7 @@ if (isset($_GET["action"])) {
                                                                 while (in_array($num = mt_rand($min, $max), $range));
                                                                 $range[] = $num;
                                                             }
+                                                   
                                                             ?>
 
                                                             <form id="payment_form" method="post" action="easebuzz/easebuzz.php?api_name=initiate_payment">

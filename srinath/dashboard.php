@@ -389,14 +389,14 @@ $last_date = date('m');
 $arr = array();
 
 $year = date('Y');
-for ($i = 1; $i < $last_date; $i++) {
+for ($i = 1; $i <= $last_date; $i++) {
     $d =  date("M", strtotime("+" . $i-1 . " month", $last_date));
   
     echo "<script>
 
 date1.push('" . $d . "')
 </script>";
-    if ($i < 9) {
+    if ($i <= 9) {
       echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$i-31' ";
         $income_result = mysqli_query($con, $total_income);
         $total_income_data = mysqli_fetch_array($income_result);
@@ -428,7 +428,7 @@ expense.push('" . $total_expense_amount . "')
 income.push('" . $total_income_amount . "')
 </script>";
 
-        $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-$i-01' AND '$year-$i-31' ";
+      $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-$i-01' AND '$year-$i-31' ";
         $expense_result = mysqli_query($con, $total_expense);
         $total_expense_data = mysqli_fetch_array($expense_result);
         $total_expense_amount = $total_expense_data['total'];

@@ -397,7 +397,7 @@ for ($i = 1; $i <= $last_date; $i++) {
 date1.push('" . $d . "')
 </script>";
     if ($i <= 9) {
-      echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$i-31' ";
+        $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$i-31' ";
         $income_result = mysqli_query($con, $total_income);
         $total_income_data = mysqli_fetch_array($income_result);
         $total_income_amount = $total_income_data['total'];

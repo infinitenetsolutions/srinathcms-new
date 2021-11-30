@@ -1,5 +1,5 @@
 .login{
-    background-color: #a82b12;
+    background-color: #c70013;
     color: aliceblue;
 }
 .logo{
@@ -34,4 +34,11 @@
 }
 .infinite{
     color: green;
+}
+li a{
+    font-weight: bold;
+}
+.nav-link{
+    padding: 15px;
+    font-size: 17px;
 }

@@ -1,5 +1,5 @@
 <?php
-
+$page=1;
 //index.php
 
 include('header.php');

@@ -1,12 +1,13 @@
 <?php
+$page=4;
 $conn = '';
 if (isset($_POST["importExcelButton"])) {
 
-// here i to creating the connection for exporting the data in to excel
+  // here i to creating the connection for exporting the data in to excel
   if ($_SERVER['HTTP_HOST'] == "localhost") {
-    $conn = mysqli_connect("localhost", "root", "", "srinath_atteandance");
+    $conn = mysqli_connect("localhost", "root", "", "nsunivac_attendance");
   } else {
-    $conn = mysqli_connect("localhost", "phpmyadmin", "raja@#", "srinath_cms");
+    $conn = mysqli_connect("localhost", "nsunivac_attendance", "4Ckt6FML9", "nsunivac_attendance");
   }
   $file = $_FILES['importExcelFile']['tmp_name'];
   $handle = fopen($file, "r");
@@ -55,6 +56,24 @@ if (isset($_POST["importExcelButton"])) {
 //student.php
 
 include('header.php');
+include '../include/connection.php';
+$grade_total='';
+if(isset($_GET['grade'])){
+$grade=$_GET['grade'];
+if($grade!="all"){
+$grade_qury="SELECT * FROM `tbl_student` WHERE `student_grade_id`='$grade'";
+$grade_result=mysqli_query($connection,$grade_qury);
+$grade_total=mysqli_num_rows($grade_result);
+}else{
+  $grade_qury="SELECT * FROM `tbl_student` WHERE 1";
+  $grade_result=mysqli_query($connection,$grade_qury);
+  $grade_total=mysqli_num_rows($grade_result);
+}
+}else {
+  $grade_qury="SELECT * FROM `tbl_student` WHERE 1";
+  $grade_result=mysqli_query($connection,$grade_qury);
+  $grade_total=mysqli_num_rows($grade_result);
+}
 
 ?>
 
@@ -71,12 +90,12 @@ include('header.php');
     </div>
     <div class="card-header">
       <div class="row">
-        <div class="col-md-6">All Student List</div>
-        <div class="col-md-6" align="right">
-          <select style="width:100%;" class="form-control" onchange="changeGrade()" id="changeGradeId">
+        <div class="col-md-8">Total number of Student List : -  <span class="text-danger font-weight-bold"><?php echo $grade_total; ?></span> </div>
+        <div class="col-md-4" align="right">
+          <select style="width:100%;" class="form-control selectpicker" data-show-subtext="true" data-live-search="true" onchange="changeGrade()" id="changeGradeId">
             <option value="all" <?php
-                                  echo "disabled selected";
-                                ?>>-Select Semester-</option>
+                                echo " selected";
+                                ?>>- All -</option>
             <?php
             $query = "
             		SELECT * FROM tbl_grade ORDER BY grade_name ASC
@@ -85,9 +104,9 @@ include('header.php');
             $statement->execute();
             $result = $statement->fetchAll();
             foreach ($result as $row) {
-              
+
             ?>
-              <option value="<?php echo $row["grade_id"]; ?>" <?php if ($row["grade_id"] == $_GET["grade"]) {
+              <option value="<?php echo $row["grade_id"]; ?>" <?php if (isset($_GET['grade']))  if ($row["grade_id"] == $_GET["grade"]) {
                                                                 echo "disabled selected";
                                                               } ?>><?php echo $row["grade_name"]; ?></option>
             <?php } ?>
@@ -129,7 +148,9 @@ include('header.php');
 
 <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
 <link rel="stylesheet" href="../css/datepicker.css" />
-
+<link rel="stylesheet" href="../css/bootstrap.select.min.css">
+<link rel="stylesheet" href="../css/bootstrap-select.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 <style>
   .datepicker {
     z-index: 1600 !important;
@@ -242,7 +263,7 @@ include('header.php');
             <div class="row">
               <div class="col-md-12">
                 <input type="file" name="importExcelFile" class="form-control" />
-                <span id="" class="text-danger"> CSV format only... </span>
+                <span id="" class="text-danger"> <a href="format.xls">CSV format only...</a> </span>
               </div>
             </div>
           </div>

@@ -187,164 +187,164 @@ include "include/authentication.php";
                         <!-- /.row -->
                     </div>
                 </section>
-            <?php } ?>
-            <!-- /.content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!-- PIE CHART -->
-                            <div class="card card-danger">
-                                <div class="card-header">
-                                    <h3 class="card-title">Overall Total Income</h3>
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                <!-- /.content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- PIE CHART -->
+                                <div class="card card-danger">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Overall Total Income</h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        </div>
                                     </div>
+                                    <div class="card-body">
+                                        <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+
+
+                                <!-- DONUT CHART -->
+                                <div class="card card-danger d-none">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Donut Chart</h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- /.card -->
                             </div>
+                            <!-- /.col (LEFT) -->
+                            <div class="col-md-6 ">
+                                <!-- LINE CHART -->
 
 
-                            <!-- DONUT CHART -->
-                            <div class="card card-danger d-none">
-                                <div class="card-header">
-                                    <h3 class="card-title">Donut Chart</h3>
+                                <!-- BAR CHART -->
+                                <div class="card card-success">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Income and Expenses</h3>
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart">
+                                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
                                 <!-- /.card-body -->
+                                <div class="card card-primary d-none">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Area Chart</h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart">
+                                            <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <div class="card card-info d-none">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Line Chart</h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart">
+                                            <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
                             </div>
                             <!-- /.card -->
+
+
+
                         </div>
-                        <!-- /.col (LEFT) -->
-                        <div class="col-md-6 ">
-                            <!-- LINE CHART -->
-
-
-                            <!-- BAR CHART -->
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <h3 class="card-title">Income and Expenses</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart">
-                                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card card-primary d-none">
-                                <div class="card-header">
-                                    <h3 class="card-title">Area Chart</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart">
-                                        <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <div class="card card-info d-none">
-                                <div class="card-header">
-                                    <h3 class="card-title">Line Chart</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart">
-                                        <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.card -->
-
-
-
+                        <!-- /.col (RIGHT) -->
                     </div>
-                    <!-- /.col (RIGHT) -->
-                </div>
-                <!-- /.row -->
+                    <!-- /.row -->
         </div><!-- /.container-fluid -->
         </section>
     </div>
+<?php } ?>
+<!-- /.content-wrapper -->
+<?php include 'include/footer.php'; ?>
 
-    <!-- /.content-wrapper -->
-    <?php include 'include/footer.php'; ?>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
-
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
 </body>
 <script>
     const date1 = []
@@ -354,7 +354,7 @@ include "include/authentication.php";
 <?php
 $year = date('Y');
 // getting the total fee admission and semester
-$sql = "select * from tbl_fee_paid  WHERE `status` = '$visible' &&  cash_date BETWEEN '$year-01-01' AND '$year-12-31' ";
+ $sql = "select * from tbl_fee_paid WHERE `status` = '46cf0e59759c9b7f1112ca4b174343ef' && cash_date BETWEEN '$year-01-01' AND '$year-12-31' ";
 $query = mysqli_query($con, $sql);
 $sum1 = 0;
 while ($row = mysqli_fetch_array($query)) {
@@ -385,60 +385,59 @@ extra_fee=" . $sum13 . "
 
 // getting the month of the year
 // print the month of the year
-echo $last_date = date('m');
+$last_date = date('m');
 $arr = array();
 
 $year = date('Y');
-for ($i = 0; $i < $last_date; $i++) {
-    $d =  date("M", strtotime("+" . $i . " month", $last_date));
-    $next = $i + 1;
+for ($i = 1; $i < $last_date; $i++) {
+    $d =  date("M", strtotime("+" . $i-1 . " month", $last_date));
+  
     echo "<script>
 
 date1.push('" . $d . "')
 </script>";
-if($i<9){
-    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
-    $income_result = mysqli_query($con, $total_income);
-    $total_income_data = mysqli_fetch_array($income_result);
-    $total_income_amount = $total_income_data['total'];
+    if ($i < 9) {
+      echo  $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-0$i-01' AND '$year-0$i-31' ";
+        $income_result = mysqli_query($con, $total_income);
+        $total_income_data = mysqli_fetch_array($income_result);
+        $total_income_amount = $total_income_data['total'];
 
-    echo "<script>
-
-income.push('" . $total_income_amount . "')
-</script>";
-
-    $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-0$i-01' AND '$year-0$next-01' ";
-    $expense_result = mysqli_query($con, $total_expense);
-    $total_expense_data = mysqli_fetch_array($expense_result);
-    $total_expense_amount = $total_expense_data['total'];
-
-    echo "<script>
-
-expense.push('" . $total_expense_amount . "')
-</script>";
-}
-else{
-  
-    $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-$i-01' AND '$year-$next-01' ";
-    $income_result = mysqli_query($con, $total_income);
-    $total_income_data = mysqli_fetch_array($income_result);
-    $total_income_amount = $total_income_data['total'];
-
-    echo "<script>
+        echo "<script>
 
 income.push('" . $total_income_amount . "')
 </script>";
 
-    $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-$i-01' AND '$year-$next-01' ";
-    $expense_result = mysqli_query($con, $total_expense);
-    $total_expense_data = mysqli_fetch_array($expense_result);
-    $total_expense_amount = $total_expense_data['total'];
+        $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-0$i-01' AND '$year-0$i-31' ";
+        $expense_result = mysqli_query($con, $total_expense);
+        $total_expense_data = mysqli_fetch_array($expense_result);
+        $total_expense_amount = $total_expense_data['total'];
 
-    echo "<script>
+        echo "<script>
 
 expense.push('" . $total_expense_amount . "')
 </script>";
-}
+    } else {
+
+        $total_income = "SELECT SUM(amount) as total FROM `tbl_income` WHERE post_at BETWEEN '$year-$i-01' AND '$year-$i-31' ";
+        $income_result = mysqli_query($con, $total_income);
+        $total_income_data = mysqli_fetch_array($income_result);
+        $total_income_amount = $total_income_data['total'];
+
+        echo "<script>
+
+income.push('" . $total_income_amount . "')
+</script>";
+
+        $total_expense = "SELECT SUM(amount) as total FROM `tbl_expenses` WHERE payment_date BETWEEN '$year-$i-01' AND '$year-$i-31' ";
+        $expense_result = mysqli_query($con, $total_expense);
+        $total_expense_data = mysqli_fetch_array($expense_result);
+        $total_expense_amount = $total_expense_data['total'];
+
+        echo "<script>
+
+expense.push('" . $total_expense_amount . "')
+</script>";
+    }
 }
 
 ?>

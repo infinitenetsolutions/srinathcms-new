@@ -54,8 +54,8 @@ if ($chk_tx == "success") {
 
     $PaymentMode = "Online";
     $cashDepositTo = "University Office";
-    $paidDate = date('d-m-Y');
-    $paymentDate = date('d-m-Y');
+    $paidDate = date('Y-m-d');
+    $paymentDate = date('Y-m-d');
 
     $pyament_check = "SELECT * FROM `tbl_payment_check` WHERE student_id='$registrationNumber' && txno='$txn_id' && date='$paidDate'  ORDER BY  id DESC;";
     $result_payment = mysqli_query($con, $pyament_check);
@@ -139,7 +139,7 @@ if ($chk_tx == "success") {
         $_SESSION['amount'] = $result["data"]["amount"];
         $_SESSION['txnid'] = $result["data"]["txnid"];
         $_SESSION['easepayid'] = $result["data"]["easepayid"];
-      
+
         echo "<script>
         window.location.replace('thankyou.php')
     </script>";

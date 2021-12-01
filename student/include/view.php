@@ -372,7 +372,7 @@ if (isset($_GET["action"])) {
                                                                     $Idno++;
                                                                     $tmpSNo++;
                                                                 }
-                                                                ?>
+                                                                ?>                                           
                                                                 <tr>
                                                                     <td><?php echo $tmpSNo; ?></td>
                                                                     <td>Fine</td>
@@ -418,7 +418,7 @@ if (isset($_GET["action"])) {
                                                                                 <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
                                                                             <input id="remaininga" value="<?php echo $totalRemainings ?>" type="hidden" class="form-control">
-                                                                            <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="0" max="<?php echo $totalRemainings ?>" type="number" readonly class="form-control">
+                                                                            <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="500" max="<?php echo $totalRemainings ?>" type="number" readonly class="form-control">
                                                                         </div>
                                                                         <small class="text-red" id="totalErr"></small>
                                                                     </td>

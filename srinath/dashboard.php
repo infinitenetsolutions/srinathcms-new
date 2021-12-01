@@ -301,7 +301,6 @@ include "include/authentication.php";
     </div>
 <?php } ?>
 <!-- /.content-wrapper -->
-<?php include 'include/footer.php'; ?>
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -310,6 +309,7 @@ include "include/authentication.php";
 <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<?php include 'include/footer.php'; ?>
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>

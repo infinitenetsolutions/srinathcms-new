@@ -1,6 +1,6 @@
 <?php
 $page_no = "9";
-$page_no_inside = "9_2";
+$page_no_inside = "9_3";
 include "include/authentication.php";
 ?>
 <!DOCTYPE html>
@@ -142,13 +142,14 @@ include "include/authentication.php";
         <!-- /.content -->
     </div>
 
-    <?php include 'include/footer.php'; ?>
 
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
     </div>
+    <?php include 'include/footer.php'; ?>
+
     <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>

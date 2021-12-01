@@ -362,7 +362,7 @@ if (isset($_GET["action"])) {
                                                                                                                                                                                 ?>" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" <?php //if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0) echo "readonly"; 
                                                                                                                                                                                                                                                                                                                                                             ?>>-->
                                                                                 <input id="particular_paid_amount[<?php echo $Idno; ?>]" name="particular_paid_amount[<?php echo $Idno; ?>]" min="0" value="<?php echo ($arrayTblFeeUpdate->fee_remaining) + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)) - ($arrayTblFeeUpdate->fee_rebate); ?>" onmouseover="completeCalculation();" max="<?php echo (($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)); ?>" type="number" class="form-control" <?php //if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0) echo "readonly"; 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ?>readonly>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ?>>
 
                                                                             </div>
                                                                         </td>
@@ -417,8 +417,8 @@ if (isset($_GET["action"])) {
                                                                             <div class="input-group-prepend">
                                                                                 <span class="input-group-text">&#8377; &nbsp; &nbsp;</span>
                                                                             </div>
-                                                                            <input id="remaininga"  value="<?php echo $totalRemainings ?>" type="hidden" class="form-control">
-                                                                            <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="0" max="<?php echo $totalRemainings ?>" type="number" class="form-control">
+                                                                            <input id="remaininga" value="<?php echo $totalRemainings ?>" type="hidden" class="form-control">
+                                                                            <input id="total_amount" name="total_amount" onkeyup="checkRemaining(this.value)" min="0" max="<?php echo $totalRemainings ?>" type="number" readonly class="form-control">
                                                                         </div>
                                                                         <small class="text-red" id="totalErr"></small>
                                                                     </td>
@@ -441,8 +441,6 @@ if (isset($_GET["action"])) {
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-
-
                                                     </div>
                                                     <!-- /.col -->
 
@@ -530,7 +528,7 @@ if (isset($_GET["action"])) {
                                                                 while (in_array($num = mt_rand($min, $max), $range));
                                                                 $range[] = $num;
                                                             }
-                                                   
+
                                                             ?>
 
                                                             <form id="payment_form" method="post" action="easebuzz/easebuzz.php?api_name=initiate_payment">

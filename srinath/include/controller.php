@@ -463,6 +463,9 @@ if (isset($_POST["action"])) {
                 case "tbl_university_details";
                     $id_name = "university_details_id";
                     break;
+                    case "tbl_prospectus";
+                    $id_name = "id";
+                    break;
                 default:
                     $id_name = "";
                     break;
@@ -485,9 +488,10 @@ if (isset($_POST["action"])) {
     //Restore From Trash End With Ajax
     //Delete From Trash Start With Ajax
     if ($_POST["action"] == "trash_delete") {
-        $action_tbl = $_POST["action_tbl"];
-        $delete_id = $_POST["delete_id"];
+        echo    $action_tbl = $_POST["action_tbl"];
+        echo  $delete_id = $_POST["delete_id"];
         $id_name = "";
+
         if (!empty($action_tbl && $delete_id)) {
             switch ($action_tbl) {
                 case "tbl_admin":
@@ -502,12 +506,15 @@ if (isset($_POST["action"])) {
                 case "tbl_university_details";
                     $id_name = "university_details_id";
                     break;
+                case "tbl_prospectus";
+                    $id_name = "id";
+                    break;
                 default:
                     $id_name = "";
                     break;
             }
             if (!empty($id_name)) {
-                $sql = "DELETE FROM `$action_tbl` 
+                echo   $sql = "DELETE FROM `$action_tbl` 
                             WHERE `$id_name` = '$delete_id' && `status` = '$trash'
                             ";
                 if ($con->query($sql))

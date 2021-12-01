@@ -66,22 +66,47 @@ $event_result = mysqli_query($connection, $get_event);
             <!-- Main content -->
             <section class="content">
                 <div class="row">
+                    <div class="col-sm-7">
 
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-body">
+                    </div>
+                    <div class="col-sm-5">
+                        <form action="../srinath/event_hindi_inc/export/participants.php" >
 
+                            <div class="container">
+                                <div class="row">
+                                    <div class=" form-group col-sm-8">
 
+                                     
+
+                                    </div>
+                                    <div class=" form-group col-sm-4">
+                                        <button type="submit" class="btn  btn-warning">
+                                            Export
+                                        </button>
+                                    </div>
                                 </div>
-                                <!-- /.card-header -->
-                                <div class="table-responsive">
-                                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th class="th-sm">S.NO
-                                                </th>
-                                                <!-- <th class="th-sm">Name
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-body">
+
+
+                        </div>
+                        <div class="col-12">
+                            <!-- /.card-header -->
+                            <div class="table-responsive">
+                                <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm">S.NO
+                                            </th>
+                                            <!-- <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
@@ -103,71 +128,71 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm">event_name
                                                 </th> -->
-                                                <th class="th-sm text-center">name
-                                                </th>
-                                                <th class="th-sm text-center">type
-                                                </th>
-                                                <th class="th-sm text-center">board name
-                                                </th>
-                                                <th class="th-sm">affiliated_name
-                                                </th>
+                                            <th class="th-sm text-center">name
+                                            </th>
+                                            <th class="th-sm text-center">type
+                                            </th>
+                                            <th class="th-sm text-center">board name
+                                            </th>
+                                            <th class="th-sm">affiliated_name
+                                            </th>
 
-                                                <th class="th-sm text-center">mobile
-                                                </th>
-                                                <th class="th-sm text-center">Email
-                                                </th>
-                                                <th class="th-sm">country
-                                                </th>
-                                                <th class="th-sm">state
-                                                </th>
-                                                <th class="th-sm text-center">city
-                                                </th>
-                                                <th class="th-sm text-center">pincode
-                                                </th>
-                                                <th class="th-sm text-center">address1
-                                                </th>
-                                                <th class="th-sm text-center">address2
-                                                </th>
-                                                <th class="th-sm text-center">Print
-                                                </th>
-                                                <th class="th-sm text-center">Action
-                                                </th>
+                                            <th class="th-sm text-center">mobile
+                                            </th>
+                                            <th class="th-sm text-center">Email
+                                            </th>
+                                            <th class="th-sm">country
+                                            </th>
+                                            <th class="th-sm">state
+                                            </th>
+                                            <th class="th-sm text-center">city
+                                            </th>
+                                            <th class="th-sm text-center">pincode
+                                            </th>
+                                            <th class="th-sm text-center">address1
+                                            </th>
+                                            <th class="th-sm text-center">address2
+                                            </th>
+                                            <th class="th-sm text-center">Print
+                                            </th>
+                                            <th class="th-sm text-center">Action
+                                            </th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $i = 1;
-                                            while ($get_row = mysqli_fetch_array($event_result)) {
-
-
-                                            ?>
-                                                <!-- Button trigger modal -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 1;
+                                        while ($get_row = mysqli_fetch_array($event_result)) {
 
 
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal<?php echo $get_row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Term & Conditions</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <?php echo $get_row['t&c']; ?>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
+                                        ?>
+                                            <!-- Button trigger modal -->
+
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal<?php echo $get_row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Term & Conditions</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <?php echo $get_row['t&c']; ?>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <tr>
-                                                 <td><?php echo $i; ?></td>
-                                                    <!-- <td><?php echo $get_row['s_name']; ?></td> 
+                                            <tr>
+                                                <td><?php echo $i; ?></td>
+                                                <!-- <td><?php echo $get_row['s_name']; ?></td> 
                                                     <td><?php echo $get_row['s_department']; ?></td>
                                                     <td><?php echo $get_row['s_f_name']; ?></td>
                                                     <td><?php echo $get_row['s_dob']; ?></td>
@@ -187,31 +212,31 @@ $event_result = mysqli_query($connection, $get_event);
                                                         $event = str_replace("]", " ", $event);
                                                         echo str_replace('"', " ", $event);
                                                         ?></td> -->
-                                                    <td><?php echo $get_row['college_name']; ?></td>
-                                                    <td><?php echo $get_row['type']; ?></td>
-                                                    <td><?php echo $get_row['board_name']; ?></td>
-                                                    <td><?php echo $get_row['affiliated_name']; ?></td>
-                                                    <td><?php echo $get_row['mobile']; ?></td>
-                                                    <td><?php echo $get_row['email']; ?></td>
-                                                    <td><?php echo $get_row['state']; ?></td>
-                                                    <td><?php echo $get_row['state']; ?></td>
-                                                    <td><?php echo $get_row['city']; ?></td>
-                                                    <td><?php echo $get_row['pincode']; ?></td>
-                                                    <td><?php echo $get_row['address1']; ?></td>
-                                                    <td><?php echo $get_row['address2']; ?></td>
+                                                <td><?php echo $get_row['college_name']; ?></td>
+                                                <td><?php echo $get_row['type']; ?></td>
+                                                <td><?php echo $get_row['board_name']; ?></td>
+                                                <td><?php echo $get_row['affiliated_name']; ?></td>
+                                                <td><?php echo $get_row['mobile']; ?></td>
+                                                <td><?php echo $get_row['email']; ?></td>
+                                                <td><?php echo $get_row['state']; ?></td>
+                                                <td><?php echo $get_row['state']; ?></td>
+                                                <td><?php echo $get_row['city']; ?></td>
+                                                <td><?php echo $get_row['pincode']; ?></td>
+                                                <td><?php echo $get_row['address1']; ?></td>
+                                                <td><?php echo $get_row['address2']; ?></td>
 
-                                                    <td> <a href="http://65.2.20.135/printevent?ins=<?php echo $get_row['college_name'] ?>" class="btn btn-success btn-sm"> Print</a></td>
-                                                    <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['college_name'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
-                                                </tr>
-                                            <?php $i++;
-                                            } ?>
+                                                <td> <a href="http://65.2.20.135/printevent?ins=<?php echo $get_row['college_name'] ?>" class="btn btn-success btn-sm"> Print</a></td>
+                                                <td> <a href="./event_hindi_inc/participants/delete.php?delete=<?php echo $get_row['college_name'] ?>" class="btn btn-danger btn-sm"> Delete</a></td>
+                                            </tr>
+                                        <?php $i++;
+                                        } ?>
 
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th class="th-sm">S.NO
-                                                </th>
-                                                <!-- <th class="th-sm">Name
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th class="th-sm">S.NO
+                                            </th>
+                                            <!-- <th class="th-sm">Name
                                                 </th>
                                                 <th class="th-sm">department
                                                 </th>
@@ -231,60 +256,60 @@ $event_result = mysqli_query($connection, $get_event);
                                                 </th>
                                                 <th class="th-sm">student_imgages
                                                 </th> -->
-                                                <!-- <th class="th-sm">event_name
+                                            <!-- <th class="th-sm">event_name
                                                 </th> -->
-                                                <th class="th-sm text-center">name
-                                                </th>
-                                                <th class="th-sm text-center">type
-                                                </th>
-                                                <th class="th-sm text-center">board name
-                                                </th>
-                                                <th class="th-sm">affiliated_name
-                                                </th>
+                                            <th class="th-sm text-center">name
+                                            </th>
+                                            <th class="th-sm text-center">type
+                                            </th>
+                                            <th class="th-sm text-center">board name
+                                            </th>
+                                            <th class="th-sm">affiliated_name
+                                            </th>
 
-                                                <th class="th-sm text-center">mobile
-                                                </th>
-                                                <th class="th-sm text-center">Email
-                                                </th>
-                                                <th class="th-sm">country
-                                                </th>
-                                                <th class="th-sm">state
-                                                </th>
-                                                <th class="th-sm text-center">city
-                                                </th>
-                                                <th class="th-sm text-center">pincode
-                                                </th>
-                                                <th class="th-sm text-center">address1
-                                                </th>
-                                                <th class="th-sm text-center">address2
-                                                </th>
-                                                <th class="th-sm text-center">Print
-                                                </th>
-                                                <th class="th-sm text-center">Action
-                                                </th>
+                                            <th class="th-sm text-center">mobile
+                                            </th>
+                                            <th class="th-sm text-center">Email
+                                            </th>
+                                            <th class="th-sm">country
+                                            </th>
+                                            <th class="th-sm">state
+                                            </th>
+                                            <th class="th-sm text-center">city
+                                            </th>
+                                            <th class="th-sm text-center">pincode
+                                            </th>
+                                            <th class="th-sm text-center">address1
+                                            </th>
+                                            <th class="th-sm text-center">address2
+                                            </th>
+                                            <th class="th-sm text-center">Print
+                                            </th>
+                                            <th class="th-sm text-center">Action
+                                            </th>
 
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.row -->
-            </section>
-            <!-- /.content -->
+                <!-- /.col -->
         </div>
+        <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
 
-        <?php include 'include/footer.php'; ?>
+    <?php include 'include/footer.php'; ?>
 
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 

@@ -1,6 +1,6 @@
 <?php
 include '../../include/config.php';
-require('PHPExcel/Excel.php');
+require('../../export/PHPExcel/Excel.php');
 
 $res = mysqli_query($con, "SELECT * FROM `participants_list` WHERE 1");
 if (mysqli_num_rows($res) > 0) {

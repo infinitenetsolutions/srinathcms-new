@@ -263,7 +263,7 @@ $grade_total=mysqli_num_rows($grade_result);
             <div class="row">
               <div class="col-md-12">
                 <input type="file" name="importExcelFile" class="form-control" />
-                <span id="" class="text-danger"> <a href="format.xls">CSV format only...</a> </span>
+                <span id="" class="text-danger"> <a href="ATTENDANCE-FORMAT.xlsx">CSV format only...</a> </span>
               </div>
             </div>
           </div>

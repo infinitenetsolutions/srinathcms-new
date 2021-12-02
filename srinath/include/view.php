@@ -3799,7 +3799,7 @@ if (isset($_GET["action"])) {
                                                                         </div>
                                                                         <input id="rebate_amount" name="rebate_amount" min="0" max="" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
                                                                         <div class="input-group-prepend">
-                                                                            <select id="rebate_from" name="rebate_from" class="btn btn-danger btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                                                                            <select id="rebate_from" name="rebate_from" class="btn  btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
                                                                                 <option value="">Rebate From</option>
                                                                                 <?php
                                                                                 foreach ($arrayTblFee as $arrayTblFeeUpdate) {

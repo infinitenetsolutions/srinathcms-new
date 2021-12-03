@@ -1,26 +1,24 @@
 <?php
-$page = 1;
+$page=1;
 //index.php
 
 include('header.php');
 
 ?>
 
-
-
 <div class="container" style="margin-top:30px">
   <div class="card">
-    <div class="card-header">
+  	<div class="card-header">
       <div class="row">
         <div class="col-md-9">Overall Student Attendance Status</div>
         <div class="col-md-3" align="right">
-
+          
         </div>
       </div>
     </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table id="example" class="table table-striped table-bordered table-sm display"  style="width:100%" cellspacing="0" width="100%">
+  	<div class="card-body">
+  		<div class="table-responsive">
+        <table class="table table-striped table-bordered" id="student_table">
           <thead>
             <tr>
               <th>Student Name</th>
@@ -35,54 +33,22 @@ include('header.php');
 
           </tbody>
         </table>
-      </div>
-    </div>
+  		</div>
+  	</div>
   </div>
 </div>
 <?php include '../include/footer.php'; ?>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </html>
 
 <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
 <link rel="stylesheet" href="../css/datepicker.css" />
-<script >
 
-  /* Custom filtering function which will search data in column four between two values */
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = parseInt( $('#min').val(), 10 );
-        var max = parseInt( $('#max').val(), 10 );
-        var age = parseFloat( data[3] ) || 0; // use data for the age column
- 
-        if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && age <= max ) ||
-             ( min <= age   && isNaN( max ) ) ||
-             ( min <= age   && age <= max ) )
-        {
-            return true;
-        }
-        return false;
-    }
-);
- 
-$(document).ready(function() {
-    var table = $('#example').DataTable();
-     
-    // Event listener to the two range filtering inputs to redraw on input
-    $('#min, #max').keyup( function() {
-        table.draw();
-    } );
-} );
-</script>
 <style>
-  .datepicker {
-    z-index: 1600 !important;
-    /* has to be larger than 1050 */
-  }
-
-  
+    .datepicker
+    {
+      z-index: 1600 !important; /* has to be larger than 1050 */
+    }
 </style>
 
 <div class="modal" id="formModal">
@@ -125,67 +91,73 @@ $(document).ready(function() {
 </div>
 
 <script>
-  $(document).ready(function() {
+$(document).ready(function(){
+	 
+   var dataTable = $('#student_table').DataTable({
+    "processing":true,
+    "serverSide":true,
+    "order":[],
+    "ajax":{
+      url:"attendance_action.php",
+      type:"POST",
+      data:{action:'index_fetch'}
+    }
+   });
 
-    var dataTable = $('#example').DataTable({
-      "processing": true,
-      "serverSide": true,
-      "order": [],
-      "ajax": {
-        url: "attendance_action.php",
-        type: "POST",
-        data: {
-          action: 'index_fetch'
-        }
+   $('.input-daterange').datepicker({
+    todayBtn:"linked",
+    format:'yyyy-mm-dd',
+    autoclose:true,
+    container: '#formModal modal-body'
+   });
+
+   $(document).on('click', '.report_button', function(){
+    var student_id = $(this).data('student_id');
+    $('#student_id').val(student_id);
+    $('#formModal').modal('show');
+   });
+
+   $('#create_report').click(function(){
+    var student_id = $('#student_id').val();
+    var from_date = $('#from_date').val();
+    var to_date = $('#to_date').val();
+    var error = 0;
+    var action = $('#report_action').val();
+    if(from_date == '')
+    {
+      $('#error_from_date').text('From Date is Required');
+      error++;
+    }
+    else
+    {
+      $('#error_from_date').text('');
+    }
+    if(to_date == '')
+    {
+      $('#error_to_date').text("To Date is Required");
+      error++;
+    }
+    else
+    {
+      $('#error_to_date').text('');
+    }
+
+    if(error == 0)
+    {
+      $('#from_date').val('');
+      $('#to_date').val('');
+      $('#formModal').modal('hide');
+      if(action == 'pdf_report')
+      {
+        window.open("report.php?action=student_report&student_id="+student_id+"&from_date="+from_date+"&to_date="+to_date);
       }
-    });
-
-    $('.input-daterange').datepicker({
-      todayBtn: "linked",
-      format: 'yyyy-mm-dd',
-      autoclose: true,
-      container: '#formModal modal-body'
-    });
-
-    $(document).on('click', '.report_button', function() {
-      var student_id = $(this).data('student_id');
-      $('#student_id').val(student_id);
-      $('#formModal').modal('show');
-    });
-
-    $('#create_report').click(function() {
-      var student_id = $('#student_id').val();
-      var from_date = $('#from_date').val();
-      var to_date = $('#to_date').val();
-      var error = 0;
-      var action = $('#report_action').val();
-      if (from_date == '') {
-        $('#error_from_date').text('From Date is Required');
-        error++;
-      } else {
-        $('#error_from_date').text('');
+      if(action == 'chart_report')
+      {
+        location.href = "chart.php?action=student_chart&student_id="+student_id+"&from_date="+from_date+"&to_date="+to_date;
       }
-      if (to_date == '') {
-        $('#error_to_date').text("To Date is Required");
-        error++;
-      } else {
-        $('#error_to_date').text('');
-      }
+    }
 
-      if (error == 0) {
-        $('#from_date').val('');
-        $('#to_date').val('');
-        $('#formModal').modal('hide');
-        if (action == 'pdf_report') {
-          window.open("report.php?action=student_report&student_id=" + student_id + "&from_date=" + from_date + "&to_date=" + to_date);
-        }
-        if (action == 'chart_report') {
-          location.href = "chart.php?action=student_chart&student_id=" + student_id + "&from_date=" + from_date + "&to_date=" + to_date;
-        }
-      }
+   });
 
-    });
-
-  });
+});
 </script>
-

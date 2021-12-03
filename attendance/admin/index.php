@@ -20,7 +20,7 @@ include('header.php');
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>Student Name</th>
@@ -127,7 +127,7 @@ $(document).ready(function() {
 <script>
   $(document).ready(function() {
 
-    var dataTable = $('#dtBasicExample').DataTable({
+    var dataTable = $('#example').DataTable({
       "processing": true,
       "serverSide": true,
       "order": [],

@@ -1,14 +1,11 @@
 <?php
-$page=4;
+$page = 4;
 $conn = '';
 if (isset($_POST["importExcelButton"])) {
 
   // here i to creating the connection for exporting the data in to excel
-  if ($_SERVER['HTTP_HOST'] == "localhost") {
-    $conn = mysqli_connect("localhost", "root", "", "nsunivac_attendance");
-  } else {
-    $conn = mysqli_connect("localhost", "nsunivac_attendance", "4Ckt6FML9", "nsunivac_attendance");
-  }
+  include '../include/connection.php';
+  $conn = $connection;
   $file = $_FILES['importExcelFile']['tmp_name'];
   $handle = fopen($file, "r");
   if ($file == NULL) {
@@ -57,22 +54,22 @@ if (isset($_POST["importExcelButton"])) {
 
 include('header.php');
 include '../include/connection.php';
-$grade_total='';
-if(isset($_GET['grade'])){
-$grade=$_GET['grade'];
-if($grade!="all"){
-$grade_qury="SELECT * FROM `tbl_student` WHERE `student_grade_id`='$grade'";
-$grade_result=mysqli_query($connection,$grade_qury);
-$grade_total=mysqli_num_rows($grade_result);
-}else{
-  $grade_qury="SELECT * FROM `tbl_student` WHERE 1";
-  $grade_result=mysqli_query($connection,$grade_qury);
-  $grade_total=mysqli_num_rows($grade_result);
-}
-}else {
-  $grade_qury="SELECT * FROM `tbl_student` WHERE 1";
-  $grade_result=mysqli_query($connection,$grade_qury);
-  $grade_total=mysqli_num_rows($grade_result);
+$grade_total = '';
+if (isset($_GET['grade'])) {
+  $grade = $_GET['grade'];
+  if ($grade != "all") {
+    $grade_qury = "SELECT * FROM `tbl_student` WHERE `student_grade_id`='$grade'";
+    $grade_result = mysqli_query($connection, $grade_qury);
+    $grade_total = mysqli_num_rows($grade_result);
+  } else {
+    $grade_qury = "SELECT * FROM `tbl_student` WHERE 1";
+    $grade_result = mysqli_query($connection, $grade_qury);
+    $grade_total = mysqli_num_rows($grade_result);
+  }
+} else {
+  $grade_qury = "SELECT * FROM `tbl_student` WHERE 1";
+  $grade_result = mysqli_query($connection, $grade_qury);
+  $grade_total = mysqli_num_rows($grade_result);
 }
 
 ?>
@@ -90,7 +87,7 @@ $grade_total=mysqli_num_rows($grade_result);
     </div>
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8">Total number of Student List : -  <span class="text-danger font-weight-bold"><?php echo $grade_total; ?></span> </div>
+        <div class="col-md-8">Total number of Student List : - <span class="text-danger font-weight-bold"><?php echo $grade_total; ?></span> </div>
         <div class="col-md-4" align="right">
           <select style="width:100%;" class="form-control selectpicker" data-show-subtext="true" data-live-search="true" onchange="changeGrade()" id="changeGradeId">
             <option value="all" <?php

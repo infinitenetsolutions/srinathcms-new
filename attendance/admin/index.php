@@ -18,7 +18,7 @@ include('header.php');
     </div>
   	<div class="card-body">
   		<div class="table-responsive">
-        <table class="table table-striped table-bordered" id="student_table">
+      <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>Student Name</th>
@@ -93,7 +93,7 @@ include('header.php');
 <script>
 $(document).ready(function(){
 	 
-   var dataTable = $('#student_table').DataTable({
+   var dataTable = $('#dtBasicExample').DataTable({
     "processing":true,
     "serverSide":true,
     "order":[],

@@ -97,15 +97,15 @@ if(isset($_POST["action"]))
 		SELECT * FROM tbl_student 
 
 		";
-		if(isset($_POST["search"]["value"]))
-		{
-			$query .= '
-			WHERE tbl_student.student_name LIKE "%'.$_POST["search"]["value"].'%" 
-			OR tbl_student.student_roll_number LIKE "%'.$_POST["search"]["value"].'%" 
-			OR tbl_grade.grade_name LIKE "%'.$_POST["search"]["value"].'%" 
-			OR tbl_teacher.teacher_name LIKE "%'.$_POST["search"]["value"].'%" 
-			';
-		}
+		// if(isset($_POST["search"]["value"]))
+		// {
+		// 	$query .= '
+		// 	WHERE tbl_student.student_name LIKE "%'.$_POST["search"]["value"].'%" 
+		// 	OR tbl_student.student_roll_number LIKE "%'.$_POST["search"]["value"].'%" 
+		// 	OR tbl_grade.grade_name LIKE "%'.$_POST["search"]["value"].'%" 
+		// 	OR tbl_teacher.teacher_name LIKE "%'.$_POST["search"]["value"].'%" 
+		// 	';
+		// }
 		$query .= 'GROUP BY tbl_student.student_id ';
 		// if(isset($_POST["order"]))
 		// {

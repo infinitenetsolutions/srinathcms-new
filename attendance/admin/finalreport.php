@@ -87,8 +87,8 @@ if (isset($_GET['grade'])) {
         </div>
         <div class="card-header">
             <div class="row">
-                <div class="col-md-3">Total Attendance List : - <span class="text-danger font-weight-bold"><?php echo $present_total + $absent_total; ?></span></div>
-                <div class="col-md-3" align="right">
+                <div class="col-md-7">Total Attendance List : - <span class="text-danger font-weight-bold"><?php echo $present_total + $absent_total; ?></span></div>
+                <div class="col-md-5" align="right">
                     <select class="form-control selectpicker" onchange="changeGrade()" id="changeGradeId" data-show-subtext="true" data-live-search="true">
                         <option value="all" <?php if (isset($row['grade_id']) && ($row["grade_id"] == "all")) {
                                                 echo "disabled selected";
@@ -114,40 +114,7 @@ if (isset($_GET['grade'])) {
                 </div>
 
 
-                <div class="col-md-6">
-                    <form action="" method="POST">
-                        <div class="row">
-                            <div class="col-md-4" align="right">
-                                <select class="form-control selectpicker" onchange="changeStudent(this.value)" id="changeGradeId" data-show-subtext="true" data-live-search="true">
-                                    <option value="all" <?php if (isset($row['grade_id']) && ($row["grade_id"] == "all")) {
-                                                            echo "disabled selected";
-                                                        } ?>>All</option>
-                                    <?php
-                                    while ($grade_total = mysqli_fetch_array($student_result)) {
-                                        $student_id=$grade_total['student_id'];
-                                        $query = " SELECT * FROM `tbl_student` WHERE `student_id`='$student_id' ";
-                                        $result = mysqli_query($connection, $query);
-                                        $row1=mysqli_fetch_array($result);
-                                    ?>
-                                        <option value="<?php echo $row1["student_id"]; ?>
-                                      " <?php if (isset($_GET['student_id'])) {
-                                            if ($row1["student_id"] == $_GET["student_id"]) {
-                                                echo "disabled selected";
-                                            }
-                                        } ?>><?php echo $row1["student_name"]; ?></option>
-                                    <?php } ?>
-
-                                </select>
-                            </div>
-                            <div class="col-md-4"> <input class="form-control" type="date" name="start"> </div>
-                            <div class="col-md-4"> <input class="form-control" type="date" name="end"> </div>
-
-
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+             
         </div>
         <div class="card-body">
             <div class="table-responsive">

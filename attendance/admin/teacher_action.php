@@ -12,32 +12,33 @@ if(isset($_POST["action"]))
 	{
 		$query = "
 		SELECT * FROM tbl_teacher 
-	
+		INNER JOIN tbl_grade 
+		ON tbl_grade.grade_id = tbl_teacher.teacher_grade_id 
 		";
-		// if(isset($_POST["search"]["value"]))
-		// {
-		// 	$query .= '
-		// 	WHERE tbl_teacher.teacher_name LIKE "%'.$_POST["search"]["value"].'%" 
-		// 	OR tbl_teacher.teacher_emailid LIKE "%'.$_POST["search"]["value"].'%" 
-		// 	OR tbl_grade.grade_name LIKE "%'.$_POST["search"]["value"].'%" 
-		// 	';
-		// }
-		// if(isset($_POST["order"]))
-		// {
-		// 	$query .= '
-		// 	ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].'
-		// 	';
-		// }
-		// else
-		// {
-		// 	$query .= '
-		// 	ORDER BY tbl_teacher.teacher_id DESC 
-		// 	';
-		// }
-		// if($_POST["length"] != -1)
-		// {
-		// 	$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-		// }
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= '
+			WHERE tbl_teacher.teacher_name LIKE "%'.$_POST["search"]["value"].'%" 
+			OR tbl_teacher.teacher_emailid LIKE "%'.$_POST["search"]["value"].'%" 
+			OR tbl_grade.grade_name LIKE "%'.$_POST["search"]["value"].'%" 
+			';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= '
+			ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].'
+			';
+		}
+		else
+		{
+			$query .= '
+			ORDER BY tbl_teacher.teacher_id DESC 
+			';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
 
 		$statement = $connect->prepare($query);
 		$statement->execute();

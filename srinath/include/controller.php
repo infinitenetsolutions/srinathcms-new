@@ -1973,7 +1973,7 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "update_prospectus_enquiry") {
         $prosprectus_number = $_POST["prosprectus_number"];
         $prosprectus_id = $_POST["prosprectus_id"];
-        $add_prospectus_email =  $_SESSION['prospectus_emailid'];
+        $add_prospectus_email =  $_POST['prospectus_emailid'];
         $prospectus_course_name = $_POST["prospectus_course_name"];
         $prospectus_session = $_SESSION["prospectus_session"];
         $prospectus_rate = $_POST["prospectus_rate"];
@@ -1985,10 +1985,18 @@ if (isset($_POST["action"])) {
             // $objectSecond->where("`status` = '$visible' && `prospectus_no` = '$prosprectus_number'");
             // $result = $objectSecond->get();
             $exist_check = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '$prosprectus_number' && `status`='$visible'";
+           
+           
             $result = $con->query($exist_check);
             if ($result->num_rows < 0) {
+
+              
+
                 echo 'exists';
             } else {
+                $add_prospectus_email_data=mysqli_fetch_array($result);
+                echo   $add_prospectus_email=$add_prospectus_email_data['prospectus_emailid'];
+                
                 $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
                 $getmaxid_result = mysqli_query($con, $getmaxid);
                 $getmaxid_data = mysqli_fetch_array($getmaxid_result);

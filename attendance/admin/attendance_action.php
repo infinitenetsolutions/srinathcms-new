@@ -84,7 +84,7 @@ if(isset($_POST["action"]))
 
 	if($_POST["action"] == "index_fetch")
 	{
-	echo	$query = "
+		$query = "
 		SELECT * FROM tbl_student 
 		LEFT JOIN tbl_attendance 
 		ON tbl_attendance.student_id = tbl_student.student_id 
@@ -93,8 +93,6 @@ if(isset($_POST["action"]))
 		INNER JOIN tbl_teacher 
 		ON tbl_teacher.teacher_grade_id = tbl_grade.grade_id  
 		";
-		// $query = "
-		// SELECT * FROM tbl_student	";
 		if(isset($_POST["search"]["value"]))
 		{
 			$query .= '

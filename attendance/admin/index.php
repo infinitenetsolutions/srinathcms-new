@@ -1,7 +1,7 @@
 <?php
-$page=1;
-//index.php
 
+//index.php
+$page=1;
 include('header.php');
 
 ?>

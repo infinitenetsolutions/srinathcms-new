@@ -6,7 +6,7 @@ include '../Backend/connection.inc.php';
 $get_event = "SELECT *
 FROM participants_list
 GROUP BY college_name
-ORDER BY COUNT(college_name) DESC;";
+ORDER BY id ASC;";
 $event_result = mysqli_query($connection, $get_event);
 
 ?>

@@ -3535,7 +3535,7 @@ if (isset($_GET["action"])) {
                                     ?>
                                             <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
 
-<?php
+                                <?php
                                     } else if (strtolower($row["admission_gender"]) == "female") {
                                     ?>
                                         <img class="profile-user-img img-fluid img-circle" src="images/womenIcon.png" alt="Student profile picture">
@@ -3790,15 +3790,23 @@ if (isset($_GET["action"])) {
                                                                 </td>
                                                             </tr>
                                                             <tr>
+
+                            
                                                                 <td><?php echo ++$tmpSNo; ?></td>
                                                                 <td>Rebate</td>
                                                                 <td>
                                                                     <div class="input-group">
+
+
+
+
+
                                                                         <div class="input-group-prepend">
                                                                             <span class="input-group-text">&#8377;</span>
                                                                         </div>
                                                                         <input id="rebate_amount" name="rebate_amount" min="0" max="" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
-                                                                        <div class="input-group-prepend">
+
+                                                                        <div class="input-group-prepend  ml-4">
                                                                             <select id="rebate_from" name="rebate_from" class="btn  btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
                                                                                 <option value="">Rebate From</option>
                                                                                 <?php
@@ -3809,6 +3817,15 @@ if (isset($_GET["action"])) {
                                                                                 <option value="fine">From - Fine</option>
                                                                             </select>
                                                                         </div>
+                                                                        <input disabled id="img_approve" name="rebate_amount" min="0" max="" type="file" class="form-control ml-4" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                     
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                       
+                                                                      
                                                                     </div>
                                                                     <small class="text-red" id="rebateErr"></small>
                                                                 </td>
@@ -3983,10 +4000,13 @@ if (isset($_GET["action"])) {
                                                 var fineAmount = 0;
                                                 var rebateAmount = Number(document.getElementById("rebate_amount").value);
                                                 if (rebateAmount > 0) {
+                                                 
+
                                                     if (document.getElementById("rebate_from").value == "") {
                                                         $("#rebate_amount").addClass("is-invalid");
                                                         $("#rebateErr").html("~ Please select 'Rebate From'");
                                                     } else {
+                                                        document.getElementById("img_approve").disabled=false;
                                                         $("#rebate_amount").removeClass("is-invalid");
                                                         $("#rebateErr").html("");
                                                     }

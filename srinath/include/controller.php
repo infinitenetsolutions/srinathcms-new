@@ -72,11 +72,14 @@ if (isset($_POST["action"])) {
                 $row = $result->fetch_assoc();
                 if ($row["admin_type"] == "superadmin")
                     $_SESSION["logger_type"] = "admin";
+
                 else {
                     $_SESSION["logger_type"] = "subadmin";
                     $_SESSION["authority"] = $row["admin_permission"];
                     $_SESSION["admin_name"] = $row["admin_name"];
                 }
+                $_SESSION["admin_email"] = $row["admin_email"];
+
                 $_SESSION["logger_username"] = $admin_login_username;
                 $_SESSION["logger_password"] = $admin_login_password;
                 $_SESSION["logger_time"] = time();
@@ -463,7 +466,7 @@ if (isset($_POST["action"])) {
                 case "tbl_university_details";
                     $id_name = "university_details_id";
                     break;
-                    case "tbl_prospectus";
+                case "tbl_prospectus";
                     $id_name = "id";
                     break;
                 default:
@@ -1447,7 +1450,32 @@ if (isset($_POST["action"])) {
                           </div>';
                 exit();
             } else
-                $implodedRebate = $rebate_amount . "," . $rebate_from;
+                // inserting the data into the rebate form table for how much rebate will come into the colleage
+            $rebate_by_name='NULL';
+            $rebate_by_email='NULL';
+            $approve_attach='NULl';
+            
+              $getting_student_email = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$registrationNumber'";
+            $getting_student_result = mysqli_query($con, $getting_student_email);
+            $getting_student_email_data = mysqli_fetch_array($getting_student_result);
+            $getting_student_email_id = $getting_student_email_data['admission_emailid_student'];
+            $getting_student_name = $getting_student_email_data['admission_first_name'];
+            $department_email = $_SESSION['admin_email'];
+            $date = date('Y-m-d');
+            if($rebate_from==647){
+            $rebate_particular='1st semester';
+            }
+            else{
+                $rebate_particular=$rebate_from;
+            }
+            $insert_rebate = "INSERT INTO `rebate`(`rebate_amount`, `approve_amount`, `rebate_by_name`, `rebate_by_email`, `student_email`, `student_name`, `rebate_date`, `approve_date`, `department`, `particular`, `massage`, `attach`, `status`) VALUES
+            ('$rebate_amount','0','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','0','$department_email','$rebate_particular','$NotesByAdmin','$approve_attach','0')";
+
+            $rebate_result = mysqli_query($con, $insert_rebate);
+
+
+
+            $implodedRebate = $rebate_amount . "," . $rebate_from;
         } else
             $implodedRebate = "";
         if (!empty($registrationNumber && $academicYear && $courseId) && (count($particular_paid_id) != 0) && (count($particular_paid_amount) != 0) && !empty($total_amount)) {
@@ -1784,6 +1812,11 @@ if (isset($_POST["action"])) {
             } else
                 $permission_14 = "";
 
+            if (count($_POST["permission_15"]) >= 1) {
+                $permission_15 = implode("||", $_POST["permission_15"]);
+            } else
+                $permission_15 = "";
+
             $allPermissions = array(
                 "3"          =>       $permission_3,
                 "4"          =>       $permission_4,
@@ -1795,7 +1828,9 @@ if (isset($_POST["action"])) {
                 "11"         =>       $permission_11,
                 "12"         =>       $permission_12,
                 "13"         =>       $permission_13,
-                "14"         =>       $permission_14
+                "14"         =>       $permission_14,
+                "15"         =>       $permission_15,
+
             );
             $sql = "INSERT INTO `tbl_admin`
                             (`admin_id`, `admin_name`, `admin_username`, `admin_password`, `admin_email`, `admin_mobile`, `admin_type`, `admin_permission`, `status`) 
@@ -1879,6 +1914,10 @@ if (isset($_POST["action"])) {
                 $permission_14 = $_POST["permission_14"];
             } else
                 $permission_14 = "";
+            if ($_POST["permission_15"] != "") {
+                $permission_15 = $_POST["permission_15"];
+            } else
+                $permission_15 = "";
 
             $allPermissions = array(
                 "3"          =>       $permission_3,
@@ -1891,7 +1930,9 @@ if (isset($_POST["action"])) {
                 "11"         =>       $permission_11,
                 "12"         =>       $permission_12,
                 "13"         =>       $permission_13,
-                "14"         =>       $permission_14
+                "14"         =>       $permission_14,
+                "15"         =>       $permission_15,
+
             );
             $sql = "UPDATE `tbl_admin` 
                         SET 
@@ -1985,18 +2026,18 @@ if (isset($_POST["action"])) {
             // $objectSecond->where("`status` = '$visible' && `prospectus_no` = '$prosprectus_number'");
             // $result = $objectSecond->get();
             $exist_check = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '$prosprectus_number' && `status`='$visible'";
-           
-           
+
+
             $result = $con->query($exist_check);
             if ($result->num_rows < 0) {
 
-              
+
 
                 echo 'exists';
             } else {
-                $add_prospectus_email_data=mysqli_fetch_array($result);
-                echo   $add_prospectus_email=$add_prospectus_email_data['prospectus_emailid'];
-                
+                $add_prospectus_email_data = mysqli_fetch_array($result);
+                echo   $add_prospectus_email = $add_prospectus_email_data['prospectus_emailid'];
+
                 $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
                 $getmaxid_result = mysqli_query($con, $getmaxid);
                 $getmaxid_data = mysqli_fetch_array($getmaxid_result);

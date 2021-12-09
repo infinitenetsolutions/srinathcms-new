@@ -31,7 +31,7 @@
                   </li>
                   <li class="nav-item has-treeview <?php if($page_no == "2"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 2; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "2"){ echo 'active'; } ?>">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fas fa-user-shield"></i>
                           <p>
                               Administration
                               <i class="fas fa-angle-left right"></i>
@@ -113,7 +113,7 @@
                   </li>
                   <li class="nav-item has-treeview <?php if($page_no == "6"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 6; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "6"){ echo 'active'; } ?>">
-                          <i class="nav-icon fas fa-edit"></i>
+                          <i class="nav-icon fas fa-user-graduate" > </i>
                           <p>
                               Student
                               <i class="fas fa-angle-left right"></i>
@@ -154,7 +154,7 @@
                   </li>
                    <li class="nav-item has-treeview <?php if($page_no == "7"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 7; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "7"){ echo 'active'; } ?>">
-                          <i class="nav-icon fas fa-book"></i>
+                          <i class="nav-icon fas fa-rupee-sign"></i>
                           <p>
                               Fee Payment
                               <i class="fas fa-angle-left right"></i>
@@ -298,7 +298,31 @@
                           </li>
                       </ul>
                   </li>
-                  
+                  <li class="nav-item has-treeview <?php if($page_no == "15"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 15; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                      <a href="#" class="nav-link <?php if($page_no == "15"){ echo 'active'; } ?>">
+                          <i class="nav-icon fas fa-tags"></i>
+                          <p>
+                      Rebate
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 15; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "15_1"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                              <a href="rebate" class="nav-link <?php if($page_no_inside == "15_1"){ echo 'active'; } ?>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Rebate</p>
+                             
+                              </a>
+                          </li>
+                           <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 15; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "15_2"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
+                              <a href="rebatedashboard" class="nav-link <?php if($page_no_inside == "15_2"){ echo 'active'; } ?>">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Dashboard</p>
+                                                              </a>
+                          </li>
+                         
+                      </ul>
+                  </li>
                 <!--  NSUNIV (Main Website Navbar) Start -->
                     <li class="nav-item has-treeview <?php if($page_no == "9"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 9; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "9"){ echo 'active'; } ?>">
@@ -677,7 +701,7 @@
                   </li>
                   <li class="nav-item has-treeview <?php if($page_no == "12"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 12; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "12"){ echo 'active'; } ?>">
-                          <i class="nav-icon fas fa-edit"></i>
+                          <i class="nav-icon fas fa-diagnoses"></i>
                           <p>
                               Examination
                               <i class="fas fa-angle-left right"></i>
@@ -725,7 +749,7 @@
                   </li>
 				  <li class="nav-item has-treeview <?php if($page_no == "14"){ echo 'menu-open'; } ?>" <?php if(isset($autority)){ $page_no_temp = 14; if(isset($allAutority->$page_no_temp)){ if($allAutority->$page_no_temp == ""){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
                       <a href="#" class="nav-link <?php if($page_no == "14"){ echo 'active'; } ?>">
-                          <i class="nav-icon fas fa-edit"></i>
+                          <i class="nav-icon far fa-id-card"></i>
                           <p>
                               Admit Card
                               <i class="fas fa-angle-left right"></i>

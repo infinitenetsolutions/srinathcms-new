@@ -798,6 +798,29 @@ include "include/authentication.php";
                     </div>
                   </div>
                 </div>
+                <div class="col-sm-6">
+                  <div class="col-sm-12">
+                    <div class="card card-warning">
+                      <div class="card-header">
+                        <h3 class="card-title">Admit Card</h3>
+                      </div>
+                      <div class="card-body pl-5 pr-5">
+                        <!-- Minimal style -->
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <!-- checkbox -->
+                            <div class="form-group clearfix">
+                              <div class="icheck-warning d-inline">
+                                <input type="checkbox" id="checkboxPrimary12_1" name="permission_15[]" value="15_1">
+                                <label for="checkboxPrimary12_1">Fee payment Approval</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

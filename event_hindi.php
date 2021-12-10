@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
   </script>";
   } else {
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Alert!</strong> Data Already Exits Please Check Your Input Data
+      <strong>Alert!</strong> Please Fill Atleast one student Please Check Your Input Data
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>

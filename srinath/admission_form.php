@@ -86,9 +86,9 @@ include "include/authentication.php";
                     $sel = mysqli_query($con, " SELECT MAX(admission_id) + 1 AS id FROM tbl_admission");
                     $result = mysqli_fetch_array($sel)
                     ?>
-                      <label>Registration No</label>
-                      <input type="text" name="add_admission_id" value="<?php echo $result['id'] ?>" class="form-control">
-        
+                    <label>Registration No</label>
+                    <input type="text" name="add_admission_id" value="<?php echo $result['id'] ?>" class="form-control">
+
                   </div>
                   <div class="col-4">
                     <label>Enter Prospectus No</label>
@@ -111,7 +111,7 @@ include "include/authentication.php";
                   </div>
 
                   <div class="col-4">
-                    <label>Full  Name</label>
+                    <label>Full Name</label>
                     <!-- <input id="first_name" type="hidden" name="add_admission_first_name" class="form-control" required> -->
                     <input id="first_name" type="text" name="add_admission_first_name" class="form-control" required>
                   </div>
@@ -228,7 +228,7 @@ include "include/authentication.php";
                   </div>
                   <div class="col-4">
                     <label>Image</label>
-                    <input type="file" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
                   </div>
                   <div class="col-4">
                     <img src="http://www.clipartpanda.com/clipart_images/user-66327738/download" id="photoBrowser" style="margin-top:17px;margin-left:4px;border:solid 1px lightgray" width="120" height="120">
@@ -397,37 +397,37 @@ include "include/authentication.php";
                 <div class="row">
                   <div class="col-4">
                     <label>10th Marksheet</label>
-                    <input type="file" name="add_admission_tenth_marksheet" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_tenth_marksheet" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>10th Passing Certificate</label>
-                    <input type="file" name="add_admission_tenth_passing_certificate" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_tenth_passing_certificate" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>12th Marksheet</label>
-                    <input type="file" name="add_admission_twelve_markesheet" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_twelve_markesheet" class="form-control">
                   </div>
 
                   <div class="col-4">
                     <label>12th Passing Certificate</label>
-                    <input type="file" name="add_admission_twelve_passing_certificate" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_twelve_passing_certificate" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Graduation Marksheet</label>
-                    <input type="file" name="add_admission_graduation_marksheet" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_graduation_marksheet" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Recent Character Certificate</label>
-                    <input type="file" name="add_admission_recent_character_certificate" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_recent_character_certificate" class="form-control">
                   </div>
 
                   <div class="col-4">
                     <label>Other Certificate (If applicable)</label>
-                    <input type="file" name="add_admission_other_certificate" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_other_certificate" class="form-control">
                   </div>
                   <div class="col-4">
                     <label>Character Certificate (If applicable)</label>
-                    <input type="file" name="add_admission_character_certificate" class="form-control">
+                    <input type="file" accept="image/*" name="add_admission_character_certificate" class="form-control">
                   </div>
 
                 </div>
@@ -519,7 +519,72 @@ include "include/authentication.php";
               </table>
             </div>
           </div>
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Documents Required For Admission</h3>
+            </div>
 
+            <div class="card-body table-responsive p-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <label>Student Signature</label>
+                    <input required type="file" accept="image/*" name="student_sing" class="form-control">
+                  </div>
+                  <div class="col-4">
+                    <label>Parent Signature</label>
+                    <input required type="file" accept="image/*" name="parent_sing" class="form-control">
+                  </div>
+                  <div class="col-4">
+                    <label>Date</label>
+                    <input required readonly type="text" name="date" class="form-control" value="<?php echo date('Y-m-d') ?>">
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Rebate For Admission</h3>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4">
+                    <label>Rebate Amount</label>
+                    <input required type="number" name="rebate_amount" class="form-control">
+                  </div>
+                  <div class="col-4">
+                    <label>Approver's Email</label>
+                    <?php
+                    $getting_admin = "SELECT * FROM `tbl_admin` WHERE 1 ";
+                    $getting_admin_result = mysqli_query($con, $getting_admin);
+                    ?>
+
+
+                   <select id="admin_approve" name="rebate_amount"  class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                      <option selected >Select Approver's Email</option>
+                      <?php while ($admin_getting_data = mysqli_fetch_array($getting_admin_result)) {
+                        if (preg_match('/15_1/i',  $admin_getting_data['admin_permission']) == 1) {
+                      ?>
+                          <option name="admin_email" value="<?php echo $admin_getting_data['admin_email']; ?>"><?php echo $admin_getting_data['admin_email']; ?></option>
+                      <?php }
+                      } ?>
+
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <label>Relevant Documents</label>
+                    <input required  type="file" name="attach" class="form-control" >
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-md-12">
             <div id="loader_section"></div>
           </div>

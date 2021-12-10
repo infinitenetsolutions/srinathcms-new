@@ -197,7 +197,7 @@ $result3 = mysqli_query($connection, $event_qury2);
                   <div class="col-sm-4  mt-3">
                     <b>विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम : <br>
                       Name of the School/College/University :</b>
-                    <input type="text" name="college_name" value="" placeholder="विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम" class="form-control">
+                    <input required type="text" name="college_name" value="" placeholder="विद्यालय/महावि़द्यालय/विश्वविद्यालय का नाम" class="form-control">
                   </div>
                   <div id="board" style="display: none;" class="col-sm-4  mt-3">
 
@@ -236,19 +236,19 @@ $result3 = mysqli_query($connection, $event_qury2);
                   <div class="col-sm-4  mt-3">
                     <b> दूरभाष संख्या  : <br>
                       Phone No. :</b>
-                    <input type="text" name="phone" placeholder=" दूरभाष संख्या " class="form-control">
+                    <input required type="text" name="phone" placeholder=" दूरभाष संख्या " class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
                     <b>मोबाईल नं. : <br>
                       Mobile No. :</b>
-                    <input type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
+                    <input required type="text" name="mobile" placeholder="मोबाईल नं." class="form-control">
                   </div>
 
                   <div class="col-sm-4  mt-3">
                     <b>ई-मेल : <br>
                       E-mail :</b>
-                    <input type="email" name="email" placeholder="ई-मेल" class="form-control">
+                    <input required type="email" name="email" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-4  mt-3">
                     <b>पिन कोड
@@ -307,29 +307,29 @@ $result3 = mysqli_query($connection, $event_qury2);
                   <div class="col-sm-3  mt-3">
                     <b>नाम : <br>
                       Name :</b>
-                    <input id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
+                    <input required id="" type="text" name="t_name[]" placeholder="नाम" class="form-control">
                   </div>
                   <div class="col-sm-2  mt-3">
                     <b>संस्थान में  पद : <br>
                     Designation :</b>
-                    <input type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">
+                    <input required type="text" name="t_post[]" placeholder="संस्थान में  पद" class="form-control">
                   </div>
                   <div class="col-sm-3  mt-3">
                     <b>ई-मेल : <br>
                       E-mail :</b>
-                    <input type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
+                    <input required type="email" name="t_email[]" placeholder="ई-मेल" class="form-control">
                   </div>
                   <div class="col-sm-2  mt-3">
                     <b>मोबाईल नं. : <br>
                       Mobile No. :</b>
-                    <input type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
+                    <input required type="text" name="t_mobile[]" placeholder="मोबाईल नं." class="form-control">
                   </div>
                   
                   <div class="col-sm-2  mt-3">
                     <b> फोटो
                       : <br>
                       Photograph:</b>
-                     <input type="file" name="img[]" placeholder=" फोटो " class="form-control">
+                     <input required type="file" name="img[]" placeholder=" फोटो " class="form-control">
                  
                      
                    
@@ -793,7 +793,7 @@ while ($row1 = mysqli_fetch_array($result1)) {
         console.log(inum)
         if (limit<?php echo $row1['id'] ?> >= inum){
       
-          $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row<?php echo $row1['id'] ?>' + inum + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + inum + '" value="' + inum + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागी का नाम " type="text" placeholder="प्रतिभागी का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled >Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>   <option value="Others">Others</option>               </select>        </td>                  <td> <input title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + inum + '" class="btn btn-danger btn_remove<?php echo $row1['id'] ?>">X</button></td></tr>');
+          $('#dynamic_field<?php echo $row1['id'] ?>').append('<tr id="row<?php echo $row1['id'] ?>' + inum + '" class="dynamic-added" ><td width="1%"><input title=" "   type="text" id="slno' + inum + '" value="' + inum + '" readonly class="form-control form-control1" style="border:none;" /></td> </td><td> <input title=" प्रतिभागी का नाम " type="text" placeholder="प्रतिभागी का नाम" name="student_name[]" class="form-control" required></td> <td> <input title=" पिता का नाम " id="course" name="f_name[]" placeholder="पिता का नाम" class="form-control" required /></td>  <td> <input title=" जन्म तिथि " id="dob" type="date" name="dob[]" placeholder="जन्म तिथि" class="form-control" required></td>  <td> <select id="gender" name="gender[]" class="form-control">  <option selected disabled >Gender</option>                            <option value="Male">Male</option>                      <option value="Female">Female</option>   <option value="Others">Others</option>               </select>        </td>                  <td> <input required title=" मोबाईल नं. " type="text" name="student_mobile[]" placeholder="मोबाईल नं." class="form-control"></td>              <td> <input title=" व्हाट्स एप नं. " type="text" name="student_whatsapp[]" placeholder="व्हाट्स एप नं." class="form-control"></td>               <td> <input required title=" पता " type="text" name="student_address[]" placeholder="पता" class="form-control"></td>               <td> <input required title=" छात्र छवि (Student images) " type="file" name="student_images[]" placeholder="मोबाईल नं." class="form-control"></td>                 <td> <input title=" ई-मेल " type="text" name="student_email[]" placeholder="ई-मेल" class="form-control"></td>    <td class="d-none" > <input title=" " type="text"  name="activites[]" value="<?php echo $row1['name'] ?>" placeholder="activites" class="form-control" />             </td>  <td><button type="button" name="remove" id="' + inum + '" class="btn btn-danger btn_remove<?php echo $row1['id'] ?>">X</button></td></tr>');
         }
         else{
           inum=limit<?php echo $row1['id'] ?>;

@@ -3637,7 +3637,8 @@ if (isset($_GET["action"])) {
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="active tab-pane" id="payfee">
-                                        <form method="POST" id="PayFeeForm">
+                                  
+                                        <form  method="POST" id="PayFeeForm" enctype="multipart/form-data" >
                                             <!-- Table row -->
                                             <div class="row">
                                                 <input type="hidden" name="registrationNumber" value="<?php echo $studentRegistrationNo; ?>" readonly />
@@ -3817,15 +3818,8 @@ if (isset($_GET["action"])) {
                                                                                 <option value="fine">From - Fine</option>
                                                                             </select>
                                                                         </div>
-                                                                        <input disabled id="img_approve" name="rebate_amount" min="0" max="" type="file" class="form-control ml-4" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                                                                        <input  disabled id="img_approve" name="img_approve" accept="image/*"  type="file"  class="form-control ml-4" >
                      
-                                                                       
-                                                                       
-                                                                       
-                                                                       
-                                                                       
-                                                                       
-                                                                      
                                                                     </div>
                                                                     <small class="text-red" id="rebateErr"></small>
                                                                 </td>
@@ -4078,15 +4072,22 @@ if (isset($_GET["action"])) {
                                             }
                                         </script>
                                         <script>
-                                            $(document).ready(function() {
+                                            $(document).ready(function(event) {
                                                 $('#PayFeeForm').submit(function(event) {
+                                                    event.preventDefault();
+                                                      var formData = new FormData(this);
                                                     $('#PayText').hide();
                                                     $('#loader_section_on_pay_fee').append('<img id = "loading" width="30px" src = "images/ajax-loader.gif" alt="Currently loading" />');
                                                     $('#PayFeeButton').prop('disabled', true);
+  
                                                     $.ajax({
-                                                        url: 'include/controller.php',
+                                                      
                                                         type: 'POST',
-                                                        data: $('#PayFeeForm').serializeArray(),
+                                                         url: 'include/controller.php',
+                                                        data: formData,
+                                                      cache: false,
+                                                      contentType: false,
+                                                         processData: false,
                                                         success: function(result) {
                                                             $('#response_on_pay_fee').remove();
                                                             if (result == "success") {

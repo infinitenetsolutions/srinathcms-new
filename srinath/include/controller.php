@@ -70,10 +70,10 @@ if (isset($_POST["action"])) {
             $result = $con->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                if ($row["admin_type"] == "superadmin")
+                if ($row["admin_type"] == "superadmin") {
                     $_SESSION["logger_type"] = "admin";
-
-                else {
+                    $_SESSION["admin_name"] = $row["admin_name"];
+                } else {
                     $_SESSION["logger_type"] = "subadmin";
                     $_SESSION["authority"] = $row["admin_permission"];
                     $_SESSION["admin_name"] = $row["admin_name"];
@@ -1307,53 +1307,82 @@ if (isset($_POST["action"])) {
 			$add_admission_duration2 && 
 			$add_admission_location2)){*/
 
-        if (!empty($_FILES["add_admission_profile_image"]["name"])) {
-            $add_admission_profile_image_rand = $random_number . "_" . $add_admission_profile_image;
-            move_uploaded_file($_FILES["add_admission_profile_image"]["tmp_name"], "$admission_profile_image_dir/$add_admission_profile_image_rand");
-        } else {
-            $add_admission_profile_image_rand = "";
-        }
+        // if (!empty($_FILES["add_admission_profile_image"]["name"])) {
+        //     $add_admission_profile_image_rand = $random_number . "_" . $add_admission_profile_image;
+        //     move_uploaded_file($_FILES["add_admission_profile_image"]["tmp_name"], "$admission_profile_image_dir/$add_admission_profile_image_rand");
+        // } else {
+        //     $add_admission_profile_image_rand = "";
+        // }
 
-        $add_admission_tenth_marksheet_rand = $random_number . "_" . $add_admission_tenth_marksheet;
-        move_uploaded_file($_FILES["add_admission_tenth_marksheet"]["tmp_name"], "$certificates/$add_admission_tenth_marksheet_rand");
+        // $add_admission_tenth_marksheet_rand = $random_number . "_" . $add_admission_tenth_marksheet;
+        // move_uploaded_file($_FILES["add_admission_tenth_marksheet"]["tmp_name"], "$certificates/$add_admission_tenth_marksheet_rand");
 
-        $add_admission_tenth_passing_certificate_rand = $random_number . "_" . $add_admission_tenth_passing_certificate;
-        move_uploaded_file($_FILES["add_admission_tenth_passing_certificate"]["tmp_name"], "$certificates/$add_admission_tenth_passing_certificate_rand");
+        // $add_admission_tenth_passing_certificate_rand = $random_number . "_" . $add_admission_tenth_passing_certificate;
+        // move_uploaded_file($_FILES["add_admission_tenth_passing_certificate"]["tmp_name"], "$certificates/$add_admission_tenth_passing_certificate_rand");
 
-        $add_admission_twelve_markesheet_rand = $random_number . "_" . $add_admission_twelve_markesheet;
-        move_uploaded_file($_FILES["add_admission_twelve_markesheet"]["tmp_name"], "$certificates/$add_admission_twelve_markesheet_rand");
+        // $add_admission_twelve_markesheet_rand = $random_number . "_" . $add_admission_twelve_markesheet;
+        // move_uploaded_file($_FILES["add_admission_twelve_markesheet"]["tmp_name"], "$certificates/$add_admission_twelve_markesheet_rand");
 
-        $add_admission_twelve_passing_certificate_rand = $random_number . "_" . $add_admission_twelve_passing_certificate;
-        move_uploaded_file($_FILES["add_admission_twelve_passing_certificate"]["tmp_name"], "$certificates/$add_admission_twelve_passing_certificate_rand");
+        // $add_admission_twelve_passing_certificate_rand = $random_number . "_" . $add_admission_twelve_passing_certificate;
+        // move_uploaded_file($_FILES["add_admission_twelve_passing_certificate"]["tmp_name"], "$certificates/$add_admission_twelve_passing_certificate_rand");
 
-        $add_admission_graduation_marksheet_rand = $random_number . "_" . $add_admission_graduation_marksheet;
-        move_uploaded_file($_FILES["add_admission_graduation_marksheet"]["tmp_name"], "$certificates/$add_admission_graduation_marksheet_rand");
+        // $add_admission_graduation_marksheet_rand = $random_number . "_" . $add_admission_graduation_marksheet;
+        // move_uploaded_file($_FILES["add_admission_graduation_marksheet"]["tmp_name"], "$certificates/$add_admission_graduation_marksheet_rand");
 
-        $add_admission_recent_character_certificate_rand = $random_number . "_" . $add_admission_recent_character_certificate;
-        move_uploaded_file($_FILES["add_admission_recent_character_certificate"]["tmp_name"], "$certificates/$add_admission_recent_character_certificate_rand");
+        // $add_admission_recent_character_certificate_rand = $random_number . "_" . $add_admission_recent_character_certificate;
+        // move_uploaded_file($_FILES["add_admission_recent_character_certificate"]["tmp_name"], "$certificates/$add_admission_recent_character_certificate_rand");
 
-        $add_admission_other_certificate_rand = $random_number . "_" . $add_admission_other_certificate;
-        move_uploaded_file($_FILES["add_admission_other_certificate"]["tmp_name"], "$certificates/$add_admission_other_certificate_rand");
+        // $add_admission_other_certificate_rand = $random_number . "_" . $add_admission_other_certificate;
+        // move_uploaded_file($_FILES["add_admission_other_certificate"]["tmp_name"], "$certificates/$add_admission_other_certificate_rand");
 
-        $add_admission_character_certificate_rand = $random_number . "_" . $add_admission_character_certificate;
-        move_uploaded_file($_FILES["add_admission_character_certificate"]["tmp_name"], "$certificates/$add_admission_character_certificate_rand");
+        // $add_admission_character_certificate_rand = $random_number . "_" . $add_admission_character_certificate;
+        // move_uploaded_file($_FILES["add_admission_character_certificate"]["tmp_name"], "$certificates/$add_admission_character_certificate_rand");
 
+
+
+        // image check 
+       
+
+
+            $add_admission_profile_image = addslashes(file_get_contents($_FILES['add_admission_profile_image']['tmp_name']));
+    
+            $add_admission_tenth_marksheet = addslashes(file_get_contents($_FILES['add_admission_tenth_marksheet']['tmp_name']));
+        
+            $add_admission_tenth_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_tenth_passing_certificate']['tmp_name']));
+        
+            $add_admission_twelve_markesheet = addslashes(file_get_contents($_FILES['add_admission_twelve_markesheet']['tmp_name']));
+        
+            $add_admission_twelve_passing_certificate = addslashes(file_get_contents($_FILES['add_admission_twelve_passing_certificate']['tmp_name']));
+        
+            $add_admission_graduation_marksheet = addslashes(file_get_contents($_FILES['add_admission_graduation_marksheet']['tmp_name']));
+        
+            $add_admission_recent_character_certificate = addslashes(file_get_contents($_FILES['add_admission_recent_character_certificate']['tmp_name']));
+        
+            $add_admission_other_certificate = addslashes(file_get_contents($_FILES['add_admission_other_certificate']['tmp_name']));
+        
+            $add_admission_character_certificate = addslashes(file_get_contents($_FILES['add_admission_character_certificate']['tmp_name']));
+        
+            $student_signature = addslashes(file_get_contents($_FILES['student_signature']['tmp_name']));
+        
+            $parent_signature = addslashes(file_get_contents($_FILES['parent_signature']['tmp_name']));
+        
 
         $sql = "INSERT INTO `tbl_admission`
-                            (`admission_id`, `admission_form_no`, `admission_no`, `admission_title`, `admission_first_name`, `admission_middle_name`, `admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`date_of_admission`,`admission_category`,`admission_gender`,`admission_username`,`admission_password`,`admission_blood_group`,`admission_hostel`,`admission_transport`,`admission_profile_image`,`admission_residential_address`,`admission_state`,`admission_city`,`admission_district`,`admission_pin_code`,`admission_home_landlineno`,`admission_mobile_student`,`admission_father_phoneno`,`admission_emailid_father`,`admission_emailid_student`,`admission_father_name`,`admission_father_whatsappno`,`admission_mother_name`,`admission_high_school_board_university`,`admission_high_school_college_name`,`admission_high_school_passing_year`,`admission_high_school_per`,`admission_high_school_subjects`,`admission_intermediate_board_university`,`admission_intermediate_college_name`,`admission_intermediate_passing_year`,`admission_intermediate_per`,`admission_intermediate_subjects`,`admission_graduation_board_university`,`admission_graduation_college_name`,`admission_graduation_passing_year`,`admission_graduation_per`,`admission_graduation_subjects`,`admission_post_graduation_board_university`,`admission_post_graduation_college_name`,`admission_post_graduation_others`,`admission_post_graduation_per`,`admission_post_graduation_subjects`,`admission_others_board_university`,`admission_others_college_name`,`admission_others_passing_year`,`admission_others_per`,`admission_others_subjects`,`admission_tenth_marksheet`,`admission_tenth_passing_certificate`,`admission_twelve_markesheet`,`admission_twelve_passing_certificate`,`admission_graduation_marksheet`,`admission_recent_character_certificate`,`admission_other_certificate`,`admission_character_certificate`,`admission_course1`,`admission_board_university1`,`admission_year_of_passing1`,`admission_percentage1`,`admission_course2`,`admission_board_university2`,`admission_year_of_passing2`,`admission_percentage2`,`admission_course3`,`admission_board_university3`,`admission_year_of_passing3`,`admission_percentage3`,`admission_course4`,`admission_board_university4`,`admission_year_of_passing4`,`admission_percentage4`,`admission_course5`,`admission_board_university5`,`admission_year_of_passing5`,`admission_percentage5`,`admission_name_of_org1`,`admission_designation1`,`admission_duration1`,`post_at`,`type`,`approval`,`transactionid`,`easebuzzid`, `status`) 
+                            ( `admission_form_no`, `admission_no`, `admission_title`, `admission_first_name`, `admission_middle_name`, `admission_last_name`, `admission_course_name`, `admission_session`, `admission_dob`, `admission_nationality`, `admission_aadhar_no`,`date_of_admission`,`admission_category`,`admission_gender`,`admission_username`,`admission_password`,`admission_blood_group`,`admission_hostel`,`admission_transport`,`admission_profile_image`,`admission_residential_address`,`admission_state`,`admission_city`,`admission_district`,`admission_pin_code`,`admission_home_landlineno`,`admission_mobile_student`,`admission_father_phoneno`,`admission_emailid_father`,`admission_emailid_student`,`admission_father_name`,`admission_father_whatsappno`,`admission_mother_name`,`admission_high_school_board_university`,`admission_high_school_college_name`,`admission_high_school_passing_year`,`admission_high_school_per`,`admission_high_school_subjects`,`admission_intermediate_board_university`,`admission_intermediate_college_name`,`admission_intermediate_passing_year`,`admission_intermediate_per`,`admission_intermediate_subjects`,`admission_graduation_board_university`,`admission_graduation_college_name`,`admission_graduation_passing_year`,`admission_graduation_per`,`admission_graduation_subjects`,`admission_post_graduation_board_university`,`admission_post_graduation_college_name`,`admission_post_graduation_others`,`admission_post_graduation_per`,`admission_post_graduation_subjects`,`admission_others_board_university`,`admission_others_college_name`,`admission_others_passing_year`,`admission_others_per`,`admission_others_subjects`,`admission_tenth_marksheet`,`admission_tenth_passing_certificate`,`admission_twelve_markesheet`,`admission_twelve_passing_certificate`,`admission_graduation_marksheet`,`admission_recent_character_certificate`,`admission_other_certificate`,`admission_character_certificate`,`admission_course1`,`admission_board_university1`,`admission_year_of_passing1`,`admission_percentage1`,`admission_course2`,`admission_board_university2`,`admission_year_of_passing2`,`admission_percentage2`,`admission_course3`,`admission_board_university3`,`admission_year_of_passing3`,`admission_percentage3`,`admission_course4`,`admission_board_university4`,`admission_year_of_passing4`,`admission_percentage4`,`admission_course5`,`admission_board_university5`,`admission_year_of_passing5`,`admission_percentage5`,`admission_name_of_org1`,`admission_designation1`,`admission_duration1`,`post_at`,`type`,`approval`,`transactionid`,`easebuzzid`, `status`) 
                             VALUES 
-                            ('$add_admission_id','$add_admission_form_no','$add_admission_no','$add_admission_title','$add_admission_first_name', '$add_admission_middle_name', '$add_admission_last_name', '$add_admission_course_name','$add_admission_session','$add_admission_dob', '$add_admission_nationality', '$add_admission_aadhar_no','$add_date_of_admission','$add_admission_category', '$add_admission_gender', '$add_admission_username', '$add_admission_password', '$add_admission_blood_group', '$add_admission_hostel','$add_admission_transport', '$add_admission_profile_image_rand','$add_admission_residential_address','$add_admission_state','$add_admission_city','$add_admission_district','$add_admission_pin_code','$add_admission_home_landlineno','$add_admission_mobile_student','$add_admission_father_phoneno','$add_admission_emailid_father','$add_admission_emailid_student','$add_admission_father_name','$add_admission_father_whatsappno','$add_admission_mother_name','$add_admission_high_school_board_university', '$add_admission_high_school_college_name', '$add_admission_high_school_passing_year','$add_admission_high_school_per','$add_admission_high_school_subjects', '$add_admission_intermediate_board_university', '$add_admission_intermediate_college_name', '$add_admission_intermediate_passing_year', '$add_admission_intermediate_per', '$add_admission_intermediate_subjects', '$add_admission_graduation_board_university', '$add_admission_graduation_college_name', '$add_admission_graduation_passing_year', '$add_admission_graduation_per','$add_admission_graduation_subjects','$add_admission_post_graduation_board_university', '$add_admission_post_graduation_college_name', '$add_admission_post_graduation_others', '$add_admission_post_graduation_per', '$add_admission_post_graduation_subjects', '$add_admission_others_board_university', '$add_admission_others_college_name', '$add_admission_others_passing_year', '$add_admission_others_per', '$add_admission_others_subjects','$add_admission_tenth_marksheet_rand','$add_admission_tenth_passing_certificate_rand','$add_admission_twelve_markesheet_rand','$add_admission_twelve_passing_certificate_rand','$add_admission_graduation_marksheet_rand','$add_admission_recent_character_certificate_rand',	'$add_admission_other_certificate_rand','$add_admission_character_certificate',	'$add_admission_course1', '$add_admission_board_university1', '$add_admission_year_of_passing1', '$add_admission_percentage1', '$add_admission_course2', '$add_admission_board_university2','$add_admission_year_of_passing2','$add_admission_percentage2', '$add_admission_course3', '$add_admission_board_university3', '$add_admission_year_of_passing3', '$add_admission_percentage3', '$add_admission_course4','$add_admission_board_university4', '$add_admission_year_of_passing4', '$add_admission_percentage4', '$add_admission_course5', '$add_admission_board_university5', '$add_admission_year_of_passing5', '$add_admission_percentage5', '$add_admission_name_of_org1','$add_admission_designation1', '$add_admission_duration1','$date_variable_today_month_year_with_timing','','','','','$visible')
+                            ('$add_admission_form_no','$add_admission_no','$add_admission_title','$add_admission_first_name', '$add_admission_middle_name', '$add_admission_last_name', '$add_admission_course_name','$add_admission_session','$add_admission_dob', '$add_admission_nationality', '$add_admission_aadhar_no','$add_date_of_admission','$add_admission_category', '$add_admission_gender', '$add_admission_username', '$add_admission_password', '$add_admission_blood_group', '$add_admission_hostel','$add_admission_transport', '$add_admission_profile_image','$add_admission_residential_address','$add_admission_state','$add_admission_city','$add_admission_district','$add_admission_pin_code','$add_admission_home_landlineno','$add_admission_mobile_student','$add_admission_father_phoneno','$add_admission_emailid_father','$add_admission_emailid_student','$add_admission_father_name','$add_admission_father_whatsappno','$add_admission_mother_name','$add_admission_high_school_board_university', '$add_admission_high_school_college_name', '$add_admission_high_school_passing_year','$add_admission_high_school_per','$add_admission_high_school_subjects', '$add_admission_intermediate_board_university', '$add_admission_intermediate_college_name', '$add_admission_intermediate_passing_year', '$add_admission_intermediate_per', '$add_admission_intermediate_subjects', '$add_admission_graduation_board_university', '$add_admission_graduation_college_name', '$add_admission_graduation_passing_year', '$add_admission_graduation_per','$add_admission_graduation_subjects','$add_admission_post_graduation_board_university', '$add_admission_post_graduation_college_name', '$add_admission_post_graduation_others', '$add_admission_post_graduation_per', '$add_admission_post_graduation_subjects', '$add_admission_others_board_university', '$add_admission_others_college_name', '$add_admission_others_passing_year', '$add_admission_others_per', '$add_admission_others_subjects','$add_admission_tenth_marksheet','$add_admission_tenth_passing_certificate','$add_admission_twelve_markesheet','$add_admission_twelve_passing_certificate','$add_admission_graduation_marksheet','$add_admission_recent_character_certificate',	'$add_admission_other_certificate','$add_admission_character_certificate',	'$add_admission_course1', '$add_admission_board_university1', '$add_admission_year_of_passing1', '$add_admission_percentage1', '$add_admission_course2', '$add_admission_board_university2','$add_admission_year_of_passing2','$add_admission_percentage2', '$add_admission_course3', '$add_admission_board_university3', '$add_admission_year_of_passing3', '$add_admission_percentage3', '$add_admission_course4','$add_admission_board_university4', '$add_admission_year_of_passing4', '$add_admission_percentage4', '$add_admission_course5', '$add_admission_board_university5', '$add_admission_year_of_passing5', '$add_admission_percentage5', '$add_admission_name_of_org1','$add_admission_designation1', '$add_admission_duration1','$date_variable_today_month_year_with_timing','','','','','$visible')
                             ";
         if ($con->query($sql)) {
             echo "<script>
                                 alert('Added successfully!!!');
                                 location.replace('../admission_form');
                             </script>";
-        } else
+        } else{
             echo "<script>
-                                alert('Something went wrong please try again!!!');
+                                alert('Student Already Exits got to the Admission Enquiry and Edit the form');
                                 location.replace('../admission_form');
                             </script>";
+        }
         /*} else{
 						echo "<script>
 									alert('Please fill out all required fields!!!');
@@ -1424,6 +1453,7 @@ if (isset($_POST["action"])) {
 
     //Pay Fee Start
     if ($_POST["action"] == "pay_fees") {
+
         $registrationNumber = $_POST["registrationNumber"];
         $academicYear = $_POST["academicYear"];
         $courseId = $_POST["courseId"];
@@ -1451,25 +1481,24 @@ if (isset($_POST["action"])) {
                 exit();
             } else
                 // inserting the data into the rebate form table for how much rebate will come into the colleage
-            $rebate_by_name='NULL';
-            $rebate_by_email='NULL';
-            $approve_attach='NULl';
-            
-              $getting_student_email = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$registrationNumber'";
+                $rebate_by_name = $_SESSION['admin_name'];
+            $rebate_by_email = $_SESSION['admin_email'];
+            $approve_attach = addslashes(file_get_contents($_FILES['img_approve']['tmp_name']));
+
+            $getting_student_email = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$registrationNumber'";
             $getting_student_result = mysqli_query($con, $getting_student_email);
             $getting_student_email_data = mysqli_fetch_array($getting_student_result);
             $getting_student_email_id = $getting_student_email_data['admission_emailid_student'];
             $getting_student_name = $getting_student_email_data['admission_first_name'];
             $department_email = $_SESSION['admin_email'];
             $date = date('Y-m-d');
-            if($rebate_from==647){
-            $rebate_particular='1st semester';
-            }
-            else{
-                $rebate_particular=$rebate_from;
+            if ($rebate_from == 647) {
+                $rebate_particular = '1st semester';
+            } else {
+                $rebate_particular = $rebate_from;
             }
             $insert_rebate = "INSERT INTO `rebate`(`rebate_amount`, `approve_amount`, `rebate_by_name`, `rebate_by_email`, `student_email`, `student_name`, `rebate_date`, `approve_date`, `department`, `particular`, `massage`, `attach`, `status`) VALUES
-            ('$rebate_amount','0','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','0','$department_email','$rebate_particular','$NotesByAdmin','$approve_attach','0')";
+            ('$rebate_amount','$rebate_amount','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','$date','$department_email','$rebate_particular','$NotesByAdmin','$approve_attach','1')";
 
             $rebate_result = mysqli_query($con, $insert_rebate);
 

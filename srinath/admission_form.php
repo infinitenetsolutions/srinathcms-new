@@ -552,11 +552,30 @@ include "include/authentication.php";
             <div class="card-body table-responsive p-0">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-3">
                     <label>Rebate Amount</label>
-                    <input required type="number" name="rebate_amount" class="form-control">
+                    <input required type="number" onkeyup="rebate(this.value)" name="rebate_amount" class="form-control">
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
+                    <label>Approver's Email</label>
+                    <?php
+                    $getting_admin1 = "SELECT * FROM `tbl_admin` WHERE 1 ";
+                    $getting_admin_result1 = mysqli_query($con, $getting_admin1);
+                    ?>
+
+
+                    <select required disabled id="admin_name" name="admin_email" class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                      <option selected>Select Approver's Email</option>
+                      <?php while ($admin_getting_data = mysqli_fetch_array($getting_admin_result1)) {
+                        if (preg_match('/15_1/i',  $admin_getting_data['admin_permission']) == 1) {
+                      ?>
+                          <option value="<?php echo $admin_getting_data['admin_name']; ?>"><?php echo $admin_getting_data['admin_email']; ?></option>
+                      <?php }
+                      } ?>
+
+                    </select>
+                  </div>
+                  <div class="col-3">
                     <label>Approver's Email</label>
                     <?php
                     $getting_admin = "SELECT * FROM `tbl_admin` WHERE 1 ";
@@ -564,20 +583,21 @@ include "include/authentication.php";
                     ?>
 
 
-                   <select id="admin_approve" name="rebate_amount"  class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
-                      <option selected >Select Approver's Email</option>
+                    <select required disabled id="admin_email" name="admin_email" class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
+                      <option selected>Select Approver's Email</option>
                       <?php while ($admin_getting_data = mysqli_fetch_array($getting_admin_result)) {
                         if (preg_match('/15_1/i',  $admin_getting_data['admin_permission']) == 1) {
                       ?>
-                          <option name="admin_email" value="<?php echo $admin_getting_data['admin_email']; ?>"><?php echo $admin_getting_data['admin_email']; ?></option>
+                          <option value="<?php echo $admin_getting_data['admin_email']; ?>"><?php echo $admin_getting_data['admin_email']; ?></option>
                       <?php }
                       } ?>
 
                     </select>
+                    
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                     <label>Relevant Documents</label>
-                    <input required  type="file" name="attach" class="form-control" >
+                    <input disabled required id="attach_doc" type="file" name="attach_doc" class="form-control">
                   </div>
 
 
@@ -749,3 +769,20 @@ include "include/authentication.php";
 </body>
 
 </html>
+<script>
+  function rebate(amount) {
+    if (amount > 0) {
+      document.getElementById('admin_email').disabled = false;
+      document.getElementById('admin_name').disabled = false;
+
+      document.getElementById('attach_doc').disabled = false;
+    } else {
+      document.getElementById('admin_name').disabled = true;
+
+      document.getElementById('admin_email').disabled = true;
+      document.getElementById('attach_doc').disabled = true;
+    }
+
+
+  }
+</script>

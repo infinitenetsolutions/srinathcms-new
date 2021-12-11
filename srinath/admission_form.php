@@ -556,25 +556,7 @@ include "include/authentication.php";
                     <label>Rebate Amount</label>
                     <input required type="number" onkeyup="rebate(this.value)" name="rebate_amount" class="form-control">
                   </div>
-                  <div class="col-3">
-                    <label>Approver's Email</label>
-                    <?php
-                    $getting_admin1 = "SELECT * FROM `tbl_admin` WHERE 1 ";
-                    $getting_admin_result1 = mysqli_query($con, $getting_admin1);
-                    ?>
 
-
-                    <select required disabled id="admin_name" name="admin_email" class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
-                      <option selected>Select Approver's Email</option>
-                      <?php while ($admin_getting_data = mysqli_fetch_array($getting_admin_result1)) {
-                        if (preg_match('/15_1/i',  $admin_getting_data['admin_permission']) == 1) {
-                      ?>
-                          <option value="<?php echo $admin_getting_data['admin_name']; ?>"><?php echo $admin_getting_data['admin_email']; ?></option>
-                      <?php }
-                      } ?>
-
-                    </select>
-                  </div>
                   <div class="col-3">
                     <label>Approver's Email</label>
                     <?php
@@ -583,8 +565,8 @@ include "include/authentication.php";
                     ?>
 
 
-                    <select required disabled id="admin_email" name="admin_email" class="form-control " onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();">
-                      <option selected>Select Approver's Email</option>
+                    <select disabled onchange="changename(this.value)" required id="admin_email" name="admin_email" class="form-control ">
+                      <option disabled selected>Select Approver's Email</option>
                       <?php while ($admin_getting_data = mysqli_fetch_array($getting_admin_result)) {
                         if (preg_match('/15_1/i',  $admin_getting_data['admin_permission']) == 1) {
                       ?>
@@ -593,7 +575,12 @@ include "include/authentication.php";
                       } ?>
 
                     </select>
-                    
+
+                  </div>
+                  <div class="col-3">
+                    <label>Approver's Name</label>
+                    <select required disabled id="admin_name" name="admin_name" class="form-control ">
+                    </select>
                   </div>
                   <div class="col-3">
                     <label>Relevant Documents</label>
@@ -784,5 +771,16 @@ include "include/authentication.php";
     }
 
 
+  }
+
+  function changename(email) {
+
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      document.getElementById("admin_name").innerHTML = this.responseText;
+    }
+    xhttp.open("GET", "./include/ajax/admission.php?email=" + email);
+    xhttp.send();
   }
 </script>

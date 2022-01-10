@@ -7,8 +7,8 @@ $end = '';
 include "include/authentication.php";
 
 include '../srinath/include/config.php';
-$admin_email = $_SESSION['admin_email'];
 
+$admin_email = $_SESSION['admin_email'];
 if (isset($_POST['submit'])) {
     $start = $_POST['start'];
     $end = $_POST['end'];
@@ -218,8 +218,8 @@ if (isset($_POST['submit'])) {
                                                                     Reject
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item bg-success " href="./include/status/rebate.update.php?status=success&&id=<?php echo $get_row['id']; ?> ">Success</a>
-                                                                    <a class="dropdown-item bg-warning " href="./include/status/rebate.update.php?status=pending&&id=<?php echo $get_row['id']; ?> ">Pending</a>
+                                                                    <a class="dropdown-item bg-success " href="rebate.update.php?status=success&&id=<?php echo $get_row['id']; ?> ">Success</a>
+                                                                    <a class="dropdown-item bg-warning " href="rebate.update.php?status=pending&&id=<?php echo $get_row['id']; ?> ">Pending</a>
 
                                                                 </div>
                                                             </div>
@@ -232,8 +232,8 @@ if (isset($_POST['submit'])) {
                                                                     Success
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item  bg-warning" href="./include/status/rebate.update.php?status=pending&&id=<?php echo $get_row['id']; ?> ">Pending</a>
-                                                                    <a class="dropdown-item bg-danger" href="./include/status/rebate.update.php?status=reject&&id=<?php echo $get_row['id']; ?> ">Reject</a>
+                                                                    <a class="dropdown-item  bg-warning" href="rebate.update.php?status=pending&&id=<?php echo $get_row['id']; ?> ">Pending</a>
+                                                                    <a class="dropdown-item bg-danger" href="rebate.update.php?status=reject&&id=<?php echo $get_row['id']; ?> ">Reject</a>
 
                                                                 </div>
                                                             </div>
@@ -246,8 +246,8 @@ if (isset($_POST['submit'])) {
                                                                     Pending
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item bg-success  " href="./include/status/rebate.update.php?status=success&&id=<?php echo $get_row['id']; ?>">Success</a>
-                                                                    <a class="dropdown-item bg-danger" href="./include/status/rebate.update.php?status=reject&&id=<?php echo $get_row['id']; ?> ">Reject</a>
+                                                                    <a class="dropdown-item bg-success  " href="rebate.update.php?status=success&&id=<?php echo $get_row['id']; ?>">Success</a>
+                                                                    <a class="dropdown-item bg-danger" href="rebate.update.php?status=reject&&id=<?php echo $get_row['id']; ?> ">Reject</a>
 
                                                                 </div>
                                                             </div>

@@ -190,7 +190,271 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
+            <section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-12">
+							<h5 style="color: #17a2b7;"><b>Admission Income</b></h5>
+							<div class="info-box">
+								<span class="info-box-icon bg-info" style="padding: 0px;"></span>
 
+								<div class="info-box-content">
+									<?php
+									$sql = "select * from tbl_fee_paid  WHERE `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									$sum1 = 0;
+									while ($row = mysqli_fetch_array($query)) {
+										$sum1 = $sum1 + array_sum(explode(",", $row["paid_amount"]));
+									} ?>
+									<span class="info-box-text">Total Admission Income : <b><?php echo $sum1; ?></b></span>
+									<?php
+									$sum2 = 0;
+									$sql = "select * from tbl_fee_paid WHERE payment_mode='Cash' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum2 = $sum2 + array_sum(explode(",", $row["paid_amount"]));
+									}
+									?>
+									<span class="info-box-text">Cash Payment : <b><?php echo $sum2; ?></b></span>
+									<?php
+									$sum3 = 0;
+									$sql = "select * from tbl_fee_paid WHERE payment_mode='Cheque' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum3 = $sum3 + array_sum(explode(",", $row["paid_amount"]));
+									}
+									?>
+									<span class="info-box-text">Cheque Payment : <b><?php echo $sum3; ?></b></span>
+									<?php
+									$sum4 = 0;
+									$sql = "select * from tbl_fee_paid WHERE payment_mode='DD' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum4 = $sum4 + array_sum(explode(",", $row["paid_amount"]));
+									}
+									?>
+									<span class="info-box-text">DD Payment : <b><?php echo $sum4; ?></b></span>
+									<?php
+									$sum5 = 0;
+									$sql = "select * from tbl_fee_paid WHERE payment_mode='Online' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum5 = $sum5 + array_sum(explode(",", $row["paid_amount"]));
+									}
+									?>
+									<span class="info-box-text">Online Payment : <b><?php echo $sum5; ?></b></span>
+									<?php
+									$sum6 = 0;
+									$sql = "select * from tbl_fee_paid WHERE payment_mode='NEFT/IMPS/RTGS' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum6 = $sum6 + array_sum(explode(",", $row["paid_amount"]));
+									}
+									?>
+									<span class="info-box-text">NEFT/IMPS/RTGS Payment : <b><?php echo $sum6; ?></b></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+							<!-- /.info-box -->
+						</div>
+						<!-- /.col -->
+						<div class="col-md-3 col-sm-6 col-12">
+							<h5 style="color: #28a745;"><b>Prospectus Income</b></h5>
+							<div class="info-box">
+
+								<span class="info-box-icon bg-success" style="padding: 0px;"></span>
+
+								<div class="info-box-content">
+									<?php
+									$sql = "select * from tbl_prospectus WHERE  1";
+									$query = mysqli_query($con, $sql);
+									$sum7 = 0;
+									while ($row = mysqli_fetch_array($query)) {
+										$sum7 = $sum7 + array_sum(explode(",", $row["prospectus_rate"]));
+									} ?>
+									<span class="info-box-text">Total Prospectus Income : <b><?php echo $sum7; ?></b></span>
+									<?php
+									$sum8 = 0;
+									$sql = "select * from tbl_prospectus WHERE prospectus_payment_mode='Cash' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum8 = $sum8 + array_sum(explode(",", $row["prospectus_rate"]));
+									}
+									?>
+									<span class="info-box-text">Cash Payment : <b><?php echo $sum8; ?></b></span>
+									<?php
+									$sum9 = 0;
+									$sql = "select * from tbl_prospectus WHERE prospectus_payment_mode='Cheque' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum9 = $sum9 + array_sum(explode(",", $row["prospectus_rate"]));
+									}
+									?>
+									<span class="info-box-text">Cheque Payment : <b><?php echo $sum9; ?></b></span>
+									<?php
+									$sum10 = 0;
+									$sql = "select * from tbl_prospectus WHERE prospectus_payment_mode='DD' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum10 = $sum10 + array_sum(explode(",", $row["prospectus_rate"]));
+									}
+									?>
+									<span class="info-box-text">DD Payment : <b><?php echo $sum10; ?></b></span>
+									<?php
+									$sum11 = 0;
+									$sql = "select * from tbl_prospectus WHERE prospectus_payment_mode='Online' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum11 = $sum11 + array_sum(explode(",", $row["prospectus_rate"]));
+									}
+									?>
+									<span class="info-box-text">Online Payment : <b><?php echo $sum11; ?></b></span>
+									<?php
+									$sum12 = 0;
+									$sql = "select * from tbl_prospectus WHERE prospectus_payment_mode='NEFT/IMPS/RTGS' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum12 = $sum12 + array_sum(explode(",", $row["prospectus_rate"]));
+									}
+									?>
+									<span class="info-box-text">NEFT/IMPS/RTGS Payment : <b><?php echo $sum12; ?></b></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+							<!-- /.info-box -->
+						</div>
+						<!-- /.col -->
+						<div class="col-md-3 col-sm-6 col-12">
+							<h5 style="color: #ffc107;"><b>Extra Income</b></h5>
+							<div class="info-box">
+								<span class="info-box-icon bg-warning" style="padding: 0px;"></span>
+								<div class="info-box-content">
+									<?php
+									$sql = "select * from tbl_extra_income WHERE  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									$sum13 = 0;
+									while ($row = mysqli_fetch_array($query)) {
+										$sum13 = $sum13 + array_sum(explode(",", $row["amount"]));
+									} ?>
+									<span class="info-box-text">Total Extra Income : <b><?php echo $sum13; ?></b></span>
+									<?php
+									$sum14 = 0;
+									$sql = "select * from tbl_extra_income WHERE payment_mode='Cash' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum14 = $sum14 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Cash Payment : <b><?php echo $sum14; ?></b></span>
+									<?php
+									$sum15 = 0;
+									$sql = "select * from tbl_extra_income WHERE payment_mode='Cheque' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum15 = $sum15 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Cheque Payment : <b><?php echo $sum15; ?></b></span>
+									<?php
+									$sum16 = 0;
+									$sql = "select * from tbl_extra_income WHERE payment_mode='DD' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum16 = $sum16 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">DD Payment : <b><?php echo $sum16; ?></b></span>
+									<?php
+									$sum17 = 0;
+									$sql = "select * from tbl_extra_income WHERE payment_mode='Online' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum17 = $sum17 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Online Payment : <b><?php echo $sum17; ?></b></span>
+									<?php
+									$sum18 = 0;
+									$sql = "select * from tbl_extra_income WHERE payment_mode='NEFT/RTGS/IMPS' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum18 = $sum18 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">NEFT/IMPS/RTGS Payment : <b><?php echo $sum18; ?></b></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+							<!-- /.info-box -->
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<h5 style="color: #dc3545;"><b>Expenditure</b></h5>
+							<div class="info-box">
+								<span class="info-box-icon bg-danger" style="padding: 0px;"></span>
+
+								<div class="info-box-content">
+									<?php
+									$sql = "select * from tbl_expenses WHERE  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									$sum19 = 0;
+									while ($row = mysqli_fetch_array($query)) {
+										$sum19 = $sum19 + array_sum(explode(",", $row["amount"]));
+									} ?>
+									<span class="info-box-text">Total Expenditure : <b><?php echo $sum19; ?></b></span>
+									<?php
+									$sum20 = 0;
+									$sql = "select * from tbl_expenses WHERE payment_mode='Cash' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum20 = $sum20 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Cash Payment : <b><?php echo $sum20; ?></b></span>
+									<?php
+									$sum21 = 0;
+									$sql = "select * from tbl_expenses WHERE payment_mode='Cheque' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum21 = $sum21 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Cheque Payment : <b><?php echo $sum21; ?></b></span>
+									<?php
+									$sum22 = 0;
+									$sql = "select * from tbl_expenses WHERE payment_mode='DD' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum22 = $sum22 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">DD Payment : <b><?php echo $sum22; ?></b></span>
+									<?php
+									$sum23 = 0;
+									$sql = "select * from tbl_expenses WHERE payment_mode='Online' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum23 = $sum23 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">Online Payment : <b><?php echo $sum23; ?></b></span>
+									<?php
+									$sum24 = 0;
+									$sql = "select * from tbl_expenses WHERE payment_mode='NEFT/RTGS/IMPS' &&  `status` = '$visible'";
+									$query = mysqli_query($con, $sql);
+									while ($row = mysqli_fetch_array($query)) {
+										$sum24 = $sum24 + array_sum(explode(",", $row["amount"]));
+									}
+									?>
+									<span class="info-box-text">NEFT/IMPS/RTGS Payment : <b><?php echo $sum24; ?></b></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+							<!-- /.info-box -->
+						</div>
+						<!-- /.col -->
+					</div>
+				</div>
+			</section>
             <!-- Main content -->
             <section class="content">
                 <div class="row">

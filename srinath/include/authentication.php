@@ -1,6 +1,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <?php 
+
+
+function asset($url)
+{
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        return $_SERVER['HTTP_HOST'] . '/srinathcms/srinath/' . $url;
+
+        return $_SERVER['HTTP_HOST'] . '/srinath/' . $url;
+    }
+}
+
 //     ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);

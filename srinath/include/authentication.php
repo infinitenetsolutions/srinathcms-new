@@ -3,14 +3,7 @@
 <?php 
 
 
-function asset($url)
-{
-    if ($_SERVER['HTTP_HOST'] == 'localhost') {
-        return $_SERVER['HTTP_HOST'] . '/srinathcms/srinath/' . $url;
 
-        return $_SERVER['HTTP_HOST'] . '/srinath/' . $url;
-    }
-}
 
 //     ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);

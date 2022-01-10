@@ -37,7 +37,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 // if the database in the server
 else {
-    $objectDefault->new_db("localhost", "phpmyadmin", "raja@#", "srinath_demo_cms");
+    $objectDefault->new_db("localhost","srinathuniversity_srinath_cms","Rohit83013@#","srinathuniversity_srinath_cms");
 }
 //Creating Object NSUCMS
 $objectSecond = new DBEVAL();
@@ -52,7 +52,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 // if the database in the server
 else {
-    $objectSecond->new_db("localhost", "phpmyadmin", "raja@#", "srinath_cms");
+    $objectSecond->new_db("localhost","srinathuniversity_srinath_cms","Rohit83013@#","srinathuniversity_srinath_cms");
 }
 
 //All File Directries End

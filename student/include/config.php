@@ -4,7 +4,7 @@
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $con = new mysqli('localhost', 'root', '', 'srinath_cms');
 } else {
-    $con = new mysqli("localhost", "phpmyadmin", "raja@#", "srinath_cms");
+    $con = new mysqli("localhost", "srinathuniversity_srinath_cms", "Rohit83013@#", "srinathuniversity_srinath_cms");
     // Check connection
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
@@ -15,6 +15,6 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $con_attendance = new mysqli('localhost', 'root', '', 'srinath_atteandance');
 } else {
-    $con_attendance = new mysqli("localhost", "phpmyadmin", "raja@#", "srinath_atteandance");
+    $con_attendance =new mysqli("localhost", "srinathuniversity_srinath_cms", "Rohit83013@#", "srinathuniversity_srinath_cms");
     // Check connection
 }

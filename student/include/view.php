@@ -579,8 +579,8 @@ if (isset($_GET["action"])) {
                                                                         <label for="">Status</label>
                                                                         <input id="productinfo" class="form-control" name="productinfo" value="<?php echo "Fee"; ?>" placeholder="" readonly>
                                                                     </div>
-                                                                    <input type="hidden" id="surl" class="surl" name="surl" value="http://localhost/srinathcms/student/success" placeholder="">
-                                                                    <input type="hidden" id="furl" class="furl" name="furl" value="http://localhost/srinathcms/student/success" placeholder="">
+                                                                    <input type="hidden" id="surl" class="surl" name="surl" value="https://srinathuniversity.com/srinathcms/student/success" placeholder="">
+                                                                    <input type="hidden" id="furl" class="furl" name="furl" value="https://srinathuniversity.com/srinathcms/student/success" placeholder="">
                                                                     <div class="form-group col-md-4 mt-2">
                                                                         <button class="btn btn-primary btn-lg btn-block" type="submit" name="button"><i class="fa fa-paper-plane"></i> Pay </button>
                                                                     </div>

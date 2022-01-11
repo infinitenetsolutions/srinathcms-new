@@ -64,7 +64,7 @@ if (isset($_POST["action"])) {
         $admin_login_username = $_POST["admin_login_username"];
         $admin_login_password = md5($_POST["admin_login_password"]);
         if (!empty($admin_login_username && $admin_login_password)) {
-            $sql = "SELECT * FROM `tbl_admin`
+          echo  $sql = "SELECT * FROM `tbl_admin`
                         WHERE `admin_username` = '$admin_login_username' && `admin_password` = '$admin_login_password' && `status` = '$visible'
                         ";
             $result = $con->query($sql);

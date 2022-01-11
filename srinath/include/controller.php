@@ -57,6 +57,8 @@ else {
 
 //All File Directries End
 if (isset($_POST["action"])) {
+    echo "working";
+    exit;
     //Action Section Start
     /* ---------- All Admin(Backend) Codes Start ---------- */
     //Login Section Start With Ajax

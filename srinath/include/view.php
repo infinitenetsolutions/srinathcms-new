@@ -53,7 +53,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     $objectDefault->new_db("localhost", "root", "", "srinath_demo_cms");    }
 // if the database in the server
 else{
-    $objectDefault->new_db("localhost", "phpmyadmin", "raja@#", "srinath_demo_cms");
+    $objectDefault->new_db("localhost", "srinathuniversity_demo_cms", "Rohit83013@#", "srinathuniversity_demo_cms");
     }
 // $objectDefault->new_db("localhost", "nsucms_demo_nsuniv", "4rp5NsX7", "nsucms_demo_nsuniv");
 //Creating Object NSUCMS

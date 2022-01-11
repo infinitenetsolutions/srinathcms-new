@@ -37,7 +37,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 // if the database in the server
 else {
-    $objectDefault->new_db("localhost","srinathuniversity_srinath_cms","Rohit83013@#","srinathuniversity_srinath_cms");
+    $objectDefault->new_db("localhost","srinathuniversity_demo_cms","Rohit83013@#","srinathuniversity_demo_cms");
 }
 //Creating Object NSUCMS
 $objectSecond = new DBEVAL();
@@ -64,7 +64,7 @@ if (isset($_POST["action"])) {
         $admin_login_username = $_POST["admin_login_username"];
         $admin_login_password = md5($_POST["admin_login_password"]);
         if (!empty($admin_login_username && $admin_login_password)) {
-          echo  $sql = "SELECT * FROM `tbl_admin`
+           $sql = "SELECT * FROM `tbl_admin`
                         WHERE `admin_username` = '$admin_login_username' && `admin_password` = '$admin_login_password' && `status` = '$visible'
                         ";
             $result = $con->query($sql);

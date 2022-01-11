@@ -18,9 +18,9 @@
 //        public $dbName = "db_nsucms_updated";
         //Server
         public $hostName = "localhost";
-        public $userName = "root";
-        public $password = "";
-        public $dbName = "srinath_demo_cms";
+        public $userName = "srinathuniversity_srinath_cms";
+        public $password = "Rohit83013@#";
+        public $dbName = "srinathuniversity_srinath_cms";
      
         //Function --------------------------------------------------------------------------
         //Database Connection

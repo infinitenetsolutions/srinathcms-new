@@ -15,4 +15,3 @@ jobs:
         username:  cms@srinathuniversity.co.in
         password: ${{ secrets.ftp_password }}
         
-# changing the directory name

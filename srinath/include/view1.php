@@ -10,9 +10,6 @@ $(document).ready(function(){
 });
 </script>
 
-
-
-
 <?php
     //Starting Session
     if(empty(session_start()))

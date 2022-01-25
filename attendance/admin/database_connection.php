@@ -7,7 +7,7 @@ if($_SERVER['HTTP_HOST']=="localhost"){
 	$connect = 	new PDO("mysql:host=localhost;dbname=srinath_atteandance","root","");
 }
 else{
-	$connect = 	new PDO("mysql:host=localhost;dbname=srinathuniversityerp_srinath_cms","srinathuniversityerp_srinath_cms","Rohit83013@#");
+	$connect = 	new PDO("mysql:host=localhost;dbname=srinathuniversityerp_attandace","srinathuniversityerp_attandace","Rohit83013@#");
   
 }
 

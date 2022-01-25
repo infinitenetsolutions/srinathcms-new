@@ -4,9 +4,9 @@
         $to_date = $_POST["to_date"];
         $withGrade = $_POST["withGrade"];
         $servername = "localhost";
-        $username = "nsunivac_attendance";
-        $password = "4Ckt6FML9";
-        $dbname = "nsunivac_attendance";
+        $username = "srinathuniversityerp_srinath_cms";
+        $password = "Rohit83013@#";
+        $dbname = "srinathuniversityerp_srinath_cms";
         $con = new mysqli($servername, $username, $password, $dbname);
         if($withGrade == "all")
             $sql = "SELECT * 

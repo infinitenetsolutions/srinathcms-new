@@ -67,7 +67,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     $objectSecond->new_db("localhost", "root", "", "srinath_cms");    }
 // if the database in the server
 else{
-    $objectSecond->new_db("localhost", "srinathuniversity_srinath_cms", "Rohit83013@#", "srinathuniversity_srinath_cms");
+    $objectSecond->new_db("localhost", "srinathuniversityerp_srinath_cms", "Rohit83013@#", "srinathuniversityerp_srinath_cms");
     }
 // $objectSecond->new_db("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
 //All File Directries End

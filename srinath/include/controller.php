@@ -1405,6 +1405,7 @@ if (isset($_POST["action"])) {
                 if ($rebate_result) {
                     sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name, $add_admission_session, $student_id,'Addmission',$rebate_amount);
                 }
+                exit;
             }
 
 

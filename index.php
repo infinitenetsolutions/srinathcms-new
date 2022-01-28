@@ -115,7 +115,7 @@ if (isset($_POST['done'])) {
         </div>
     </nav>
     </div>
-    <div class="container pl-5">
+    <div class="container pl-5 pr-5">
         <div class="row ">
             <div class="col-sm-8  p-0 ">
                 <div class="login-box">

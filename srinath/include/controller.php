@@ -37,7 +37,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 // if the database in the server
 else {
-    $objectDefault->new_db("localhost","srinathuniversity_demo_cms","Rohit83013@#","srinathuniversity_demo_cms");
+    $objectDefault->new_db("localhost", "srinathuniversity_demo_cms", "Rohit83013@#", "srinathuniversity_demo_cms");
 }
 //Creating Object NSUCMS
 $objectSecond = new DBEVAL();
@@ -52,7 +52,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 // if the database in the server
 else {
-    $objectSecond->new_db("localhost","srinathuniversityerp_srinath_cms","Rohit83013@#","srinathuniversityerp_srinath_cms");
+    $objectSecond->new_db("localhost", "srinathuniversityerp_srinath_cms", "Rohit83013@#", "srinathuniversityerp_srinath_cms");
 }
 
 //All File Directries End
@@ -65,7 +65,7 @@ if (isset($_POST["action"])) {
         $admin_login_username = $_POST["admin_login_username"];
         $admin_login_password = md5($_POST["admin_login_password"]);
         if (!empty($admin_login_username && $admin_login_password)) {
-           $sql = "SELECT * FROM `tbl_admin`
+            $sql = "SELECT * FROM `tbl_admin`
                         WHERE `admin_username` = '$admin_login_username' && `admin_password` = '$admin_login_password' && `status` = '$visible'
                         ";
             $result = $con->query($sql);
@@ -1381,6 +1381,8 @@ if (isset($_POST["action"])) {
                             VALUES 
                             ('$add_admission_form_no','$add_admission_no','$add_admission_title','$add_admission_first_name', '$add_admission_middle_name', '$add_admission_last_name', '$add_admission_course_name','$add_admission_session','$add_admission_dob', '$add_admission_nationality', '$add_admission_aadhar_no','$add_date_of_admission','$add_admission_category', '$add_admission_gender', '$add_admission_username', '$add_admission_password', '$add_admission_blood_group', '$add_admission_hostel','$add_admission_transport', '$add_admission_profile_image','$student_signature','$parent_signature','$add_admission_residential_address','$add_admission_state','$add_admission_city','$add_admission_district','$add_admission_pin_code','$add_admission_home_landlineno','$add_admission_mobile_student','$add_admission_father_phoneno','$add_admission_emailid_father','$add_admission_emailid_student','$add_admission_father_name','$add_admission_father_whatsappno','$add_admission_mother_name','$add_admission_high_school_board_university', '$add_admission_high_school_college_name', '$add_admission_high_school_passing_year','$add_admission_high_school_per','$add_admission_high_school_subjects', '$add_admission_intermediate_board_university', '$add_admission_intermediate_college_name', '$add_admission_intermediate_passing_year', '$add_admission_intermediate_per', '$add_admission_intermediate_subjects', '$add_admission_graduation_board_university', '$add_admission_graduation_college_name', '$add_admission_graduation_passing_year', '$add_admission_graduation_per','$add_admission_graduation_subjects','$add_admission_post_graduation_board_university', '$add_admission_post_graduation_college_name', '$add_admission_post_graduation_others', '$add_admission_post_graduation_per', '$add_admission_post_graduation_subjects', '$add_admission_others_board_university', '$add_admission_others_college_name', '$add_admission_others_passing_year', '$add_admission_others_per', '$add_admission_others_subjects','$add_admission_tenth_marksheet','$add_admission_tenth_passing_certificate','$add_admission_twelve_markesheet','$add_admission_twelve_passing_certificate','$add_admission_graduation_marksheet','$add_admission_recent_character_certificate',	'$add_admission_other_certificate','$add_admission_character_certificate',	'$add_admission_course1', '$add_admission_board_university1', '$add_admission_year_of_passing1', '$add_admission_percentage1', '$add_admission_course2', '$add_admission_board_university2','$add_admission_year_of_passing2','$add_admission_percentage2', '$add_admission_course3', '$add_admission_board_university3', '$add_admission_year_of_passing3', '$add_admission_percentage3', '$add_admission_course4','$add_admission_board_university4', '$add_admission_year_of_passing4', '$add_admission_percentage4', '$add_admission_course5', '$add_admission_board_university5', '$add_admission_year_of_passing5', '$add_admission_percentage5', '$add_admission_name_of_org1','$add_admission_designation1', '$add_admission_duration1','$date_variable_today_month_year_with_timing','','','','','$visible')
                             ";
+
+        include('../../Backend/rebate.php');
         if ($con->query($sql)) {
 
             if ($rebate_amount > 0) {
@@ -1394,6 +1396,15 @@ if (isset($_POST["action"])) {
                 ('$rebate_amount','0','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','','$department_email','Admission','$NotesByAdmin','$approve_attach','0')";
 
                 $rebate_result = mysqli_query($con, $insert_rebate);
+
+                $getting_latst_rebate_id = "SELECT MAX(id) as id FROM `rebate` WHERE 1";
+                $getting_last_rebate_resutl = mysqli_query($con, $getting_latst_rebate_id);
+                $getting_last_rebate_result_data = mysqli_fetch_array($getting_last_rebate_resutl);
+                $student_id = $getting_last_rebate_result_data['id'];
+
+                if ($rebate_result) {
+                    sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name, $add_admission_session, $student_id,'Addmission',$rebate_amount);
+                }
             }
 
 

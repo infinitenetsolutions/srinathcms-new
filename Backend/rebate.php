@@ -1,11 +1,9 @@
 <?php
 
-function sendmassageforupdate($massage,$email,$name,$course,$session)
-
+function sendmassageforupdate($massage,$email,$name,$course,$session,$student_id,$particular,$amount)
 {
     $reciever_email = $email;
     $reciever_name = $name;
-    $amount = '';
     $prosprectus_number = $massage;
     $course = $course;
     $session = $session;
@@ -39,7 +37,7 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
     $mail->isHTML(true);                                  // Set email format to HTML
 
-    $mail->Subject = 'Admission Form Error Confirmation';
+    $mail->Subject = $particular .' Fee Approval ';
     $mail->Body    = '<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;vertical-align:top;background-color:#fff;border-spacing:0;min-width:320px;table-layout:fixed;width:100%" valign="top" width="100%">
     <tbody>
         <tr style="border-collapse:collapse;vertical-align:top" valign="top">
@@ -51,7 +49,7 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
                                 <div class="m_7666453172668600852col_cont" style="width:100%!important">
                                     <div style="border-top:0px solid transparent;border-left:0px solid transparent;border-bottom:0px solid transparent;border-right:0px solid transparent;padding-top:20px;padding-right:0px;padding-left:0px">
                                         <div align="center" class="m_7666453172668600852img-container m_7666453172668600852big" style="padding-right:0px;padding-left:0px">
-                                            <img align="center" alt="Image" border="0" src="https://www.srinathuniversity.com/srinath/images/logo1.png" style="text-decoration:none;height:auto;border:0;width:200px;max-width:50%;display:block" title="Image" width="200" class="CToWUd a6T" tabindex="0">
+                                            <img align="center" alt="Image" border="0" src="https://www.srinathuniversity.co.in/srinath/images/logo1.png" style="text-decoration:none;height:auto;border:0;width:200px;max-width:50%;display:block" title="Image" width="200" class="CToWUd a6T" tabindex="0">
                                             <div class="a6S" dir="ltr" style="opacity: 0.01; left: 516px; top: 123px;">
                                                 <div id=":1qe" class="T-I J-J5-Ji aQv T-I-ax7 L3 a5q" role="button" tabindex="0" aria-label="Download attachment " data-tooltip-class="a1V" data-tooltip="Download">
                                                     <div class="akn">
@@ -62,14 +60,19 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
                                         </div>
                                         <div style="color:#1c2951;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;line-height:2;padding-top:25px;padding-right:25px;padding-bottom:25px;padding-left:25px">
                                             <div style="font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;font-size:12px;line-height:2;color:#1c2951">
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Dear <b> '.$name.' </b>,</span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Dear Sir<b> '.$name.' </b>,</span></p>
                                                 <br>
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Hope you’re doing well! We re reaching out to your <b> '.$prosprectus_number.' </b></span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Hope you are doing well! We re reaching out to your <b>  </b></span></p>
                                             <br>
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Course <b> '.$course.'</b> <span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Student Name : <b> '.$name.'</b> <span></p>
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
-                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px">Your Session <b>'.$session.' </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Student Email : <b>'.$email.' </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Student Session : <b>'.$session.' </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Student Course : <b>'.$course.' </b> </span></p>
+                                                <p style="margin:0;font-size:14px;text-align:justify;line-height:2;word-break:break-word;margin-top:0;margin-bottom:0"><span style="font-size:14px"> Rebate Amount : <b>'.$amount.' </b> </span></p>
+
+
                                                 <!-- <p style="margin:0;line-height:2;word-break:break-word;font-size:14px;text-align:justify;margin-top:0;margin-bottom:0">&nbsp;</p> -->
 
 
@@ -106,7 +109,9 @@ function sendmassageforupdate($massage,$email,$name,$course,$session)
                                             </tbody>
                                         </table>
                                         <div align="center" style="padding-top:30px;padding-right:10px;padding-bottom:10px;padding-left:10px">
-                                            <a href="https://www.srinathuniversity.com/admission_login.php" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Update Information</strong></span></span></a>
+                                            <a href="https://www.srinathuniversity.co.in/srinath/rebate.update.php?status=success&&id='.$student_id.'" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#2cf929;border-radius:5px;width:auto;width:auto;border-top:1px solid #2cf929;border-right:1px solid #2cf929;border-bottom:1px solid #2cf929;border-left:1px solid #2cf929;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Approve</strong></span></span></a>
+                                            <a href="https://www.srinathuniversity.co.in/rebate.update.php?status=reject&&id='.$student_id.'" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#f94a29;border-radius:5px;width:auto;width:auto;border-top:1px solid #f94a29;border-right:1px solid #f94a29;border-bottom:1px solid #f94a29;border-left:1px solid #f94a29;padding-top:10px;padding-bottom:10px;font-family:Montserrat,Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;text-align:center;word-break:keep-all" target="_blank"><span style="padding-left:60px;padding-right:60px;font-size:16px;display:inline-block;letter-spacing:undefined"><span style="font-size:16px;line-height:2;word-break:break-word"><strong>Reject</strong></span></span></a>
+
                                         </div>
                                     </div>
                                 </div>

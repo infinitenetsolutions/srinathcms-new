@@ -163,7 +163,7 @@ if (isset($_POST['done'])) {
                                     </div>
                                     <p class="errormsg"><?php echo $smg; ?></p>
                                     <div class="hr"></div>
-                                    <div class="foot"> <a href="forgetpass.php">Forget password</a> </div>
+                                    <!-- <div class="foot"> <a href="forgetpass.php">Forget password</a> </div> -->
 
 
                                 </div>

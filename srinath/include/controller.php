@@ -1386,8 +1386,11 @@ if (isset($_POST["action"])) {
         if ($con->query($sql)) {
 
             if ($rebate_amount > 0) {
+                $NotesByAdmin = 'Student admission rebate fee approval related';
                 $rebate_by_email = $_POST['admin_email'];
                 $rebate_by_name = $_POST['admin_name'];
+                $getting_student_name = $add_admission_first_name;
+
                 $getting_student_email_id = $add_admission_emailid_student;
                 $date = date('Y-m-d');
                 $approve_attach = $_POST['attach_doc'];
@@ -1402,10 +1405,18 @@ if (isset($_POST["action"])) {
                 $getting_last_rebate_result_data = mysqli_fetch_array($getting_last_rebate_resutl);
                 $student_id = $getting_last_rebate_result_data['id'];
 
+                // getting the course name from the database 
+
+                $getting_course_name1 = "SELECT * FROM `tbl_course` WHERE course_id=$add_admission_course_name";
+                $getting_course_name_result = mysqli_query($con, $getting_course_name1);
+                $getting_course_name_result_data = mysqli_fetch_array($getting_course_name_result);
+                $add_admission_course_name1 = $getting_course_name_result_data['course_name'];
+                $date = date('Y') + $add_admission_session;
+                $add_admission_session = date('Y') . ' - ' . $date;
+
                 if ($rebate_result) {
-                    sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name, $add_admission_session, $student_id,'Addmission',$rebate_amount);
+                    sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, 'Addmission', $rebate_amount,$rebate_by_email);
                 }
-                exit;
             }
 
 
@@ -1494,7 +1505,7 @@ if (isset($_POST["action"])) {
         $registrationNumber = $_POST["registrationNumber"];
         $academicYear = $_POST["academicYear"];
         $courseId = $_POST["courseId"];
-        $particular_paid_id = $_POST["particular_paid_id"];
+         $particular_paid_id = $_POST["particular_paid_id"];
         $particular_paid_amount = $_POST["particular_paid_amount"];
         $fine_amount = $_POST["fine_amount"];
         $rebate_amount = $_POST["rebate_amount"];
@@ -1509,6 +1520,19 @@ if (isset($_POST["action"])) {
         $paymentDate = $_POST["paymentDate"];
         $NotesByAdmin = $_POST["NotesByAdmin"];
         $FeeStatus = "cleared";
+     $fee_particular_id=   $particular_paid_id[0];
+     print_r($particular_paid_id);
+        // gettig the fee particualr name 
+        $particular_paid_name = "SELECT * FROM `tbl_fee` WHERE  `fee_id`='$fee_particular_id'";
+        $particular_paid_name_result = mysqli_query($con, $particular_paid_name);
+        $particular_paid_name_data = mysqli_fetch_array($particular_paid_name_result);
+        $particular_paid_particular_name = $particular_paid_name_data['fee_particulars'];
+
+        if ($particular_paid_particular_name == '') {
+            $particular_paid_particular_name = 'Fine';
+        }
+
+
         if ($rebate_amount > 0) {
             if ($rebate_from == "") {
                 echo '<div class="alert alert-danger alert-dismissible">
@@ -1527,6 +1551,7 @@ if (isset($_POST["action"])) {
             $getting_student_email_data = mysqli_fetch_array($getting_student_result);
             $getting_student_email_id = $getting_student_email_data['admission_emailid_student'];
             $getting_student_name = $getting_student_email_data['admission_first_name'];
+            $student_id = $registrationNumber;
             $department_email = $_SESSION['admin_email'];
             $date = date('Y-m-d');
             if ($rebate_from == 647) {
@@ -1539,6 +1564,24 @@ if (isset($_POST["action"])) {
 
             $rebate_result = mysqli_query($con, $insert_rebate);
 
+
+
+
+            include('../../Backend/rebate.php');
+
+            if ($rebate_result) {
+
+                $getting_course_name1 = "SELECT * FROM `tbl_course` WHERE course_id=$courseId";
+                $getting_course_name_result = mysqli_query($con, $getting_course_name1);
+                $getting_course_name_result_data = mysqli_fetch_array($getting_course_name_result);
+                $add_admission_course_name1 = $getting_course_name_result_data['course_name'];
+                $add_admission_session = $getting_course_name_result_data['course_duration'];
+
+                $date = date('Y') + $add_admission_session;
+                $add_admission_session = date('Y') . ' - ' . $date;
+
+                sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, $particular_paid_particular_name, $rebate_amount,$rebate_by_email);
+            }
 
 
             $implodedRebate = $rebate_amount . "," . $rebate_from;

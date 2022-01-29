@@ -1523,14 +1523,14 @@ if (isset($_POST["action"])) {
      $fee_particular_id=   $particular_paid_id[0];
      print_r($particular_paid_id);
         // gettig the fee particualr name 
-        $particular_paid_name = "SELECT * FROM `tbl_fee` WHERE  `fee_id`='$fee_particular_id'";
-        $particular_paid_name_result = mysqli_query($con, $particular_paid_name);
-        $particular_paid_name_data = mysqli_fetch_array($particular_paid_name_result);
-        $particular_paid_particular_name = $particular_paid_name_data['fee_particulars'];
+        // $particular_paid_name = "SELECT * FROM `tbl_fee` WHERE  `fee_id`='$fee_particular_id'";
+        // $particular_paid_name_result = mysqli_query($con, $particular_paid_name);
+        // $particular_paid_name_data = mysqli_fetch_array($particular_paid_name_result);
+        // $particular_paid_particular_name = $particular_paid_name_data['fee_particulars'];
 
-        if ($particular_paid_particular_name == '') {
-            $particular_paid_particular_name = 'Fine';
-        }
+        $particular_paid_particular_name = 'Fine';
+
+
 
 
         if ($rebate_amount > 0) {
@@ -1560,7 +1560,7 @@ if (isset($_POST["action"])) {
                 $rebate_particular = $rebate_from;
             }
             $insert_rebate = "INSERT INTO `rebate`(`rebate_amount`, `approve_amount`, `rebate_by_name`, `rebate_by_email`, `student_email`, `student_name`, `rebate_date`, `approve_date`, `department`, `particular`, `massage`, `attach`, `status`) VALUES
-            ('$rebate_amount','$rebate_amount','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','$date','$department_email','$rebate_particular','$NotesByAdmin','$approve_attach','1')";
+            ('$rebate_amount','$rebate_amount','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','$date','$department_email','Fine','$NotesByAdmin','$approve_attach','1')";
 
             $rebate_result = mysqli_query($con, $insert_rebate);
 

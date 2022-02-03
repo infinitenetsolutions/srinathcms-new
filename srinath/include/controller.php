@@ -1415,7 +1415,7 @@ if (isset($_POST["action"])) {
                 $add_admission_session = date('Y') . ' - ' . $date;
 
                 if ($rebate_result) {
-                    sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, 'Addmission', $rebate_amount,$rebate_by_email);
+                    sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, 'Addmission', $rebate_amount, $rebate_by_email);
                 }
             }
 
@@ -1505,7 +1505,7 @@ if (isset($_POST["action"])) {
         $registrationNumber = $_POST["registrationNumber"];
         $academicYear = $_POST["academicYear"];
         $courseId = $_POST["courseId"];
-         $particular_paid_id = $_POST["particular_paid_id"];
+        $particular_paid_id = $_POST["particular_paid_id"];
         $particular_paid_amount = $_POST["particular_paid_amount"];
         $fine_amount = $_POST["fine_amount"];
         $rebate_amount = $_POST["rebate_amount"];
@@ -1520,8 +1520,8 @@ if (isset($_POST["action"])) {
         $paymentDate = $_POST["paymentDate"];
         $NotesByAdmin = $_POST["NotesByAdmin"];
         $FeeStatus = "cleared";
-     $fee_particular_id=   $particular_paid_id[0];
-     print_r($particular_paid_id);
+        $fee_particular_id =   $particular_paid_id[0];
+        print_r($particular_paid_id);
         // gettig the fee particualr name 
         // $particular_paid_name = "SELECT * FROM `tbl_fee` WHERE  `fee_id`='$fee_particular_id'";
         // $particular_paid_name_result = mysqli_query($con, $particular_paid_name);
@@ -1580,7 +1580,7 @@ if (isset($_POST["action"])) {
                 $date = date('Y') + $add_admission_session;
                 $add_admission_session = date('Y') . ' - ' . $date;
 
-                sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, $particular_paid_particular_name, $rebate_amount,$rebate_by_email);
+                sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, $particular_paid_particular_name, $rebate_amount, $rebate_by_email);
             }
 
 
@@ -1701,17 +1701,24 @@ if (isset($_POST["action"])) {
             $sql = "INSERT INTO `tbl_extra_income`
                             (`id`, `received_date`, `particulars`, `amount`, `payment_mode`,`account_number`,`bank_name`,`branch_name`,`ifsc_code`,`transaction_no`, `received_from`,`remarks`, `status`) 
                             VALUES 
-                            ('$id','$received_date','$particulars','$amount','$payment_mode','$account_number','$bank_name','$branch_name',
+                            (NULL,'$received_date','$particulars','$amount','$payment_mode','$account_number','$bank_name','$branch_name',
                             '$ifsc_code','$transaction_no','$received_from','$remarks','$visible')
                             ";
-            $sql_inc = "INSERT INTO `tbl_income`
-				(`id`,`reg_no`,`course`,`received_date`, `academic_year`,`particulars`, `amount`, `payment_mode` ,`check_no`,`bank_name`,`income_from`,`post_at`) 
-				VALUES 
-				(NULL,'(Extra Income)$received_from','','$received_date','','$particulars','$amount','$payment_mode','$account_number','$bank_name','Extra Income','" . date("Y-m-d") . "')
-				";
-            $query = mysqli_query($con, $sql_inc);
+
 
             if ($con->query($sql)) {
+
+
+                $get_last_id = "SELECT MAX(id) as id FROM tbl_extra_income";
+                $get_extra_income_id = mysqli_query($con, $get_last_id);
+                $extra_income_id = mysqli_fetch_array($get_extra_income_id)['id'];
+
+                $sql_inc = "INSERT INTO `tbl_income`
+                    (`id`,`reg_no`,`course`,`received_date`, `academic_year`,`particulars`, `amount`, `payment_mode` ,`check_no`,`bank_name`,`income_from`,`post_at`,`table_name`,`table_id`) 
+                    VALUES 
+                    (NULL,'(Extra Income)$received_from','','$received_date','','$particulars','$amount','$payment_mode','$account_number','$bank_name','Extra Income','" . date("Y-m-d") . "','tbl_extra_income','$extra_income_id')
+                    ";
+                $query = mysqli_query($con, $sql_inc);
 
                 echo '
                             <div class="alert alert-success alert-dismissible">
@@ -1753,6 +1760,8 @@ if (isset($_POST["action"])) {
                             `received_date` = '$received_date',`particulars` = '$particulars',`amount` = '$amount',`payment_mode` = '$payment_mode',`account_number` = '$account_number',`bank_name` = '$bank_name',`branch_name` = '$branch_name',`ifsc_code` = '$ifsc_code',`transaction_no` = '$transaction_no',`received_from` = '$received_from',`remarks` = '$remarks'
                              WHERE `status` = '$visible' && `id` = '$edit_id';
                             ";
+            $income_sql = "UPDATE `tbl_income` SET `particulars`='$particulars',`amount`='$amount',`payment_mode`='$payment_mode',`bank_name`='$bank_name',`income_from`='Extra Income' WHERE `table_name`='tbl_extra_income' && `table_id`='$edit_id' ";
+            $con->query($income_sql);
             if ($con->query($sql))
                 echo 'success';
             else
@@ -1770,7 +1779,29 @@ if (isset($_POST["action"])) {
                         `status` = '$trash' 
                         WHERE `status` = '$visible' && `id` = '$delete_id';
                         ";
+
+
+            echo  $get_last_id = "SELECT * FROM tbl_extra_income WHERE `id`='$delete_id'";
+            $get_extra_income_id = mysqli_query($con, $get_last_id);
+            $extra_income = mysqli_fetch_array($get_extra_income_id);
+            $received_from = $extra_income['reg_no'];
+            $received_date = $extra_income['received_date'];
+            $particulars = $extra_income['particulars'];
+            $amount = '-' . $extra_income['amount'];
+            $payment_mode = $extra_income['payment_mode'];
+            $account_number = $extra_income['account_number'];
+            $bank_name = $extra_income['bank_name'];
+
+
+            $sql_inc = "INSERT INTO `tbl_income`
+    (`id`,`reg_no`,`course`,`received_date`, `academic_year`,`particulars`, `amount`, `payment_mode` ,`check_no`,`bank_name`,`income_from`,`post_at`,`table_name`,`table_id`) 
+    VALUES 
+    (NULL,'(Extra Income deleted)$received_from','','$received_date','','$particulars','$amount','$payment_mode','$account_number','$bank_name','Extra Income','" . date("Y-m-d") . "','tbl_extra_income','$delete_id')
+    ";
+            $query = mysqli_query($con, $sql_inc);
+
             if ($con->query($sql))
+
                 echo 'success';
             else
                 echo 'error';
@@ -1801,6 +1832,7 @@ if (isset($_POST["action"])) {
                             (NULL,'$payment_date','$particulars','$amount','$payment_mode','$account_number','$bank_name','$branch_name','$ifsc_code','$transaction_no','$paid_to','$remarks','$visible')
                             ";
             if ($con->query($sql)) {
+
 
                 echo '
                             <div class="alert alert-success alert-dismissible">

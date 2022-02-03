@@ -2,6 +2,7 @@
 $page_no = "11";
 $page_no_inside = "11_1";
 include "include/authentication.php";
+$duration='';
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,7 +90,7 @@ include "include/authentication.php";
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Course Name</label>
-                                            <select class="form-control" name="course_id">
+                                            <select class="form-control" name="course_id" onchange="change_semester(this.value)">
                                                 <option value="all">All</option>
                                                 <?php
                                                 $sql_course = "SELECT * FROM `tbl_course`
@@ -109,21 +110,8 @@ include "include/authentication.php";
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Academic Year</label>
-                                            <select class="form-control" name="academic_year">
-                                                <?php
-                                                $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                       WHERE `status` = '$visible';
-                                       ";
-                                                $result_ac_year = $con->query($sql_ac_year);
-                                                while ($row_ac_year = $result_ac_year->fetch_assoc()) {
-                                                ?>
-                                                    <?php
-                                                    $completeSessionStart = explode("-", $row_ac_year["university_details_academic_start_date"]);
-                                                    $completeSessionEnd = explode("-", $row_ac_year["university_details_academic_end_date"]);
-                                                    $completeSessionOnlyYear = $completeSessionStart[0] . "-" . $completeSessionEnd[0];
-                                                    ?>
-                                                    <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo $completeSessionOnlyYear; ?></option>
-                                                <?php } ?>
+                                            <select id="s_academic_year" class="form-control" name="academic_year">
+                                             
                                             </select>
                                         </div>
 
@@ -334,6 +322,21 @@ include "include/authentication.php";
             });
 
         });
+
+        function change_semester(semester){
+
+            $.ajax({
+                    url: 'include/ajax/add_semester.php',
+                    type: 'POST',
+                    data: {'data':semester},
+                    success: function(result) {
+                       document.getElementById('s_academic_year').innerHTML=result;
+                    }
+
+                });
+        }
+
+
     </script>
 
     <script type="text/javascript">
@@ -355,3 +358,9 @@ include "include/authentication.php";
 </body>
 
 </html>
+<style>
+    input,
+    select {
+        width: 120px !important;
+    }
+</style>

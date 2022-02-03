@@ -6325,7 +6325,7 @@ if (isset($_GET["action"])) {
     //Admin List Start
     if ($_GET["action"] == "get_admin") {
     ?>
-        <table id="example1" class="table table-bordered table-striped">
+    <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>S.No</th>

@@ -3,13 +3,22 @@ $page_no = "8";
 $page_no_inside = "8_4";
 include "include/authentication.php";
 $visible = md5("visible");
-error_reporting(0);
+
 $query = "SELECT * FROM `tbl_income` ORDER BY received_date DESC";
 $results = mysqli_query($con, $query) or die("database error:" . mysqli_error($con));
 $allOrders = array();
 while ($order = mysqli_fetch_assoc($results)) {
   $no = 1;
   $allOrders[] = $order;
+}
+
+
+if (isset($_SESSION['start_date'])) {
+  $income_start_date = $_SESSION['start_date'];
+  $income_end_date = $_SESSION['end_date'];
+}else{
+  $income_start_date =date('Y-m-d');
+  $income_end_date = date('Y-m-d');
 }
 ?>
 <!DOCTYPE html>
@@ -30,6 +39,8 @@ while ($order = mysqli_fetch_assoc($results)) {
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -367,7 +378,7 @@ while ($order = mysqli_fetch_assoc($results)) {
                               <div class="ui calendar" id="rangestart">
                                 <div class="ui input left icon">
                                   <i class="calendar icon"></i>
-                                  <input type="text" placeholder="Start Date" name="startDate" style="width:100%" readonly value="<?php echo date("Y-m-d"); ?>">
+                                  <input type="text" placeholder="Start Date" name="startDate" style="width:100%" readonly value="<?php echo $income_start_date ?>">
                                 </div>
                               </div>
                             </div>
@@ -378,7 +389,7 @@ while ($order = mysqli_fetch_assoc($results)) {
                               <div class="ui calendar" id="rangeend">
                                 <div class="ui input left icon">
                                   <i class="calendar icon"></i>
-                                  <input type="text" placeholder="End Date" name="endDate" style="width:100%" readonly value="<?php echo date("Y-m-d"); ?>">
+                                  <input type="text" placeholder="End Date" name="endDate" style="width:100%" readonly value="<?php echo $income_end_date; ?>">
                                 </div>
                               </div>
                             </div>
@@ -387,7 +398,9 @@ while ($order = mysqli_fetch_assoc($results)) {
                           <div class="col-md-4 mt-4">
                             <input type="hidden" name="totalExpence" value="<?php echo $sum19 ?>" />
                             <input type="hidden" name="totalIncome" value="<?php echo $sum_total ?>" />
-                            <button style="float:right" type="submit" id="export" name="export" class="btn btn-warning button-loading" data-loading-text="Loading..."><i class="fa fa-download"></i> Export In Excel</button>
+                            <button type="submit" id="export" name="export" class="btn btn-warning button-loading" data-loading-text="Loading..."><i class="fa fa-download"></i> Export In Excel</button>
+                            <button type="submit" id="show" name="show" class="btn btn-info button-loading ml-5" data-loading-text="Loading..."><i class="fa fa-info-circle"></i> Show full data </button>
+
                           </div>
                           <!-- /.input group -->
                         </div>
@@ -407,6 +420,121 @@ while ($order = mysqli_fetch_assoc($results)) {
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->
+
+      <div class="card card-body">
+
+        <table id="dtHorizontalExample" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Date</th>
+              <th>Reg No/Form No</th>
+              <th>Name</th>
+              <th>Course</th>
+              <th>Session</th>
+              <th>Particulars</th>
+              <th>Amount</th>
+              <th>Payment Mode</th>
+              <th>Cheque/DD/Online No</th>
+              <th>Payment Date</th>
+              <th>Bank Name</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $s_no = 1;
+            foreach ($allOrders as $order) {
+              if ($order["amount"] != "") {
+            ?>
+                <tr>
+                  <td><?php echo $s_no; ?></td>
+                  <td><?php echo date("d-m-Y", strtotime($order["post_at"])); ?></td>
+                  <td>
+                    <?php
+                    if (strpos($order["reg_no"], "Extra Income") === false)
+                      echo $order["reg_no"];
+                    else
+                      echo "Extra Income";
+                    ?>
+
+                  </td>
+                  <?php
+                  if (strpos($order["reg_no"], "Extra Income") === false) {
+                    $remove_admission = str_replace("(Reg No)", "", $order["reg_no"]);
+                    $sql_name = "SELECT * FROM `tbl_admission` WHERE `admission_id` = '" . $remove_admission . "' ";
+                    $result_name = $con->query($sql_name);
+                    if ($result_name->num_rows > 0) {
+                      $row_name = $result_name->fetch_assoc();
+                  ?>
+                      <td><?php echo strtoupper($row_name["admission_first_name"]) . " " . strtoupper($row_name["admission_middle_name"]) . " " . strtoupper($row_name["admission_last_name"]); ?></td>
+                    <?php
+
+                    } else {
+                      $remove_prospectus = str_replace("(Form No)", "", $order["reg_no"]);
+                      $sql_name1 = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_no` = '" . $remove_prospectus . "' ";
+                      $result_name1 = $con->query($sql_name1);
+                      $row_name1 = $result_name1->fetch_assoc();
+                    ?>
+                      <td><?php echo strtoupper($row_name1["prospectus_applicant_name"]); ?></td>
+                  <?php
+                    }
+                  } else {
+                    echo "<td> " . strtoupper("From " . str_replace("Extra Income", "", str_replace(")", "", str_replace("(", "", $order["reg_no"])))) . " </td>";
+                  }
+                  ?>
+
+                  <?php
+                  $sql_course = "SELECT * FROM `tbl_course` WHERE `course_id` = '" . $order["course"] . "' ";
+                  $result_course = $con->query($sql_course);
+                  $row_course = $result_course->fetch_assoc();
+                  ?>
+                  <td><?php echo $row_course["course_name"]; ?></td>
+                  <?php
+                  $sql_session = "SELECT * FROM `tbl_university_details` WHERE `university_details_id` = '" . $order["academic_year"] . "' ";
+                  $result_session = $con->query($sql_session);
+                  $row_session = $result_session->fetch_assoc();
+                  ?>
+                  <td><?php echo intval($row_session["university_details_academic_start_date"]) . " - " . intval($row_session["university_details_academic_end_date"]); ?></td>
+                  <td><?php
+                      if (strpos($order["reg_no"], "Extra Income") === false)
+                        echo strtoupper($order["particulars"]);
+                      else
+                        echo " " . $order["particulars"] . " From " . str_replace("Extra Income", "", str_replace(")", "", str_replace("(", "", $order["reg_no"])));
+                      ?>
+
+                  </td>
+                  <td><?php echo $order["amount"]; ?></td>
+                  <td><?php echo $order["payment_mode"]; ?></td>
+                  <td><?php echo  $order["check_no"]; ?></td>
+                  <td><?php echo date("d-m-Y", strtotime($order["received_date"])); ?></td>
+                  <td><?php echo $order["bank_name"]; ?></td>
+                  <td><?php echo $row["remarks"]; ?></td>
+
+                </tr>
+            <?php
+                $s_no++;
+              }
+            }
+
+            ?>
+          </tbody>
+          <?php
+          $sum170 = 0;
+          $sql = "select * from tbl_income WHERE 1";
+          $query = mysqli_query($con, $sql);
+          while ($row = mysqli_fetch_array($query)) {
+            $sum170 = $sum170 + array_sum(explode(",", $row["amount"]));
+          }
+          ?>
+          <tfoot>
+            <tr>
+              <th>
+                Overall Total Income- <?php echo $sum170 ?> </th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
     </div>
     <!-- /.content-wrapper -->
     <?php include 'include/footer.php'; ?>
@@ -478,14 +606,25 @@ while ($order = mysqli_fetch_assoc($results)) {
     });
     $('#example15').calendar();
   </script>
+
   <script src="plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="plugins/datatables/jquery.dataTables.js"></script>
+  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#dtHorizontalExample').DataTable({
+        "scrollX": true
+      });
+      $('.dataTables_length').addClass('bs-select');
+    });
+  </script>
 </body>
 
 </html>

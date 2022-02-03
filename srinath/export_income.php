@@ -2,7 +2,7 @@
     // Create connection
     include "include/config.php";
     include "include/PHPExcel/PHPExcel.php";
-    if(isset($_POST["startDate"])){
+    if(isset($_POST["startDate"]) && isset($_POST['export'])){
         $startDate = $_POST["startDate"];
         $endDate = $_POST["endDate"];
         $totalIncome = intval($_POST["totalIncome"]);
@@ -293,5 +293,13 @@
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save('php://output');
         exit;
+    }else{
+        session_start();
+        $startDate = $_POST["startDate"];
+        $endDate = $_POST["endDate"];
+        $_SESSION['start_date']= date("Y-m-d", strtotime($startDate));
+        $_SESSION['end_date']= date("Y-m-d", strtotime($endDate));
+        header('location:balance_sheet');
+
     }
 ?>

@@ -351,19 +351,19 @@
                               </a>
                           </li> -->
                           <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 9; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "9_2"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
-                              <a href="nsuniv-prospectus-enquiry" class="nav-link <?php if($page_no_inside == "9_2"){ echo 'active'; } ?>">
+                              <a href="prospectus-enquiry" class="nav-link <?php if($page_no_inside == "9_2"){ echo 'active'; } ?>">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Prospectus Enquiry <span id="allNsunivProspectusEnquiry"></span></p>
                               </a>
                           </li>
                           <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 9; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "9_3"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
-                              <a href="nsuniv-admission-enquiry" class="nav-link <?php if($page_no_inside == "9_3"){ echo 'active'; } ?>">
+                              <a href="admission-enquiry" class="nav-link <?php if($page_no_inside == "9_3"){ echo 'active'; } ?>">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Admission Enquiry <span id="allNsunivAdmissionEnquiry"></span></p>
                               </a>
                           </li>
                           <li class="nav-item" <?php if(isset($autority)){ $page_no_temp = 9; $flag = 0; if(isset($allAutority->$page_no_temp)) { $subMenus = explode("||", $allAutority->$page_no_temp); for($i=0; $i<count($subMenus);$i++){ if($subMenus[$i] == "9_5"){ $flag++; break; } } if($flag == 0){ echo "style='display:none;';"; } } else { echo "style='display:none;';"; } } ?>>
-                              <a href="notification-nsuniv" class="nav-link <?php if($page_no_inside == "9_5"){ echo 'active'; } ?>">
+                              <a href="notification" class="nav-link <?php if($page_no_inside == "9_5"){ echo 'active'; } ?>">
                                   <i class="far fa-circle nav-icon"></i>
                                   <p>Notifications</p>
                               </a>

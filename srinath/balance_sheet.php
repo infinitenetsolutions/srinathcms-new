@@ -3,8 +3,15 @@ $page_no = "8";
 $page_no_inside = "8_4";
 include "include/authentication.php";
 $visible = md5("visible");
+if (isset($_SESSION['start_date'])) {
+  $income_start_date = $_SESSION['start_date'];
+  $income_end_date = $_SESSION['end_date'];
+}else{
+  $income_start_date =date('Y-m-d');
+  $income_end_date = date('Y-m-d');
+}
 
-$query = "SELECT * FROM `tbl_income` ORDER BY received_date DESC";
+$query = "SELECT * FROM `tbl_income` where (post_at BETWEEN '$income_start_date' AND '$income_end_date') ORDER BY received_date DESC";
 $results = mysqli_query($con, $query) or die("database error:" . mysqli_error($con));
 $allOrders = array();
 while ($order = mysqli_fetch_assoc($results)) {
@@ -13,13 +20,7 @@ while ($order = mysqli_fetch_assoc($results)) {
 }
 
 
-if (isset($_SESSION['start_date'])) {
-  $income_start_date = $_SESSION['start_date'];
-  $income_end_date = $_SESSION['end_date'];
-}else{
-  $income_start_date =date('Y-m-d');
-  $income_end_date = date('Y-m-d');
-}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -520,7 +521,7 @@ if (isset($_SESSION['start_date'])) {
           </tbody>
           <?php
           $sum170 = 0;
-          $sql = "select * from tbl_income WHERE 1";
+          $sql = "select * from tbl_income where (post_at BETWEEN '$income_start_date' AND '$income_end_date')";
           $query = mysqli_query($con, $sql);
           while ($row = mysqli_fetch_array($query)) {
             $sum170 = $sum170 + array_sum(explode(",", $row["amount"]));

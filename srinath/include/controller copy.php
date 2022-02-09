@@ -1594,22 +1594,17 @@ if (isset($_POST["action"])) {
                                  ";
                     $receipt_no_gen = 0;
                     $getReResult =  $con->query($getRe);
-
                     while ($getReRow = $getReResult->fetch_assoc())
                         $receipt_no_gen = $getReRow["feepaid_id"];
                     $receipt_no_gen++;
                     $implodedId = implode(",", $particular_paid_id);
                     $implodedAmount = implode(",", $particular_paid_amount);
-                    if (isset($_POST["extra_fine"]) && !empty($_POST["extra_fine"])) {
+                    if (isset($_POST["extra_fine"]) && !empty($_POST["extra_fine"]))
                         $complete_extra_fine = $_POST["extra_fine"] + "|separator|" + htmlspecialchars($_POST["extra_fine_description"], ENT_QUOTES);
-                        $add_extra_income = "INSERT INTO `tbl_extra_income`(`id`, `received_date`, `particulars`, `amount`, `payment_mode`, `account_number`, `bank_name`, `branch_name`, `ifsc_code`, `transaction_no`, `received_from`, `remarks`, `post_at`, `status`) VALUES
-                                                                         (NULL,'" . date('Y-m-d') . "','Extra Fine','$complete_extra_fine','$PaymentMode','$cashDepositTo','$bankName',' ','','$chequeAndOthersNumber','Extra Fine','$NotesByAdmin','" . date('Y-m-d') . "','$visible')";
-                        $extra_fine_result = mysqli_query($con, $add_extra_income);
-                    } else {
+                    else
                         $complete_extra_fine = "";
-                        if ($PaymentMode == "Cheque")
-                            $FeeStatus = "pending";
-                    }
+                    if ($PaymentMode == "Cheque")
+                        $FeeStatus = "pending";
                     $sql = "INSERT INTO `tbl_fee_paid`
                                 (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
                                 VALUES 
@@ -1629,18 +1624,6 @@ if (isset($_POST["action"])) {
 
                     $perticulars = explode(",", $implodedId);
                     $amounts = explode(",", $implodedAmount);
-
-                    if(isset($_POST["fine_amount"]) && ($_POST["fine_amount"]!='')){
-                        $amount_extra=  $_POST["fine_amount"];
-                        $sql_inc = "INSERT INTO `tbl_income`
-            				(`id`,`reg_no`,	`course`, `academic_year`,`received_date`, `particulars`, `amount`, `payment_mode`,`check_no`,`bank_name`,`income_from`,`post_at`,`table_name`,`table_id`) 
-            				VALUES
-            				(NULL,'$registrationNumber(Reg No)','$courseId',$academicYear,'$paidDate','Fine','$amount_extra','$PaymentMode','$chequeAndOthersNumber','$bankName','Fee','" . date("Y-m-d") . "','tbl_fee_paid','$table_feepaid_id_data')
-            				";
-                        $query = mysqli_query($con, $sql_inc);
-                    }
-
-
                     for ($i = 0; $i < count($perticulars); $i++) {
                         $sql_fee = "SELECT * FROM `tbl_fee`
             						WHERE `status` = '$visible' && `fee_id` = '" . $perticulars[$i] . "'
@@ -1648,7 +1631,7 @@ if (isset($_POST["action"])) {
                         $result_fee = $con->query($sql_fee);
                         $row_fee = $result_fee->fetch_assoc();
 
-                        $sql_inc = "INSERT INTO `tbl_income`
+                          $sql_inc = "INSERT INTO `tbl_income`
             				(`id`,`reg_no`,	`course`, `academic_year`,`received_date`, `particulars`, `amount`, `payment_mode`,`check_no`,`bank_name`,`income_from`,`post_at`,`table_name`,`table_id`) 
             				VALUES
             				(NULL,'$registrationNumber(Reg No)','$courseId',$academicYear,'$paidDate','" . $row_fee["fee_particulars"] . "','$amounts[$i]','$PaymentMode','$chequeAndOthersNumber','$bankName','Fee','" . date("Y-m-d") . "','tbl_fee_paid','$table_feepaid_id_data')

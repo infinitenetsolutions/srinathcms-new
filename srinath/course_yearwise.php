@@ -1,7 +1,7 @@
-<?php 
-    $page_no = "7";
-    $page_no_inside = "7_9";
-    include "include/authentication.php"; 
+<?php
+$page_no = "7";
+$page_no_inside = "7_9";
+include "include/authentication.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +46,6 @@
         td {
             border-collapse: collapse;
         }
-
     </style>
 </head>
 
@@ -90,20 +89,20 @@
                         <form role="form" method="POST" id="fetchFeeDataForm">
                             <div class="card-body" style="margin-top: 0px;">
                                 <div class="row">
-                                   <div class="col-12" id="error_section"></div>
+                                    <div class="col-12" id="error_section"></div>
                                     <div class="col-5">
                                         <div class="form-group">
                                             <label>Course Name</label>
-                                            <select class="form-control" name="course_id">
+                                            <select class="form-control" onchange="change_semester(this.value)" name="course_id">
                                                 <option value="all">All</option>
-                                                <?php 
-                                                    $sql_course = "SELECT * FROM `tbl_course`
+                                                <?php
+                                                $sql_course = "SELECT * FROM `tbl_course`
                                                                    WHERE `status` = '$visible';
                                                                    ";
-                                                    $result_course = $con->query($sql_course);
-                                                    while($row_course = $result_course->fetch_assoc()){
+                                                $result_course = $con->query($sql_course);
+                                                while ($row_course = $result_course->fetch_assoc()) {
                                                 ?>
-                                                <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
+                                                    <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -111,17 +110,9 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Academic Year</label>
-                                            <select class="form-control" name="academic_year">
-                                               <option value="all">Select</option>
-                                                <?php 
-                                                    $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                                                   WHERE `status` = '$visible';
-                                                                   ";
-                                                    $result_ac_year = $con->query($sql_ac_year);
-                                                    while($row_ac_year = $result_ac_year->fetch_assoc()){
-                                                ?>
-                                                <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"]))." to ".date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?></option>
-                                                <?php } ?>
+                                            <select class="form-control" id="s_academic_year" name="academic_year">
+                                                <option value="all">Select</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -177,7 +168,7 @@
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    
+
     <script>
         $(function() {
             //Initialize Select2 Elements
@@ -249,11 +240,10 @@
             });
 
         });
-
     </script>
     <script>
         $(document).ready(function() {
-            $('#fetchFeeDataForm').submit(function( event ) {
+            $('#fetchFeeDataForm').submit(function(event) {
                 $('#loader_section').append('<center id = "loading"><img width="50px" src = "images/ajax-loader.gif" alt="Currently loading" /></center>');
                 $('#fetchFeeDataButton').prop('disabled', true);
                 $.ajax({
@@ -262,9 +252,9 @@
                     data: $('#fetchFeeDataForm').serializeArray(),
                     success: function(result) {
                         $('#response').remove();
-                        if(result == 0){
+                        if (result == 0) {
                             $('#error_section').append('<div id = "response"><div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Please select Academic Year!!!</div></div>');
-                        } else{
+                        } else {
                             $('#data_table').append('<div id = "response">' + result + '</div>');
                         }
                         $('#loading').fadeOut(500, function() {
@@ -290,6 +280,19 @@
             });
         });
 
+        function change_semester(semester) {
+
+            $.ajax({
+                url: 'include/ajax/add_semester.php',
+                type: 'POST',
+                data: {
+                    'data': semester
+                },
+                success: function(result) {
+                    document.getElementById('s_academic_year').innerHTML = result;
+                }
+            });
+        }
     </script>
 </body>
 

@@ -1,108 +1,103 @@
-<?php 
-    $page_no = "11";
-    $page_no_inside = "11_5";
-    include "include/authentication.php"; 
-    $visible = md5("visible");
-	date_default_timezone_set("Asia/Calcutta");
-    $date_variable_today_month_year_with_timing = date("d M, Y. h:i A");
+<?php
+$page_no = "11";
+$page_no_inside = "11_5";
+include "include/authentication.php";
+$visible = md5("visible");
+date_default_timezone_set("Asia/Calcutta");
+$date_variable_today_month_year_with_timing = date("d M, Y. h:i A");
 ?>
 <?php
-        if(isset($_POST["importExcelButton"]))
-        {
-            //$conn = mysqli_connect("localhost", "root", "", "nsucms_cms");
-			$conn = mysqli_connect("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
-            $file = $_FILES['importExcelFile']['tmp_name'];
-            $handle = fopen($file, "r");
-            if ($file == NULL) {
-                echo "<script>
+if (isset($_POST["importExcelButton"])) {
+    //$conn = mysqli_connect("localhost", "root", "", "nsucms_cms");
+    $conn = mysqli_connect("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
+    $file = $_FILES['importExcelFile']['tmp_name'];
+    $handle = fopen($file, "r");
+    if ($file == NULL) {
+        echo "<script>
                         alert('Please first select an Excel file!!!');
                         location.replace('add_marks');
                     </script>";
-            }
-            else {
-                $c = 0;
-				$course_id = "";
-				$total_subject = "";
-				$semester_id = "";
-				$fee_academic_year = "";	
-				$totalSubject = "";
-				$marks_array = array();
-                while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
-                {
-				    $course_name = $filesop[0];
-					$semester_name = $filesop[1];
-					$academic_year = $filesop[2];
-					
-					$sql_semester = "SELECT * FROM `tbl_semester` WHERE `semester`='$semester_name' ";
-						$result_semester = mysqli_query($conn, $sql_semester);
-						$row_semester = mysqli_fetch_assoc($result_semester);
-						$semester_id = $row_semester["semester_id"];
-						
-						$sql_year = "SELECT * FROM `tbl_university_details` WHERE `academic_session`='$academic_year' ";
-						$result_year = mysqli_query($conn, $sql_year);
-						$row_year = mysqli_fetch_assoc($result_year);
-						$fee_academic_year = $row_year["university_details_id"];
-						
-					if($c == 0){
-						$sql_grade = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
-						$result_grade = mysqli_query($conn, $sql_grade);
-						$row_grade = mysqli_fetch_assoc($result_grade);
-						$course_id = $row_grade["course_id"];
-						$sql_count = "SELECT COUNT(subject_name) as sub,course_id,semester_id FROM `tbl_subjects` 
-									  WHERE course_id= '".$row_grade["course_id"]."' && semester_id='$semester_id'
+    } else {
+        $c = 0;
+        $course_id = "";
+        $total_subject = "";
+        $semester_id = "";
+        $fee_academic_year = "";
+        $totalSubject = "";
+        $marks_array = array();
+        while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
+            $course_name = $filesop[0];
+            $semester_name = $filesop[1];
+            $academic_year = $filesop[2];
+
+            $sql_semester = "SELECT * FROM `tbl_semester` WHERE `semester`='$semester_name' ";
+            $result_semester = mysqli_query($conn, $sql_semester);
+            $row_semester = mysqli_fetch_assoc($result_semester);
+            $semester_id = $row_semester["semester_id"];
+
+            $sql_year = "SELECT * FROM `tbl_university_details` WHERE `academic_session`='$academic_year' ";
+            $result_year = mysqli_query($conn, $sql_year);
+            $row_year = mysqli_fetch_assoc($result_year);
+            $fee_academic_year = $row_year["university_details_id"];
+
+            if ($c == 0) {
+                $sql_grade = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
+                $result_grade = mysqli_query($conn, $sql_grade);
+                $row_grade = mysqli_fetch_assoc($result_grade);
+                $course_id = $row_grade["course_id"];
+                $sql_count = "SELECT COUNT(subject_name) as sub,course_id,semester_id FROM `tbl_subjects` 
+									  WHERE course_id= '" . $row_grade["course_id"] . "' && semester_id='$semester_id'
 									  ";
-						$result_count = $con->query($sql_count);
-						$row_count = $result_count->fetch_assoc();
-						$total_subject = $row_count["sub"];
-						
-						
-						
-						$tempCourse = 4;
-						$totalSubject = $total_subject;
-						$subject_id = "";
-						for($loop = $tempCourse; $loop < $tempCourse+$totalSubject; $loop++){
-							$sql_sub = "SELECT * FROM `tbl_subjects` WHERE `subject_name`='".$filesop[$loop]."' ";
-							$result_sub = mysqli_query($conn, $sql_sub);
-							$row_sub = mysqli_fetch_assoc($result_sub);
-							$subject_id = $row_sub["subject_id"];
-							$marks_array[$loop] = $subject_id;
-						}
-						
-						$c = $c + 1;
-						continue;
-					}
-					
-                    $reg_no = $filesop[3];
-					if(!empty($reg_no)){
-					foreach($marks_array as $cell => $course_ids){
-						$internal_marks = $filesop[$cell];
-						$external_marks = $filesop[$totalSubject+$cell];
-						
-						$sql = "INSERT INTO `tbl_marks`(`marks_id`,`course_id`, `semester_id`, `fee_academic_year`,`subject_id`, `reg_no`,`internal_marks`,`external_marks`,`add_time` ,`status`) 
-						VALUES ('','$course_id','$semester_id','$fee_academic_year','$course_ids','$reg_no','$internal_marks','$external_marks','$date_variable_today_month_year_with_timing','$visible')";  
-						$stmt = mysqli_prepare($conn,$sql);
-						mysqli_stmt_execute($stmt);
-					}
-					}
-					 
-                    $c = $c + 1;
+                $result_count = $con->query($sql_count);
+                $row_count = $result_count->fetch_assoc();
+                $total_subject = $row_count["sub"];
+
+
+
+                $tempCourse = 4;
+                $totalSubject = $total_subject;
+                $subject_id = "";
+                for ($loop = $tempCourse; $loop < $tempCourse + $totalSubject; $loop++) {
+                    $sql_sub = "SELECT * FROM `tbl_subjects` WHERE `subject_name`='" . $filesop[$loop] . "' ";
+                    $result_sub = mysqli_query($conn, $sql_sub);
+                    $row_sub = mysqli_fetch_assoc($result_sub);
+                    $subject_id = $row_sub["subject_id"];
+                    $marks_array[$loop] = $subject_id;
                 }
-                if($sql){
-                   echo "<script>
+
+                $c = $c + 1;
+                continue;
+            }
+
+            $reg_no = $filesop[3];
+            if (!empty($reg_no)) {
+                foreach ($marks_array as $cell => $course_ids) {
+                    $internal_marks = $filesop[$cell];
+                    $external_marks = $filesop[$totalSubject + $cell];
+
+                    $sql = "INSERT INTO `tbl_marks`(`marks_id`,`course_id`, `semester_id`, `fee_academic_year`,`subject_id`, `reg_no`,`internal_marks`,`external_marks`,`add_time` ,`status`) 
+						VALUES ('','$course_id','$semester_id','$fee_academic_year','$course_ids','$reg_no','$internal_marks','$external_marks','$date_variable_today_month_year_with_timing','$visible')";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_execute($stmt);
+                }
+            }
+
+            $c = $c + 1;
+        }
+        if ($sql) {
+            echo "<script>
                             alert('Excel Imported Successfully!!!');
                             location.replace('add_marks');
                         </script>";
-                } 
-                else
-                {
-                    echo "<script>
+        } else {
+            echo "<script>
                             alert('Something went wrong please try again!!!');
                             location.replace('add_marks');
                         </script>";
-                }
-            }
         }
-    ?>
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -146,7 +141,6 @@
         td {
             border-collapse: collapse;
         }
-
     </style>
 </head>
 
@@ -189,61 +183,48 @@
                             </div>
                         </div></br>
                         <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-            			<div class="input-row">
-            				<label class="col-md-4 control-label">&nbsp;&nbsp;&nbsp;Choose CSV
-            					File</label> <input type="file" name="importExcelFile" />
-            				<input type="submit" name="importExcelButton" class="btn btn-success btn-sm" value="Import" />
-            			</div>
-            		    </form>
+                            <div class="input-row">
+                                <label class="col-md-4 control-label">&nbsp;&nbsp;&nbsp;Choose CSV
+                                    File</label> <input type="file" name="importExcelFile" />
+                                <input type="submit" name="importExcelButton" class="btn btn-success btn-sm" value="Import" />
+                            </div>
+                        </form>
                         <form role="form" method="POST" id="fetchStudentDataForm">
                             <div class="card-body" style="margin-top: 0px;">
                                 <div class="row">
-                                   <div class="col-12" id="error_section"></div>
+                                    <div class="col-12" id="error_section"></div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Course Name</label>
-                                            <select class="form-control" name="course_id" id="course_id"  onchange="showdesg(this.value)" >
+                                            <select class="form-control" name="course_id" id="course_id" onchange="showdesg(this.value)">
                                                 <option value="all">Select</option>
-                                                <?php 
-                                                    $sql_course = "SELECT * FROM `tbl_course`
+                                                <?php
+                                                $sql_course = "SELECT * FROM `tbl_course`
                                                                    WHERE `status` = '$visible';
                                                                    ";
-                                                    $result_course = $con->query($sql_course);
-                                                    while($row_course = $result_course->fetch_assoc()){
+                                                $result_course = $con->query($sql_course);
+                                                while ($row_course = $result_course->fetch_assoc()) {
                                                 ?>
-                                                <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
+                                                    <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                     </div>
-									<div class="col-3">
-                                        <div class="form-group">
-                                            <label>Semester</label>
-                                            <select class="form-control" name="semester_id" id="sem" onchange="show(this.value)">
-											   <option value="-1">Select</option>
-											</select>
-                                        </div>
-                                    </div>								
+
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Academic Year</label>
-											<input type="hidden" name="subject_id">
-                                            <select class="form-control" name="academic_year">
-                                                <option value="0">Select Academic Year</option>
-                                                <?php 
-                                                    $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                                                   WHERE `status` = '$visible';
-                                                                   ";
-                                                    $result_ac_year = $con->query($sql_ac_year);
-                                                    while($row_ac_year = $result_ac_year->fetch_assoc()){
-                                                ?>
-                                                <?php 
-                    							  $completeSessionStart = explode("-", $row_ac_year["university_details_academic_start_date"]);
-                    							  $completeSessionEnd = explode("-", $row_ac_year["university_details_academic_end_date"]);
-                    							  $completeSessionOnlyYear = $completeSessionStart[0]."-".$completeSessionEnd[0];
-                    							?>
-                                                <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo $completeSessionOnlyYear ; ?></option>
-                                                <?php } ?>
+                                            <input type="hidden" name="subject_id">
+                                            <select class="form-control" id="s_academic_year" name="academic_year">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label>Semester</label>
+                                            <select class="form-control" name="semester_id" id="sem" onchange="show(this.value)">
+                                                <option value="-1">Select</option>
                                             </select>
                                         </div>
                                     </div>
@@ -299,7 +280,7 @@
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    
+
     <script>
         $(function() {
             //Initialize Select2 Elements
@@ -371,11 +352,10 @@
             });
 
         });
-
     </script>
     <script>
         $(document).ready(function() {
-            $('#fetchStudentDataForm').submit(function( event ) {
+            $('#fetchStudentDataForm').submit(function(event) {
                 $('#loader_section').append('<center id = "loading"><img width="50px" src = "images/ajax-loader.gif" alt="Currently loading" /></center>');
                 $('#fetchStudentDataButton').prop('disabled', true);
                 $.ajax({
@@ -384,9 +364,9 @@
                     data: $('#fetchStudentDataForm').serializeArray(),
                     success: function(result) {
                         $('#response').remove();
-                        if(result == 0){
+                        if (result == 0) {
                             $('#error_section').append('<div id = "response"><div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Please select Academic Year!!!</div></div>');
-                        } else{
+                        } else {
                             $('#data_table').append('<div id = "response">' + result + '</div>');
                         }
                         $('#loading').fadeOut(500, function() {
@@ -399,18 +379,32 @@
             });
         });
     </script>
-	<script>
-    function showdesg(dept) {
-        $.ajax({
-            url: 'ajaxdata.php',
-            type: 'POST',
-            data: {depart: dept},
-            success: function (data) {
-                $("#sem").html(data);
-            },
-        });
-    }
-</script>
+    <script>
+        function showdesg(dept) {
+            $.ajax({
+                url: 'ajaxdata.php',
+                type: 'POST',
+                data: {
+                    depart: dept
+                },
+                success: function(data) {
+                    $("#sem").html(data);
+                },
+            });
+
+            $.ajax({
+                url: 'include/ajax/add_semester.php',
+                type: 'POST',
+                data: {
+                    'data': dept
+                },
+                success: function(result) {
+                    document.getElementById('s_academic_year').innerHTML = result;
+                }
+
+            });
+        }
+    </script>
     <script>
         $(function() {
             $("#example1").DataTable();
@@ -423,7 +417,6 @@
                 "autoWidth": false,
             });
         });
-
     </script>
 </body>
 

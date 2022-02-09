@@ -128,7 +128,7 @@ include "include/authentication.php";
 
                   <div class="col-4">
                     <label>Course</label>
-                    <select id="course" name="add_admission_course_name" class="form-control" required>
+                    <select id="course" name="add_admission_course_name" onchange="change_semester(this.value)" class="form-control" required>
                       <option value="0">Select Course</option>
                       <?php
                       $sql = "select * from tbl_course";
@@ -144,17 +144,8 @@ include "include/authentication.php";
 
                   <div class="col-4">
                     <label>Session</label>
-                    <select id="session_check" class="form-control" name="add_admission_session">
-                      <option value="0">Select Academic Year</option>
-                      <?php
-                      $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                       WHERE `status` = '$visible';
-                                       ";
-                      $result_ac_year = $con->query($sql_ac_year);
-                      while ($row_ac_year = $result_ac_year->fetch_assoc()) {
-                      ?>
-                        <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo date("d/m/Y", strtotime($row_ac_year["university_details_academic_start_date"])) . " to " . date("d/m/Y", strtotime($row_ac_year["university_details_academic_end_date"])); ?></option>
-                      <?php } ?>
+                    <select id="s_academic_year" class="form-control" name="add_admission_session">
+
                     </select>
                   </div>
                   <div class="col-4">
@@ -782,5 +773,19 @@ include "include/authentication.php";
     }
     xhttp.open("GET", "./include/ajax/admission.php?email=" + email);
     xhttp.send();
+  }
+
+  function change_semester(semester) {
+    $.ajax({
+      url: 'include/ajax/add_semester.php',
+      type: 'POST',
+      data: {
+        'data': semester
+      },
+      success: function(result) {
+        document.getElementById('s_academic_year').innerHTML = result;
+      }
+
+    });
   }
 </script>

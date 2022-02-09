@@ -2,7 +2,7 @@
 $page_no = "11";
 $page_no_inside = "11_1";
 include "include/authentication.php";
-$duration='';
+$duration = '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,7 +111,7 @@ $duration='';
                                         <div class="form-group">
                                             <label>Academic Year</label>
                                             <select id="s_academic_year" class="form-control" name="academic_year">
-                                             
+
                                             </select>
                                         </div>
 
@@ -323,20 +323,20 @@ $duration='';
 
         });
 
-        function change_semester(semester){
+        function change_semester(semester) {
 
             $.ajax({
-                    url: 'include/ajax/add_semester.php',
-                    type: 'POST',
-                    data: {'data':semester},
-                    success: function(result) {
-                       document.getElementById('s_academic_year').innerHTML=result;
-                    }
+                url: 'include/ajax/add_semester.php',
+                type: 'POST',
+                data: {
+                    'data': semester
+                },
+                success: function(result) {
+                    document.getElementById('s_academic_year').innerHTML = result;
+                }
 
-                });
+            });
         }
-
-
     </script>
 
     <script type="text/javascript">
@@ -359,8 +359,15 @@ $duration='';
 
 </html>
 <style>
-    input,
-    select {
+   td input
+     {
         width: 120px !important;
+    }
+    td select{
+        width: 120px !important;
+
+    }
+    select{
+        padding: 5px !important;
     }
 </style>

@@ -72,9 +72,14 @@
                                        WHERE `status` = '$visible';
                                        ";
                         $result_ac_year = $con->query($sql_ac_year);
+
                         while($row_ac_year = $result_ac_year->fetch_assoc()){
+
+                          $completeSessionStart = explode("-", $row_ac_year["university_details_academic_start_date"]);
+                          $completeSessionEnd = explode("-", $row_ac_year["university_details_academic_end_date"]);
+                          $completeSessionOnlyYear = $completeSessionStart[0]."-".$completeSessionEnd[0];
                     ?>
-                            <option value="<?php echo $row_ac_year["university_details_id"]; ?>" ><?php echo $row_ac_year["university_details_academic_start_date"]." to ".$row_ac_year["university_details_academic_end_date"]; ?></option>
+                            <option value="<?php echo $row_ac_year["university_details_id"]; ?>" ><?php echo $completeSessionOnlyYear ?></option>
                     <?php } ?>
 				</select>
 			  </div>			  

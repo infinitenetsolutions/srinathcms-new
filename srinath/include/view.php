@@ -3681,7 +3681,7 @@ if (isset($_GET["action"])) {
                                                                         <?php echo $arrayTblFeeUpdate->fee_particulars; ?></td>
                                                                     <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_amount); ?></td>
 
-                                                                    <?php //if ($row["admission_hostel"] == 'YES'){  
+                                                                    <?php //if ($row["admission_hostel"] == 'YES'){  rohit done
                                                                     ?>
                                                                     <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_paid); ?></td>
 

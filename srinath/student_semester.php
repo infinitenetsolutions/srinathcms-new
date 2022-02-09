@@ -1,76 +1,71 @@
-<?php 
-    $page_no = "11";
-    $page_no_inside = "11_3";
-    include "include/authentication.php"; 
-	$visible = md5("visible");
+<?php
+$page_no = "11";
+$page_no_inside = "11_3";
+include "include/authentication.php";
+$visible = md5("visible");
 ?>
 <?php
-        if(isset($_POST["importExcelButton"]))
-        {
-            //$conn = mysqli_connect("localhost", "root", "", "nsucms_cms");
-			$conn = mysqli_connect("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
-            $file = $_FILES['importExcelFile']['tmp_name'];
-            $handle = fopen($file, "r");
-            if ($file == NULL) {
-                echo "<script>
+if (isset($_POST["importExcelButton"])) {
+    //$conn = mysqli_connect("localhost", "root", "", "nsucms_cms");
+    $conn = mysqli_connect("localhost", "nsucms_cms", "wpNnnOv5", "nsucms_cms");
+    $file = $_FILES['importExcelFile']['tmp_name'];
+    $handle = fopen($file, "r");
+    if ($file == NULL) {
+        echo "<script>
                         alert('Please first select an Excel file!!!');
                         location.replace('student_semester');
                     </script>";
-            }
-            else {
-                $c = 0;
-                while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
-                {
-					$admission_id = $filesop[0];
-					$reg_no = $filesop[1];
-				    $course_name = $filesop[2];
-					$fee_academic_year = $filesop[3];	
-					$roll_no = $filesop[4];
-					$semester_name = $filesop[5];                  					                   
-                    $type = $filesop[6];	                    				
-					$course_id = "";    
-                    $academic_year = "";
-                    $semester_id = "";
-                  
-                    
-					                								                   
-                    $sql_grade = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
-                    $result_grade = mysqli_query($conn, $sql_grade);
-                    $row_grade = mysqli_fetch_assoc($result_grade);
-                    $course_id = $row_grade["course_id"];
-					
-					$sql_semester = "SELECT * FROM `tbl_semester` WHERE `semester`='$semester_name' ";
-                    $result_semester = mysqli_query($conn, $sql_semester);
-                    $row_semester = mysqli_fetch_assoc($result_semester);
-                    $semester_id = $row_semester["semester_id"];
-					
-					$sql_year = "SELECT * FROM `tbl_university_details` WHERE `academic_session`='$fee_academic_year' ";
-                    $result_year = mysqli_query($conn, $sql_year);
-                    $row_year = mysqli_fetch_assoc($result_year);
-                    $academic_year = $row_year["university_details_id"];									
-										
-                    $sql = "INSERT INTO `tbl_allot_semester`(`allot_id`,`admission_id`,`reg_no`,`course_id`,`academic_year`,`roll_no`, `semester_id`, `type`,`status`) 
-                    VALUES ('','$admission_id','$reg_no','$course_id','$academic_year','$roll_no','$semester_id','$type','$visible')";  
-                    $stmt = mysqli_prepare($conn,$sql);
-                    mysqli_stmt_execute($stmt);
-                    $c = $c + 1;
-                }
-                if($sql){
-                   echo "<script>
+    } else {
+        $c = 0;
+        while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
+            $admission_id = $filesop[0];
+            $reg_no = $filesop[1];
+            $course_name = $filesop[2];
+            $fee_academic_year = $filesop[3];
+            $roll_no = $filesop[4];
+            $semester_name = $filesop[5];
+            $type = $filesop[6];
+            $course_id = "";
+            $academic_year = "";
+            $semester_id = "";
+
+
+
+            $sql_grade = "SELECT * FROM `tbl_course` WHERE `course_name`='$course_name' ";
+            $result_grade = mysqli_query($conn, $sql_grade);
+            $row_grade = mysqli_fetch_assoc($result_grade);
+            $course_id = $row_grade["course_id"];
+
+            $sql_semester = "SELECT * FROM `tbl_semester` WHERE `semester`='$semester_name' ";
+            $result_semester = mysqli_query($conn, $sql_semester);
+            $row_semester = mysqli_fetch_assoc($result_semester);
+            $semester_id = $row_semester["semester_id"];
+
+            $sql_year = "SELECT * FROM `tbl_university_details` WHERE `academic_session`='$fee_academic_year' ";
+            $result_year = mysqli_query($conn, $sql_year);
+            $row_year = mysqli_fetch_assoc($result_year);
+            $academic_year = $row_year["university_details_id"];
+
+            $sql = "INSERT INTO `tbl_allot_semester`(`allot_id`,`admission_id`,`reg_no`,`course_id`,`academic_year`,`roll_no`, `semester_id`, `type`,`status`) 
+                    VALUES ('','$admission_id','$reg_no','$course_id','$academic_year','$roll_no','$semester_id','$type','$visible')";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_execute($stmt);
+            $c = $c + 1;
+        }
+        if ($sql) {
+            echo "<script>
                             alert('Excel Imported Successfully!!!');
                             location.replace('student_semester');
                         </script>";
-                } 
-                else
-                {
-                    echo "<script>
+        } else {
+            echo "<script>
                             alert('Something went wrong please try again!!!');
                             location.replace('student_semester');
                         </script>";
-                }
-            }
         }
-    ?>
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -114,7 +109,6 @@
         td {
             border-collapse: collapse;
         }
-
     </style>
 </head>
 
@@ -155,38 +149,41 @@
                                 <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
                             </div>
                         </div>
-						<br>
-						<div id="response"
-						class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
-						<?php if(!empty($message)) { echo $message; } ?>
-						</div>
-						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-								<div class="input-row">
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="images/marksheet/Allot_STUDENT_FORMAT.csv"><b style="font-size:16px;">Format</b></a>
-									<label class="col-md-4 control-label">Choose CSV
-										File</label> <input type="file" name="importExcelFile" />
-									<input type="submit" name="importExcelButton" class="btn btn-success btn-sm" value="Import" />
-									
-								</div>
+                        <br>
+                        <div id="response" class="<?php if (!empty($type)) {
+                                                        echo $type . " display-block";
+                                                    } ?>">
+                            <?php if (!empty($message)) {
+                                echo $message;
+                            } ?>
+                        </div>
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            <div class="input-row">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="images/marksheet/Allot_STUDENT_FORMAT.csv"><b style="font-size:16px;">Format</b></a>
+                                <label class="col-md-4 control-label">Choose CSV
+                                    File</label> <input type="file" name="importExcelFile" />
+                                <input type="submit" name="importExcelButton" class="btn btn-success btn-sm" value="Import" />
 
-					    </form>
+                            </div>
+
+                        </form>
                         <form role="form" method="POST" id="fetchStudentDataForm">
                             <div class="card-body" style="margin-top: 0px;">
                                 <div class="row">
-                                   <div class="col-12" id="error_section"></div>
+                                    <div class="col-12" id="error_section"></div>
                                     <div class="col-5">
                                         <div class="form-group">
                                             <label>Course Name</label>
-                                            <select class="form-control" name="course_id" onchange="showdesg(this.value)">
+                                            <select class="form-control" name="course_id" onchange="change_semester(this.value)">
                                                 <option value="0">Select</option>
-                                                <?php 
-                                                    $sql_course = "SELECT * FROM `tbl_course`
+                                                <?php
+                                                $sql_course = "SELECT * FROM `tbl_course`
                                                                    WHERE `status` = '$visible';
                                                                    ";
-                                                    $result_course = $con->query($sql_course);
-                                                    while($row_course = $result_course->fetch_assoc()){
+                                                $result_course = $con->query($sql_course);
+                                                while ($row_course = $result_course->fetch_assoc()) {
                                                 ?>
-                                                <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
+                                                    <option value="<?php echo $row_course["course_id"]; ?>"><?php echo $row_course["course_name"]; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -194,28 +191,11 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Academic Year</label>
-                                             <!--<select class="form-control" name="academic_year" id="academic_year" onchange="show(this.value)">
+                                            <!--<select class="form-control" name="academic_year" id="academic_year" onchange="show(this.value)">
 							              <option value="-1">Select</option>
 							             </select>-->
-                                            <select class="form-control" name="academic_year">
-                                                <option value="0">Select Academic Year</option>
-                                                <?php 
-                                                    $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                                                   WHERE `status` = '$visible';
-                                                                   ";
-                                                    $result_ac_year = $con->query($sql_ac_year);
-                                                    while($row_ac_year = $result_ac_year->fetch_assoc()){
-                                                ?>
-                                                <?php 
-                    							  $completeSessionStart = explode("-", $row_ac_year["university_details_academic_start_date"]);
-                    							  $completeSessionEnd = explode("-", $row_ac_year["university_details_academic_end_date"]);
-                    							  $completeSessionOnlyYear = $completeSessionStart[0]."-".$completeSessionEnd[0];
-                    							?>
-                                              <!--  <option value="<?php //echo $row_ac_year["university_details_id"]; ?>"><?php //echo $completeSessionOnlyYear ; ?></option>-->
-                                              <option value="<?php echo $completeSessionOnlyYear; ?>"><?php echo $completeSessionOnlyYear ; ?></option>
+                                            <select class="form-control" id="s_academic_year" name="academic_year">
 
-                                              
-                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -228,7 +208,7 @@
                         <div class="col-12" id="loader_section"></div>
                         <!-- /.card-header -->
                         <div class="card-body" id="data_table">
-           
+
                         </div>
                     </div>
 
@@ -271,7 +251,7 @@
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    
+
     <script>
         $(function() {
             //Initialize Select2 Elements
@@ -343,11 +323,10 @@
             });
 
         });
-
     </script>
     <script>
         $(document).ready(function() {
-            $('#fetchStudentDataForm').submit(function( event ) {
+            $('#fetchStudentDataForm').submit(function(event) {
                 $('#loader_section').append('<center id = "loading"><img width="50px" src = "images/ajax-loader.gif" alt="Currently loading" /></center>');
                 $('#fetchStudentDataButton').prop('disabled', true);
                 $.ajax({
@@ -356,9 +335,9 @@
                     data: $('#fetchStudentDataForm').serializeArray(),
                     success: function(result) {
                         $('#response').remove();
-                        if(result == 0){
+                        if (result == 0) {
                             $('#error_section').append('<div id = "response"><div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Please select Academic Year!!!</div></div>');
-                        } else{
+                        } else {
                             $('#data_table').append('<div id = "response">' + result + '</div>');
                         }
                         $('#loading').fadeOut(500, function() {
@@ -383,20 +362,23 @@
                 "autoWidth": false,
             });
         });
-
     </script>
     <script>
-    function showdesg(dept) {
-        $.ajax({
-            url: 'ajaxdata2.php',
-            type: 'POST',
-            data: {depart: dept},
-            success: function (data) {
-                $("#academic_year").html(data);
-            },
-        });
-    }
-</script>
+        function change_semester(semester) {
+
+            $.ajax({
+                url: 'include/ajax/add_semester.php',
+                type: 'POST',
+                data: {
+                    'data': semester
+                },
+                success: function(result) {
+                    document.getElementById('s_academic_year').innerHTML = result;
+                }
+
+            });
+        }
+    </script>
 </body>
 
 </html>

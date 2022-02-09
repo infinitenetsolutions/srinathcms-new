@@ -23,6 +23,8 @@ include "include/authentication.php";
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="../css/pagination.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -73,7 +75,169 @@ include "include/authentication.php";
                 </div>
                 <!-- /.row -->
             </section>
+
+            <!-- Button trigger modal -->
+
+
+            <!-- Modal -->
+
             <!-- /.content -->
+
+            <div class="card table-responsive p-3 ">
+                <div class="row">
+                    <div class="col-sm-10">
+
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" onkeyup="searchData(this.value)" placeholder="Search.." class="form-control form-control-sm">
+
+                    </div>
+                </div>
+                <table id="example1" class="table table-bordered table-striped mt-2">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Prospectus No</th>
+                            <th>Course</th>
+                            <th>Name</th>
+                            <th>Phone No</th>
+                            <th>Referred By</th>
+                            <th>Payment Status</th>
+                            <th>Payment Mode</th>
+                            <th>Timing</th>
+                            <th>Action 1</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                        <?php
+                        $limit = 10;
+                        if (isset($_GET["page"])) {
+                            $page  = $_GET["page"];
+                        } else {
+                            $page = 1;
+                        };
+
+                        $start_from = ($page - 1) * $limit;
+                        $s_no = $start_from + 1;
+                        $trash = md5("trash");
+                        $tbl_prospectus = "SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `prospectus_payment_mode`='cash'  LIMIT $start_from, $limit ";
+
+                        $result = $con->query($tbl_prospectus);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $id = $row['id'];
+                        ?>
+                                <tr>
+                                    <td><?php echo $s_no; ?></td>
+                                    <td style="color:#8a0410;"><b><?php if ($row["prospectus_no"] != "") echo $row["prospectus_no"];
+                                                                    else echo "Please Give Prospectus No"; ?></b></td>
+                                    <?php
+                                    //   i heve to check prospectus course name value interger or charater
+                                    if (strlen($row["prospectus_course_name"]) <= 2) {
+                                        $prospectus_course_name = $row["prospectus_course_name"];
+                                        $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";
+                                        $course_no_result = mysqli_query($con, $course_no_query);
+                                        $data_row1 = mysqli_fetch_array($course_no_result);
+                                        $prospectus_course = $data_row1['course_name'];
+                                    } else {
+                                        $prospectus_course = $row["prospectus_course_name"];
+                                    }
+                                    ?>
+
+                                    <div class="modal fade" id="exampleModal<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm " role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-danger text-center">
+                                                    <div class="text-center">
+                                                        <h6 class="modal-title " id="exampleModalLabel"> <strong> Move To Trash</strong></h6>
+
+                                                    </div>
+                                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="modal-title text-danger " id="exampleModalLabel"> <strong><i class="fas fa-exclamation-triangle"></i> Are you sure ?</strong></h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                    <a type="button" href="./include/status/delete_prospectus?delete=<?php echo $id ?>" class="btn btn-danger">Yes</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <td><?php echo $prospectus_course  ?></td>
+                                    <td><?php echo $row["prospectus_applicant_name"] ?></td>
+                                    <td><?php echo $row["mobile"] ?></td>
+                                    <td><?php echo $row["revert_by"] ?></td>
+                                    <td><?php echo $row["payment_status"] ?></td>
+                                    <td><?php echo $row["prospectus_payment_mode"] ?></td>
+                                    <td><?php echo $row["post_at"] ?></td>
+
+                                    <td>
+
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<?php echo $id ?>">
+                                            <i class="fas fa-trash">
+                                            </i> </button>
+
+                                    </td>
+
+
+                                </tr>
+                        <?php
+                                $s_no++;
+                            }
+                        } else
+                            echo '
+                                <div class="alert alert-warning alert-dismissible">
+                                    <i class="icon fas fa-exclamation-triangle"></i>  No data available now!!!
+                                </div>';
+                        ?>
+                    </tbody>
+                </table>
+                <?php
+                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus");
+                $row_db = mysqli_fetch_row($result_db);
+                $total_records = $row_db[0];
+                $total_pages = $total_records;
+                $num_results_on_page = $limit;
+
+                /* echo  $total_pages; */ ?>
+                <div class="ml-3">
+                    <?php if (ceil($total_pages / $num_results_on_page) > 0) : ?>
+                        <ul class="pagination">
+                            <?php if ($page > 1) : ?>
+                                <li class="prev page-item"><a href="prospectus_view?page=<?php echo $page - 1 ?>">Prev</a></li>
+                            <?php endif; ?>
+
+                            <?php if ($page > 3) : ?>
+                                <li class="start"><a href="prospectus_view?page=1">1</a></li>
+                                <li class="dots">...</li>
+                            <?php endif; ?>
+
+                            <?php if ($page - 2 > 0) : ?><li class="page"><a href="prospectus_view?page=<?php echo $page - 2 ?>"><?php echo $page - 2 ?></a></li><?php endif; ?>
+                            <?php if ($page - 1 > 0) : ?><li class="page"><a href="prospectus_view?page=<?php echo $page - 1 ?>"><?php echo $page - 1 ?></a></li><?php endif; ?>
+
+                            <li class="currentpage"><a href="prospectus_view?page=<?php echo $page ?>"><?php echo $page ?></a></li>
+
+                            <?php if ($page + 1 < ceil($total_pages / $num_results_on_page) + 1) : ?><li class="page"><a href="prospectus_view?page=<?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li><?php endif; ?>
+                            <?php if ($page + 2 < ceil($total_pages / $num_results_on_page) + 1) : ?><li class="page"><a href="prospectus_view?page=<?php echo $page + 2 ?>"><?php echo $page + 2 ?></a></li><?php endif; ?>
+
+                            <?php if ($page < ceil($total_pages / $num_results_on_page) - 2) : ?>
+                                <li class="dots">...</li>
+                                <li class="end"><a href="prospectus_view?page=<?php echo ceil($total_pages / $num_results_on_page) ?>"><?php echo ceil($total_pages / $num_results_on_page) ?></a></li>
+                            <?php endif; ?>
+
+                            <?php if ($page < ceil($total_pages / $num_results_on_page)) : ?>
+                                <li class="next"><a href="prospectus_view?page=<?php echo $page + 1 ?>">Next</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+
+
+            </div>
         </div>
 
         <?php include 'include/footer.php'; ?>
@@ -91,7 +255,7 @@ include "include/authentication.php";
     $prosprectus_number = $getmaxid_data['id'];
     $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
 
-      $add_prospectus_no =  'SU/P/' . $prosprectus_number;
+    $add_prospectus_no =  'SU/P/' . $prosprectus_number;
 
     ?>
     <!-- ./wrapper -->
@@ -187,7 +351,7 @@ include "include/authentication.php";
 
                         <div class="col-4">
                             <label>Course</label>
-                            <select id="add_prospectus_course_name" name="add_prospectus_course_name" class="form-control" onchange="showdesg(this.value)">
+                            <select id="add_prospectus_course_name" onchange="change_semester(this.value)" name="add_prospectus_course_name" class="form-control" onchange="showdesg(this.value)">
                                 <option value="0">Select Course</option>
                                 <?php
                                 $sql = "select * from tbl_course";
@@ -201,17 +365,8 @@ include "include/authentication.php";
                         <div class="col-4">
                             <div class="form-group">
                                 <label>Academic Year</label>
-                                <select class="form-control" name="add_prospectus_session" id="add_prospectus_session">
-                                    <option value="0">Select Academic Year</option>
-                                    <?php
-                                    $sql_ac_year = "SELECT * FROM `tbl_university_details`
-                                                                   WHERE `status` = '$visible';
-                                                                   ";
-                                    $result_ac_year = $con->query($sql_ac_year);
-                                    while ($row_ac_year = $result_ac_year->fetch_assoc()) {
-                                    ?>
-                                        <option value="<?php echo $row_ac_year["university_details_id"]; ?>"><?php echo $row_ac_year["university_details_academic_start_date"] . " to " . $row_ac_year["university_details_academic_end_date"]; ?></option>
-                                    <?php } ?>
+                                <select class="form-control" id="s_academic_year" name="add_prospectus_session" id="add_prospectus_session">
+
                                 </select>
                             </div>
                         </div>
@@ -306,9 +461,8 @@ include "include/authentication.php";
     <!-- page script -->
     <script>
         $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
+            $('#example1').DataTable({
+                "paging": false,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": true,
@@ -407,6 +561,33 @@ include "include/authentication.php";
                 success: function(data) {
                     $("#add_prospectus_rate").html(data);
                 },
+            });
+        }
+    </script>
+
+    <script>
+        function searchData(data) {
+            $.ajax({
+                url: 'include/ajax/prospectus_enquiry.php?data=' + data,
+                type: 'GET',
+                success: function(result) {
+                    $("#data").html(result);
+                }
+            });
+
+        }
+
+        function change_semester(semester) {
+            $.ajax({
+                url: 'include/ajax/add_semester.php',
+                type: 'POST',
+                data: {
+                    'data': semester
+                },
+                success: function(result) {
+                    document.getElementById('s_academic_year').innerHTML = result;
+                }
+
             });
         }
     </script>

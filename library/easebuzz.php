@@ -36,10 +36,12 @@ if (isset($_POST)) {
     $mobile = $_SESSION['phone'];
     $surl = $_SESSION['surl'];
     $furl = $_SESSION['surl'];
-    $prospectus_emailid=$_SESSION['email'];
+    $prospectus_emailid = $_SESSION['email'];
     // ammout is recieving from the conformation page
-    //  $amount = $_SESSION['ammount'].'.00';
-    $amount='1.00';
+    $amount = $_SESSION['ammount'] . '.00';
+    if ($_SERVER['HTTP_HOST'] == 'localhost') {
+        $amount = '1.00';
+    }
     $postData = array(
         "txnid" => "$transation_id",
         "amount" => "$amount",
@@ -62,7 +64,7 @@ if (isset($_POST)) {
         "zipcode" => "123123"
     );
 
- 
+
 
 
     /*

@@ -112,7 +112,6 @@ include "include/authentication.php";
                                             <label>Academic Year</label>
                                             <select class="form-control" id="s_academic_year" name="academic_year">
                                                 <option value="all">Select</option>
-
                                             </select>
                                         </div>
                                     </div>

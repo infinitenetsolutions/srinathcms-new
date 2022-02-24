@@ -1,4 +1,3 @@
-
 <?php
 include './Backend/connection.inc.php';
 include './Backend/function.inc.php';
@@ -50,297 +49,310 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
     $status = $row['status'];
 
 ?>
-    <html>
+<html>
 
-    <head>
-        <title>Dashboard Details</title>
-        <?php include './srinath.inc/foot.php'; ?>
-        <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
-        <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- BEGIN VENDOR CSS-->
-        <link rel="stylesheet" type="text/css" href="app-assets/vendors/vendors.min.css">
-        <link rel="stylesheet" type="text/css" href="app-assets/vendors/flag-icon/css/flag-icon.min.css">
-        <link rel="stylesheet" type="text/css" href="app-assets/vendors/dropify/css/dropify.min.css">
+<head>
+    <title>Dashboard Details</title>
+    <?php include './srinath.inc/foot.php'; ?>
+    <link rel="icon" href="app-assets/images/logo/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="app-assets/images/logo/favicon-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="app-assets/images/logo/favicon-apple.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/dropify/css/dropify.min.css">
 
-        <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/materialize.css">
-        <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/style.css">
-        <link rel="stylesheet" type="text/css" href="app-assets/css/pages/app-invoice.css">
-        <!-- END Page Level CSS-->
-        <!-- BEGIN Custom CSS-->
-        <link rel="stylesheet" type="text/css" href="app-assets/css/custom/custom.css">
-        <link rel="stylesheet" href="./asset/css//print.css">
-        <!-- END Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/materialize.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/themes/vertical-gradient-menu-template/style.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/app-invoice.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom/custom.css">
+    <link rel="stylesheet" href="./asset/css//print.css">
+    <!-- END Custom CSS-->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 
-    <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-modern-menu" data-color="" data-col="2-columns">
-        <!--
+<body
+    class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns menu-expanded fixed-navbar"
+    data-open="click" data-menu="vertical-modern-menu" data-color="" data-col="2-columns">
+    <!--
     //////////////////////////////////////////////////////////////////////////// -->
-        <!-- START HEADER -->
-        <header class="page-topbar" id="header">
+    <!-- START HEADER -->
+    <header class="page-topbar" id="header">
 
-            <nav class="whitenav">
-                <div class="nav-wrapper">
-                    <img class="ajulogo" src="./asset/img/logo.png" alt="su Logo">
-                    <ul class="right">
-                        <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1"><?php echo $prospectus_applicant_name; ?><i class="material-icons right">arrow_drop_down</i></a>
-                            <div id="dropdown1" class="dropdown-content" tabindex="0">
-                                <a href="./Backend/logout.php" class="whitenav" tabindex="0">Log Out</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-        </header>
-        <!-- END HEADER -->
-        <!-- START MAIN -->
-        <div>
-            <!-- START WRAPPER -->
-            <div class="row">
-                <div class="content-wrapper-before blue-grey lighten-5"></div>
-                <div class="col s12">
-                    <div class="container">
-                        <!-- app invoice View Page -->
-                        <section class="invoice-view-wrapper section">
-                            <div class="row">
-                                <!-- invoice view page -->
-                                <div class="col l10 m8 s12">
-                                </div>
-                                <?php if ($payment_status == 'success') { ?>
-                                    <div id="printid" class="col l2 m4 s12">
-                                        <div class="card invoice-action-wrapper">
-                                            <div class="card-content">
-                                                <div class="invoice-action-btn">
-                                                    <a href="" > <button id="printbutton" onclick="printdata()" class="btn btn-success"> <span>Print</span> </button> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                                <div class="col l12 ">
-                                    <div class="card">
-                                        <div class="card-content invoice-print-area" id="print_pdf_file">
-                                            <div class="row">
-                                                <div class="col l12" style="text-align: center; width: 100%;">
-                                                    <nav class="whitenav" style="background-color: white; box-shadow: none;">
-                                                        <div class="nav-wrapper">
-                                                            <img  width="250" class="img-fluid" src="./asset/img/logo.png" alt="srinth Logo">
-                                                        </div>
-                                                    </nav>
-
-                                                <h6>   <strong>Online Application Form </strong></h6>  
-                                                </div><br><br>
-                                                <div class="row">
-                                                    <div class="col l12">
-                                                        <strong> Prospectus No : <?php echo $prospectus_no; ?></strong>
-                                                    </div>
-                                                </div>
-                                                <div class="invoice-product-details">
-                                                    <table class="striped responsive-table" style="background:#a92a31; color:#fff; padding-top: 10px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="width:100%;"><strong>Program Details</strong></th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4">
-                                                        <p><strong>Session</strong></p>
-                                                        <p><?php echo $prospectus_session; ?></p>
-                                                    </div>
-                                                    <div class="col l4">
-                                                        <p><strong>Course</strong></p>
-                                                        <p><?php echo $prospectus_course_name; ?></p>
-                                                    </div>
-                                                </div><br>
-                                                <div class="invoice-product-details">
-                                                    <table class="striped responsive-table" style="background:#a92a31; color:#fff; padding-top: 10px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th><strong>Personal Details</strong></th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Your Name</strong></p>
-                                                        <p><?php echo $prospectus_applicant_name; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Mobile Number</strong></p>
-                                                        <p><?php echo $mobile; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Email</strong></p>
-                                                        <p><?php echo $prospectus_emailid; ?></p>
-                                                    </div>
-                                                </div><br>
-                                                <div class="row">
-
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Gender</strong></p>
-                                                        <p><?php echo $prospectus_gender; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Date Of Birth</strong></p>
-                                                        <p><?php echo $prospectus_dob; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Refered BY</strong></p>
-                                                        <p><?php echo $revert_by; ?></p>
-                                                    </div>
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Father's Name</strong></p>
-                                                        <p><?php echo $prospectus_father_name ?></p>
-                                                    </div>
-
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Mother's Name</strong></p>
-                                                        <p><?php echo $prospectus_mother_name;  ?></p>
-                                                    </div>
-
-                                                </div><br>
-                                                <div class="row">
-
-                                                </div><br>
-                                                <div class="invoice-product-details">
-                                                    <table class="striped responsive-table" style="background:#a92a31; color:#fff; padding-top: 10px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th><strong>Address Details</strong></th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Parmanent Address </strong></p>
-                                                        <p><?php echo $address->permanet ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Crossponeds Address</strong></p>
-                                                        <p><?php echo $address->crosspodens ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Country</strong></p>
-                                                        <p><?php echo $prospectus_country; ?></p>
-                                                    </div>
-
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>City</strong></p>
-                                                        <p><?php echo $prospectus_city ?></p>
-                                                    </div>
-
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>State/Province</strong></p>
-                                                        <p><?php echo $prospectus_state; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Postal Code</strong></p>
-                                                        <p><?php echo $prospectus_postal_code; ?></p>
-                                                    </div>
-                                                </div><br>
-
-
-                                                <div class="invoice-product-details">
-                                                    <table class="striped responsive-table" style="background:#a92a31; color:#fff; padding-top: 10px;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th><strong>Payment Details</strong></th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Payment mode</strong></p>
-                                                        <p><?php echo $prospectus_payment_mode; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Amount </strong></p>
-                                                        <p><?php echo $prospectus_rate; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Deposit To</strong></p>
-                                                        <p><?php echo $prospectus_deposit_to; ?></p>
-                                                    </div>
-
-                                                </div><br>
-                                                <div class="row">
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Transaction Date</strong></p>
-                                                        <p><?php echo $transaction_date; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Transaction Id</strong></p>
-                                                        <p><?php echo $transaction_id; ?></p>
-                                                    </div>
-                                                    <div class="col l4" style="width: 33.33%">
-                                                        <p><strong>Easebuzz Id</strong></p>
-                                                        <p><?php echo $easebuzz_id; ?></p>
-                                                    </div>
-                                                </div><br>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </section><!-- START RIGHT SIDEBAR NAV -->
-
-                        <!-- END RIGHT SIDEBAR NAV -->
-                    </div>
-                    <div class="center-align red-text">For any query feel free to contact @ +91 9234459983
-                    </div>
-                    <br>
-                    <div class="content-overlay"></div>
-                </div>
+        <nav class="whitenav">
+            <div class="nav-wrapper">
+                <img class="ajulogo" src="./asset/img/logo.png" alt="su Logo">
+                <ul class="right">
+                    <li><a class="dropdown-trigger whitenav" href="#!" data-target="dropdown1"><?php echo $prospectus_applicant_name; ?><i
+                                class="material-icons right">arrow_drop_down</i></a>
+                        <div id="dropdown1" class="dropdown-content" tabindex="0">
+                            <a href="./Backend/logout.php" class="whitenav" tabindex="0">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <!-- END WRAPPER -->
+        </nav>
+
+    </header>
+    <!-- END HEADER -->
+    <!-- START MAIN -->
+    <div>
+        <!-- START WRAPPER -->
+        <div class="row">
+            <div class="content-wrapper-before blue-grey lighten-5"></div>
+            <div class="col s12">
+                <div class="container">
+                    <!-- app invoice View Page -->
+                    <section class="invoice-view-wrapper section">
+                        <div class="row">
+                            <!-- invoice view page -->
+                            <div class="col l10 m8 s12">
+                            </div>
+                            <?php if ($payment_status == 'success') { ?>
+                            <div id="printid" class="col l2 m4 s12">
+                                <div class="card invoice-action-wrapper">
+                                    <div class="card-content">
+                                        <div class="invoice-action-btn">
+                                            <a href=""> <button id="printbutton" onclick="printdata()"
+                                                    class="btn btn-success"> <span>Print</span> </button> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <div class="col l12 ">
+                                <div class="card">
+                                    <div class="card-content invoice-print-area" id="print_pdf_file">
+                                        <div class="row">
+                                            <div class="col l12" style="text-align: center; width: 100%;">
+                                                <nav class="whitenav"
+                                                    style="background-color: white; box-shadow: none;">
+                                                    <div class="nav-wrapper">
+                                                        <img width="250" class="img-fluid"
+                                                            src="./asset/img/logo.png" alt="srinth Logo">
+                                                    </div>
+                                                </nav>
+
+                                                <h6> <strong>Online Application Form </strong></h6>
+                                            </div><br><br>
+                                            <div class="row">
+                                                <div class="col l12">
+                                                    <strong> Prospectus No : <?php echo $prospectus_no; ?></strong>
+                                                </div>
+                                            </div>
+                                            <div class="invoice-product-details">
+                                                <table class="striped responsive-table"
+                                                    style="background:#a92a31; color:#fff; padding-top: 10px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:100%;"><strong>Program Details</strong>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4">
+                                                    <p><strong>Session</strong></p>
+                                                    <p><?php echo $prospectus_session; ?></p>
+                                                </div>
+                                                <div class="col l4">
+                                                    <p><strong>Course</strong></p>
+                                                    <p><?php echo $prospectus_course_name; ?></p>
+                                                </div>
+                                            </div><br>
+                                            <div class="invoice-product-details">
+                                                <table class="striped responsive-table"
+                                                    style="background:#a92a31; color:#fff; padding-top: 10px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><strong>Personal Details</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Your Name</strong></p>
+                                                    <p><?php echo $prospectus_applicant_name; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Mobile Number</strong></p>
+                                                    <p><?php echo $mobile; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Email</strong></p>
+                                                    <p><?php echo $prospectus_emailid; ?></p>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Gender</strong></p>
+                                                    <p><?php echo $prospectus_gender; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Date Of Birth</strong></p>
+                                                    <p><?php echo $prospectus_dob; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Refered BY</strong></p>
+                                                    <p><?php echo $revert_by; ?></p>
+                                                </div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Father's Name</strong></p>
+                                                    <p><?php echo $prospectus_father_name; ?></p>
+                                                </div>
+
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Mother's Name</strong></p>
+                                                    <p><?php echo $prospectus_mother_name; ?></p>
+                                                </div>
+
+                                            </div><br>
+                                            <div class="row">
+
+                                            </div><br>
+                                            <div class="invoice-product-details">
+                                                <table class="striped responsive-table"
+                                                    style="background:#a92a31; color:#fff; padding-top: 10px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><strong>Address Details</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Parmanent Address </strong></p>
+                                                    <p><?php echo $address->permanet; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Crossponeds Address</strong></p>
+                                                    <p><?php echo $address->crosspodens; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Country</strong></p>
+                                                    <p><?php echo $prospectus_country; ?></p>
+                                                </div>
+
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>City</strong></p>
+                                                    <p><?php echo $prospectus_city; ?></p>
+                                                </div>
+
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>State/Province</strong></p>
+                                                    <p><?php echo $prospectus_state; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Postal Code</strong></p>
+                                                    <p><?php echo $prospectus_postal_code; ?></p>
+                                                </div>
+                                            </div><br>
+
+
+                                            <div class="invoice-product-details">
+                                                <table class="striped responsive-table"
+                                                    style="background:#a92a31; color:#fff; padding-top: 10px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><strong>Payment Details</strong></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Payment mode</strong></p>
+                                                    <p><?php echo $prospectus_payment_mode; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Amount </strong></p>
+                                                    <p><?php echo $prospectus_rate; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Deposit To</strong></p>
+                                                    <p><?php echo $prospectus_deposit_to; ?></p>
+                                                </div>
+
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Transaction Date</strong></p>
+                                                    <p><?php echo $transaction_date; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Transaction Id</strong></p>
+                                                    <p><?php echo $transaction_id; ?></p>
+                                                </div>
+                                                <div class="col l4" style="width: 33.33%">
+                                                    <p><strong>Easebuzz Id</strong></p>
+                                                    <p><?php echo $easebuzz_id; ?></p>
+                                                </div>
+                                            </div><br>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </section><!-- START RIGHT SIDEBAR NAV -->
+
+                    <!-- END RIGHT SIDEBAR NAV -->
+                </div>
+                <div class="center-align red-text">For any query feel free to contact @ +91 9234459983
+                </div>
+                <br>
+                <div class="content-overlay"></div>
+            </div>
         </div>
-        <!-- END MAIN -->
-        <!--
+        <!-- END WRAPPER -->
+    </div>
+    <!-- END MAIN -->
+    <!--
       //////////////////////////////////////////////////////////////////////////// -->
-        <!-- START FOOTER -->
-        <footer class="page-footer footer footer-static footer-dark gradient-45deg-indigo-purple gradient-shadow navbar-border navbar-shadow"></footer>
-        <!-- END FOOTER -->
-        <!-- ================================================
+    <!-- START FOOTER -->
+    <footer
+        class="page-footer footer footer-static footer-dark gradient-45deg-indigo-purple gradient-shadow navbar-border navbar-shadow">
+    </footer>
+    <!-- END FOOTER -->
+    <!-- ================================================
       Scripts
       ================================================ -->
-        <!-- END: Footer-->
-        <!-- BEGIN VENDOR JS-->
-        <script src="app-assets/js/vendors.min.js"></script>
-        <!-- BEGIN VENDOR JS-->
-        <!-- BEGIN PAGE VENDOR JS-->
-        <script src="app-assets/vendors/dropify/js/dropify.min.js"></script>
-        <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
-        <!-- END PAGE VENDOR JS-->
-        <!-- BEGIN THEME  JS-->
-        <script src="app-assets/js/plugins.js"></script>
-        <script src="app-assets/js/search.js"></script>
-        <script src="app-assets/js/custom/custom-script.js"></script>
-        <!-- END THEME  JS-->
-        <!-- BEGIN PAGE LEVEL JS-->
-        <script src="app-assets/js/scripts/form-file-uploads.js"></script>
-        <script src="app-assets/js/scripts/form-validation.js"></script>
-        <script src="app-assets/js/scripts/app-invoice.js"></script>
-        <!-- END PAGE LEVEL JS-->
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="app-assets/vendors/dropify/js/dropify.min.js"></script>
+    <script src="app-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="app-assets/js/plugins.js"></script>
+    <script src="app-assets/js/search.js"></script>
+    <script src="app-assets/js/custom/custom-script.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="app-assets/js/scripts/form-file-uploads.js"></script>
+    <script src="app-assets/js/scripts/form-validation.js"></script>
+    <script src="app-assets/js/scripts/app-invoice.js"></script>
+    <!-- END PAGE LEVEL JS-->
 
 
 
-    </body>
+</body>
 
-    </html>
+</html>
 <?php
 } else {
     echo "<script>
@@ -351,11 +363,11 @@ if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
 ?>
 <script>
     function printdata() {
-        document.getElementById('printid').style.display='none'
-        document.getElementById('header').style.display='none'
-window.print()
+        document.getElementById('printid').style.display = 'none'
+        document.getElementById('header').style.display = 'none'
+        window.print()
 
 
-       
+
     }
 </script>

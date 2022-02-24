@@ -1,7 +1,7 @@
-<?php 
-    $page_no = "3";
-    $page_no_inside = "3_1";
-    include "include/authentication.php"; 
+<?php
+$page_no = "3";
+$page_no_inside = "3_1";
+include "include/authentication.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,31 +86,51 @@
                                 <div class="row">
                                     <div class="col-md-12" id="error_section"></div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <h5><b>Financial year</b></h5>
-                                            <label>Start Date</label>
-                                            <input type="date" name="add_university_details_financial_start_date" class="form-control" required>
+                                        <h5><b>Financial year</b></h5>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <input type="date" name="add_university_details_financial_start_date" class="form-control" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="date" name="add_university_details_financial_end_date" class="form-control" required>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>End Date</label>
-                                            <input type="date" name="add_university_details_financial_end_date" class="form-control" required>
-                                        </div>
+
+
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <h5><b>Academic year</b></h5>
-                                            <label>Start Date</label>
-                                            <input type="date" name="add_university_details_academic_start_date" class="form-control" required>
+                                        <h5><b>Academic year</b></h5>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <input type="date" name="add_university_details_academic_start_date" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="date" name="add_university_details_academic_end_date" class="form-control" required>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>End Date</label>
-                                            <input type="date" name="add_university_details_academic_end_date" class="form-control" required>
-                                        </div>
+
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>University Name</label>
                                             <input type="text" name="add_university_details_university_name" class="form-control" required>
@@ -122,7 +142,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Address</label>
                                             <input type="text" name="add_university_details_address" class="form-control" required>
@@ -133,7 +153,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Contact No</label>
                                             <input type="text" name="add_university_details_contact" class="form-control" required>
@@ -144,7 +164,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Website Url</label>
                                             <input type="text" name="add_university_details_website_url" class="form-control" required>
@@ -155,7 +175,7 @@
                                     <div class="col-md-12">
                                         <div id="loader_section"></div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <input type="hidden" name="action" value="add_university_details" />
                                         <button type="submit" id="add_university_details_button" class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-primary">Reset</button>
@@ -199,9 +219,9 @@
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
     <!-- Page script -->
-  
+
     <script>
-       $(function() {
+        $(function() {
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -271,11 +291,10 @@
             });
 
         })
+    </script>
 
-     </script>
-    
     <script>
-        $(document).ready(function (e){
+        $(document).ready(function(e) {
 
             $('#add_university_details_form').on('submit', (function(e) {
                 $('#loader_section').append('<center id = "loading"><img width="50px" src = "images/ajax-loader.gif" alt="Currently loading" /></center>');
@@ -307,12 +326,11 @@
             }));
 
         });
-
     </script>
 
     <script>
         $(document).ready(function() {
-            setInterval(function(){
+            setInterval(function() {
                 $.ajax({
                     url: 'include/view.php?action=get_university_details',
                     type: 'GET',

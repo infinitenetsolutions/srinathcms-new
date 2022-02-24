@@ -197,7 +197,7 @@ include "include/authentication.php";
                     </tbody>
                 </table>
                 <?php
-                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus");
+                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus where `prospectus_payment_mode`='Cash'" );
                 $row_db = mysqli_fetch_row($result_db);
                 $total_records = $row_db[0];
                 $total_pages = $total_records;

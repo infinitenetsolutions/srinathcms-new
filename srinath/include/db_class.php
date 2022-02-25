@@ -26,7 +26,14 @@
         //Database Connection
         public function __construct(){
             // Create connection
-            $this->con = new mysqli($this->hostName, $this->userName, $this->password, $this->dbName);
+            if($_SERVER['HTTP_HOST']=='localhost'){
+                $this->con = new mysqli($this->hostName, $this->userName, $this->password, $this->dbName);
+
+            }else{
+                $this->con = new mysqli("localhost", "srinathuniversityerp_srinath_cms", "Rohit83013@#", "srinathuniversityerp_srinath_cms");
+
+
+            }
             // Check connection
             if ($this->con->connect_error) {
                 die("Connection failed: " . $this->con->connect_error);
@@ -61,7 +68,7 @@
             return $this->result;
         }
         public function get_row(){
-            $this->row = $this->result->fetch_assoc();
+            $this->row = $this->con->result->fetch_assoc();
             return $this->row;
         }
         public function insert($tableName, $data){
@@ -127,4 +134,3 @@
             curl_exec($ch);
         }
     }
-?>

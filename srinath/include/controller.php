@@ -2326,7 +2326,7 @@ if (isset($_POST["action"])) {
                                 $prospectus_course_link = "course_bca";
                                 break;
                         }
-                        $message = "Dear $prospectus_name, Your Prospectus Form has been Successfully approved.\nYour Prospectus No - $prosprectus_number \nClick below link to apply Admission Form.\nhttp://65.2.3842/admission?course=$prospectus_course_link \n\nRegards,\nNetaji Subhas University, \nJamshedpur. ";
+                        $message = "Dear $prospectus_name, Your Prospectus Form has been Successfully approved.\nYour Prospectus No - $prosprectus_number \nClick below link to apply Admission Form.\nhttps://www.srinathuniversity.co.in/admission?course=$prospectus_course_link \n\nRegards,\Srinath University University, \nJamshedpur. ";
                         $objectSecond->send_otp($prospectus_mobile, $message);
                         echo 'success';
                     } else {

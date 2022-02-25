@@ -932,15 +932,14 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "add_prospectus") {
         // start the prospectus number getting
         include './config.php';
-        $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+         $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
         $getmaxid_result = mysqli_query($con, $getmaxid);
         $getmaxid_data = mysqli_fetch_array($getmaxid_result);
         $prosprectus_number = $getmaxid_data['id'];
-        $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
 
-        echo  $add_prospectus_no =  'SU/P/' . $prosprectus_number;
+        $add_prospectus_no =  'SU/P/' . ($prosprectus_number+1);
+        
         // ending the prospectus number getting
-        // fetching the all variable of the data
         $add_prospectus_applicant_name = $_POST["add_prospectus_applicant_name"];
         $add_prospectus_gender = $_POST["add_prospectus_gender"];
         $add_prospectus_father_name = $_POST["add_prospectus_father_name"];
@@ -1020,32 +1019,10 @@ if (isset($_POST["action"])) {
                 prospectus_mail($add_prospectus_emailid, $add_prospectus_no, $add_prospectus_rate, $course_name, $pro_session, $add_prospectus_applicant_name);
 
 
-                function sendsmsGET($mobileNumber, $message)
-                {
-                    $senderId = 'SUJSR';
-                    $routeId1 = 1;
-                    $getData = 'mobileNos=' . $mobileNumber . '&message=' . urlencode($message) . '&senderId=' . $senderId . '&routeId=' . $routeId1;
-                    //API URL
-                    $serverUrl1 = 'msg.msgclub.net';
-                    $authKey1 = 'fbfdee58a904a1d82641561a74c354'; 
-                    $url = "http://" . $serverUrl1 . "/rest/services/sendSMS/sendGroupSms?AUTH_KEY=" . $authKey1 . "&" . $getData;
-                    $ch = curl_init();
-                    curl_setopt_array($ch, array(
-                        CURLOPT_URL => $url,
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_SSL_VERIFYHOST => 0,
-                        CURLOPT_SSL_VERIFYPEER => 0
-                    ));
-                    $output = curl_exec($ch);
-                    if (curl_errno($ch)) {
-                        echo 'error:' . curl_error($ch);
-                    }
-                    curl_close($ch);
-                    return $output;
-                }
-
+              
+                $add_prospectus_payment_mode="Cash";
                 $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards SU";
-                sendsmsGET($mobile, $student_msg);
+                $objectSecond->send_prospectus($mobile, $message);
 
                 $_SESSION['email'] = $add_prospectus_emailid;
                 echo "<script>
@@ -1630,8 +1607,8 @@ if (isset($_POST["action"])) {
                     $perticulars = explode(",", $implodedId);
                     $amounts = explode(",", $implodedAmount);
 
-                    if(isset($_POST["fine_amount"]) && ($_POST["fine_amount"]!='')){
-                        $amount_extra=  $_POST["fine_amount"];
+                    if (isset($_POST["fine_amount"]) && ($_POST["fine_amount"] != '')) {
+                        $amount_extra =  $_POST["fine_amount"];
                         $sql_inc = "INSERT INTO `tbl_income`
             				(`id`,`reg_no`,	`course`, `academic_year`,`received_date`, `particulars`, `amount`, `payment_mode`,`check_no`,`bank_name`,`income_from`,`post_at`,`table_name`,`table_id`) 
             				VALUES
@@ -2178,13 +2155,23 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "update_prospectus_enquiry") {
         $prosprectus_number = $_POST["prosprectus_number"];
         $prosprectus_id = $_POST["prosprectus_id"];
-        $add_prospectus_email =  $_POST['prospectus_emailid'];
-        $prospectus_course_name = $_POST["prospectus_course_name"];
+
+        // getting the all data from the data base of the student
+        $prospectus_student_datails = "SELECT * FROM `tbl_prospectus` WHERE `id`='$prosprectus_id'";
+        $prospectus_student_result = mysqli_query($con, $prospectus_student_datails);
+        $prospectus_student_data = mysqli_fetch_array($prospectus_student_result);
+        $add_prospectus_email = $prospectus_student_data['prospectus_emailid'];
+        $prospectus_applicant_name = $prospectus_student_data['prospectus_applicant_name'];
+        $prospectus_mobile = $prospectus_student_data['mobile'];
+        $prospectus_course_name1 = $_POST["prospectus_course_name"];
         $prospectus_session = $_SESSION["prospectus_session"];
         $prospectus_rate = $_POST["prospectus_rate"];
         $post_at = $_POST["post_at"];
         $name = $_SESSION['prospectus_applicant_name'];
         include '../../Backend/sendprospectus.php';
+
+
+
         if (!empty($prosprectus_number && $prosprectus_id)) {
             // $objectSecond->select("tbl_prospectus");
             // $objectSecond->where("`status` = '$visible' && `prospectus_no` = '$prosprectus_number'");
@@ -2199,140 +2186,59 @@ if (isset($_POST["action"])) {
 
                 echo 'exists';
             } else {
-                $add_prospectus_email_data = mysqli_fetch_array($result);
-                echo   $add_prospectus_email = $add_prospectus_email_data['prospectus_emailid'];
+                $prospectus_rate_amount = "SELECT * FROM `tbl_course` WHERE `course_name`='$prospectus_course_name1'";
+                $prospectus_rate_amount_result = mysqli_query($con, $prospectus_rate_amount);
+                $prospectus_rate_amount_data = mysqli_fetch_array($prospectus_rate_amount_result);
+                $prospectus_rate = $prospectus_rate_amount_data['prospectus_rate'];
+                $prospectus_course_name = $prospectus_rate_amount_data['course_id'];
+                $prospectus_session1 = $prospectus_rate_amount_data['course_duration'];
 
-                $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+                $add_prospectus_email_data = mysqli_fetch_array($result);
+                $add_prospectus_email = $add_prospectus_email_data['prospectus_emailid'];
+
+                $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
                 $getmaxid_result = mysqli_query($con, $getmaxid);
                 $getmaxid_data = mysqli_fetch_array($getmaxid_result);
-              echo   $prosprectus_number = $getmaxid_data['id'];
-               echo  $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
-               echo  $prosprectus_number = 'SU/P/' . $prosprectus_number;
-
+                $prosprectus_number = $getmaxid_data['id'];
+        
+                echo  $prosprectus_number =  ('SU/P/'.($prosprectus_number+1));
                 $objectSecond->sql = "";
-                echo  $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";
+                $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' , `payment_status`='success'  `prospectus_payment_mode`='Cash', `prospectus_deposit_to`='University Office'  WHERE `id`='$prosprectus_id'";
                 $check = $con->query($update_query);
                 // $check = $objectSecond->update("tbl_prospectus", "`prospectus_no` = '$prosprectus_number'  WHERE `id`='$prosprectus_id'");
 
                 if ($check == 1) {
-                    echo   prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus_rate, $prospectus_course_name, $prospectus_session, $name);
+                    prospectus_mail($add_prospectus_email, $prosprectus_number, $prospectus_rate, $prospectus_course_name1, $prospectus_session, $name);
                     $date = date_create()->format('yy-m-d');
-                    $objectSecond->sql = "";
-                    $objectSecond->insert("tbl_income", "(`id`,`reg_no`,`course`,`academic_year` ,`received_date`, `particulars`, `amount`, `payment_mode`, `check_no`, `bank_name`,`income_from`,`post_at`) 
-	                    VALUES (NULL,'$prosprectus_number(Form No)','$prospectus_course_name','$prospectus_session','$post_at','Prospectus','$prospectus_rate','Online','','','Prospectus','" . date("Y-m-d") . "')");
 
-                    $objectSecond->sql = "";
-                    $objectSecond->select("tbl_prospectus");
-                    $objectSecond->where("`status` = '$visible' && `id`='$prosprectus_id'");
-                    $result = $objectSecond->get();
-                    if ($result->num_rows > 0) {
-                        $row = $objectSecond->get_row();
-                        $prospectus_name = $row["prospectus_applicant_name"];
-                        $prospectus_mobile = $row["mobile"];
-                        $prospectus_course = $row["prospectus_course_name"];
-                        $prospectus_course_link = "";
-                        switch ($prospectus_course) {
-                            case "PH.D":
-                                $prospectus_course_link = "course_phd";
-                                break;
-                            case "BBA":
-                                $prospectus_course_link = "course_bba";
-                                break;
-                            case "MBA":
-                                $prospectus_course_link = "course_mba";
-                                break;
-                            case "B.COM":
-                                $prospectus_course_link = "course_bcom";
-                                break;
-                            case "M.COM":
-                                $prospectus_course_link = "course_mcom";
-                                break;
-                            case "B.PHARM":
-                                $prospectus_course_link = "course_bpharm";
-                                break;
-                            case "D.PHARM":
-                                $prospectus_course_link = "course_dpharm";
-                                break;
-                            case "B.SC IN HOTEL MANAGEMENT":
-                                $prospectus_course_link = "course_hotel";
-                                break;
-                            case "BCA":
-                                $prospectus_course_link = "course_bca";
-                                break;
-                            case "MCA":
-                                $prospectus_course_link = "course_mca";
-                                break;
-                            case "B.ED":
-                                $prospectus_course_link = "course_bed";
-                                break;
-                            case "M.A IN EDUCATION":
-                                $prospectus_course_link = "course_m_a_in_edu";
-                                break;
-                            case "LLB":
-                                $prospectus_course_link = "course_llb";
-                                break;
-                            case "BBA LLB (HONS.)":
-                                $prospectus_course_link = "course_bba_llb";
-                                break;
-                            case "B.SC (BOTANY)":
-                                $prospectus_course_link = "course_bsc_botany";
-                                break;
-                            case "B.SC (ZOOLOGY)":
-                                $prospectus_course_link = "course_bsc_zoology";
-                                break;
-                            case "B.SC (MATHEMATICS)":
-                                $prospectus_course_link = "course_bsc_mathematics";
-                                break;
-                            case "B.SC (PHYSICS)":
-                                $prospectus_course_link = "course_bsc_physics";
-                                break;
-                            case "B.SC (CHEMISTRY)":
-                                $prospectus_course_link = "course_bsc_chemistry";
-                                break;
-                            case "M.SC (BOTANY)":
-                                $prospectus_course_link = "course_msc_botany";
-                                break;
-                            case "M.SC (ZOOLOGY)":
-                                $prospectus_course_link = "course_msc_zoology";
-                                break;
-                            case "M.SC (MATHEMATICS)":
-                                $prospectus_course_link = "course_msc_mathematics";
-                                break;
-                            case "M.SC (PHYSICS)":
-                                $prospectus_course_link = "course_msc_physics";
-                                break;
-                            case "M.SC (CHEMISTRY)":
-                                $prospectus_course_link = "course_msc_chemistry";
-                                break;
-                            case "POLYTECHNIC":
-                                $prospectus_course_link = "course_polytechnic";
-                                break;
-                            case "M.SC (MATHEMATICS)":
-                                $prospectus_course_link = "course_msc_mathematics";
-                                break;
-                            case "B.A":
-                                $prospectus_course_link = "course_ba";
-                                break;
-                            case "M.A":
-                                $prospectus_course_link = "course_ma";
-                                break;
-                            case "B.A IN JOURNALISM And MASS COMM":
-                                $prospectus_course_link = "course_BA_masscomm";
-                                break;
-                            case "M.A IN EDUCATION":
-                                $prospectus_course_link = "course_ma";
-                                break;
-                            default:
-                                $prospectus_course_link = "course_bca";
-                                break;
+
+                    $sql_prospectus = "INSERT INTO `tbl_income`
+                         (`id`, `reg_no`,`course`,`academic_year`,`received_date`, `particulars`, `amount`, `payment_mode`,`check_no`,`bank_name`,`income_from`,`post_at`) 
+                            VALUES 
+                          (NULL,'$prosprectus_number(Form No)','$prospectus_course_name','$prospectus_session1','" . date("Y-m-d") . "','Prospectus','$prospectus_rate','Cash','NULL','NULL','Prospectus','" . date("Y-m-d") . "')
+                               ";
+                    $query = mysqli_query($con, $sql_prospectus);
+                    // here to start the sending email and massage to the student
+                    if ($query) {
+                        $pro_session = '';
+                        if ($prospectus_session1 == 2) {
+                            $pro_session = date('Y') . '-' . date('Y', strtotime("+2 year"));
+                        } elseif ($prospectus_session1 == 3) {
+                            $pro_session = date('Y') . '-' . date('Y', strtotime("+3 year"));
+                        } else {
+                            $pro_session = date('Y') . '-' . date('Y', strtotime("+4 year"));
                         }
-                        $message = "Dear $prospectus_name, Your Prospectus Form has been Successfully approved.\nYour Prospectus No - $prosprectus_number \nClick below link to apply Admission Form.\nhttps://www.srinathuniversity.co.in/admission?course=$prospectus_course_link \n\nRegards,\Srinath University University, \nJamshedpur. ";
-                        $objectSecond->send_otp($prospectus_mobile, $message);
+                        // in the add_propectus_course stored the course id so i have to retring the course name
+                        $course_name_qury = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";
+                        $course_name_result = mysqli_query($con, $course_name_qury);
+                        $course_name_data = mysqli_fetch_array($course_name_result);
+                        $course_name = $course_name_data['course_name'];
+
+                        $add_prospectus_payment_mode = 'Cash';
+
+                        $message = "Dear $prospectus_applicant_name, Thank you for the payment of Rs. $prospectus_rate through Cash towards your Prospectus of selected Course $prospectus_course_name1. Regards Srinath University";
+                        $objectSecond->send_prospectus($prospectus_mobile, $message);
                         echo 'success';
-                    } else {
-                        $objectSecond->sql = "";
-                        $check = $objectSecond->update("tbl_prospectus", "`prospectus_no` = '' WHERE `id`='$prosprectus_id'");
-                        echo 'error';
                     }
                 } else
                     echo 'error';

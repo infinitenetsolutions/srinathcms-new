@@ -7894,7 +7894,7 @@ if (isset($_GET["action"])) {
                 //     $s_no = ++$start;
                 // }
                 // $result = $objectSecond->get();
-                
+
             $result= $con->query($tbl_prospectus);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -7961,7 +7961,9 @@ if (isset($_GET["action"])) {
                                                             <input readonly type="text" id="unversity_prospectus_number<?php echo $row["id"] ?>" name="unversity_prospectus_number" class="form-control" value="<?php echo $row["prospectus_no"] ?>">
                                                             <input type="hidden" id="prospectus_session<?php echo $row["id"] ?>" name="prospectus_session" class="form-control" value="<?php echo $row["prospectus_session"] ?>">
                                                             <input type="hidden" id="prospectus_course_name<?php echo $row["id"] ?>" name="prospectus_course_name" class="form-control" value="<?php echo $row["prospectus_course_name"] ?>">
-                                                            <input type="hidden" id="prospectus_rate<?php echo $row["id"] ?>" name="prospectus_rate" class="form-control" value="<?php echo $row["prospectus_emailid"] ?>">
+                                                            <input type="hidden" id="prospectus_rate<?php echo $row["id"] ?>" name="prospectus_rate" class="form-control" value="<?php echo $row["prospectus_rate"] ?>">
+                                                            <input type="hidden" id="prospectus_emailid<?php echo $row["id"] ?>" name="prospectus_emailid" class="form-control" value="<?php echo $row["prospectus_emailid"] ?>">
+
                                                             <input type="hidden" id="post_at<?php echo $row["id"] ?>" name="post_at" class="form-control" value="<?php echo $row["post_at"] ?>">
                                                             <input type="hidden" id="unversity_prospectus_id<?php echo $row["id"] ?>" name="unversity_prospectus_id" class="form-control" value="<?php echo $row["id"] ?>">
                                                             <input type="hidden" id="action_prospectus_enquiry<?php echo $row["id"] ?>" name="action" class="form-control" value="update_prospectus_enquiry">

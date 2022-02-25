@@ -249,13 +249,12 @@ include "include/authentication.php";
     </div>
     <?php
     include '../srinath/include/config.php';
-    $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
+    $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
     $getmaxid_result = mysqli_query($con, $getmaxid);
     $getmaxid_data = mysqli_fetch_array($getmaxid_result);
     $prosprectus_number = $getmaxid_data['id'];
-    $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
 
-    $add_prospectus_no =  'SU/P/' . $prosprectus_number;
+      $add_prospectus_no =  'SU/P/' . ($prosprectus_number+1);
 
     ?>
     <!-- ./wrapper -->

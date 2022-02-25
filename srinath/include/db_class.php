@@ -108,7 +108,7 @@
             mail($to, $subject, $message, $headers);
         }
         public function send_otp($phone, $message){
-            $senderId="NSUJSR";
+            $senderId="SRIUNI";
             $serverUrl="msg.msgclub.net";
             $authKey="6a4743a8355fb97aa42dc2452185a1cd";
             $routeId="1";
@@ -135,7 +135,7 @@
         }
 
         public function send_prospectus($phone, $message){
-            $senderId = 'SUJSR';
+            $senderId = 'SRIUNI';
             $serverUrl="msg.msgclub.net";
             $authKey="fbfdee58a904a1d82641561a74c354";
             $routeId="1";

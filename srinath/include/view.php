@@ -7894,6 +7894,7 @@ if (isset($_GET["action"])) {
                 //     $s_no = ++$start;
                 // }
                 // $result = $objectSecond->get();
+                
             $result= $con->query($tbl_prospectus);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {

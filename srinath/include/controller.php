@@ -937,7 +937,7 @@ if (isset($_POST["action"])) {
         $getmaxid_data = mysqli_fetch_array($getmaxid_result);
         $prosprectus_number = $getmaxid_data['id'];
 
-        $add_prospectus_no =  'SU/P/' . ($prosprectus_number+1);
+        $add_prospectus_no =  ('SU/P/' . ($prosprectus_number+1));
         
         // ending the prospectus number getting
         $add_prospectus_applicant_name = $_POST["add_prospectus_applicant_name"];
@@ -1021,7 +1021,7 @@ if (isset($_POST["action"])) {
 
               
                 $add_prospectus_payment_mode="Cash";
-                $student_msg = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through $add_prospectus_payment_mode towards your Prospectus of selected Course $add_prospectus_course_name. Regards SU";
+                $message = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through Cash towards your Prospectus of selected Course $course_name. Regards Srinath University";
                 $objectSecond->send_prospectus($mobile, $message);
 
                 $_SESSION['email'] = $add_prospectus_emailid;

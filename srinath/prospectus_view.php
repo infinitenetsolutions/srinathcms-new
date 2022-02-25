@@ -121,7 +121,7 @@ include "include/authentication.php";
                         $start_from = ($page - 1) * $limit;
                         $s_no = $start_from + 1;
                         $trash = md5("trash");
-                        $tbl_prospectus = "SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `prospectus_payment_mode`='cash'  LIMIT $start_from, $limit ";
+                        $tbl_prospectus = "SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `payment_status`='success'  LIMIT $start_from, $limit ";
 
                         $result = $con->query($tbl_prospectus);
                         if ($result->num_rows > 0) {
@@ -197,7 +197,7 @@ include "include/authentication.php";
                     </tbody>
                 </table>
                 <?php
-                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus where `prospectus_payment_mode`='Cash'" );
+                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus where `payment_status`='success'  " );
                 $row_db = mysqli_fetch_row($result_db);
                 $total_records = $row_db[0];
                 $total_pages = $total_records;

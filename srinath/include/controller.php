@@ -2205,9 +2205,9 @@ if (isset($_POST["action"])) {
                 $getmaxid = "SELECT MAX(prospectus_no) as id FROM `tbl_prospectus`";
                 $getmaxid_result = mysqli_query($con, $getmaxid);
                 $getmaxid_data = mysqli_fetch_array($getmaxid_result);
-                $prosprectus_number = $getmaxid_data['id'];
-                $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
-                $prosprectus_number = 'SU/P/' . $prosprectus_number;
+              echo   $prosprectus_number = $getmaxid_data['id'];
+               echo  $prosprectus_number = explode('/', $prosprectus_number)[2] + 1;
+               echo  $prosprectus_number = 'SU/P/' . $prosprectus_number;
 
                 $objectSecond->sql = "";
                 echo  $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' WHERE `id`='$prosprectus_id'";

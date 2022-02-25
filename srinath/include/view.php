@@ -5265,7 +5265,7 @@ if (isset($_GET["action"])) {
                             <div id="edit_prospectus<?php echo $row["id"]; ?>" class="w3-modal" style="z-index:2020;">
                                 <div class="w3-modal-content w3-animate-top w3-card-4" style="width:55%">
                                     <header class="w3-container" style="background:#343a40; color:white;">
-                                        <span onclick="document.getElementById('edit_prospectus<?php echo $row["id"]; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                        <span onclick="document.getElementById('edit_prospectus<?php echo $row['id']; ?>').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                                         <h2 align="center">Edit Prospectus</h2>
                                     </header>
                                     <form id="edit_prospectus_form<?php echo $row["id"]; ?>" role="form" method="POST">
@@ -7879,7 +7879,7 @@ if (isset($_GET["action"])) {
                 
                 <?php
                 $trash = md5("trash");
-                $tbl_prospectus="SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' ";
+                $tbl_prospectus="SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `payment_status`!='success' ";
                 // $result=mysqli_quary($con,$tbl_prospectus);
             
                 // $objectSecond->select("tbl_prospectus");

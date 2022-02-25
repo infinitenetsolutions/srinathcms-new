@@ -7907,7 +7907,7 @@ if (isset($_GET["action"])) {
                             //   i heve to check prospectus course name value interger or charater
                                 if(strlen($row["prospectus_course_name"])<=2){
                               $prospectus_course_name=$row["prospectus_course_name"];
-                    $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name'";
+                    $course_no_query = "SELECT * FROM `tbl_course` WHERE `course_id`='$prospectus_course_name' ";
                     $course_no_result = mysqli_query($con, $course_no_query);
                     $data_row1 = mysqli_fetch_array($course_no_result);
                     $prospectus_course = $data_row1['course_name'];

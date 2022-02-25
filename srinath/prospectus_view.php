@@ -121,7 +121,7 @@ include "include/authentication.php";
                         $start_from = ($page - 1) * $limit;
                         $s_no = $start_from + 1;
                         $trash = md5("trash");
-                        $tbl_prospectus = "SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `payment_status`='success'  LIMIT $start_from, $limit ";
+                        $tbl_prospectus = "SELECT * FROM `tbl_prospectus` WHERE `status`!='$trash' && `payment_status`='success' ORDER BY `prospectus_no` ASC LIMIT $start_from, $limit   ";
 
                         $result = $con->query($tbl_prospectus);
                         if ($result->num_rows > 0) {
@@ -249,12 +249,12 @@ include "include/authentication.php";
     </div>
     <?php
     include '../srinath/include/config.php';
-    $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
+    $getmaxid = "SELECT COUNT(prospectus_no) as id1 FROM `tbl_prospectus` WHERE  `payment_status`='success'";
     $getmaxid_result = mysqli_query($con, $getmaxid);
     $getmaxid_data = mysqli_fetch_array($getmaxid_result);
-    $prosprectus_number = $getmaxid_data['id'];
+    $prosprectus_number = $getmaxid_data['id1'];
 
-      $add_prospectus_no =  'SU/P/' . ($prosprectus_number+1);
+      $add_prospectus_no =  'SU/P/' . (($prosprectus_number)+1);
 
     ?>
     <!-- ./wrapper -->

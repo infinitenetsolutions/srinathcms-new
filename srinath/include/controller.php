@@ -1027,7 +1027,7 @@ if (isset($_POST["action"])) {
                     $getData = 'mobileNos=' . $mobileNumber . '&message=' . urlencode($message) . '&senderId=' . $senderId . '&routeId=' . $routeId1;
                     //API URL
                     $serverUrl1 = 'msg.msgclub.net';
-                    $authKey1 = 'fbfdee58a904a1d82641561a74c354';
+                    $authKey1 = 'fbfdee58a904a1d82641561a74c354'; 
                     $url = "http://" . $serverUrl1 . "/rest/services/sendSMS/sendGroupSms?AUTH_KEY=" . $authKey1 . "&" . $getData;
                     $ch = curl_init();
                     curl_setopt_array($ch, array(

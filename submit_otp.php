@@ -126,7 +126,7 @@ function send_data_in_database($connection)
                     </div>
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-4">
                 <img class="es-margin" src="./asset/img/index_banner.jpeg" alt="">
             </div>
         </div>

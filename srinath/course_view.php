@@ -67,7 +67,7 @@ include "include/authentication.php";
                         <div class="card">
                             <div class="card-header">
                                 <div class="float-sm-right">
-                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('add_courses_with_excel').style.display='block'"><i class="fa fa-upload"></i> Import</button>
+                                    <!-- <button type="button" class="btn btn-primary" onclick="document.getElementById('add_courses_with_excel').style.display='block'"><i class="fa fa-upload"></i> Import</button> -->
                                     <button type="button" class="btn btn-success" onclick="document.getElementById('add_courses').style.display='block'">Add Course</button>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ include "include/authentication.php";
                             </div>
                         </div>
                     </div>
-                    <input type='hidden' name='action' value='' />
+                    <input type='hidden' name='action' value='import_prospectus' />
                     <button type="button" id="" class="btn btn-primary"><i class="fa fa-upload"></i> Import</button>
                     <button type="reset" onclick="document.getElementById('add_courses_with_excel').style.display='none'" class="btn btn-danger">Cancel</button>
                 </div>

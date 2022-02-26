@@ -317,28 +317,22 @@ if (isset($_POST["action"])) {
 
     //Edit Courses Start With Ajax
     if ($_POST["action"] == "edit_courses") {
-        echo   $edit_course_name = $_POST["edit_course_name"];
-        echo   $edit_course_id = $_POST["edit_course_id"];
-        echo   $edit_course_duration = $_POST['edit_course_duration'];
-        echo   $edit_course_fee = $_POST['prospectus_fee'];
-        if (!empty($edit_course_name && $edit_course_id)) {
-            $sql = "SELECT * FROM `tbl_course`
-                        WHERE `status` = '$visible' && `course_name` = '$edit_course_name';
-                        ";
-            $result = $con->query($sql);
-            if ($result->num_rows > 0) {
-                echo 'exsits';
-            } else {
+
+           $edit_course_name = $_POST["edit_course_name"];
+           $edit_course_id = $_POST["edit_course_id"];
+           $edit_course_duration = $_POST['edit_course_duration'];
+           $edit_course_fee = $_POST['edit_course_fee'];
+        if (!empty($edit_course_name && $edit_course_id)) {           
                 $sql = "UPDATE `tbl_course` 
                             SET 
-                            `course_name` = '$edit_course_name',`prospectus_rate`='$prospectus_fee', `course_time` = '$date_variable_today_month_year_with_timing' 
+                            `course_name` = '$edit_course_name',`prospectus_rate`='$edit_course_fee', `course_time` = '$date_variable_today_month_year_with_timing' ,`course_duration`='$edit_course_duration' 
                             WHERE `status` = '$visible' && `course_id` = '$edit_course_id';
                             ";
                 if ($con->query($sql))
                     echo 'success';
                 else
                     echo 'error';
-            }
+            
         } else
             echo 'empty';
     }

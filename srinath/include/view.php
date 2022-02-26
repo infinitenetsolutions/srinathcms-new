@@ -1031,7 +1031,7 @@ if (isset($_GET["action"])) {
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                      <label>Prospectus fee
-                                                     <input type="text" name="prospectus_fee" id="propectus_fee<?php echo $row["course_id"]; ?>" class="form-control" value="<?php echo $row["prospectus_rate"]; ?>">
+                                                     <input type="text" name="prospectus_fee" id="prospectus_fee<?php echo $row["course_id"]; ?>" class="form-control" value="<?php echo $row["prospectus_rate"]; ?>">
 
                                                       </label>
                                                       

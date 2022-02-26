@@ -2517,8 +2517,8 @@ if (isset($_GET["action"])) {
                             <td><?php echo $row["fee_amount"] ?></td>
                             <td><?php echo $row["fee_fine"] ?></td>
                             <td><?php echo date("d-m-Y", strtotime($row["fee_lastdate"])) ?></td>
-                            <td> <button type="button" id="edit_fee_status_button<?php echo $row["fee_id"]; ?>" class="btn <?php if ($row["fee_astatus"] == "Active") echo "btn-primary";
-                                                                                                                            else echo "btn-warning" ?> btn-sm"><span id="loader_id<?php echo $row["fee_id"]; ?>"></span> <?php echo $row["fee_astatus"] ?></button></td>
+                            <td> <button type="button" id="edit_fee_status_button<?php echo $row["fee_id"]; ?>" class="btn <?php if ($row["fee_astatus"] == "Active") echo "btn-warning";
+                                                                                                                            else echo "btn-success" ?> btn-sm"><span id="loader_id<?php echo $row["fee_id"]; ?>"></span> <?php echo  ($row["fee_astatus"]=="Active") ? 'Inactive':'Active' ?></button></td>
                             <td class="project-actions text-center">
                                 <button class="btn btn-info btn-sm" onclick="document.getElementById('edit_fees<?php echo $row["fee_id"]; ?>').style.display='block'">
                                     <i class="fas fa-pencil-alt">

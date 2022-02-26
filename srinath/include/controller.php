@@ -932,13 +932,13 @@ if (isset($_POST["action"])) {
     if ($_POST["action"] == "add_prospectus") {
         // start the prospectus number getting
         include './config.php';
-         $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
+        $getmaxid = "SELECT COUNT(prospectus_no) as id FROM `tbl_prospectus` WHERE  `payment_status`='success'";
         $getmaxid_result = mysqli_query($con, $getmaxid);
         $getmaxid_data = mysqli_fetch_array($getmaxid_result);
         $prosprectus_number = $getmaxid_data['id'];
 
-        $add_prospectus_no =  ('SU/P/' . ($prosprectus_number+1));
-        
+        $add_prospectus_no =  ('SU/P/' . ($prosprectus_number + 1));
+
         // ending the prospectus number getting
         $add_prospectus_applicant_name = $_POST["add_prospectus_applicant_name"];
         $add_prospectus_gender = $_POST["add_prospectus_gender"];
@@ -992,19 +992,26 @@ if (isset($_POST["action"])) {
                             (NULL,'$add_prospectus_no','$add_prospectus_applicant_name','$add_prospectus_gender','$add_prospectus_father_name','$add_prospectus_mother_name','$add_prospectus_address','$add_prospectus_country','$add_prospectus_state','$add_prospectus_city','$add_prospectus_postal_code','$add_prospectus_dob','$add_prospectus_emailid','$mobile','$add_prospectus_course_name','$add_prospectus_session','success','$add_prospectus_rate','$add_prospectus_payment_mode','$cashDepositTo','$add_bank_name','$add_transaction_no','$add_transaction_date','$timing','','','','$visible')
                             ";
 
+            $course_getting_query = "SELECT * FROM `tbl_course` WHERE `course_name`='$add_prospectus_course_name'";
+            $course_getting_result = mysqli_query($con, $course_getting_query);
+            $course_getting_data = mysqli_fetch_array($course_getting_result);
+            $add_prospectus_course_name = $course_getting_data['course_id'];
+            $course_session = $course_getting_data['course_duration'];
+            $add_prospectus_session = $_POST["add_prospectus_session"];
+
             $sql_prospectus = "INSERT INTO `tbl_income`
                     				(`id`, `reg_no`,`course`,`academic_year`,`received_date`, `particulars`, `amount`, `payment_mode`,`check_no`,`bank_name`,`income_from`,`post_at`) 
                     				VALUES 
-                    				(NULL,'$add_prospectus_no(Form No)','$add_prospectus_course_name','$add_prospectus_session','$add_transaction_date','Prospectus','$add_prospectus_rate','$add_prospectus_payment_mode','$add_transaction_no','$add_bank_name','Prospectus','" . date("Y-m-d") . "')
+                    				(NULL,'$add_prospectus_no(Form No)','$add_prospectus_course_name','$course_session','$add_transaction_date','Prospectus','$add_prospectus_rate','$add_prospectus_payment_mode','','$add_bank_name','Prospectus','" . date("Y-m-d") . "')
                     				";
             $query = mysqli_query($con, $sql_prospectus);
 
 
             if ($con->query($sql)) {
                 $pro_session = '';
-                if ($add_prospectus_session == 2) {
+                if ($course_session == 2) {
                     $pro_session = date('Y') . '-' . date('Y', strtotime("+2 year"));
-                } elseif ($add_prospectus_session == 3) {
+                } elseif ($course_session == 3) {
                     $pro_session = date('Y') . '-' . date('Y', strtotime("+3 year"));
                 } else {
                     $pro_session = date('Y') . '-' . date('Y', strtotime("+4 year"));
@@ -1019,8 +1026,8 @@ if (isset($_POST["action"])) {
                 prospectus_mail($add_prospectus_emailid, $add_prospectus_no, $add_prospectus_rate, $course_name, $pro_session, $add_prospectus_applicant_name);
 
 
-              
-                $add_prospectus_payment_mode="Cash";
+
+                $add_prospectus_payment_mode = "Cash";
                 $message = "Dear $add_prospectus_applicant_name, Thank you for the payment of Rs. $add_prospectus_rate through Cash towards your Prospectus of selected Course $course_name. Regards Srinath University";
                 $objectSecond->send_prospectus($mobile, $message);
 
@@ -2200,10 +2207,10 @@ if (isset($_POST["action"])) {
                 $getmaxid_result = mysqli_query($con, $getmaxid);
                 $getmaxid_data = mysqli_fetch_array($getmaxid_result);
                 $prosprectus_number = $getmaxid_data['id'];
-        
-                echo  $prosprectus_number =  ('SU/P/'.($prosprectus_number+1));
+
+                $prosprectus_number =  ('SU/P/' . ($prosprectus_number + 1));
                 $objectSecond->sql = "";
-                $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' , `payment_status`='success'  `prospectus_payment_mode`='Cash', `prospectus_deposit_to`='University Office'  WHERE `id`='$prosprectus_id'";
+                $update_query = "UPDATE `tbl_prospectus` SET `prospectus_no`='$prosprectus_number' , `payment_status`='success' , `prospectus_payment_mode`='Cash', `prospectus_deposit_to`='University Office' ,`prospectus_rate`='$prospectus_rate' ,`status`='$visible'  WHERE `id`='$prosprectus_id'";
                 $check = $con->query($update_query);
                 // $check = $objectSecond->update("tbl_prospectus", "`prospectus_no` = '$prosprectus_number'  WHERE `id`='$prosprectus_id'");
 

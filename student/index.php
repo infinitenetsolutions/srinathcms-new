@@ -7,15 +7,19 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
     echo "<script> location.replace('dashboard'); </script>";
 } else {
 ?>
-<!-- this the comments -->
-    <body>
+    <!-- this the comments -->
+
+    <head>
         <title> SRINATH UNIVERSITY LOGIN PAGE</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="icon" href="../app-assets/images/logo/favicon-32x32.png">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="dist/css/login.css" rel="stylesheet" id="bootstrap-css">
+    </head>
+
+    <body>
 
         <style type="text/css">
             body {
@@ -76,10 +80,10 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
                             </form>
                             <br><br>
                             <!-- write code for sending the otp and forget the password -->
-                            <p class="p-white" ><a style="color: white;" href="#"> Forget Password </a></p>
+                            <p class="p-white"><a style="color: white;" href="forgetpassword"> Forget Password </a></p>
                         </center>
-      
-              
+
+
                         <br>
                         <br>
                     </div>

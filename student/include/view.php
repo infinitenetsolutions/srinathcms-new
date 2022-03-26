@@ -1172,8 +1172,9 @@ if (isset($_GET["action"])) {
 
                                 <div class="col-8">
                                     <label>Passport Size Photograph</label><br>
-                                    <input type="hidden" name="passport_photo" class="form-control" value="<?php echo $row["admission_profile_image"]; ?>">
-                                    <img class="profile-user-img " src="../images/student_images/<?php echo $row["admission_profile_image"]; ?>" alt="Student profile picture">
+                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; ?>"> -->
+                                    <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
+                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php // echo $row["admission_profile_image"]; ?>" alt="Student profile picture"> -->
                                 </div>
                             </div>
                         </div>
@@ -1360,8 +1361,9 @@ if (isset($_GET["action"])) {
 
                                 <div class="col-8">
                                     <label>Passport Size Photograph</label><br>
-                                    <input type="hidden" name="passport_photo" class="form-control" value="<?php echo $row["admission_profile_image"]; ?>">
-                                    <img class="profile-user-img " src="../images/student_images/<?php echo $row["admission_profile_image"]; ?>" alt="Student profile picture">
+                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; ?>"> -->
+                                    <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
+                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php //echo $row["admission_profile_image"]; ?>" alt="Student profile picture"> -->
                                 </div>
                             </div>
                         </div>

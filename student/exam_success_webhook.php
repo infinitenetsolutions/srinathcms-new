@@ -74,7 +74,7 @@ $chk_tx=$result["data"]["status"];
                  //$easebuzzObj->initiatePaymentAPI($_POST);
                $result = $easebuzzObj->transactionAPI($_POST);
              // Note:- initiate payment API response will get for success URL or failure URL  using HTTP form post
-      }
+      
                 if(empty($course_id && $registration_no && $academic_year && $semester_id && $roll_no && $candidate_name && $father_name && $department && $candidate_signature_rand && $passport_photo_rand && $gender && $dob && $email_id)){
                      $sql = "UPDATE `tbl_examination_form` 
                             SET 

@@ -1,10 +1,10 @@
 <?php
 // send the main in the email variable
 function generate_otp($email)
+
 {
-
-    $otp = $_SESSION['otp'] = rand(100000, 999999);
-
+    $otp  = rand(100000, 999999);
+    $_SESSION['otp']=$otp;
     return $otp;
 }
 function send_otp()

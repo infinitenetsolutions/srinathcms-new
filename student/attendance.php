@@ -2,7 +2,6 @@
 
 <?php
 
-use Dompdf\FrameDecorator\Inline;
 $year_err='';
 $year = date('Y');
 $month = date('m');
@@ -73,7 +72,7 @@ if (isset($_POST['submit'])) {
                     $this.addClass('active');
                 }
             })
-        })
+        });
     </script>
 </head>
 

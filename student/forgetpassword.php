@@ -125,7 +125,7 @@ if (isset($_SESSION["logger_username1"]) && isset($_SESSION["logger_password1"])
                     ?>
                     <br>
                     <?php if ($msg == 1) { ?>
-                        <strong> <p class="text-danger text-light bg-white p-2"> <?php echo  $phone ?> is not match with our records </p>
+                        <strong> <p class="text-danger text-light bg-white p-2"> <?php echo  $phone ?> is not match with our records <a href="index">back</a> </p>
                         </strong>
                     <?php  } elseif ($msg == 2) { ?>
                         <small class="text-danger text-light"> Please enter valid otp <?php echo  $otp ?> </small>

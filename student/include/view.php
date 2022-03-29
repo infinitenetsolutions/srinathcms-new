@@ -372,7 +372,7 @@ if (isset($_GET["action"])) {
                                                                     $Idno++;
                                                                     $tmpSNo++;
                                                                 }
-                                                                ?>                                           
+                                                                ?>
                                                                 <tr>
                                                                     <td><?php echo $tmpSNo; ?></td>
                                                                     <td>Fine</td>
@@ -1112,83 +1112,15 @@ if (isset($_GET["action"])) {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-4">
-
-                                    <label>Registration Number</label>
-                                    <input id="" type="hidden" name="course_id" value="<?php echo $_SESSION['course_id'] ?>" class="form-control">
-                                    <input id="" type="hidden" name="academic_year" value="<?php echo $_SESSION['academic_year'] ?>" class="form-control">
-                                    <input id="" type="hidden" name="semester_id" value="<?php echo $_SESSION['semester_id'] ?>" class="form-control">
-                                    <input id="" type="hidden" name="amount" value="<?php echo $_SESSION['amount'] ?>" class="form-control">
-                                    <input id="" type="text" name="registration_no" class="form-control" required value="<?php echo $adrow['reg_no'] ?>">
-                                </div>
-
-                                <div class="col-4">
-                                    <label>Roll Number</label>
-                                    <input id="" type="text" name="roll_no" class="form-control" value="<?php echo $adrow['roll_no'] ?>">
-                                </div>
-
-                                <div class="col-4">
                                     <label>Candidate's Name</label>
                                     <input id="" type="hidden" name="candidate_name" class="form-control" value="<?php echo $row['admission_first_name'] . " " . $row['admission_middle_name'] . " " . $row['admission_last_name'] ?>">
                                     <input id="" type="text" name="candidate_name" class="form-control" value="<?php echo $row['admission_first_name'] . " " . $row['admission_middle_name'] . " " . $row['admission_last_name'] ?>" readonly>
                                 </div>
-
                                 <div class="col-4">
                                     <label>Father's Name</label>
                                     <input id="" type="hidden" name="father_name" class="form-control" value="<?php echo $row['admission_father_name'] ?>">
                                     <input id="" type="text" name="father_name" class="form-control" value="<?php echo $row['admission_father_name'] ?>" readonly>
                                 </div>
-
-                                <div class="col-4">
-                                    <label>Department / Specialisation</label>
-                                    <input id="" type="text" name="department" class="form-control" required value="<?php echo $deprow['department'] ?>">
-                                </div>
-
-                                <div class="col-4">
-                                    <label>Candidate Signature</label>
-                                    <input type="file" id="fileSign" onchange="Filevalidation()" name="candidate_signature" class="form-control" required>
-                                    <script>
-                                        Filevalidation = () => {
-                                            var fi = document.getElementById('fileSign');
-                                            // Check if any file is selected. 
-                                            if (fi.files.length > 0) {
-                                                for (i = 0; i <= fi.files.length - 1; i++) {
-
-                                                    var fsize = fi.files.item(i).size;
-                                                    var file = Math.round((fsize / 1024));
-                                                    // The size of the file. 
-                                                    if (file >= 4096) {
-                                                        alert(
-                                                            "File too Big, please select a file less than 4mb");
-                                                        $("#fileSign").val("");
-                                                    } else {
-                                                        document.getElementById('size').innerHTML = '<b>' +
-                                                            file + '</b> KB';
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    </script>
-                                </div>
-
-                                <div class="col-8">
-                                    <label>Passport Size Photograph</label><br>
-                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; ?>"> -->
-                                    <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
-                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php // echo $row["admission_profile_image"]; ?>" alt="Student profile picture"> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title">PERSONAL DETAILS</h3>
-                    </div>
-
-                    <div class="card-body table-responsive p-0">
-                        <div class="card-body">
-                            <div class="row">
                                 <div class="col-4">
                                     <label>Gender</label>
                                     <input id="" type="hidden" name="gender" class="form-control" value="<?php echo strtoupper($row['admission_gender']) ?>">
@@ -1205,28 +1137,106 @@ if (isset($_GET["action"])) {
                                     <input id="" type="text" name="email_id" class="form-control" value="<?php echo $row['admission_emailid_student'] ?>">
                                 </div>
                                 <div class="col-4">
-                                    <label>Mobile No.(01)</label>
+                                    <label>Mobile Number.(01)</label>
                                     <input id="" type="hidden" name="mobile_no1" class="form-control" value="<?php echo $row['admission_mobile_student'] ?>">
                                     <input id="" type="text" name="mobile_no1" class="form-control" value="<?php echo $row['admission_mobile_student'] ?>">
                                 </div>
                                 <div class="col-4">
-                                    <label>Mobile No.(02)</label>
+                                    <label>Mobile Number.(02)</label>
                                     <input id="" type="text" name="mobile_no2" class="form-control">
                                 </div>
                                 <div class="col-4">
-                                    <label>Adhar No</label>
+                                    <label>Aadhar Number</label>
                                     <input id="" type="hidden" name="adhar_no" class="form-control" value="<?php echo $row['admission_aadhar_no'] ?>">
                                     <input id="" type="text" name="adhar_no" class="form-control" value="<?php echo $row['admission_aadhar_no'] ?>">
                                 </div>
+
+                                <!-- extra added -->
                                 <div class="col-12">
                                     <label>Correspondence Address (for all communication by the University):</label>
                                     <input id="" type="hidden" name="address" class="form-control" value="<?php echo $row['admission_residential_address'] ?>">
-                                    <textarea id="address" name="address" class="form-control" value="<?php echo $row['admission_residential_address'] ?>" style="height: 38px;"><?php echo $row['admission_residential_address'] ?></textarea>
+                                    <textarea cols="5" id="address" name="address" class="form-control" value="<?php echo $row['admission_residential_address'] ?>" style="height: 38px;"><?php echo $row['admission_residential_address'] ?></textarea>
+                                </div>
+                                <!-- extra added -->
+
+
+
+
+                                <div class="col-8">
+                                    <label>Passport Size Photograph</label><br>
+                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; 
+                                                                                                                ?>"> -->
+                                    <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
+                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php // echo $row["admission_profile_image"]; 
+                                                                                                        ?>" alt="Student profile picture"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">COURSE DETAILS</h3>
+                    </div>
+
+                    <div class="card-body table-responsive p-0">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <label>Registration Number</label>
+                                    <input id="" type="hidden" name="course_id" value="<?php echo $_SESSION['course_id'] ?>" class="form-control">
+                                    <input id="" type="hidden" name="academic_year" value="<?php echo $_SESSION['academic_year'] ?>" class="form-control">
+                                    <input id="" type="hidden" name="semester_id" value="<?php echo $_SESSION['semester_id'] ?>" class="form-control">
+                                    <input id="" type="hidden" name="amount" value="<?php echo $_SESSION['amount'] ?>" class="form-control">
+                                    <input id="" type="text" name="registration_no" class="form-control" required value="<?php echo $adrow['reg_no'] ?>">
+                                </div>
+
+                                <div class="col-4">
+                                    <label>Roll Number</label>
+                                    <input id="" type="text" name="roll_no" class="form-control" value="<?php echo $adrow['roll_no'] ?>">
                                 </div>
                                 <div class="col-4">
+                                    <label>Department / Specialisation</label>
+                                    <input id="" type="text" name="department" class="form-control" required value="<?php echo $deprow['department'] ?>">
+                                </div>
+                                <!-- added extra  -->
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label>Course Name</label>
+                                        <input type="hidden" name="academic_year" value="<?php echo $row["academic_year"]; ?>">
+                                        <?php
+                                        $sql_course = "SELECT * FROM `tbl_course`
+															   WHERE `status` = '$visible';
+															   ";
+                                        $result_course = $con->query($sql_course);
+                                        while ($row_course = $result_course->fetch_assoc()) {
+                                            if ($course_id == $row_course["course_id"]) {
+                                        ?>
+                                                <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                                                <input type="hidden" name="academic_year" value="<?php echo $academic_yearId ?>">
+                                                <input class="form-control" name="" id="course_id" value="<?php echo $row_course["course_name"]; ?>" readonly>
+                                        <?php }
+                                        } ?>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label> Session </label>
+                                    <input id="" type="text" name="student_session" class="form-control" value="">
+                                </div>
+                                <div class="col-4">
+                                    <label>Semester</label>
+                                    <input id="" type="text" name="student_semester" class="form-control" value="">
+                                </div>
+                                <!-- added extra -->
+
+                                <!-- <div class="col-4">
                                     <label>Last Examination Passed & Year</label>
                                     <input id="" type="text" name="last_exam_year" class="form-control" required>
-                                </div>
+                                </div> -->
+
                             </div>
                         </div>
                     </div>
@@ -1259,8 +1269,56 @@ if (isset($_GET["action"])) {
                         ?>
                     </tbody>
                 </table>
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title"> Student Declaration</h3>
+                    </div>
 
-                <p>Declaration By the Student :</p>
+                    <div class="card-body table-responsive p-0">
+                        <div class="card-body row">
+                            <div class="col-4">
+                                <label>Candidate Signature ( <span class="text-danger" >max size 200kb</span> )</label>
+                                <input type="file" id="fileSign" onchange="Filevalidation('fileSign')" name="candidate_signature" class="form-control" required>
+                              
+                            </div>
+                            <div class="col-4">
+                                <label>Candidate Registration Slip ( <span class="text-danger" >max size 512kb</span> )</label>
+                                <input type="file" id="fileSign" onchange="Filevalidation()" name="registration_slip" class="form-control" required>
+                              
+                            </div>
+                            <div class="col-4">
+                                <label class="font-12" > Marksheet of last examination passed </label>
+                                <input type="file" id="fileSign" onchange="Filevalidation()" name="candidate_signature" class="form-control" required>
+                              
+                            </div>
+                            <script>
+                                    Filevalidation = () => {
+                                        var fi = document.getElementById('fileSign');
+                                        // Check if any file is selected. 
+                                        if (fi.files.length > 0) {
+                                            for (i = 0; i <= fi.files.length - 1; i++) {
+
+                                                var fsize = fi.files.item(i).size;
+                                                var file = Math.round((fsize / 1024));
+                                                // The size of the file. 
+                                                console.log(file)
+                                                if (file >= 200) {
+                                                    alert(
+                                                        "File too Big, please select a file less than 200kb");
+                                                    $("#fileSign").val("");
+                                                } else {
+                                                    document.getElementById('size').innerHTML = '<b>' +
+                                                        file + '</b> KB';
+                                                }
+                                            }
+                                        }
+                                    }
+                                </script>
+                        </div>
+                    </div>
+                    
+                </div>
+                <p> <input required type="checkbox" name="" id=""> Declaration by the student :</p>
                 <p style="text-align:justify;">I hereby declare that I have read and understood the instructions given above. I also affirm that I have submitted all the required numbers of assignment as applicable for the aforesaid course filled in the examination form and my registration for the course is valid and not time barred. If any of my statements is found to be untrue, I will have no claim for appearing in the examination. I undertake that I shall abide by the rules and regulations of the University.</p>
 
                 <tr>
@@ -1361,9 +1419,11 @@ if (isset($_GET["action"])) {
 
                                 <div class="col-8">
                                     <label>Passport Size Photograph</label><br>
-                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; ?>"> -->
+                                    <!-- <input type="hidden" name="passport_photo" class="form-control" value="<?php // echo $row["admission_profile_image"]; 
+                                                                                                                ?>"> -->
                                     <img class="profile-user-img " src=<?php echo  ' "data:image/jpeg;base64,' . base64_encode($row["admission_profile_image"]) . '" ' ?> alt="Student profile picture">
-                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php //echo $row["admission_profile_image"]; ?>" alt="Student profile picture"> -->
+                                    <!-- <img class="profile-user-img " src="../images/student_images/<?php //echo $row["admission_profile_image"]; 
+                                                                                                        ?>" alt="Student profile picture"> -->
                                 </div>
                             </div>
                         </div>

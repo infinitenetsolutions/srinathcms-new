@@ -61,6 +61,10 @@ $completeSessionOnlyYear;
     .form-control {
       font-weight: 900 !important;
       color: #ad183a !important;
+
+    }
+    input, textarea{
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -118,9 +122,9 @@ $completeSessionOnlyYear;
                   $result = $con->query($sql);
                   $row = $result->fetch_assoc();
                   // echo $row["exam_status"] ;    
-                  if ($sem_row["exam_fee_last_date"] >= $today && $row["exam_status"] == 'Approve')
+                 // if ($sem_row["exam_fee_last_date"] >= $today && $row["exam_status"] == 'Approve')
                   //if($sem_row["exam_fee_last_date"] >= $today)
-                  {
+                //  {
 
                     //if ($sem_row["exam_fee_last_date"] < $today) {
 
@@ -192,10 +196,10 @@ $completeSessionOnlyYear;
                       </div>
 
                     <?php
-                  } else {
+                 // } else {
                     // echo  "<h4 style='color:red;'>Dear ".ucfirst($_SESSION["logger_username1"]).",your dues is not clear, please clear your dues to fill the EXAMINATION FORM.</h4>";
-                    echo  "<h4 style='color:red;'>Dear " . ucfirst($_SESSION["logger_username1"]) . ", Form Fill Up Closed.</h4>";
-                  }
+                    // echo  "<h4 style='color:red;'>Dear " . ucfirst($_SESSION["logger_username1"]) . ", Form Fill Up Closed.</h4>";
+                //  }
                     ?>
 
 

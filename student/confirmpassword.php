@@ -5,6 +5,7 @@ if (empty(session_start()))
 include "include/config.php";
 $msg = '';
 $password='';
+
 // checking the phone number and email id seated into the session or not as well as checking it is not must bes null
 if (isset($_SESSION['phone']) && isset($_SESSION['email']) && $_SESSION['phone'] != '' && $_SESSION['email'] != '') {
     if (isset($_POST['resetpassword'])) {

@@ -1782,7 +1782,7 @@ if (isset($_POST["action"])) {
                         ";
 
 
-            echo  $get_last_id = "SELECT * FROM tbl_extra_income WHERE `id`='$delete_id'";
+              $get_last_id = "SELECT * FROM tbl_extra_income WHERE `id`='$delete_id'";
             $get_extra_income_id = mysqli_query($con, $get_last_id);
             $extra_income = mysqli_fetch_array($get_extra_income_id);
             $received_from = $extra_income['reg_no'];

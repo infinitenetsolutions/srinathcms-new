@@ -18,12 +18,14 @@ function send_otp()
     $sender_email_id = "admissions.srinathuniversity@gmail.com";  //here put the sender email id he show in the clint email
     $sender_password = "Rafiganj"; //here put the password of email id to send the email otp
 
+    // sending otp in mobile phone
+    $message = "Your OTP is " . $otp . ". Please do not share this OTP to anyone. Regards, Srinath University, JSR";
+    sendsmsGET($phone, $message);
     // here is the actual logic to send the otp on the email id show keep changes quirefully
     include 'phpmailer/PHPMailerAutoload.php';
 
     $mail = new PHPMailer;
-    $message = "Your OTP is " . $otp . ". Please do not share this OTP to anyone. Regards, Srinath University, JSR";
-    sendsmsGET($phone, $message);
+  
     //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
     $mail->isSMTP();                                      // Set mailer to use SMTP

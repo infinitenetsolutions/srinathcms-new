@@ -17,6 +17,8 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($connection, $otp_query);
     $data = mysqli_fetch_array($result);
     $dphone = $data['prospectus_no'];
+    $mobile_number = $data['mobile'];
+
     $demail = $data['prospectus_emailid'];
 
     if ($demail == $email || $dphone == $phone) {
@@ -24,8 +26,9 @@ if (isset($_POST['submit'])) {
           $_SESSION['phone'] = $_POST['phone'];  //the data type of phone number is string
           $_SESSION['emailid'] = $_POST['email'];
           $_SESSION['email'] = $_POST['email'];   //the data type of name is string
-          $_SESSION['otp'] = generate_otp($email);
-          $_SESSION['msg'] = send_otp();
+          $otp = generate_otp($email);
+          $message = "Your OTP is " . $otp . ". Please do not share this OTP to anyone. Regards, Srinath University, JSR";
+        sendsmsGET($mobile_number, $message);
           // redirect to the page
           header("location:./admission_verify.php");
        

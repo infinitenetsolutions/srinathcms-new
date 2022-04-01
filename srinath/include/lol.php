@@ -3406,7 +3406,10 @@ if (isset($_GET["action"])) {
             echo "0";
     }
     //Fetching Precious Fees Due Dates end
-     
+
+    /* ------------------------------------------------- Fee Payment Start -------------------------------------------------- */
+      //Fetching Precious Fees Due Dates end
+          
      /* ------------------------------------------------- Fee Payment Start -------------------------------------------------- */
         // Student fee start
         if($_GET["action"] == "fetch_student_fee_details"){
@@ -3433,76 +3436,10 @@ if (isset($_GET["action"])) {
                     $totalRemainings = 0; //In Amount or In Number
                     $totalRebate = 0; //In Amount or In Number
                     $totalPaid = 0; //In Amount or In Number
-                    $total_fine_payment=0; //total fine amount 
-                    $total_fine_payment_remaining=0;
                     //String Variables
                     $arrayPerticular = array();
                     $arrayTblFee = array();
                     $objTblFee = "";
-
-                    //  this function is making for finding the particular paid  fine amount
-                    //  $con -> is the connection object for making the connection with the database
-                    // $student-> visible is the md5 of string "visible"
-                    // $studentRegistration -> number is the student id actully it is stored into the tbl_admission table the id name is 
-                        // student_id
-                    // $particular_id is the main variable for finding the fine for particular send the particulr id and function return for the particular id 
-                      // have any paid fine amount or not if any amout have then return the amount if or it simply retern 0
-                    
-                      function fine_calculator_by_particular($con,$visible,$studentRegistrationNo,$particular_id){
-                        $fine=0; //fine variable is used for calculating the total fine for a particular id 
-                        
-                       $sqlTblFeePaid = "SELECT *
-                        FROM `tbl_fee_paid`
-                        WHERE `status` = '$visible' AND `student_id` = '$studentRegistrationNo' AND `payment_status` IN ('cleared', 'pending')
-                        AND fine!=''";
-                        $resultTblFeePaid = $con->query($sqlTblFeePaid);
-            
-                        if($resultTblFeePaid->num_rows > 0){
-                       
-                                while($rowTblFeePaid = $resultTblFeePaid->fetch_assoc()){
-    
-                                    if($rowTblFeePaid['fine']>0){
-
-                                    $after_expoide_id=explode(",",$rowTblFeePaid['particular_id']);
-                                    $after_PaidAmount = explode(",", $rowTblFeePaid["paid_amount"]);
-                
-                                    for($i=0; $i<count($after_expoide_id); $i++){
-                                        if($after_PaidAmount[$i] >0){
-                                            if($particular_id== $after_expoide_id[$i]){
-                                         $fine=$fine+ $rowTblFeePaid['fine'] ;
-                                            }   
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        return $fine;
-                    }
-                        // fine calculting total
-                        // this function is the so easy function in this function taking 3 arguments
-                        //  $con -> is the connection object for making the connection with the database
-                        // $student-> visible is the md5 of string "visible"
-                        // $studentRegistration -> number is the student id actully it is stored into the tbl_admission table the id name is 
-                        // student_id
-                        function fine_calculator_by_total($con,$visible,$studentRegistrationNo){
-                            $fine=0; //fine variable is used for calculating the total fine for a particular student 
-                            
-                           $sqlTblFeePaid = "SELECT SUM(fine) as fine
-                            FROM `tbl_fee_paid`
-                            WHERE `status` = '$visible' AND `student_id` = '$studentRegistrationNo' AND `payment_status` IN ('cleared', 'pending')
-                            AND fine!=''";
-                            $resultTblFeePaid = $con->query($sqlTblFeePaid);
-                
-                            if($resultTblFeePaid->num_rows > 0){
-                                $rowTblFeePaid = $resultTblFeePaid->fetch_assoc();
-                                    $fine=$rowTblFeePaid['fine'];
-                                
-                            }
-                            return $fine;
-                        }
-
-
-
                     //Checking If Hostel If Available Or Not
                     if(strtolower($row["admission_hostel"]) == "yes")
                         $sqlTblFee = "SELECT *
@@ -3526,7 +3463,6 @@ if (isset($_GET["action"])) {
                                 $fine_particular = $rowTblFee["fee_fine"];
                             else
                                 $fine_particular = 0;
-                     
                             $completeArray = array(
                                                 "fee_id" => $rowTblFee["fee_id"],
                                                 "fee_particulars" => $rowTblFee["fee_particulars"],
@@ -3537,13 +3473,15 @@ if (isset($_GET["action"])) {
                                                 "fee_remaining" => $rowTblFee["fee_amount"],
                                                 "fee_fine_days" => $noOfDays,
                                                 "fee_last_date" => $rowTblFee["fee_lastdate"],
+                                                "paid_fine"=>0,
                                                 "balace_amount"=>0,
+                                          
+
                                             );
                             array_push($arrayTblFee, $completeArray);
                         }
                     $arrayTblFee = json_decode(json_encode($arrayTblFee));
-                   // echo "<pre>";
-                   // print_r($arrayTblFee);
+          
                    $lastpaymentDate ="";
                      $sqlTblFeePaid = "SELECT *
                                      FROM `tbl_fee_paid`
@@ -3572,14 +3510,16 @@ if (isset($_GET["action"])) {
                                         $arrayTblFeeUpdate->fee_remaining = $arrayTblFeeUpdate->fee_remaining - intval($arrayPaidAmount[$i]);
                                     }
                                 }
+
                             }
-                               $total_balance_amount_after_pay = ($arrayTblFeeUpdate->balace_amount+$rowTblFeePaid["balance"]);
+                            $arrayTblFeeUpdate->paid_fine = $rowTblFeePaid["fine"];
+                           echo   $arrayTblFeeUpdate->balace_amount = ($arrayTblFeeUpdate->balace_amount+$rowTblFeePaid["balance"]);
+
+                    
                         }
                     //Define Variables Section End
 
-                    // echo "<pre>";
-                    // print_r( $fineArray);
-                   
+                 
 
                     ?>
                         <div class="row">
@@ -3703,33 +3643,32 @@ if (isset($_GET["action"])) {
                                           <h5>Fee Details of  <b><a href="javascript:void(0);"><?php echo $row["course_name"]." | ".$completeSessionOnlyYear; ?></a></b></h5>
                                           <table class="table table-bordered table-sm">
                                             <thead>
+                                            
                                             <tr>
                                               <th>S.No</th>
                                               <th>Particulars</th>
                                               <th>Last Date</th>
+
                                               <th>Amount</th>
                                               <th>Paid</th>
                                               <th>Rebate</th>
                                               <th>Remaining</th>
                                               <th>Fine</th>
-                                              <th>Fine paid</th>
-                                              <th>Fine Remaining</th>
-
+                                              <th>Fine paid </th>
                                               <th><span class="text-red">Total<sup class="text-yellow ml-1 text-xs">(Including Fine)</sup></span></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
                                                     $tmpSNo = 1;
-                                                    $fine_array=0;
+                                                 $balance_fine_total_amount=   $arrayTblFeeUpdate->balace_amount;
                                                     foreach($arrayTblFee as $arrayTblFeeUpdate){
 
-                                                  
-                                                    
-                                                        if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0 && $total_balance_amount_after_pay==0){
-                                                            $totalRemainings = $totalRemainings + 0;
-                                                            $totalRemaining = $totalRemaining + 0;
-                                                              $totalFine = $totalFine + 0;
+                                                                                                            
+                                                        if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0){
+                                                          //  $totalRemainings = $totalRemainings + 0;
+                                                          //  $totalRemaining = $totalRemaining + 0;
+                                                          //    $totalFine = $totalFine + 0;
                                                        
                                                         }
                                                         else{
@@ -3749,21 +3688,14 @@ if (isset($_GET["action"])) {
                                                              if( isset($arrayTblFeeUpdate->fee_last_date) && isset($lastpaymentDate['cash_date']) && isset($lastpaymentDate['balance'])){ 
                                                               if($arrayTblFeeUpdate->fee_last_date >= $lastpaymentDate['cash_date'] && $lastpaymentDate['balance'] != '')  {  //check condition
                                                                   $totalFine = $totalFine + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days));
-                                                                  $total_fine_payment=fine_calculator_by_total($con,$visible,$studentRegistrationNo);
-                                                                  $total_fine_payment_remaining=$totalFine-$total_fine_payment;
-                                                              
-                                                                } else {
-                                                                $totalFine =$totalFine+ ($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days);
-                                                                $total_fine_payment=fine_calculator_by_total($con,$visible,$studentRegistrationNo);
-                                                                $total_fine_payment_remaining=$totalFine-$total_fine_payment;
+
+                                                               } else {
+                                                              //  $totalFine = ($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days);
 
                                                                 }
-                                                           
-                                                            }else{
-                                                                $totalFine = $totalFine + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days));
-                                                                $total_fine_payment=fine_calculator_by_total($con,$visible,$studentRegistrationNo);
-                                                                $total_fine_payment_remaining=$totalFine-$total_fine_payment;
-
+                                                             }else{
+                                                             //   $totalFine = $totalFine + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days));
+ 
                                                              }
                                                        
                                                         }
@@ -3778,44 +3710,59 @@ if (isset($_GET["action"])) {
                                                             <td>&#8377; <?php echo number_format($arrayTblFeeUpdate->fee_rebate); ?></td>
 
                                                             <?php
-                                                        //    echo "<pre>";
-                                                        // printing the fine amount particular by 
-                                                        // print_r( $fineArray[$fine_array]);
-                                                                if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0 && $total_balance_amount_after_pay==0){
-                                                            ?>
+                                                             // getting the balance amount for checking balance amount exits or not
+
+                                                            //    $arrayTblFeeUpdate->balace_amount=(array_reverse($a));
+                                               
+
+                                                            if((($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)) == 0 && $balance_fine_total_amount==0 ){
+
+                                                          ?>
+                                                            
+                                                                <!-- check last payment date   -->
                                                                 <td>&#8377; <?php echo 0; ?></td>
                                                                 <td>&#8377; <?php echo 0; ?></td>
                                                                 <td><span class="text-red text-bold">&#8377; <?php echo 0; ?></span></td>
-                                                                    <?php } else{ ?>
+                                                              <?php } elseif($arrayTblFeeUpdate->fee_remaining==0) { ?>
                                                                     
                                                                         <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)); ?></td>
                                                                         
                                                                         
-                                                                      <!--check last payment date -->  
                                                                         <?php //if($arrayTblFeeUpdate->fee_last_date >= $lastpaymentDate['cash_date'] && $lastpaymentDate['balance'] != '0')  { ?> 
                                                                         <!--<td>&#8377; <?php //echo 0; ?></td>
                                                                         <td><span class="text-red text-bold">&#8377; <?php //echo 0; ?></span></td>-->
-                                                                        <?php //} else { ?>
-                                                                             <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)); ?></td> 
-                                                                              <td>&#8377; <?php echo $fine_by_particular= fine_calculator_by_particular($con,$visible,$studentRegistrationNo,$arrayTblFeeUpdate->fee_id)?></td> 
-                                                                              <td>&#8377; <?php echo $fine_by_particular_remaning=  (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days))-fine_calculator_by_particular($con,$visible,$studentRegistrationNo,$arrayTblFeeUpdate->fee_id) ?></td> 
-                                                                                <!-- total  fine has been left -->
+                                                                        <?php //} else {
                                                                             
-                                                                                <!-- total remaining fine has been left -->
+                                                                            // echo ($arrayTblFeeUpdate->paid_fine);
+                                                                            $totalFine= $totalFine+($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)-($arrayTblFeeUpdate->paid_fine);
 
-                                                                             <td><span class="text-red text-bold">&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) + (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)) - ($arrayTblFeeUpdate->fee_rebate)); ?></span></td>
+                                                                            ?>
+                                                                             <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)-($arrayTblFeeUpdate->paid_fine)); ?></td> 
+                                                                             <td><span class="text-red text-bold">&#8377; <?php echo $totalFine ?></span></td>
 
-                                                                            <?php //} ?>
-                                                                             <!--check last payment date -->  
+                                                                            <?php //} ?>              
                                                                     <?php
-                                                            } ?>
+                                                                    echo $arrayTblFeeUpdate->paid_fine;
+                                                                
+
+                                                            }else{
+
+                                                                ?>
+                                                            <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate)); ?></td>
+                                                            <td>&#8377; <?php echo number_format(($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days)-($arrayTblFeeUpdate->paid_fine)); ?></td> 
+                                                            <td><span class="text-red text-bold">&#8377; <?php echo number_format($arrayTblFeeUpdate->balace_amount); ?></span></td>
+                                                           <?php 
+                                                        
+                                                        $totalFine= $totalFine+$arrayTblFeeUpdate->balace_amount;
+                                                        $totalRemainings=$arrayTblFeeUpdate->balace_amount;
+                                                        } ?>
 
                                                         </tr>
                                                 <?php 
                                                         $tmpSNo++;
-                                                        $fine_array++;
                                                     } 
                                                 ?>
+                                             
                                                 <tr>
                                                     <td></td>
                                                     <td class="text-right text-bold"></td>
@@ -3827,8 +3774,6 @@ if (isset($_GET["action"])) {
                                                     <td class="text-bold">&#8377; <?php echo number_format($totalRebate); ?></td>
                                                     <td class="text-bold">&#8377; <?php echo number_format($totalRemaining); ?></td>
                                                     <td class="text-bold">&#8377; <?php echo number_format($totalFine); ?></td>
-                                                    <td class="text-bold">&#8377; <?php echo number_format($total_fine_payment); ?></td>
-                                                    <td class="text-bold">&#8377; <?php echo number_format($total_fine_payment_remaining); ?></td> 
                                                     <td class="text-bold"><span class="text-red"> &#8377; <?php echo number_format($totalRemainings); ?></span></td>
                                                 </tr>
                                             </tbody>
@@ -3872,7 +3817,6 @@ if (isset($_GET["action"])) {
                                                          <input type="hidden" id="particular_paid_lastDate[<?php echo $Idno; ?>]" name="particular_paid_lastDate[<?php echo $Idno; ?>]" value="<?php echo $arrayTblFeeUpdate->fee_last_date; ?>" />
                                                          <input type="hidden" id="particular_paid_fineAmount[<?php echo $Idno; ?>]" name="particular_paid_fineAmount[<?php echo $Idno; ?>]" value="<?php echo $arrayTblFeeUpdate->fee_fine; ?>" />
                                                          <input type="hidden" id="particular_paid_amount1[<?php echo $Idno; ?>]" name="particular_paid_amount1[<?php echo $Idno; ?>]" value="<?php echo ($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate) ?>" />
-                                                         <input type="" id="particular_fine_remaining[<?php echo $Idno; ?>]" name="particular_fine_remaining[<?php echo $Idno; ?>]" value="<?php echo $fine_by_particular_remaning=  (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days))-fine_calculator_by_particular($con,$visible,$studentRegistrationNo,$arrayTblFeeUpdate->fee_id) ?>" />
 
                                                          <div class="input-group">
                                                           <div class="input-group-prepend">
@@ -3898,19 +3842,7 @@ if (isset($_GET["action"])) {
                                                       </div>
                                                       <input value="<?php echo $totalFine ?>" id="fine_amount1" name="fine_amount" min="0" max="<?php echo $totalFine; ?>" type="hidden"  >
 
-                                                      <input value="<?php echo $fine_by_particular_remaning=  (($arrayTblFeeUpdate->fee_fine) * ($arrayTblFeeUpdate->fee_fine_days))-fine_calculator_by_particular($con,$visible,$studentRegistrationNo,$arrayTblFeeUpdate->fee_id) ?>" id="fine_amount" name="fine_amount" min="0" max="<?php echo $totalFine; ?>" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" <?php if($totalFine == 0) echo "readonly"; ?>>
-                                                  
-                                                      <div class="input-group-prepend">
-                                                        <select id="fine_from" onchange=" fine_by_remaining("  name="fine_from" class="btn btn-default btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" >
-                                                          <option selected disabled >Fine For</option>
-                                                          <?php
-                                                              foreach($arrayTblFee as $arrayTblFeeUpdate){
-                                                          ?>
-                                                          <option value="<?php echo $arrayTblFeeUpdate->fee_id; ?>">For - <?php echo $arrayTblFeeUpdate->fee_particulars; ?></option>
-                                                          <?php } ?>
-                                                        </select>
-                                                      </div>
-                                                   
+                                                      <input value="" id="fine_amount" name="fine_amount" min="0" max="<?php echo $totalFine; ?>" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" <?php if($totalFine == 0) echo "readonly"; ?>>
                                                     </div>
                                                 </td> 
                                             </tr>
@@ -3939,7 +3871,7 @@ if (isset($_GET["action"])) {
                                                       </div>
                                                       <input id="rebate_amount" name="rebate_amount" min="0" max="" type="number" class="form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" >
                                                       <div class="input-group-prepend">
-                                                        <select id="rebate_from" name="rebate_from" class="btn btn-default btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" >
+                                                        <select id="rebate_from" name="rebate_from" class="btn btn-danger btn-block form-control" onKeyup="completeCalculation();" onClick="completeCalculation();" onChange="completeCalculation();" onBlur="completeCalculation();" >
                                                           <option value="">Rebate From</option>
                                                           <?php
                                                               foreach($arrayTblFee as $arrayTblFeeUpdate){

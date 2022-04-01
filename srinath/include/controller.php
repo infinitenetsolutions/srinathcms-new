@@ -1564,6 +1564,8 @@ if (isset($_POST["action"])) {
             $implodedRebate = $rebate_amount . "," . $rebate_from;
         } else
             $implodedRebate = "";
+            $flag=0;
+
         if (!empty($registrationNumber && $academicYear && $courseId) && (count($particular_paid_id) != 0) && (count($particular_paid_amount) != 0) && !empty($total_amount)) {
             if (($PaymentMode != "0" && $cashDepositTo != "0") || ($PaymentMode != "0" && !empty($chequeAndOthersNumber))) {
                 if ($fine_amount >= 0 && $rebate_amount >= 0 && $total_amount >= 0 && $remaining_amount >= 0) {
@@ -1590,12 +1592,42 @@ if (isset($_POST["action"])) {
                     }
 
                     echo "<pre>";
-                    print_r($_POST);
-                        $sql = "INSERT INTO `tbl_fee_paid`
+
+                    // checking the fine exits or not into  the post variable
+                     print_r($particular_paid_id);
+                     print_r($particular_paid_amount);
+
+                    for($i=0;$i<count($particular_paid_id);$i++){
+                        echo $particular_paid_amount[$i];
+                    if($particular_paid_amount[$i]!=='' ){
+                 echo   $flag=1;
+                    }else{
+                    $flag=0;
+                    }
+                }
+                echo $flag;
+                    if($flag===1){
+                    echo     $sql = "INSERT INTO `tbl_fee_paid`
+                        (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
+                        VALUES 
+                        (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'SU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
+                        ";
+                    }else{
+                     echo    $implodedId =  ",".$_POST['fine_from'];
+                        $implodedAmount = ",0";
+
+                         $sql = "INSERT INTO `tbl_fee_paid`
                                 (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
-                                VALUES 
+                                VALUES 10,000
                                 (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'SU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
                                 ";
+
+                    }
+
+
+
+
+                
                     // getting the last inserted data of the fee paid
                     $table_id_fee_paid = "SELECT * FROM `tbl_fee_paid` WHERE 1";
                     $table_result = mysqli_query($con, $table_id_fee_paid);

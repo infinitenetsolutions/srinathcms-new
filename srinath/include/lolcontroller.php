@@ -1487,7 +1487,7 @@ if (isset($_POST["action"])) {
         $particular_paid_amount = $_POST["particular_paid_amount"];
         $fine_amount = $_POST["fine_amount"];
         $rebate_amount = $_POST["rebate_amount"];
-        $rebate_from = $_POST["rebate_from"];
+        $rebate_from = $_POST["particular_paid_id"];
         $total_amount = $_POST["total_amount"];
         $remaining_amount = $_POST["remaining_amount"];
         $PaymentMode = $_POST["PaymentMode"];
@@ -1519,46 +1519,46 @@ if (isset($_POST["action"])) {
                 exit();
             } else
                 // inserting the data into the rebate form table for how much rebate will come into the colleage
-                $rebate_by_name = $_SESSION['admin_name'];
-            $rebate_by_email = $_SESSION['admin_email'];
-            $approve_attach = addslashes(file_get_contents($_FILES['img_approve']['tmp_name']));
+            //     $rebate_by_name = $_SESSION['admin_name'];
+            // $rebate_by_email = $_SESSION['admin_email'];
+            // $approve_attach = addslashes(file_get_contents($_FILES['img_approve']['tmp_name']));
 
-            $getting_student_email = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$registrationNumber'";
-            $getting_student_result = mysqli_query($con, $getting_student_email);
-            $getting_student_email_data = mysqli_fetch_array($getting_student_result);
-            $getting_student_email_id = $getting_student_email_data['admission_emailid_student'];
-            $getting_student_name = $getting_student_email_data['admission_first_name'];
-            $student_id = $registrationNumber;
-            $department_email = $_SESSION['admin_email'];
-            $date = date('Y-m-d');
-            if ($rebate_from == 647) {
-                $rebate_particular = '1st semester';
-            } else {
-                $rebate_particular = $rebate_from;
-            }
-            $insert_rebate = "INSERT INTO `rebate`(`rebate_amount`, `approve_amount`, `rebate_by_name`, `rebate_by_email`, `student_email`, `student_name`, `rebate_date`, `approve_date`, `department`, `particular`, `massage`, `attach`, `status`) VALUES
-            ('$rebate_amount','$rebate_amount','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','$date','$department_email','Fine','$NotesByAdmin','$approve_attach','1')";
+            // $getting_student_email = "SELECT * FROM `tbl_admission` WHERE `admission_id`='$registrationNumber'";
+            // $getting_student_result = mysqli_query($con, $getting_student_email);
+            // $getting_student_email_data = mysqli_fetch_array($getting_student_result);
+            // $getting_student_email_id = $getting_student_email_data['admission_emailid_student'];
+            // $getting_student_name = $getting_student_email_data['admission_first_name'];
+            // $student_id = $registrationNumber;
+            // $department_email = $_SESSION['admin_email'];
+            // $date = date('Y-m-d');
+            // if ($rebate_from == 647) {
+            //     $rebate_particular = '1st semester';
+            // } else {
+            //     $rebate_particular = $rebate_from;
+            // }
+            // $insert_rebate = "INSERT INTO `rebate`(`rebate_amount`, `approve_amount`, `rebate_by_name`, `rebate_by_email`, `student_email`, `student_name`, `rebate_date`, `approve_date`, `department`, `particular`, `massage`, `attach`, `status`) VALUES
+            // ('$rebate_amount','$rebate_amount','$rebate_by_name','$rebate_by_email','$getting_student_email_id','$getting_student_name','$date','$date','$department_email','Fine','$NotesByAdmin','$approve_attach','1')";
 
-            $rebate_result = mysqli_query($con, $insert_rebate);
+            // $rebate_result = mysqli_query($con, $insert_rebate);
 
 
 
 
             include('../../Backend/rebate.php');
 
-            if ($rebate_result) {
+            // if ($rebate_result) {
 
-                $getting_course_name1 = "SELECT * FROM `tbl_course` WHERE course_id=$courseId";
-                $getting_course_name_result = mysqli_query($con, $getting_course_name1);
-                $getting_course_name_result_data = mysqli_fetch_array($getting_course_name_result);
-                $add_admission_course_name1 = $getting_course_name_result_data['course_name'];
-                $add_admission_session = $getting_course_name_result_data['course_duration'];
+            //     $getting_course_name1 = "SELECT * FROM `tbl_course` WHERE course_id=$courseId";
+            //     $getting_course_name_result = mysqli_query($con, $getting_course_name1);
+            //     $getting_course_name_result_data = mysqli_fetch_array($getting_course_name_result);
+            //     $add_admission_course_name1 = $getting_course_name_result_data['course_name'];
+            //     $add_admission_session = $getting_course_name_result_data['course_duration'];
 
-                $date = date('Y') + $add_admission_session;
-                $add_admission_session = date('Y') . ' - ' . $date;
+            //     $date = date('Y') + $add_admission_session;
+            //     $add_admission_session = date('Y') . ' - ' . $date;
 
-                sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, $particular_paid_particular_name, $rebate_amount, $rebate_by_email);
-            }
+            //     sendmassageforupdate($NotesByAdmin, $getting_student_email_id, $getting_student_name, $add_admission_course_name1, $add_admission_session, $student_id, $particular_paid_particular_name, $rebate_amount, $rebate_by_email);
+            // }
 
 
             $implodedRebate = $rebate_amount . "," . $rebate_from;
@@ -1566,7 +1566,10 @@ if (isset($_POST["action"])) {
             $implodedRebate = "";
             $flag=0;
 
-        if (!empty($registrationNumber && $academicYear && $courseId) && !empty($total_amount)) {
+
+            echo "<pre>";
+            print_r($_POST);
+        if (!empty($registrationNumber && $academicYear && $courseId) && (count($particular_paid_id) != 0) && (count($particular_paid_amount) != 0) && !empty($total_amount)) {
             if (($PaymentMode != "0" && $cashDepositTo != "0") || ($PaymentMode != "0" && !empty($chequeAndOthersNumber))) {
                 if ($fine_amount >= 0 && $rebate_amount >= 0 && $total_amount >= 0 && $remaining_amount >= 0) {
                     $getRe = "SELECT `feepaid_id` FROM `tbl_fee_paid`
@@ -1578,8 +1581,7 @@ if (isset($_POST["action"])) {
                     while ($getReRow = $getReResult->fetch_assoc())
                         $receipt_no_gen = $getReRow["feepaid_id"];
                     $receipt_no_gen++;
-                    $implodedId = implode(",", $particular_paid_id);
-                    $implodedAmount = implode(",", $particular_paid_amount);
+                  
                     if (isset($_POST["extra_fine"]) && !empty($_POST["extra_fine"])) {
                         $complete_extra_fine = $_POST["extra_fine"] + "|separator|" + htmlspecialchars($_POST["extra_fine_description"], ENT_QUOTES);
                         $add_extra_income = "INSERT INTO `tbl_extra_income`(`id`, `received_date`, `particulars`, `amount`, `payment_mode`, `account_number`, `bank_name`, `branch_name`, `ifsc_code`, `transaction_no`, `received_from`, `remarks`, `post_at`, `status`) VALUES
@@ -1591,31 +1593,22 @@ if (isset($_POST["action"])) {
                             $FeeStatus = "pending";
                     }
 
-                    echo "<pre>";
+                    if($particular_paid_amount>0){
+                        $implodedId =  $particular_paid_id;
+                        $implodedAmount =  $particular_paid_amount;
 
-                    // checking the fine exits or not into  the post variable
-                     print_r($particular_paid_id);
-                     print_r($particular_paid_amount);
-
-                    for($i=0;$i<count($particular_paid_id);$i++){
-                    if($particular_paid_amount[$i]!=='' ){
-                         echo   $flag=1;
-                        }
-                }
-                echo $flag;
-                    if($flag===1){
-                    echo     $sql = "INSERT INTO `tbl_fee_paid`
+                         $sql = "INSERT INTO `tbl_fee_paid`
                         (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
                         VALUES 
                         (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'SU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
                         ";
                     }else{
-                     echo    $implodedId =  ",".$_POST['fine_from'];
+                     echo    $implodedId =  ",".$particular_paid_id;
                         $implodedAmount = ",0";
 
-                       echo  $sql = "INSERT INTO `tbl_fee_paid`
+                         $sql = "INSERT INTO `tbl_fee_paid`
                                 (`feepaid_id`, `student_id`, `course_id`, `particular_id`, `paid_amount`, `rebate_amount`, `fine`, `extra_fine`, `balance`, `payment_mode`, `cash_deposit_to`, `cash_date`, `notes`, `receipt_date`, `bank_name`, `transaction_no`, `transaction_date`, `receipt_no`, `paid_on`, `university_details_id`, `fee_paid_time`, `payment_status`, `status`) 
-                                VALUES 
+                                VALUES 10,000
                                 (NULL, '$registrationNumber', '$courseId', '$implodedId', '$implodedAmount', '$implodedRebate', '$fine_amount', '$complete_extra_fine', '$remaining_amount', '$PaymentMode', '$cashDepositTo', '$paymentDate', '$NotesByAdmin', '$paidDate', '$bankName', '$chequeAndOthersNumber', '$paymentDate', 'SU_$receipt_no_gen', '$paymentDate', '$academicYear', '$date_variable_today_month_year_with_timing', '$FeeStatus', '$visible')
                                 ";
 

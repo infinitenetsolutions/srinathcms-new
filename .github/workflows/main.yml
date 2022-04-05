@@ -11,7 +11,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        # server: srinathuniversity.co.in
-        # username:  cms@srinathuniversity.co.in
-        # password: ${{ secrets.ftp_password }}
+        server: srinathuniversity.co.in
+        username:  cms@srinathuniversity.co.in
+        password: ${{ secrets.ftp_password }}
         

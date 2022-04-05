@@ -5,30 +5,30 @@ $smg = '';
 $otp = '';
 $otp_value = '';
 $name = '';
-$email = '';
+$phone_number = '';
 $phone = '';
 
 require('./Backend/connection.inc.php');
 include('./Backend/function.inc.php');
 if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $otp_query = "SELECT * FROM `tbl_prospectus` WHERE prospectus_emailid='$email' && `prospectus_no`='$phone'";
+    $phone_number = $_POST['email'];
+    $otp_query = "SELECT * FROM `tbl_prospectus` WHERE `mobile`='$phone_number' && `prospectus_no`='$phone'";
     $result = mysqli_query($connection, $otp_query);
     $data = mysqli_fetch_array($result);
-    $dphone = $data['prospectus_no'];
+    $prospectus_no = $data['prospectus_no'];
     $mobile_number = $data['mobile'];
 
     $demail = $data['prospectus_emailid'];
 
-    if ($demail == $email || $dphone == $phone) {
+    if ($demail == $phone_number || $prospectus_no == $phone) {
           //the data type of name is string
           $_SESSION['phone'] = $_POST['phone'];  //the data type of phone number is string
           $_SESSION['emailid'] = $_POST['email'];
           $_SESSION['email'] = $_POST['email'];   //the data type of name is string
-          $otp = generate_otp($email);
+          $otp = generate_otp($phone_number);
           $message = "Your OTP is " . $otp . ". Please do not share this OTP to anyone. Regards, Srinath University, JSR";
-        sendsmsGET($mobile_number, $message);
+            sendsmsGET($mobile_number, $message);
           // redirect to the page
           header("location:./admission_verify.php");
        
@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
                                         <div class="group col-sm-6 "> <label for="user" class="label">Prospectus Number</label> <input value="<?php echo $phone; ?>" required id="user" type="text" class="input" placeholder="Prospectus Number" name="phone" required maxlength="12" > </div>
 
 
-                                        <div class="group col-sm-6"> <label for="user" class="label">Email</label> <input value="<?php echo $email; ?>" required id="user" type="email" class="input" placeholder="Enter Email id" name="email" required pattern="[^ @]*@[^ @]*"> </div>
+                                        <div class="group col-sm-6"> <label for="user" class="label">Phone  number</label> <input value="<?php echo $phone_number; ?>" required id="user" type="email" class="input" placeholder="Enter 10 digit valid mobile number" name="email" required > </div>
 
                                         <p class="errormsg col-sm-6"><?php echo $smg; ?></p>
                                     </div>

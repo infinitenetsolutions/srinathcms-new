@@ -3867,7 +3867,8 @@ if (isset($_GET["action"])) {
                                                                                 <input type="hidden" id="particular_paid_fineAmount[<?php echo $Idno; ?>]" name="particular_paid_fineAmount[<?php echo $Idno; ?>]" value="<?php echo $arrayTblFeeUpdate->fee_fine; ?>" />
                                                                                 <input type="hidden" id="particular_paid_amount1[<?php echo $Idno; ?>]" name="particular_paid_amount1[<?php echo $Idno; ?>]" value="<?php echo ($arrayTblFeeUpdate->fee_remaining) - ($arrayTblFeeUpdate->fee_rebate) ?>" />
                                                                                 <input type="hidden" id="particular_fine_remaining[<?php echo $arrayTblFeeUpdate->fee_id; ?>]" name="particular_fine_remaining[<?php echo $Idno; ?>]" value="<?php echo $fine_by_particular_remaning  ?>" />
-                                                                                <input type="hidden" id="particular_fine_for_database" name="particular_fine_for_database[<?php echo $arrayTblFeeUpdate->fee_id; ?>]" value="<?php echo $all_fine  ?>" />
+                                                                                <input type="hidden" id="particular_fine_for_database[<?php echo $arrayTblFeeUpdate->fee_id; ?>]" name="particular_fine_for_database[<?php echo $arrayTblFeeUpdate->fee_id; ?>]" value="<?php echo $all_fine  ?>" />
+                                                                                <br/>
 
                                                                     <?php
                                                             //} ?>
@@ -4192,7 +4193,11 @@ if (isset($_GET["action"])) {
                                     const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
                                     const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
                                     day = 1000*60*60*24;
-                                    return(date2utc - date1utc)/day
+                                    total_days=(date2utc - date1utc)/day;
+                                    if(total_days>0){
+                                        return total_days
+                                    }
+                                     
                                             }
 
 
@@ -4266,7 +4271,10 @@ if (isset($_GET["action"])) {
                                                 date1 = new Date(lastDate),
                                                 date2 = new Date(paymentDate),
                                                 noOfDays = difference(date1,date2); 
-                                                particular_fine_remaining_amount=  Number(document.getElementById("particular_fine_remaining["+particular_id+"]").value)
+                                                particular_fine_remaining_amount= (fineAmount * noOfDays)
+                                                
+                                                document.getElementById("particular_fine_remaining["+particular_id+"]").value=particular_fine_remaining_amount
+                                                document.getElementById("particular_fine_for_database["+particular_id+"]").value=particular_fine_remaining_amount
 
                                                total_calculated_fine= total_calculated_fine+ Number(particular_fine_remaining_amount)
                                                 //    console.log(total_calculated_fine)

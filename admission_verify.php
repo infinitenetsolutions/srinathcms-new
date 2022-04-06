@@ -106,7 +106,7 @@ if (isset($_POST['submit']) && isset($_POST['otp'])) {
                             <div class="login">
                                 <form action="" method="POST">
                                     <div class="group col-sm-6"> <label for="user" class="label">Otp</label> <input required id="user" type="text" class="input" placeholder="Enter 6 Digit otp" name="otp">
-                                    <?php echo $_SESSION['msg']; ?>   
+                                  <small>OTP sended to your mobile number <?php echo $_SESSION['phone'] ?></small> 
                                     <p class="errormsg"><?php echo $smg; ?></p>
                                     </div>
 

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
 
     if ($demail == $phone_number || $prospectus_no == $phone) {
           //the data type of name is string
-          $_SESSION['phone'] = $_POST['phone'];  //the data type of phone number is string
+          $_SESSION['phone'] = $mobile_number;  //the data type of phone number is string
           $_SESSION['emailid'] = $_POST['email'];
           $_SESSION['email'] = $_POST['email'];   //the data type of name is string
           $otp = generate_otp($phone_number);

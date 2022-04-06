@@ -20,7 +20,7 @@ if (isset($_SESSION['emailid']) && ($_SESSION['emailid'] != '')) {
 
 
 
-  $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE `prospectus_emailid`='$email'";
+  $user_data_query = "SELECT * FROM `tbl_prospectus` WHERE `mobile`='$email'";
   $propactus_details = mysqli_query($connection, $user_data_query);
   $row = mysqli_fetch_array($propactus_details);
   // course details

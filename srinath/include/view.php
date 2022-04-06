@@ -4194,6 +4194,9 @@ if (isset($_GET["action"])) {
                                     const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
                                     day = 1000*60*60*24;
                                     total_days=(date2utc - date1utc)/day;
+                                    console.log(total_days)
+
+                                   
                                     if(total_days>0){
                                         return total_days
                                     }
@@ -4264,13 +4267,14 @@ if (isset($_GET["action"])) {
                                                 
                       
 
-                                             if(lastDate <= paymentDate){
                                                  if(particular_paid_amount1!=0){
                                                    // console.log(particular_paid_amount1)
 
-                                                date1 = new Date(lastDate),
-                                                date2 = new Date(paymentDate),
+                                                date1 = new Date(lastDate);
+                                                date2 = new Date(paymentDate);
+                                                
                                                 noOfDays = difference(date1,date2); 
+                                                console.log(noOfDays);
                                                 particular_fine_remaining_amount= (fineAmount * noOfDays)
                                                 
                                                 document.getElementById("particular_fine_remaining["+particular_id+"]").value=particular_fine_remaining_amount
@@ -4285,7 +4289,7 @@ if (isset($_GET["action"])) {
 
                                                }
                                              }
-                                               }
+                                               
                                                 // Total fine
                                                 total_fine_calculated_after=Number(total_calculated_fine1)+Number(total_calculated_fine);
 

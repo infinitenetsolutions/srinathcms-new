@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
                                         <div class="group col-sm-6 "> <label for="user" class="label">Prospectus Number</label> <input value="<?php echo $phone; ?>" required id="user" type="text" class="input" placeholder="Prospectus Number" name="phone" required maxlength="12" > </div>
 
 
-                                        <div class="group col-sm-6"> <label for="user" class="label">Phone  number</label> <input value="<?php echo $phone_number; ?>" required id="user" type="email" class="input" placeholder="Enter 10 digit valid mobile number" name="email" required > </div>
+                                        <div class="group col-sm-6"> <label for="user" class="label">Phone  number</label> <input value="<?php echo $phone_number; ?>" required id="user" type="text" class="input" placeholder="Enter 10 digit valid mobile number" name="email" required > </div>
 
                                         <p class="errormsg col-sm-6"><?php echo $smg; ?></p>
                                     </div>

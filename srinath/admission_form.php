@@ -86,21 +86,21 @@ include "include/authentication.php";
                     $sel = mysqli_query($con, " SELECT MAX(admission_id) + 1 AS id FROM tbl_admission");
                     $result = mysqli_fetch_array($sel)
                     ?>
-                    <label>Registration No</label>
+                    <label>Registration No<span class="text-danger">*</span> </label>
                     <input type="text" name="add_admission_id" value="<?php echo $result['id'] ?>" class="form-control">
 
                   </div>
                   <div class="col-4">
-                    <label>Enter Prospectus No</label>
+                    <label>Enter Prospectus No<span class="text-danger">*</span> </label>
                     <input id="form_no" type="text" name="add_admission_form_no" class="form-control" required>
                   </div>
                   <div class="col-4">
-                    <label>Admission No</label>
+                    <label>Admission No<span class="text-danger">*</span> </label>
                     <input type="text" name="add_admission_no" class="form-control" value="" readonly placeholder="Generate By University">
                   </div>
 
                   <div class="col-4">
-                    <label>Title</label>
+                    <label>Title<span class="text-danger">*</span> </label>
                     <select name="add_admission_title" class="form-control">
                       <option value="0">Select</option>
                       <option value="Master">Master</option>
@@ -111,23 +111,23 @@ include "include/authentication.php";
                   </div>
 
                   <div class="col-4">
-                    <label>Full Name</label>
+                    <label>Full Name<span class="text-danger">*</span> </label>
                     <!-- <input id="first_name" type="hidden" name="add_admission_first_name" class="form-control" required> -->
                     <input id="first_name" type="text" name="add_admission_first_name" class="form-control" required>
                   </div>
 
                   <!-- <div class="col-4">
-                    <label>Middle Name</label>
+                    <label>Middle Name<span class="text-danger">*</span> </label>
                     <input type="text" name="add_admission_middle_name" class="form-control">
                   </div> -->
 
                   <!-- <div class="col-4">
-                    <label>Last Name</label>
+                    <label>Last Name<span class="text-danger">*</span> </label>
                     <input id="last_name" type="text" name="add_admission_last_name" class="form-control">
                   </div> -->
 
                   <div class="col-4">
-                    <label>Course</label>
+                    <label>Course<span class="text-danger">*</span> </label>
                     <select id="course" name="add_admission_course_name" onchange="change_semester(this.value)" class="form-control" required>
                       <option value="0">Select Course</option>
                       <?php
@@ -143,31 +143,31 @@ include "include/authentication.php";
 
 
                   <div class="col-4">
-                    <label>Session</label>
+                    <label>Session<span class="text-danger">*</span> </label>
                     <select id="s_academic_year" class="form-control" name="add_admission_session">
 
                     </select>
                   </div>
                   <div class="col-4">
-                    <label>Date Of Birth</label>
+                    <label>Date Of Birth<span class="text-danger">*</span> </label>
                     <input id="dob" type="date" name="add_admission_dob" class="form-control" required>
                   </div>
 
                   <div class="col-4">
-                    <label>Nationality</label>
+                    <label>Nationality<span class="text-danger">*</span> </label>
                     <input type="text" name="add_admission_nationality" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Aadhar No</label>
+                    <label>Aadhar No<span class="text-danger">*</span> </label>
                     <input type="text" name="add_admission_aadhar_no" class="form-control">
                   </div>
 
                   <div class="col-4">
-                    <label>Date Of Admission</label>
+                    <label>Date Of Admission<span class="text-danger">*</span> </label>
                     <input type="date" name="add_date_of_admission" class="form-control" value="<?php echo date("Y-m-d"); ?>">
                   </div>
                   <div class="col-4">
-                    <label>Category</label>
+                    <label>Category </label>
                     <select name="add_admission_category" class="form-control">
                       <option value="0">Select</option>
                       <option value="General">General</option>
@@ -177,7 +177,7 @@ include "include/authentication.php";
                     </select>
                   </div>
                   <div class="col-4">
-                    <label>Gender</label>
+                    <label>Gender </label>
                     <select id="gender" name="add_admission_gender" class="form-control">
                       <option value="0">Select</option>
                       <option value="Male">Male</option>
@@ -187,27 +187,27 @@ include "include/authentication.php";
 
 
                   <div class="col-md-4">
-                    <label>Username</label>
-                    <input type="text" name="add_admission_username" class="form-control" required>
+                    <label>Username<span class="text-danger">*</span> </label>
+                    <input  type="text" name="add_admission_username" class="form-control" required>
                   </div>
                   <div class="col-4">
-                    <label>Password</label>
+                    <label>Password<span class="text-danger">*</span> </label>
                     <input type="password" name="add_admission_password" class="form-control" required>
                   </div>
                   <div class="col-4">
-                    <label>Blood Group</label>
+                    <label>Blood Group </label>
                     <input type="text" name="add_admission_blood_group" class="form-control">
                   </div>
 
                   <div class="col-4">
-                    <label>Hostel</label>
+                    <label>Hostel </label>
                     <select name="add_admission_hostel" class="form-control">
                       <option value="No">No</option>
                       <option value="Yes">Yes</option>
                     </select>
                   </div>
                   <div class="col-4">
-                    <label>Transport</label>
+                    <label>Transport </label>
                     <select name="add_admission_transport" class="form-control">
                       <option value="No">No</option>
                       <option value="Yes">Yes</option>
@@ -218,7 +218,7 @@ include "include/authentication.php";
 
                   </div>
                   <div class="col-4">
-                    <label>Image</label>
+                    <label>Image<span class="text-danger">*</span> </label>
                     <input type="file" accept="image/*" name="add_admission_profile_image" id="add_admission_profile_image" class="form-control">
                   </div>
                   <div class="col-4">
@@ -238,43 +238,43 @@ include "include/authentication.php";
               <div class="card-body">
                 <div class="row">
                   <div class="col-4">
-                    <label>Residential Address</label>
+                    <label>Residential Address </label>
                     <textarea id="address" name="add_admission_residential_address" class="form-control" style="height: 38px;"></textarea>
                   </div>
                   <div class="col-4">
-                    <label>State</label>
+                    <label>State </label>
                     <input id="state" type="text" name="add_admission_state" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>City</label>
+                    <label>City </label>
                     <input id="city" type="text" name="add_admission_city" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>District</label>
+                    <label>District </label>
                     <input type="text" name="add_admission_district" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Pin Code</label>
+                    <label>Pin Code </label>
                     <input id="postal_code" type="text" name="add_admission_pin_code" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Home Landline no.</label>
+                    <label>Home Landline no. </label>
                     <input type="text" name="add_admission_home_landlineno" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Mobile No. (Student)</label>
+                    <label>Mobile No. (Student) </label>
                     <input id="mobile_no" type="text" name="add_admission_mobile_student" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Father Phone No.</label>
+                    <label>Father Phone No. </label>
                     <input type="text" name="add_admission_father_phoneno" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Email Id (Father)</label>
+                    <label>Email Id (Father) </label>
                     <input type="email" name="add_admission_emailid_father" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Email Id (Student)</label>
+                    <label>Email Id (Student) </label>
                     <input id="email_id" type="email" name="add_admission_emailid_student" class="form-control">
                   </div>
 
@@ -292,15 +292,15 @@ include "include/authentication.php";
               <div class="card-body">
                 <div class="row">
                   <div class="col-4">
-                    <label>Father Name</label>
-                    <input id="father_name" type="text" name="add_admission_father_name" class="form-control">
+                    <label>Father Name<span class="text-danger">*</span> </label>
+                    <input required id="father_name" type="text" name="add_admission_father_name" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Father Whatsapp No</label>
+                    <label>Father Whatsapp No </label>
                     <input type="text" name="add_admission_father_whatsappno" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Mother Name</label>
+                    <label>Mother Name<span class="text-danger">*</span> </label>
                     <input id="mother_name" type="text" name="add_admission_mother_name" class="form-control">
                   </div>
                 </div>
@@ -387,37 +387,37 @@ include "include/authentication.php";
               <div class="card-body">
                 <div class="row">
                   <div class="col-4">
-                    <label>10th Marksheet</label>
+                    <label>10th Marksheet<span class="text-danger">*</span> </label>
                     <input type="file" accept="image/*" name="add_admission_tenth_marksheet" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>10th Passing Certificate</label>
+                    <label>10th Passing Certificate<span class="text-danger">*</span> </label>
                     <input type="file" accept="image/*" name="add_admission_tenth_passing_certificate" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>12th Marksheet</label>
+                    <label>12th Marksheet </label>
                     <input type="file" accept="image/*" name="add_admission_twelve_markesheet" class="form-control">
                   </div>
 
                   <div class="col-4">
-                    <label>12th Passing Certificate</label>
+                    <label>12th Passing Certificate </label>
                     <input type="file" accept="image/*" name="add_admission_twelve_passing_certificate" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Graduation Marksheet</label>
+                    <label>Graduation Marksheet </label>
                     <input type="file" accept="image/*" name="add_admission_graduation_marksheet" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Recent Character Certificate</label>
+                    <label>Recent Character Certificate </label>
                     <input type="file" accept="image/*" name="add_admission_recent_character_certificate" class="form-control">
                   </div>
 
                   <div class="col-4">
-                    <label>Other Certificate (If applicable)</label>
+                    <label>Other Certificate (If applicable) </label>
                     <input type="file" accept="image/*" name="add_admission_other_certificate" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Character Certificate (If applicable)</label>
+                    <label>Character Certificate (If applicable) </label>
                     <input type="file" accept="image/*" name="add_admission_character_certificate" class="form-control">
                   </div>
 
@@ -519,15 +519,15 @@ include "include/authentication.php";
               <div class="card-body">
                 <div class="row">
                   <div class="col-4">
-                    <label>Student Signature</label>
+                    <label>Student Signature<span class="text-danger">*</span> </label>
                     <input required type="file" accept="image/*" name="student_sing" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Parent Signature</label>
+                    <label>Parent Signature<span class="text-danger">*</span> </label>
                     <input required type="file" accept="image/*" name="parent_sing" class="form-control">
                   </div>
                   <div class="col-4">
-                    <label>Date</label>
+                    <label>Date<span class="text-danger">*</span> </label>
                     <input required readonly type="text" name="date" class="form-control" value="<?php echo date('Y-m-d') ?>">
                   </div>
 
@@ -544,12 +544,12 @@ include "include/authentication.php";
               <div class="card-body">
                 <div class="row">
                   <div class="col-3">
-                    <label>Rebate Amount</label>
+                    <label>Rebate Amount </label>
                     <input required type="number" onkeyup="rebate(this.value)" name="rebate_amount" class="form-control">
                   </div>
 
                   <div class="col-3">
-                    <label>Approver's Email</label>
+                    <label>Approver's Email </label>
                     <?php
                     $getting_admin = "SELECT * FROM `tbl_admin` WHERE 1 ";
                     $getting_admin_result = mysqli_query($con, $getting_admin);
@@ -569,12 +569,12 @@ include "include/authentication.php";
 
                   </div>
                   <div class="col-3">
-                    <label>Approver's Name</label>
+                    <label>Approver's Name </label>
                     <select required disabled id="admin_name" name="admin_name" class="form-control ">
                     </select>
                   </div>
                   <div class="col-3">
-                    <label>Relevant Documents</label>
+                    <label>Relevant Documents </label>
                     <input disabled required id="attach_doc" type="file" name="attach_doc" class="form-control">
                   </div>
 

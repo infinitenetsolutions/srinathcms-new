@@ -1,12 +1,37 @@
 <?php
+include './framwork/main.php';
 $page_no = "4";
 $page_no_inside = "4_1";
 include "include/authentication.php";
 $id = $_GET['id'];
+$url='prospectus_view';
 $prospectus = "SELECT * FROM `tbl_prospectus` WHERE `id`=$id";
 $prospectus_result = mysqli_query($con, $prospectus);
 $row = mysqli_fetch_array($prospectus_result);
-
+if(isset($_POST['prospectus_applicant_name'])){
+  $result= updateAll('tbl_prospectus',$_POST,'`id`='.$id);
+  if($result=='success'){
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> Data successfully updated.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <script>
+  setTimeout(function() {  window.location.replace("' . $url . '") },1000);
+  </script>
+  ';
+  }else{
+    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Warning!</strong> '.$result.'
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+ 
+  ';
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -130,7 +155,7 @@ $row = mysqli_fetch_array($prospectus_result);
                   </div>
                   <div class="col-4">
                     <label>State</label>
-                    <input type="text" value="<?php echo $row['prospectus_state'] ?>" id="prospectus_state	" name="prospectus_state	" class="form-control" required>
+                    <input type="text" value="<?php echo $row['prospectus_state'] ?>" id="prospectus_state	" name="prospectus_state" class="form-control" required>
 
                   </div>
                   <div class="col-4">
@@ -178,13 +203,13 @@ $row = mysqli_fetch_array($prospectus_result);
                     <label> Session </label>
                     <select id="prospectus_session" name="prospectus_session" class="form-control">
 
-                      <option value="<?php echo $row['prospectus_session'] ?>"><?php echo $row['prospectus_session'] ?></option>
+                    <option value="<?php echo $row['prospectus_session'] ?>"><?php echo $row['prospectus_session'] ?></option>
                       <?php
-                      $sql = "select * from tbl_university_details";
+                      $sql = "select * from tbl_university_details where 1";
                       $query = mysqli_query($con, $sql);
-                      while ($row = mysqli_fetch_array($query)) {
+                      while ($row1 = mysqli_fetch_array($query)) {
                       ?>
-                        <option value="<?php echo $row['university_details_academic_start_date'] . '-' . $row['university_details_academic_start_date']; ?>"><?php echo $row['university_details_academic_start_date'] . '-' . $row['university_details_academic_start_date']; ?></option>
+                        <option value="<?php echo $row1['university_details_academic_start_date'] . '-' . $row1['university_details_academic_end_date']; ?>"><?php echo $row1['university_details_academic_start_date'] . '-' . $row1['university_details_academic_end_date']; ?></option>
                       <?php } ?>
                     </select>
                   </div>
@@ -195,7 +220,7 @@ $row = mysqli_fetch_array($prospectus_result);
                   <div id="loader_section"></div>
                 </div>
                 <div class="col-md-6 mt-4">
-                  <input type="submit" id="prospectus_form_button" name="prospectus_form_button" class="btn btn-primary" value="Submit">
+                  <input type="submit" id="prospectus_form_button"  class="btn btn-primary" value="Submit">
                   <button type="reset" class="btn btn-primary">Reset</button>
                 </div>
               </div>

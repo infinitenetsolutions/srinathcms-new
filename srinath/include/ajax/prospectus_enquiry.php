@@ -28,7 +28,7 @@ if ($result->num_rows > 0) {
             }
             ?>
 
-            <div class="modal fade" id="exampleModal<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal1<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm " role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-danger text-center">
@@ -59,10 +59,22 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["post_at"] ?></td>
 
             <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<?php echo $id ?>">
-                    <i class="fas fa-trash">
-                    </i> </button>
+                <a type="button" class="btn btn-warning" href="prospectus_form?id=<?php echo $id ?>">
+                    <i class="fas fa-edit"></i>
+                    </i> </a>
+            </td>
+            <td>
 
+                <a type="button" class="btn btn-danger" href="./include/status/delete_prospectus?delete=<?php echo $id ?>" >
+                    <i class="fas fa-trash">
+                    </i> </a>
+
+            </td>
+
+            <td>
+                <a type="button" class="btn btn-success" href="admit_card_print?id=<?php echo $id ?>">
+                    <i class="fas fa-print"></i>
+                    </i> </a>
             </td>
 
 

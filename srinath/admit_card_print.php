@@ -413,9 +413,9 @@ error_reporting(0);
 
                       <tbody>
                         <?php
-                        $sql = "SELECT * FROM `tbl_subjects` WHERE `status` = '$visible' && course_id = '1' && fee_academic_year = '3' ORDER BY `subject_id` ASC ";
+                      //  $sql = "SELECT * FROM `tbl_subjects` WHERE `status` = '$visible' && course_id = '1' && fee_academic_year = '3' ORDER BY `subject_id` ASC ";
 
-                        //  $sql = "SELECT * FROM `tbl_subjects` WHERE `status` = '$visible' && course_id = '" . $row_course["course_id"] . "' && fee_academic_year = '" . $row_session["university_details_id"] . "' ORDER BY `subject_id` ASC ";
+                          $sql = "SELECT * FROM `tbl_subjects` WHERE `status` = '$visible' && course_id = '" . $row_course["course_id"] . "' && fee_academic_year = '" . $row_session["university_details_id"] . "' ORDER BY `subject_id` ASC ";
                         $rows = $con->query($sql);
                         while ($row_course = $rows->fetch_assoc()) {
                         ?>

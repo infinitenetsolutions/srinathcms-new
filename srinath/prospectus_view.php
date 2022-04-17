@@ -105,7 +105,9 @@ include "include/authentication.php";
                             <th>Payment Status</th>
                             <th>Payment Mode</th>
                             <th>Timing</th>
-                            <th>Action 1</th>
+                            <th>Action1 </th>
+                            <th>Action 2</th>
+                            <th>Admit Card</th>
 
                         </tr>
                     </thead>
@@ -174,7 +176,11 @@ include "include/authentication.php";
                                     <td><?php echo $row["payment_status"] ?></td>
                                     <td><?php echo $row["prospectus_payment_mode"] ?></td>
                                     <td><?php echo $row["post_at"] ?></td>
-
+                                    <td>
+                                        <a type="button" class="btn btn-warning" href="prospectus_form?id=<?php echo $id ?>">
+                                        <i class="fas fa-edit"></i>
+                                            </i> </a>
+                                    </td>
                                     <td>
 
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<?php echo $id ?>">
@@ -182,6 +188,13 @@ include "include/authentication.php";
                                             </i> </button>
 
                                     </td>
+
+                                    <td>
+                                        <a type="button" class="btn btn-success" href="admit_card_print?id=<?php echo $id ?>">
+                                        <i class="fas fa-print"></i>
+                                            </i> </a>
+                                    </td>
+                                 
 
 
                                 </tr>
@@ -197,7 +210,7 @@ include "include/authentication.php";
                     </tbody>
                 </table>
                 <?php
-                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus where `payment_status`='success'  " );
+                $result_db = mysqli_query($con, "SELECT COUNT(id) FROM tbl_prospectus where `payment_status`='success'  ");
                 $row_db = mysqli_fetch_row($result_db);
                 $total_records = $row_db[0];
                 $total_pages = $total_records;
@@ -254,7 +267,7 @@ include "include/authentication.php";
     $getmaxid_data = mysqli_fetch_array($getmaxid_result);
     $prosprectus_number = $getmaxid_data['id1'];
 
-      $add_prospectus_no =  'SU/P/' . (($prosprectus_number)+1);
+    $add_prospectus_no =  'SU/P/' . (($prosprectus_number) + 1);
 
     ?>
     <!-- ./wrapper -->
@@ -350,7 +363,7 @@ include "include/authentication.php";
 
                         <div class="col-4">
                             <label>Course</label>
-                            <select id="add_prospectus_course_name"  name="add_prospectus_course_name" class="form-control" onchange="showdesg(this.value)">
+                            <select id="add_prospectus_course_name" name="add_prospectus_course_name" class="form-control" onchange="showdesg(this.value)">
                                 <option value="0">Select Course</option>
                                 <?php
                                 $sql = "select * from tbl_course";
@@ -550,7 +563,7 @@ include "include/authentication.php";
         });
     </script>
     <script>
-   
+
     </script>
 
     <script>

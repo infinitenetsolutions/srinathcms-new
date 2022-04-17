@@ -2,6 +2,12 @@
 $page_no = "4";
 $page_no_inside = "4_1";
 include "include/authentication.php";
+$id = $_GET['id'];
+$prospectus = "SELECT * FROM `tbl_prospectus` WHERE `id`=$id";
+$prospectus_result = mysqli_query($con, $prospectus);
+$row = mysqli_fetch_array($prospectus_result);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,34 +72,38 @@ include "include/authentication.php";
 
           <!-- SELECT2 EXAMPLE -->
           <div class="card card-default">
-            <!-- <div class="card-header">
-            <h3 class="card-title">Prospectus Form</h3>
 
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
-            </div>
-          </div>-->
 
             <form role="form" action="" method="POST" id="prospectus_form">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12" id="error_section"></div>
                   <div class="col-4">
-            
+
                     <label>Prospectus No.</label>
-                    <input type="text" id="add_prospectus_no" name="add_prospectus_no"  class="form-control" required>
+                    <input readonly type="text" value="<?php echo $row['prospectus_no'] ?>" id="prospectus_no" name="prospectus_no" class="form-control" required>
+                  </div>
+                  <div class="col-4">
+
+                    <label>Prospectus Price </label>
+                    <input readonly type="text" value="<?php echo $row['prospectus_rate'] ?>" id="prospectus_rate" name="prospectus_rate" class="form-control" required>
+                  </div>
+
+                  <div class="col-4">
+
+                    <label> Payment mode </label>
+                    <input readonly type="text" value="<?php echo $row['prospectus_payment_mode'] ?>" id="prospectus_payment_mode" name="prospectus_payment_mode" class="form-control" required>
                   </div>
 
                   <div class="col-4">
                     <label>Applicant Name</label>
-                    <input type="text" id="add_prospectus_applicant_name" name="add_prospectus_applicant_name" class="form-control" required>
+                    <input type="text" value="<?php echo $row['prospectus_applicant_name'] ?>" id="prospectus_applicant_name" name="prospectus_applicant_name" class="form-control" required>
                   </div>
 
                   <div class="col-4">
                     <label>Gender</label>
-                    <select id="add_prospectus_gender" name="add_prospectus_gender" class="form-control">
-                      <option value="0">Select</option>
+                    <select id="prospectus_gender" name="prospectus_gender" class="form-control">
+                      <option value="<?php echo $row['prospectus_gender'] ?>"><?php echo $row['prospectus_gender'] ?></option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                     </select>
@@ -101,57 +111,60 @@ include "include/authentication.php";
 
                   <div class="col-4">
                     <label>Father Name</label>
-                    <input type="text" id="add_prospectus_father_name" name="add_prospectus_father_name" class="form-control" required>
+                    <input type="text" value="<?php echo $row['prospectus_father_name'] ?>" id="prospectus_father_name" name="prospectus_father_name" class="form-control" required>
                   </div>
 
                   <div class="col-4">
+                    <label>Mother Name</label>
+                    <input type="text" value="<?php echo $row['prospectus_mother_name'] ?>" id="prospectus_mother_name" name="prospectus_mother_name" class="form-control" required>
+                  </div>
+                  <div class="col-4">
                     <label>Address</label>
-                    <textarea id="add_prospectus_address" name="add_prospectus_address" class="form-control" style="height:38px;"></textarea>
+                    <textarea id="prospectus_address" name="prospectus_address" class="form-control" style="height:38px;"><?php echo $row['prospectus_address'] ?></textarea>
                   </div>
                   <div class="col-4">
                     <label>Country</label>
-                    <select id="add_prospectus_country" name="add_prospectus_country" class="form-control">
+                    <select id="prospectus_country" name="prospectus_country" class="form-control">
                       <option value="India">India</option>
                     </select>
                   </div>
                   <div class="col-4">
                     <label>State</label>
-                    <select id="add_prospectus_state" name="add_prospectus_state" class="form-control">
-                      <option value="0">Select State</option>
-                      <option value="Jharkhand">Jharkhand</option>
-                    </select>
+                    <input type="text" value="<?php echo $row['prospectus_state'] ?>" id="prospectus_state	" name="prospectus_state	" class="form-control" required>
+
                   </div>
                   <div class="col-4">
                     <label>City</label>
-                    <select id="add_prospectus_city" name="add_prospectus_city" class="form-control">
-                      <option value="0">Select City</option>
-                      <option value="Jamshedpur">Jamshedpur</option>
-                      <option value="Ranchi">Ranchi</option>
-                    </select>
+                    <input type="text" value="<?php echo $row['prospectus_city'] ?>" id="prospectus_city" name="prospectus_city" class="form-control" required>
                   </div>
 
                   <div class="col-4">
                     <label>Postal Code</label>
-                    <input type="text" id="add_prospectus_postal_code" name="add_prospectus_postal_code" class="form-control">
+                    <input value="<?php echo $row['prospectus_postal_code'] ?>" type="text" id="prospectus_postal_code" name="prospectus_postal_code" class="form-control">
+                  </div>
+                  <div class="col-4">
+                    <label>DOB</label>
+                    <input value="<?php echo $row['prospectus_dob'] ?>" type="date" id="prospectus_dob" name="prospectus_dob" class="form-control" required>
                   </div>
                   <div class="col-4">
                     <label>Email ID</label>
-                    <input type="email" id="add_prospectus_emailid" name="add_prospectus_emailid" class="form-control" required>
+                    <input value="<?php echo $row['prospectus_emailid'] ?>" type="email" id="prospectus_emailid" name="prospectus_emailid" class="form-control" required>
                   </div>
 
-                  <div class="col-4">
-                    <label>DOB</label>
-                    <input type="date" id="add_prospectus_dob" name="add_prospectus_dob" class="form-control" required>
-                  </div>
+
                   <div class="col-4">
                     <label>Mobile No</label>
-                    <input type="text" id="mobile" name="mobile" class="form-control" required>
+                    <input value="<?php echo $row['mobile'] ?>" type="text" id="mobile" name="mobile" class="form-control" required>
+                  </div>
+                  <div class="col-4">
+                    <label> Revert By</label>
+                    <input value="<?php echo $row['revert_by'] ?>" type="text" id="revert_by" name="revert_by" class="form-control" required>
                   </div>
 
                   <div class="col-4">
                     <label>Course</label>
-                    <select id="add_prospectus_course_name" name="add_prospectus_course_name" class="form-control">
-                      <option value="0">Select Course</option>
+                    <select id="prospectus_course_name" name="prospectus_course_name" class="form-control">
+                      <option value="<?php echo $row['prospectus_course_name'] ?>"><?php echo $row['prospectus_course_name'] ?></option>
                       <?php
                       $sql = "select * from tbl_course";
                       $query = mysqli_query($con, $sql);
@@ -162,37 +175,27 @@ include "include/authentication.php";
                     </select>
                   </div>
                   <div class="col-4">
-                    <label>Prospectus Rate</label>
-                    <input type="text" id="add_prospectus_rate" name="add_prospectus_rate" value="550" class="form-control" readonly>
+                    <label> Session </label>
+                    <select id="prospectus_session" name="prospectus_session" class="form-control">
+
+                      <option value="<?php echo $row['prospectus_session'] ?>"><?php echo $row['prospectus_session'] ?></option>
+                      <?php
+                      $sql = "select * from tbl_university_details";
+                      $query = mysqli_query($con, $sql);
+                      while ($row = mysqli_fetch_array($query)) {
+                      ?>
+                        <option value="<?php echo $row['university_details_academic_start_date'] . '-' . $row['university_details_academic_start_date']; ?>"><?php echo $row['university_details_academic_start_date'] . '-' . $row['university_details_academic_start_date']; ?></option>
+                      <?php } ?>
+                    </select>
                   </div>
 
-                  <div class="col-4">
-                    <label>Ledger Type</label>
-                    <select id="add_prospectus_ledger_type" name="add_prospectus_ledger_type" class="form-control">
-                      <option value="0">Select Ledger Type</option>
-                      <option value="Admission Ledger">Admission Ledger</option>
-                      <option value="Prospectus Ledger">Prospectus Ledger</option>
-                    </select>
-                  </div>
-                  <div class="col-4" style="margin-bottom: 20px;">
-                    <label>Payment Mode</label>
-                    <select id="add_prospectus_payment_mode" name="add_prospectus_payment_mode" class="form-control">
-                      <option value="0">Select Mode</option>
-                      <option value="Cash">Cash</option>
-                      <option value="Online">Online</option>
-                      <option value="Cheque">Cheque</option>
-                      <option value="DD">DD</option>
-                      <option value="NEFT/IMPS/RTGS">NEFT/IMPS/RTGS</option>
-                    </select>
-                  </div>
+             
                 </div>
                 <div class="col-md-12">
                   <div id="loader_section"></div>
                 </div>
-                <div class="col-md-6">
-                  <input type="hidden" name="action" value="prospectus_form" />
-                  <input type="button" id="prospectus_form_button" name="prospectus_form_button" class="btn btn-primary" value="Submit">
-
+                <div class="col-md-6 mt-4">
+                  <input type="submit" id="prospectus_form_button" name="prospectus_form_button" class="btn btn-primary" value="Submit">
                   <button type="reset" class="btn btn-primary">Reset</button>
                 </div>
               </div>
@@ -234,105 +237,7 @@ include "include/authentication.php";
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
   <!-- Page script -->
-  <script>
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-
-      //Datemask dd/mm/yyyy
-      $('#datemask').inputmask('dd/mm/yyyy', {
-        'placeholder': 'dd/mm/yyyy'
-      })
-      //Datemask2 mm/dd/yyyy
-      $('#datemask2').inputmask('mm/dd/yyyy', {
-        'placeholder': 'mm/dd/yyyy'
-      })
-      //Money Euro
-      $('[data-mask]').inputmask()
-
-      //Date range picker
-      $('#reservation').daterangepicker()
-      //Date range picker with time picker
-      $('#reservationtime').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: {
-          format: 'MM/DD/YYYY hh:mm A'
-        }
-      })
-      //Date range as a button
-      $('#daterange-btn').daterangepicker({
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          startDate: moment().subtract(29, 'days'),
-          endDate: moment()
-        },
-        function(start, end) {
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-        }
-      )
-
-      //Timepicker
-      $('#timepicker').datetimepicker({
-        format: 'LT'
-      })
-
-      //Bootstrap Duallistbox
-      $('.duallistbox').bootstrapDualListbox()
-
-      //Colorpicker
-      $('.my-colorpicker1').colorpicker()
-      //color picker with addon
-      $('.my-colorpicker2').colorpicker()
-
-      $('.my-colorpicker2').on('colorpickerChange', function(event) {
-        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-      });
-
-      $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-      });
-
-    })
-  </script>
-  <!-- Contact Form Section -->
-  <script>
-    $(function() {
-
-      $('#prospectus_form_button').click(function() {
-        // $('#loader_section').append('<center><img width="50px" src = "images/icons/loader2.gif" alt="Currently loading" id = "loading" /></center>');
-        $('#prospectus_form_button').prop('disabled', true);
-        $.ajax({
-          url: 'include/controller.php',
-          type: 'POST',
-          data: $('#prospectus_form').serializeArray(),
-          success: function(result) {
-            $('#response').remove();
-            $('#prospectus_form')[0].reset();
-            $('#error_section').append('<p id = "response" class="first-title">' + result + '</p>');
-            $('#loading').fadeOut(500, function() {
-              $(this).remove();
-            });
-            $('#prospectus_form_button').prop('disabled', false);
-          }
-
-        });
-
-      });
-
-    });
-  </script>
+ 
 </body>
 
 </html>

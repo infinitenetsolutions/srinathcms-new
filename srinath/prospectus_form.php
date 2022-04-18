@@ -4,13 +4,13 @@ $page_no = "4";
 $page_no_inside = "4_1";
 include "include/authentication.php";
 $id = $_GET['id'];
-$url='prospectus_view';
+$url = 'prospectus_view';
 $prospectus = "SELECT * FROM `tbl_prospectus` WHERE `id`=$id";
 $prospectus_result = mysqli_query($con, $prospectus);
 $row = mysqli_fetch_array($prospectus_result);
-if(isset($_POST['prospectus_applicant_name'])){
-  $result= updateAll('tbl_prospectus',$_POST,'`id`='.$id);
-  if($result=='success'){
+if (isset($_POST['prospectus_applicant_name'])) {
+  $result = updateAll('tbl_prospectus', $_POST, '`id`=' . $id);
+  if ($result == 'success') {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Success!</strong> Data successfully updated.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -21,9 +21,9 @@ if(isset($_POST['prospectus_applicant_name'])){
   setTimeout(function() {  window.location.replace("' . $url . '") },1000);
   </script>
   ';
-  }else{
+  } else {
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Warning!</strong> '.$result.'
+    <strong>Warning!</strong> ' . $result . '
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -31,6 +31,17 @@ if(isset($_POST['prospectus_applicant_name'])){
  
   ';
   }
+}
+
+$explode_date = explode('-', $row['prospectus_session']);
+if (strlen($explode_date[0]) > 5) {
+  $start_year = explode('/', $explode_date[0])[2];
+  $end_year = explode('/', $explode_date[1])[2];
+  $start_year = $start_year;
+  $end_year = $end_year;
+} else {
+  $start_year = $explode_date[0];
+  $end_year = $explode_date[1];
 }
 
 ?>
@@ -193,9 +204,9 @@ if(isset($_POST['prospectus_applicant_name'])){
                       <?php
                       $sql = "select * from tbl_course";
                       $query = mysqli_query($con, $sql);
-                      while ($row = mysqli_fetch_array($query)) {
+                      while ($row2 = mysqli_fetch_array($query)) {
                       ?>
-                        <option value="<?php echo $row['course_name']; ?>"><?php echo $row['course_name']; ?></option>
+                        <option value="<?php echo $row2['course_name']; ?>"><?php echo $row2['course_name']; ?></option>
                       <?php } ?>
                     </select>
                   </div>
@@ -203,24 +214,35 @@ if(isset($_POST['prospectus_applicant_name'])){
                     <label> Session </label>
                     <select id="prospectus_session" name="prospectus_session" class="form-control">
 
-                    <option value="<?php echo $row['prospectus_session'] ?>"><?php echo $row['prospectus_session'] ?></option>
-                      <?php
-                      $sql = "select * from tbl_university_details where 1";
-                      $query = mysqli_query($con, $sql);
-                      while ($row1 = mysqli_fetch_array($query)) {
-                      ?>
-                        <option value="<?php echo $row1['university_details_academic_start_date'] . '-' . $row1['university_details_academic_end_date']; ?>"><?php echo $row1['university_details_academic_start_date'] . '-' . $row1['university_details_academic_end_date']; ?></option>
+                      <option value="<?php echo $start_year . '-' . $end_year; ?>"><?php echo $start_year . '-' . $end_year; ?>
+                      <option>
+                        <?php
+                        $sql = "select * from tbl_university_details where 1";
+                        $query = mysqli_query($con, $sql);
+                        while ($row1 = mysqli_fetch_array($query)) {
+
+                          $explode_date1 = explode('-', $row1['university_details_academic_start_date']);
+                          $explode_date2 = explode('-', $row1['university_details_academic_end_date']);
+
+                            $start_year = $explode_date1[0];
+                            $end_year = $explode_date2[0];
+                          
+
+
+                        ?>
+                      <option value="<?php echo $start_year . '-' . $end_year; ?>"><?php echo $start_year . '-' . $end_year; ?>
+                      <option>
                       <?php } ?>
                     </select>
                   </div>
 
-             
+
                 </div>
                 <div class="col-md-12">
                   <div id="loader_section"></div>
                 </div>
                 <div class="col-md-6 mt-4">
-                  <input type="submit" id="prospectus_form_button"  class="btn btn-primary" value="Submit">
+                  <input type="submit" id="prospectus_form_button" class="btn btn-primary" value="Submit">
                   <button type="reset" class="btn btn-primary">Reset</button>
                 </div>
               </div>
@@ -262,7 +284,7 @@ if(isset($_POST['prospectus_applicant_name'])){
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
   <!-- Page script -->
- 
+
 </body>
 
 </html>

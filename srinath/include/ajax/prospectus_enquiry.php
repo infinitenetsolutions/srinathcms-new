@@ -26,6 +26,17 @@ if ($result->num_rows > 0) {
             } else {
                 $prospectus_course = $row["prospectus_course_name"];
             }
+
+            $explode_date = explode('-', $row['prospectus_session']);
+            if (strlen($explode_date[0]) > 5) {
+              $start_year = explode('/', $explode_date[0])[2];
+              $end_year = explode('/', $explode_date[1])[2];
+              $start_year = $start_year ;
+              $end_year = $end_year ;
+            } else {
+              $start_year = $explode_date[0] ;
+              $end_year = $explode_date[1] ;
+            }
             ?>
 
             <div class="modal fade" id="exampleModal1<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,6 +62,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
             <td><?php echo $prospectus_course  ?></td>
+            <td><?php echo $start_year.'-'.$end_year ?></td>
             <td><?php echo $row["prospectus_applicant_name"] ?></td>
             <td><?php echo $row["mobile"] ?></td>
             <td><?php echo $row["revert_by"] ?></td>

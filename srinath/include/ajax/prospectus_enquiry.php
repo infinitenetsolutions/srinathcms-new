@@ -3,7 +3,7 @@ include '../config.php';
 $data = $_GET['data'];
 $trash = md5("trash");
 $s_no = 1;
-$admission_query = "SELECT * FROM `tbl_prospectus` WHERE  `prospectus_applicant_name` LIKE '%$data%' || `prospectus_no` LIKE '%$data%' ||`prospectus_gender` LIKE '%$data%'  || `prospectus_father_name` LIKE '%$data%'  || `prospectus_address` LIKE '%$data%'  || `prospectus_state` LIKE '%$data%'  || `prospectus_city` LIKE '%$data%'  || `prospectus_postal_code` LIKE '%$data%'  || `prospectus_dob` LIKE '%$data%'  || `prospectus_emailid` LIKE '%$data%'|| `mobile` LIKE '%$data%'|| `revert_by` LIKE '%$data%' || `prospectus_course_name` LIKE '%$data%' || `prospectus_session` LIKE '%$data%' || `payment_status` LIKE '%$data%'  && `status`!='$trash' && `payment_status`='success' ";
+$admission_query = "SELECT * FROM `tbl_prospectus` WHERE  `status`!='$trash' && `payment_status`='success' && `prospectus_applicant_name` LIKE '%$data%' || `prospectus_no` LIKE '%$data%' ||`prospectus_gender` LIKE '%$data%'  || `prospectus_father_name` LIKE '%$data%'  || `prospectus_address` LIKE '%$data%'  || `prospectus_state` LIKE '%$data%'  || `prospectus_city` LIKE '%$data%'  || `prospectus_postal_code` LIKE '%$data%'  || `prospectus_dob` LIKE '%$data%'  || `prospectus_emailid` LIKE '%$data%'|| `mobile` LIKE '%$data%'|| `revert_by` LIKE '%$data%' || `prospectus_course_name` LIKE '%$data%' || `prospectus_session` LIKE '%$data%' || `payment_status` LIKE '%$data%'  ";
 
 $result = $con->query($admission_query);
 if ($result->num_rows > 0) {

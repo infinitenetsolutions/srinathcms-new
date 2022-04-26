@@ -3,7 +3,7 @@ include '../config.php';
 $data = $_GET['data'];
 $trash = md5("trash");
 $s_no = 1;
-$admission_query = "SELECT * FROM `tbl_prospectus` WHERE  `prospectus_applicant_name` LIKE '%$data%' || `prospectus_no` LIKE '%$data%' ||`prospectus_gender` LIKE '%$data%'  || `prospectus_father_name` LIKE '%$data%'  || `prospectus_address` LIKE '%$data%'  || `prospectus_state` LIKE '%$data%'  || `prospectus_city` LIKE '%$data%'  || `prospectus_postal_code` LIKE '%$data%'  || `prospectus_dob` LIKE '%$data%'  || `prospectus_emailid` LIKE '%$data%'|| `mobile` LIKE '%$data%'|| `revert_by` LIKE '%$data%' || `prospectus_course_name` LIKE '%$data%' || `prospectus_session` LIKE '%$data%' || `payment_status` LIKE '%$data%'  && `status`!='$trash' && `payment_status`='success' ";
+$admission_query = "SELECT * FROM `tbl_prospectus` WHERE  `status`!='$trash' && `payment_status`='success' && `prospectus_applicant_name` LIKE '%$data%' || `prospectus_no` LIKE '%$data%' ||`prospectus_gender` LIKE '%$data%'  || `prospectus_father_name` LIKE '%$data%'  || `prospectus_address` LIKE '%$data%'  || `prospectus_state` LIKE '%$data%'  || `prospectus_city` LIKE '%$data%'  || `prospectus_postal_code` LIKE '%$data%'  || `prospectus_dob` LIKE '%$data%'  || `prospectus_emailid` LIKE '%$data%'|| `mobile` LIKE '%$data%'|| `revert_by` LIKE '%$data%' || `prospectus_course_name` LIKE '%$data%' || `prospectus_session` LIKE '%$data%' || `payment_status` LIKE '%$data%'  ";
 
 $result = $con->query($admission_query);
 if ($result->num_rows > 0) {
@@ -26,9 +26,20 @@ if ($result->num_rows > 0) {
             } else {
                 $prospectus_course = $row["prospectus_course_name"];
             }
+
+            $explode_date = explode('-', $row['prospectus_session']);
+            if (strlen($explode_date[0]) > 5) {
+              $start_year = explode('/', $explode_date[0])[2];
+              $end_year = explode('/', $explode_date[1])[2];
+              $start_year = $start_year ;
+              $end_year = $end_year ;
+            } else {
+              $start_year = $explode_date[0] ;
+              $end_year = $explode_date[1] ;
+            }
             ?>
 
-            <div class="modal fade" id="exampleModal<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal1<?php echo $id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm " role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-danger text-center">
@@ -51,6 +62,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
             <td><?php echo $prospectus_course  ?></td>
+            <td><?php echo $start_year.'-'.$end_year ?></td>
             <td><?php echo $row["prospectus_applicant_name"] ?></td>
             <td><?php echo $row["mobile"] ?></td>
             <td><?php echo $row["revert_by"] ?></td>
@@ -59,10 +71,22 @@ if ($result->num_rows > 0) {
             <td><?php echo $row["post_at"] ?></td>
 
             <td>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal<?php echo $id ?>">
-                    <i class="fas fa-trash">
-                    </i> </button>
+                <a type="button" class="btn btn-warning" href="prospectus_form?id=<?php echo $id ?>">
+                    <i class="fas fa-edit"></i>
+                    </i> </a>
+            </td>
+            <td>
 
+                <a type="button" class="btn btn-danger" href="./include/status/delete_prospectus?delete=<?php echo $id ?>" >
+                    <i class="fas fa-trash">
+                    </i> </a>
+
+            </td>
+
+            <td>
+                <a type="button" class="btn btn-success" href="admit_card_print?id=<?php echo $id ?>">
+                    <i class="fas fa-print"></i>
+                    </i> </a>
             </td>
 
 

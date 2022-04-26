@@ -325,13 +325,13 @@ if (isset($_SESSION['email']) && ($_SESSION['email'] != '')) {
                                                     </div>
                                                     <div class="row">
                                                         <div class="input-field col s6 m6 l4">
-                                                            <h6 for="address1">Address 1<span class="color-red"> * </span></h6>
+                                                            <h6 for="address1">Address 1(Permanent)<span class="color-red"> * </span></h6>
                                                             <input required placeholder="Permanent Address " id="address_1" name="address1" type="text" class="validate" value="<?php echo $address->permanet; ?>">
                                                             <div class="error" id="address_1_err"></div>
                                                         </div>
 
                                                         <div class="input-field col s6 m6 l4">
-                                                            <h6 for="address2"> Address 2 </h6>
+                                                            <h6 for="address2"> Address 2 (Correspondence) </h6>
                                                             <input required placeholder="Correspondence Address" id="address_2" name="address2" type="text" class="validate" value="<?php echo $address->crosspodens; ?>">
                                                         </div>
                                                         <div class="input-field col s6 m6 l4">

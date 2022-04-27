@@ -521,19 +521,17 @@ error_reporting(0);
       <tr>
         <td style=" margin-right: 50px;
   margin-left: 80px;">
-          <center><b style="color:#0d1065;"><u style="font-size: 16px;">ONLINE EXAM INSTRUCTIONS<br />
+          <center><b style="color:#0d1065;"><u style="font-size: 16px;"><br />
                 READ VERY CAREFULLY, DO NOT IGNORE ANY INFORMATION
               </u></b></center>
           <ol style="font-size:14px;text-align: justify;color:#0d1065;">
-            <p style="font-size: 14px;">Appear for exam between the stipulated time table given above in the admit card - Exam Portal will be Activated before 15 minutes and Closed as per the finish time. (Total Two and half Hours). Student must keep track of time on own responsibility. Entire exam requires only Two and half hour, so do not appear late.</p>
             <p><b style="font-size: 16px;">PLEASE SPEND SUFFICIENT TIME TO READ ALL THESE BELOW MENTIONED DETAILS, TO AVOID ANY KIND OF LOSS, CONFUSION OR MISUNDERSTANDINGS...</b></p>
-            <li>Do not appear for exam before or after exam time. Login is for single use only. It will be deactivated automatically after first use.</li>
-            <li>Exam rules are very strict and important part so it must considered with priority and any type of negligence is not acceptable.</li>
-            <li>We have tested all the Login Keys before sending it. Avoid any login key typing mistake like- Don't use extra space before or after key, check Upper Case or Lower Case letters, Special Characters etc...</li>
-            <li>Login Key is activated for single attempt. If you face any difficulty inform your HOD without any delay, time loss due to any problem or late support team will reply.</li>
-            <li>Scheduled / Auto-Scheduled Online exam cannot be changed, postponed or request for extension under any condition, will not be entertained.</li>
-            <li>Check the exam timetable carefully. Make sure you know the time and site of examination of your exams.</li>
-            <li>Keep your Admit Card, Aadhar Card, and Consent form for online mode examination and keep it always with you as long as you are appearing the online examination. Keep your eyes on your Laptop / Desktop / Mobile. </li>
+            <li>The candidate must reach centre 15 minutes before exam timing.</li>
+            <li> Candidates are advised to carry their Admit Card along with them .</li>
+            <li> Candidates must carry "Any one of the original and valid Photo Identification Proof issued by the Government..</li>
+            <li>No candidates should adopt any unfair means or indulge in any unfair examination practices as the examination centers are under surveillance of CCTV .</li>
+            <li>Candidates are advised to check the website regularly.They should also check their mailbox on the registered E_mail address and SMS in their registered Mobile no.for latest updates and information.</li>
+            <li>Use of Calculators, Mobile phone etc, is Not permitted ,Plain sheet would be provided for rough work . Candidates should bring their own transparent pen/pencil. On completion of the exam , candidates would have to return the used sheet to the invigilator.</li>
             <p>
               “If you read all the instructions very careful, then you will not face any issue during your exam. Good Luck.”
             </p>

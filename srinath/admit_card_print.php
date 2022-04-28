@@ -439,8 +439,8 @@ error_reporting(0);
                 <tr colspan="3">
                   <td>
                     <table width="100%">
-                      <td class="narmal">CENTRE NAME: SRINATH UNIVERSITY, JAMSHEDPUR</br>ROLL NO: <?php echo '21000' ?><span id="reg_no_data1" ></span></td>
-                      <td class="narmal">LOG IN TIME: <?php echo strtoupper($row_semester["exam_reporting_time"]) ?> </br>TIME OF EXAMINATION: <?php echo strtoupper($row_semester["time_of_examination"]) ?></td>
+                      <!-- <td class="narmal">CENTRE NAME: SRINATH UNIVERSITY, JAMSHEDPUR</br>ROLL NO: <?php echo '21000' ?><span id="reg_no_data1" ></span></td> -->
+                      <!-- <td class="narmal">LOG IN TIME: <?php echo strtoupper($row_semester["exam_reporting_time"]) ?> </br>TIME OF EXAMINATION: <?php echo strtoupper($row_semester["time_of_examination"]) ?></td> -->
                     </table>
                   </td>
                 </tr>

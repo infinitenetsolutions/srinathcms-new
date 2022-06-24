@@ -167,8 +167,7 @@ if (isset($_POST["action"])) {
                 //         VALUES 
                 //         ('','$add_university_details_financial_start_date','$add_university_details_financial_end_date','$add_university_details_academic_start_date','$add_university_details_academic_end_date','$add_university_details_university_name','$add_university_details_affiliation_details','$add_university_details_address','$add_university_details_email','$add_university_details_contact','$add_university_details_logo_image_rand','$add_university_details_website_url','$visible')
                 //         ";
-                echo "<pre>";
-                echo       $sql = "INSERT INTO `tbl_university_details`
+                       $sql = "INSERT INTO `tbl_university_details`
                 (`university_details_financial_start_date`, `university_details_financial_end_date`, `university_details_academic_start_date`, `university_details_academic_end_date`, `university_details_university_name`, `university_details_affiliation_details`, `university_details_address`, `university_details_email`, `university_details_contact`, `university_details_logo_image`, `university_details_website_url`, `status`) 
                 VALUES 
                 ('$add_university_details_financial_start_date','$add_university_details_financial_end_date','$add_university_details_academic_start_date','$add_university_details_academic_end_date','$add_university_details_university_name','$add_university_details_affiliation_details','$add_university_details_address','$add_university_details_email','$add_university_details_contact','$add_university_details_logo_image_rand','$add_university_details_website_url','$visible')
@@ -1517,7 +1516,6 @@ if (isset($_POST["action"])) {
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <i class="icon fas fa-ban"></i> Please select Rebate From!!!
                           </div>';
-                exit();
             } else
                 // inserting the data into the rebate form table for how much rebate will come into the colleage
                 $rebate_by_name = $_SESSION['admin_name'];
@@ -1592,7 +1590,6 @@ if (isset($_POST["action"])) {
                             $FeeStatus = "pending";
                     }
 
-                    echo "<pre>";
 
                     // checking the fine exits or not into  the post variable
                
@@ -1634,12 +1631,7 @@ if (isset($_POST["action"])) {
                     $table_feepaid_id_data = mysqli_fetch_array($table_result)['feepaid_id'];
 
                     //insert into tbl_income
-                    $sql_course = "SELECT * FROM `tbl_course`
-						WHERE `status` = '$visible' &&  `course_id` = '" . $getRows["admission_course_name"] . "'
-						";
-                    $result_course = $con->query($sql_course);
-                    $row_course = $result_course->fetch_assoc();
-
+        
                     $perticulars = explode(",", $implodedId);
                     $amounts = explode(",", $implodedAmount);
 
@@ -1671,12 +1663,7 @@ if (isset($_POST["action"])) {
                     //end tbl_income
 
                     if ($con->query($sql)) {
-                        // $thanksMessage = " \n\nRegards,\nNetaji Subhas University, \nJamshedpur. ";
-                        // $objectSecond->send_otp($mobileNumberOfStudent, $thanksMessage);
-                        echo '<div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                             <i class="icon fas fa-check-circle"></i> Fee Successfully paid 
-                             </div>';
+                        echo 'success';
                     } else
                         echo '<div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
